@@ -1,7 +1,7 @@
 import { Carousel_002 } from "@/components/ui/skiper-ui/skiper48";
 
 // Using the carousel component with custom images
-const CustomCarousel = () => {
+const CustomCarousel = ({ className }) => {
   const images = [
     {
       src: "/port-item1.jpg",
@@ -12,20 +12,12 @@ const CustomCarousel = () => {
       alt: "Description 2",
     },
     {
-      src: "/port-item3.jpg",
-      alt: "Description 3",
-    },
-    {
       src: "/port-item1.jpg",
       alt: "Description 2",
     },
     {
       src: "/port-item2.jpg",
       alt: "Description 1",
-    },
-    {
-      src: "/port-item3.jpg",
-      alt: "Description 3",
     },
   ];
 

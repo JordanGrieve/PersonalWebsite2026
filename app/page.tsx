@@ -1,18 +1,15 @@
-import Image from "next/image";
 import CustomCarousel from "./components/Swiper";
+import Hero from "./components/Hero";
 
 export default function Home() {
   return (
     <section className="">
-      <h1 className="text-center">
-        The Hub For Every Dev <br /> Event You Cant Miss
-      </h1>
+      <div className="flex flex-col lg:flex-row gap-10">
+        <Hero className="w-full" />
+        <CustomCarousel className="w-full" />
+      </div>
       <p className="text-center m-5">
-        Hackathons, Meetups, Conferences — All in One Place
-      </p>
-      <CustomCarousel />
-      <p className="text-center m-5">
-        Hackathons, Meetups, Conferences — All in One Place
+        ONE PIECE Hackathons, Meetups, Conferences — All in One Place
       </p>
       <p className="text-center m-5">
         Hackathons, Meetups, Conferences — All in One Place
@@ -27,6 +24,13 @@ export default function Home() {
       <p className="text-center m-5">
         Hackathons, Meetups, Conferences — All in One Place
       </p>
+      <p className="text-center m-5">
+        Hackathons, Meetups, Conferences — All in One Place
+      </p>
+
+      <h1 className="text-center">
+        The Hub For Every Dev <br /> Event You Cant Miss
+      </h1>
       <p className="text-center m-5">
         Hackathons, Meetups, Conferences — All in One Place
       </p>

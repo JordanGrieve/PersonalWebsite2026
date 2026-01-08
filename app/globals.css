@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Calistoga&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -119,10 +120,6 @@
 
   main {
     @apply mx-auto container flex flex-col sm:px-10 px-5 py-10;
-  }
-
-  h1 {
-    @apply text-gradient text-6xl font-semibold max-sm:text-4xl;
   }
 
   h3 {
@@ -273,9 +270,14 @@
     }
   }
 }
-
-.test {
+.calistoga-font {
   font-family: "Calistoga", serif;
   font-weight: 400;
+  font-style: normal;
+}
+.inter-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
   font-style: normal;
 }
