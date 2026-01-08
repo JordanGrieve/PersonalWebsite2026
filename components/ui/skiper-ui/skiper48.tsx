@@ -99,7 +99,7 @@ const Carousel_002 = ({
         duration: 0.3,
         delay: 0.5,
       }}
-      className={cn("relative w-full max-w-3xl", className)}
+      className={cn("relative max-w-3xl", className)}
     >
       <style>{css}</style>
 

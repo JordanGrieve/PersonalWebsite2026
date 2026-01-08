@@ -1,5 +1,7 @@
 import CustomCarousel from "./components/Swiper";
 import Hero from "./components/Hero";
+import Tabs from "./components/Tabs";
+import TimeLine from "./components/TimeLine";
 
 export default function Home() {
   return (
@@ -8,6 +10,7 @@ export default function Home() {
         <Hero className="w-full" />
         <CustomCarousel className="w-full" />
       </div>
+      <Tabs className="w-full" />
       <p className="text-center m-5">
         ONE PIECE Hackathons, Meetups, Conferences — All in One Place
       </p>
