@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Calistoga } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const calistoga = Calistoga({
   subsets: ["latin"],
+  variable: "--font-calistoga",
+  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#030712]">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased w-auto lg:w-3xl mx-auto`}
+        className={`${inter.className} ${calistoga.className} antialiased w-auto lg:w-3xl mx-auto font-sans inter-font`}
       >
         <NavBar />
         <main className="bg-[#030712]">{children}</main>

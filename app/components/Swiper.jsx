@@ -4,19 +4,19 @@ import { Carousel_002 } from "@/components/ui/skiper-ui/skiper48";
 const CustomCarousel = ({ className }) => {
   const images = [
     {
-      src: "/port-item1.jpg",
+      src: "/profile-pic-2.png",
       alt: "Description 1",
     },
     {
-      src: "/port-item2.jpg",
+      src: "/profile-pic-1.jpg",
       alt: "Description 2",
     },
     {
-      src: "/port-item1.jpg",
+      src: "/profile-pic-3.png",
       alt: "Description 2",
     },
     {
-      src: "/port-item2.jpg",
+      src: "/profile-pic-4.png",
       alt: "Description 1",
     },
   ];

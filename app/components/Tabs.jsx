@@ -1,17 +1,20 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TimeLine from "./TimeLine";
+import ExperienceTimeLine from "./ExperienceTimeLine";
+import EducationTimeLine from "./EducationTimeline";
 
-function TabsDemo() {
+function TabsDemo({ className }) {
   return (
-    <Tabs defaultValue="account" className="w-full">
+    <Tabs defaultValue="experience" className="w-full inter-font">
       <TabsList>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="experience">Experience</TabsTrigger>
+        <TabsTrigger value="education">Education</TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
-        <TimeLine />
+      <TabsContent value="experience">
+        <ExperienceTimeLine />
       </TabsContent>
-      <TabsContent value="password">Change your password here.</TabsContent>
+      <TabsContent value="education">
+        <EducationTimeLine />
+      </TabsContent>
     </Tabs>
   );
 }
