@@ -13,7 +13,7 @@ function FeaturedProjects() {
           view more -
         </Link>
       </div>
-      <div className="flex flex-row gap-4 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
         <ProjectCard
           title="TT4D"
           description="Generate winning combinations, view past results, and analyze lottery trends all in one place."

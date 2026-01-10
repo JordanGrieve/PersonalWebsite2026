@@ -11,7 +11,6 @@ const Navbar = () => {
           <Link href="/">blog</Link>
           <Link href="/">contact</Link>
         </ul>
-        sun
       </nav>
     </header>
   );
