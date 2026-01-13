@@ -7,9 +7,11 @@ const Navbar = () => {
       <nav>
         <ul>
           <Link href="/">home</Link>
-          <Link href="/">projects</Link>
-          <Link href="/">blog</Link>
-          <Link href="/">contact</Link>
+          <Link href="/projects">projects</Link>
+          <Link href="/" className="line-through">
+            blog
+          </Link>
+          <Link href="/contact">contact</Link>
         </ul>
       </nav>
     </header>

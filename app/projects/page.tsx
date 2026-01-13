@@ -1,22 +1,23 @@
-import Link from "next/link";
-import ProjectCard from "./ProjectCard";
-import { ArrowRight } from "lucide-react";
+import ProjectCard from "@/app/components/ProjectCard";
 
-function FeaturedProjects() {
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  image: string;
+  tags?: string[];
+  links?: Link[];
+}
+
+function page() {
   return (
-    <div className="mt-15">
-      <div className="flex flex-row justify-between items-baseline">
-        <h2 className="text-3xl calistoga-font">featured projects</h2>
-        <Link
-          href="/projects"
-          className="text-lg font-extralight inter-font text-white/60 hover:text-white transition"
-        >
-          <div className="flex flex-row items-center gap-1 text-center">
-            view more
-            <ArrowRight className="size-4" />
-          </div>
-        </Link>
-      </div>
+    <div>
+      {" "}
+      <h1 className="calistoga-font text-5xl">my projects.</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
         <ProjectCard
           title="Klassic Kilts Website"
@@ -49,4 +50,4 @@ function FeaturedProjects() {
   );
 }
 
-export default FeaturedProjects;
+export default page;
