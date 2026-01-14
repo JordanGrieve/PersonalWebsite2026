@@ -1,4 +1,5 @@
 import React from "react";
+import { Github, Globe } from "lucide-react";
 
 interface Link {
   label: string;
@@ -51,6 +52,11 @@ function ProjectCard({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white px-3 py-1.5 text-xs text-black transition hover:bg-white/80 text-[10px]"
             >
+              {link.label.toLowerCase() === "repo" ? (
+                <Github className="size-3" />
+              ) : (
+                <Globe className="size-3" />
+              )}
               {link.label}
             </a>
           ))}
