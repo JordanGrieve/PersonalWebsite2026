@@ -4,7 +4,7 @@ import { Linkedin, Github, Mail } from "lucide-react";
 function Footer() {
   return (
     <footer className="flex flex-row justify-between w-full pl-6 pr-6 md:w-2xl m-auto text-sm text-white/60 text-center">
-      <p>2024 © Jordan Grieve. All rights reserved.</p>
+      <p>2026 © Jordan Grieve.</p>
       <div className="gap-1 flex">
         <Button
           title="LinkedIn"
@@ -23,7 +23,7 @@ function Footer() {
         <Button
           title="Email"
           icon={Mail}
-          href="mailto:jordangrieve.dev@outlook.com"
+          href="mailto:info@jordangrieve.com"
           variant="icon"
         />
       </div>

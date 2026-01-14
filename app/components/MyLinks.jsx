@@ -4,12 +4,12 @@ import { FileText, Linkedin, Github, Mail } from "lucide-react";
 function MyLinks() {
   return (
     <div className="flex items-center gap-3">
-      <Button
+      {/* <Button
         title="Resume"
         icon={FileText}
         href="/resume.pdf"
         variant="pill"
-      />
+      /> */}
 
       <Button
         title="LinkedIn"

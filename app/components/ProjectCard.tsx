@@ -35,7 +35,7 @@ function ProjectCard({
           {tags.map((tag, index) => (
             <span
               key={index}
-              className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/70"
+              className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/70 text-[10px]"
             >
               {tag}
             </span>
@@ -49,7 +49,7 @@ function ProjectCard({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white transition hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white px-3 py-1.5 text-xs text-black transition hover:bg-white/80 text-[10px]"
             >
               {link.label}
             </a>
