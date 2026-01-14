@@ -24,7 +24,7 @@ function ProjectCard({
   return (
     <div className="rounded-2xl border border-white/10 bg-[#030712] p-4 shadow-lg transition hover:border-white/20">
       <div className="overflow-hidden rounded-xl border border-white/10">
-        <img src={image} alt={title} className="h-48 w-full object-cover" />
+        <img src={image} alt={title} className="h-48 w-full" />
       </div>
 
       <div className="mt-4 space-y-3">

@@ -20,14 +20,18 @@ function page() {
       <h1 className="calistoga-font text-5xl">my projects.</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
         <ProjectCard
-          title="Klassic Kilts Website"
-          description="A refined website design for a family-run kilt hire business, blending tradition with modern simplicity."
-          image="/KlassicKilts-img.png"
-          tags={["UI Design", "Web Design", "Figma", "Typography", "Branding"]}
+          title="DesignHub"
+          description="A developer portfolio showcasing projects, skills, and creative work built with passion and modern design."
+          image="/DesignHub.png"
+          tags={["React", "Branding", "Frontend", "Motion", "UI/UX"]}
           links={[
             {
-              label: "Preview",
-              href: "https://www.figma.com/proto/pG6meAtVNura4dcznpse0V/Hi-Top-Sneakers?node-id=1150-58&t=Hv9AvlMj4uFrcPVt-1",
+              label: "Live",
+              href: "https://design-hub-navy.vercel.app/",
+            },
+            {
+              label: "Repo",
+              href: "https://github.com/JordanGrieve/DesignHub",
             },
           ]}
         />
@@ -42,6 +46,19 @@ function page() {
             {
               label: "Repo",
               href: "https://github.com/JordanGrieve/dev-events-nextjs16",
+            },
+          ]}
+        />
+
+        <ProjectCard
+          title="Klassic Kilts Website"
+          description="A refined website design for a family-run kilt hire business, blending tradition with modern simplicity."
+          image="/KlassicKilts-img.png"
+          tags={["UI Design", "Web Design", "Figma", "Typography", "Branding"]}
+          links={[
+            {
+              label: "Preview",
+              href: "https://www.figma.com/proto/pG6meAtVNura4dcznpse0V/Hi-Top-Sneakers?node-id=1150-58&t=Hv9AvlMj4uFrcPVt-1",
             },
           ]}
         />
