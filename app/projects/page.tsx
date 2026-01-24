@@ -20,6 +20,22 @@ function page() {
       <h1 className="calistoga-font text-5xl">my projects.</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
         <ProjectCard
+          title="CoinPulse"
+          description="A sleek crypto dashboard providing live coin prices, market trends, and portfolio analytics powered by CoinGecko API and cutting-edge design."
+          image="/CoinPulse.png"
+          tags={["Nextjs", "TypeScript", "TailwindCSS", "API Integration"]}
+          links={[
+            {
+              label: "Live",
+              href: "https://coinpulse-git-main-grievejordan-7631s-projects.vercel.app/",
+            },
+            {
+              label: "Repo",
+              href: "https://github.com/JordanGrieve/coinpulse",
+            },
+          ]}
+        />
+        <ProjectCard
           title="DesignHub"
           description="A developer portfolio showcasing projects, skills, and creative work built with passion and modern design."
           image="/DesignHub.png"
