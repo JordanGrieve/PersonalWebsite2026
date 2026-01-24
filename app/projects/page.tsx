@@ -27,7 +27,7 @@ function page() {
           links={[
             {
               label: "Live",
-              href: "https://coinpulse-git-main-grievejordan-7631s-projects.vercel.app/",
+              href: "https://coinpulse-cyan.vercel.app/",
             },
             {
               label: "Repo",
