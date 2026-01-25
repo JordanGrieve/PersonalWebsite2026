@@ -16,7 +16,7 @@ export default function firstBlog() {
       <div className="flex gap-4 text-sm mt-4 mb-2">
         <span>6 min read</span>
         <div>|</div>
-        <span>Published December 25, 2025</span>
+        <span>Published January 26, 2025</span>
       </div>
 
       {/* Tags */}
