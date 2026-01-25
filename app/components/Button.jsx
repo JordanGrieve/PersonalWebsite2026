@@ -24,7 +24,10 @@ function Button({
 
   // Link button (recommended for external links / resume download)
   if (href) {
-    const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+    const isExternal =
+      href.startsWith("http") ||
+      href.startsWith("mailto:") ||
+      href.endsWith(".pdf");
 
     return (
       <a
