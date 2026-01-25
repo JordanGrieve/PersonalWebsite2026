@@ -3,7 +3,7 @@ import { Linkedin, Github, Mail } from "lucide-react";
 
 function Footer() {
   return (
-    <footer className="flex flex-row justify-between w-full md:w-2xl m-auto text-sm text-white/60 text-center items-center">
+    <footer className="flex flex-row pl-1 pr-1 justify-between w-full md:w-2xl m-auto text-sm text-white/60 text-center items-center">
       <p>2026 © Jordan Grieve.</p>
       <div className="gap-1 flex">
         <Button
