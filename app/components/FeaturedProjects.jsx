@@ -6,7 +6,7 @@ function FeaturedProjects() {
   return (
     <div className="mt-15">
       <div className="flex flex-row justify-between items-baseline">
-        <h2 className="text-3xl calistoga-font">featured projects</h2>
+        <h2 className="text-3xl calistoga-font">featured projects.</h2>
         <Link
           href="/projects"
           className="text-lg font-extralight inter-font text-white/60 hover:text-white transition"
