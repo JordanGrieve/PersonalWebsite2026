@@ -14,7 +14,7 @@ export default function firstBlog() {
       <h1 className="mt-6 text-4xl font-bold">Hello World!</h1>
 
       <div className="flex gap-4 text-sm mt-4 mb-2">
-        <span>6 min read</span>
+        <span>1 min read</span>
         <div>|</div>
         <span>Published January 26, 2025</span>
       </div>

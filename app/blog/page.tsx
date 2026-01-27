@@ -10,7 +10,7 @@ export default function BlogPage() {
           title="Hello World"
           desc="My first blog post! Testing out blog components."
           date="January 26, 2025"
-          readingTime="4 min"
+          readingTime="1 min"
           tags={["Hello", "World"]}
         />
         {/* <hr className="border-neutral-800" /> */}
