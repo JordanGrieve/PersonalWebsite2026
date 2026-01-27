@@ -78,6 +78,35 @@ function page() {
             },
           ]}
         />
+
+        <ProjectCard
+          title="OrganicMe Website"
+          description="Brand & UI refresh for OrganicMe: introduced a warmer color palette, softer card components, and enhanced product storytelling."
+          image="/OrganicMe.png"
+          tags={["UI Design", "Web Design", "Figma", "Typography", "Branding"]}
+          links={[
+            {
+              label: "Preview",
+              href: "https://www.figma.com/proto/PvJsOOS8Mr7bH8jiL3jt46/OrganicME-Updatee?node-id=1-3&t=hLMA903Omlp2AEu5-1",
+            },
+          ]}
+        />
+        <ProjectCard
+          title="Admin Dashboard"
+          description="An elegant and responsive admin dashboard built with React and Tailwind CSS. Components are structured with props and children to promote reusability and maintainability."
+          image="/adminDashboard.png"
+          tags={["Motion", "React", "Tailwind", "Framer"]}
+          links={[
+            {
+              label: "Live",
+              href: "https://03-admin-dashboard.vercel.app/",
+            },
+            {
+              label: "Repo",
+              href: "https://github.com/JordanGrieve/03-Admin-Dashboard",
+            },
+          ]}
+        />
       </div>
     </div>
   );
