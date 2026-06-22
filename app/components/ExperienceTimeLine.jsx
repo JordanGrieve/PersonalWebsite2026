@@ -39,16 +39,25 @@ export default function ExperienceTimeline() {
                         features using Liquid, CSS, and JavaScript.
                       </li>
                       <li>
-                        Developed advanced storefront UX patterns including
-                        tabbed product carousels, dynamic colour selectors,
-                        manual product selector sections, collection card
-                        carousels, and responsive mobile improvements.
+                        Developed reusable storefront components and UX patterns
+                        including tabbed carousels, dynamic colour selectors,
+                        manual product sections, collection card carousels, and
+                        responsive mobile improvements.
+                      </li>
+                      <li>
+                        Developed a vector-based PostgreSQL recommendation system
+                        that replaced generic cart upsells with real data-driven
+                        product recommendations.
+                      </li>
+                      <li>
+                        Integrated recommendation logic across the product page,
+                        search bar, and cart to improve product discovery, upsell
+                        relevance, and sales opportunities.
                       </li>
                       <li>
                         Improved theme maintainability by refactoring legacy
-                        code, standardising reusable components, and organising
-                        JavaScript into dedicated files for cleaner Shopify
-                        theme development.
+                        code, standardising reusable components, and separating
+                        JavaScript into dedicated files.
                       </li>
                       <li>
                         Worked across multiple international Shopify storefronts
@@ -64,25 +73,17 @@ export default function ExperienceTimeline() {
                       <li>
                         Supported storefront performance improvements through
                         font optimisation, hero image testing, LCP analysis,
-                        asset handling, and Cloudflare features such as Brotli,
-                        HTTP/3, Early Hints, and caching.
+                        asset handling, and Cloudflare performance features.
                       </li>
                       <li>
                         Investigated analytics and tracking issues across
                         Microsoft Clarity, Google Analytics, Google Ads, GTM,
-                        and Zaraz, including issues caused by redirects,
-                        scripts, and bot protection.
+                        and Zaraz.
                       </li>
                       <li>
-                        Collaborated with designers and developers to convert
-                        Figma designs into production-ready Shopify features in
-                        a live e-commerce environment.
-                      </li>
-                      <li>
-                        Contributed to the early build of a Shopify
-                        basket/checkout analytics platform using Google Cloud
-                        services including Cloud Run, Pub/Sub, BigQuery, and
-                        custom ingestion/API services.
+                        Collaborated with designers and developers to translate
+                        Figma designs into production-ready Shopify features
+                        within a live e-commerce environment.
                       </li>
                     </ul>
                   </div>
