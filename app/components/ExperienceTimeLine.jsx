@@ -33,33 +33,56 @@ export default function ExperienceTimeline() {
 
                     <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-white/70">
                       <li>
-                        Helped lead the migration of the DFYNE storefront from
-                        Impulse to Horizon theme, refactoring layouts, sections,
-                        and templates to align with Horizon’s architecture
-                      </li>{" "}
-                      <li>
                         Built and customised Shopify Liquid sections, snippets,
-                        and blocks to support reusable, scalable components
-                      </li>{" "}
+                        blocks, product cards, swatches, variant pickers,
+                        badges, carousels, breadcrumbs, and collection/PDP
+                        features using Liquid, CSS, and JavaScript.
+                      </li>
                       <li>
-                        Implemented advanced product variant pickers, swatches,
-                        badges, and carousel-based UX patterns using Liquid,
-                        CSS, and JavaScript
-                      </li>{" "}
+                        Developed advanced storefront UX patterns including
+                        tabbed product carousels, dynamic colour selectors,
+                        manual product selector sections, collection card
+                        carousels, and responsive mobile improvements.
+                      </li>
                       <li>
-                        Improved storefront performance, maintainability, and UX
-                        by removing legacy Impulse logic and standardising
-                        Horizon-based components
-                      </li>{" "}
+                        Improved theme maintainability by refactoring legacy
+                        code, standardising reusable components, and organising
+                        JavaScript into dedicated files for cleaner Shopify
+                        theme development.
+                      </li>
                       <li>
-                        Collaborated closely with designers and developers to
-                        translate Figma designs into production-ready Shopify
-                        features
-                      </li>{" "}
+                        Worked across multiple international Shopify storefronts
+                        including UK/ROW, US, CA, AU, and EU stores, supporting
+                        regional consistency and domain-specific behaviour.
+                      </li>
                       <li>
-                        Worked within a live e-commerce environment, deploying
-                        changes safely and iterating based on real customer
-                        behaviour
+                        Implemented and tested Cloudflare Worker redirect logic
+                        for country-based routing, including bot bypasses,
+                        checkout/cart exclusions, account/login exceptions, and
+                        staged rollout handling.
+                      </li>
+                      <li>
+                        Supported storefront performance improvements through
+                        font optimisation, hero image testing, LCP analysis,
+                        asset handling, and Cloudflare features such as Brotli,
+                        HTTP/3, Early Hints, and caching.
+                      </li>
+                      <li>
+                        Investigated analytics and tracking issues across
+                        Microsoft Clarity, Google Analytics, Google Ads, GTM,
+                        and Zaraz, including issues caused by redirects,
+                        scripts, and bot protection.
+                      </li>
+                      <li>
+                        Collaborated with designers and developers to convert
+                        Figma designs into production-ready Shopify features in
+                        a live e-commerce environment.
+                      </li>
+                      <li>
+                        Contributed to the early build of a Shopify
+                        basket/checkout analytics platform using Google Cloud
+                        services including Cloud Run, Pub/Sub, BigQuery, and
+                        custom ingestion/API services.
                       </li>
                     </ul>
                   </div>
