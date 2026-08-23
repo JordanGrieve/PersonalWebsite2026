@@ -1,0 +1,463 @@
+/* Site-level styles.
+   Ported from the <style> block of `Jordan Portfolio.dc.html`.
+
+   The original lived inside a fixed-width preview frame that carried
+   `container-type: inline-size`, so every `cqw` unit and the
+   `@container (max-width: 640px)` block resolved against that frame.
+   `.wrap` below plays that role now, which keeps all of the original
+   sizing maths and the mobile overrides working unchanged.
+
+   Backgrounds run full-bleed: `body` and `.site` span the viewport, and
+   only the content inside each band is capped and centred. */
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-accent-300);
+}
+
+.site {
+  min-height: 100vh;
+  background: var(--color-bg);
+  /* Contains the full-bleed overshoot below. `clip` rather than `hidden`
+     so it does not become a scroll container and break the sticky header. */
+  overflow-x: clip;
+}
+
+/* Full-bleed band inside `main.wrap`: the background runs to both viewport
+   edges while the text stays on the 1500px measure. The band must be a direct
+   child of the wrap — any ancestor with `overflow: hidden` (the hero section
+   has it, to contain its glow) clips the overhang straight back off again.
+   Percentages resolve against the wrap's content box, so the padding is the
+   overshoot plus the standard section inset. The extra half a scrollbar
+   either side is clipped by `.site`. `!important` beats the inline padding
+   the element carries from the design. */
+#heroStats {
+  margin-inline: calc(50% - 50vw) !important;
+  padding-inline: calc(50vw - 50% + clamp(18px, 4cqw, 48px)) !important;
+}
+
+/* Every page title uses one size — `clamp(38px, 8cqw, 96px)`, the design's
+   /work heading — and no hard line breaks, so each one wraps naturally across
+   the full measure rather than stacking in a narrow column. Below 640px the
+   container query at the bottom of this file overrides them all to a flat
+   46px. */
+
+/* Content measure. Also the container that every `cqw` unit and the 640px
+   container query below resolve against — one per band, all the same width. */
+.wrap {
+  max-width: 1500px;
+  margin: 0 auto;
+  container-type: inline-size;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes slideOut {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes fadeScrim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeScrimOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#heroStats > div:first-child {
+  border-left: 0 !important;
+  padding-left: 0 !important;
+}
+/* One size for every call to action. Ghost buttons (text links), icon
+   buttons and the burger keep their own sizing. */
+.btn:not(.btn-ghost):not(.btn-icon):not(#burger) {
+  font-size: 16px !important;
+  padding: 14px 24px !important;
+}
+#toolGrid > button:nth-child(4n) span {
+  left: auto !important;
+  right: 0 !important;
+  transform: none !important;
+}
+#toolGrid > button:nth-child(4n + 1) span {
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+/* Toolkit / Work process / CTA is a three-card row that drops to two-up at the
+   same 883px the featured grid does, stranding the CTA alone on a half-width
+   second row. Below that it spans the full row instead. `1 / -1` rather than
+   `span 2` on purpose: once the grid is down to a single column, `span 2`
+   would invent an implicit second one. */
+@container (max-width: 882px) {
+  #ctaCard {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Featured projects ships four cards so the two-up tablet layout is a full
+   2×2 rather than three with an orphan. 883px is where the grid's auto-fit
+   reaches three columns (three 260px tracks plus two 16px gaps, inside the
+   section's 4% padding), and at three-up the fourth card would start a second
+   row on its own — so it goes. Measured, not guessed: 875px gives two
+   columns, 885px gives three. */
+@container (min-width: 883px) {
+  #featGrid > *:nth-child(4) {
+    display: none;
+  }
+}
+
+/* Four toolkit columns only fit once the card is wide enough to hold four
+   labels side by side — the card is one of three in an auto-fit section, so
+   it is at its narrowest just as that section goes three-up. Below that,
+   three columns with tighter tile padding, and the tooltip edge-nudging
+   switches from every-4th to every-3rd to match. */
+@container (max-width: 1120px) {
+  #toolGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  #toolGrid > button {
+    padding-inline: 2px !important;
+  }
+  #toolGrid > button > div {
+    overflow-wrap: anywhere;
+  }
+  #toolGrid > button:nth-child(4n) span,
+  #toolGrid > button:nth-child(4n + 1) span {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
+  #toolGrid > button:nth-child(3n) span {
+    left: auto !important;
+    right: 0 !important;
+    transform: none !important;
+  }
+  #toolGrid > button:nth-child(3n + 1) span {
+    left: 0 !important;
+    right: auto !important;
+    transform: none !important;
+  }
+}
+
+/* Hover states — the design tool expressed these as `style-hover`
+   attributes, which have no equivalent in React inline styles.
+
+   `border-color` needs `!important`: every element carrying these classes
+   also sets the `border` shorthand inline (from the design), and an inline
+   declaration beats an author rule. Without it the hover is silently dead.
+   `transform` needs no such help — nothing sets it inline. */
+.hov-lift {
+  transition: border-color 0.25s, transform 0.25s;
+}
+.hov-lift:hover {
+  border-color: var(--color-accent) !important;
+  transform: translateY(-3px);
+}
+.hov-border {
+  transition: border-color 0.25s;
+}
+.hov-border:hover {
+  border-color: var(--color-accent) !important;
+}
+/* Accordion body. Animating `height: auto` is not possible, so the wrapper is
+   a single-row grid and the row itself is animated from 0fr to 1fr — the
+   paragraph inside clips to whatever height the row currently is. Above the
+   640px breakpoint the row stays at 1fr, so every card just shows its body. */
+.svc-body {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0.22, 0.7, 0.3, 1);
+}
+
+/* Scroll reveal — see ScrollReveal.tsx. The `.js-reveal` gate is set by an
+   inline script before first paint, so the hidden state only ever exists in a
+   browser that will also run the observer that clears it. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal main > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+  }
+  .js-reveal main > .is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hov-fade {
+  transition: opacity 0.2s;
+}
+.hov-fade:hover {
+  opacity: 0.72;
+}
+
+/* "WHAT I DO" is hard-broken onto two lines as a display treatment, but its
+   column is only wide enough for that to read as deliberate on desktop. On
+   tablet and below it goes back to one line. */
+@container (max-width: 1024px) {
+  #whatIDo br {
+    display: none;
+  }
+  #whatIDo span::before {
+    content: " ";
+  }
+}
+
+@container (max-width: 640px) {
+  #heroWrap {
+    padding-right: 0 !important;
+  }
+  #heroPhoto {
+    position: relative !important;
+    width: 100% !important;
+    height: 300px !important;
+    margin: 14px 0 0 !important;
+  }
+  #heroMeta {
+    grid-template-columns: 1fr !important;
+  }
+  #heroMeta > div:last-child {
+    justify-content: flex-start !important;
+  }
+  #heroSection {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #heroPhoto {
+    order: 1 !important;
+  }
+  #heroWrap {
+    order: 2 !important;
+    margin-top: 16px !important;
+  }
+  #heroBadge {
+    display: none !important;
+  }
+  #heroPhotoBadge {
+    display: block !important;
+  }
+  #heroMeta {
+    order: 3 !important;
+    margin-top: 20px !important;
+  }
+  #availPill {
+    width: 100% !important;
+  }
+  #availPill br {
+    display: none;
+  }
+  main h1 {
+    font-size: 46px !important;
+    line-height: 0.92 !important;
+  }
+  main h2 {
+    font-size: 38px !important;
+  }
+  #heroWrap h1 {
+    font-size: 15.2cqw !important;
+    line-height: 0.84 !important;
+  }
+  #aboutSec {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #aboutPhoto {
+    order: -1 !important;
+  }
+  #svcGrid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    margin-top: 6px;
+  }
+  #svcGrid > div {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    min-height: 0 !important;
+    background: none !important;
+    border: 0 !important;
+    border-top: 1px solid var(--color-divider) !important;
+    border-radius: 0 !important;
+    padding: 15px 0 !important;
+    gap: 12px !important;
+    /* The body's spacing lives inside the animated area instead, so a closed
+       row does not reserve a row-gap for a zero-height paragraph. */
+    row-gap: 0 !important;
+    cursor: pointer;
+  }
+  #svcGrid > div:last-child {
+    border-bottom: 1px solid var(--color-divider) !important;
+  }
+  /* No lift on the accordion rows: `.hov-lift` raises a card by 3px, which
+     on a stacked list just makes the row twitch — and on touch the hover
+     state sticks after the tap that opened it. */
+  #svcGrid > div:hover {
+    transform: none;
+  }
+  #svcGrid > div > i {
+    font-size: 20px !important;
+  }
+  #svcGrid > div > h4 {
+    flex: 1 !important;
+  }
+  #svcGrid > div > b {
+    display: block !important;
+  }
+  #svcGrid > div > span {
+    display: none !important;
+  }
+  #svcGrid > div > .svc-body {
+    flex: 0 0 100% !important;
+  }
+  #svcGrid > div > .svc-body[data-open="false"] {
+    grid-template-rows: 0fr;
+  }
+  #svcGrid > div > .svc-body p {
+    padding: 10px 0 0 32px;
+  }
+  #ctaBtn {
+    margin-top: 26px !important;
+  }
+  #toolGrid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  #toolGrid > button:nth-child(4n) span,
+  #toolGrid > button:nth-child(4n + 1) span {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  #toolGrid > button:nth-child(3n) span {
+    left: auto !important;
+    right: 0 !important;
+    transform: none !important;
+  }
+  #toolGrid > button:nth-child(3n + 1) span {
+    left: 0 !important;
+    right: auto !important;
+    transform: none !important;
+  }
+  #heroStats {
+    margin: 22px 0 0 !important;
+    margin-inline: calc(50% - 50vw) !important;
+    padding: 16px 0 !important;
+    padding-inline: calc(50vw - 50% + clamp(18px, 4cqw, 48px)) !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  #heroStats > div,
+  #heroStats > div:first-child {
+    border: 1px solid var(--color-accent-800) !important;
+    border-radius: 12px !important;
+    background: var(--color-bg) !important;
+    padding: 16px !important;
+  }
+  #heroPhoto img {
+    object-position: 58% 8% !important;
+    -webkit-mask-image: radial-gradient(
+      78% 84% at 50% 32%,
+      #000 40%,
+      transparent 78%
+    ) !important;
+    mask-image: radial-gradient(
+      78% 84% at 50% 32%,
+      #000 40%,
+      transparent 78%
+    ) !important;
+  }
+  #siteNav {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    scrollbar-width: none;
+  }
+  #siteNav::-webkit-scrollbar {
+    display: none;
+  }
+  #siteNav button,
+  #siteNav a {
+    white-space: nowrap;
+  }
+  #siteNav,
+  #headerCta {
+    display: none !important;
+  }
+  #burger {
+    display: inline-flex !important;
+  }
+  #featGrid,
+  #testGrid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: clamp(18px, 4cqw, 48px);
+    gap: 12px !important;
+    margin: 0 calc(-1 * clamp(18px, 4cqw, 48px)) 0 0 !important;
+    padding: 2px 0 12px !important;
+    scrollbar-width: none;
+  }
+  #featGrid::-webkit-scrollbar,
+  #testGrid::-webkit-scrollbar {
+    display: none;
+  }
+  #featGrid > *,
+  #testGrid > * {
+    flex: 0 0 82% !important;
+    scroll-snap-align: start;
+  }
+}
