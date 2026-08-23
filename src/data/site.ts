@@ -2,7 +2,7 @@ export const site = {
   name: "Jordan",
   role: "Frontend developer",
   location: "Scotland, UK — remote worldwide",
-  email: "hello@jordan.dev",
+  email: "jordangrieve.dev@gmail.com",
   tagline: "I build fast Shopify and web front ends, back end included.",
   description:
     "Frontend developer in Scotland. Shopify storefronts, custom apps, and making slow sites fast.",

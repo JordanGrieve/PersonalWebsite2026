@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { budgetOptions, topicOptions } from "@/data/contact";
+import { site } from "@/data/site";
 
 const chip = (on: boolean) =>
   on
@@ -70,11 +71,14 @@ function ChipGroup({
 }
 
 /**
- * The brief form. Validation and the sent state match the design exactly.
+ * The brief form. Submitting hands the message to the visitor's own mail
+ * client, pre-filled, rather than posting it anywhere — so a brief either
+ * visibly reaches a compose window or visibly does not. The previous version
+ * said "Message sent" and then dropped it.
  *
- * TODO: nothing is delivered anywhere yet — `handleSubmit` only flips local
- * state. Wire it to a server action (Resend, Postmark, an inbox webhook)
- * before this goes live, or the messages go nowhere.
+ * TODO: replace with a server action (Resend, Postmark, an inbox webhook) so
+ * the form posts directly. That needs an API key in the environment; until
+ * then this is the honest version.
  */
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -92,6 +96,22 @@ export default function ContactForm() {
       return;
     }
     setErr(false);
+
+    const subject = topic ? `Portfolio enquiry — ${topic}` : "Portfolio enquiry";
+    const body = [
+      name && `Name: ${name}`,
+      `Email: ${email}`,
+      topic && `Topic: ${topic}`,
+      budget && `Budget: ${budget}`,
+      "",
+      msg,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
     setSent(true);
   }
 
@@ -123,13 +143,18 @@ export default function ContactForm() {
             padding: "26px 0",
           }}
         >
-          <i className="ph ph-check-circle" style={{ fontSize: 34, color: "var(--color-accent)" }} />
-          <h3 style={{ margin: 0, fontSize: 22 }}>Message sent</h3>
+          <i className="ph ph-envelope-simple" style={{ fontSize: 34, color: "var(--color-accent)" }} />
+          <h3 style={{ margin: 0, fontSize: 22 }}>Check your email app</h3>
           <p style={{ margin: 0, fontSize: 14.5, color: "var(--color-neutral-400)" }}>
-            Thanks {name || "there"} — I&apos;ll come back to you within a day.
+            Thanks {name || "there"} — your message is written and waiting in a
+            draft. Press send there and it reaches me; I reply within a day.
+          </p>
+          <p style={{ margin: 0, fontSize: 13.5, color: "var(--color-neutral-500)" }}>
+            Nothing opened?{" "}
+            <a href={`mailto:${site.email}`}>{site.email}</a>
           </p>
           <button className="btn btn-secondary" onClick={reset}>
-            Send another
+            Write another
           </button>
         </div>
       ) : (
