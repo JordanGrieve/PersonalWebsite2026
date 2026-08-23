@@ -1,0 +1,48 @@
+export const tiers = [
+  {
+    name: "Speed audit",
+    tag: "Fixed",
+    tagClass: "tag tag-outline",
+    price: "£750",
+    note: "One week, one report, one round of fixes",
+    border: "var(--color-divider)",
+    cta: "Book an audit",
+    items: [
+      "Full Core Web Vitals report",
+      "Prioritised fix list with effort estimates",
+      "Quick wins implemented",
+      "Two-week follow-up measurement",
+    ],
+  },
+  {
+    name: "Storefront build",
+    tag: "Most asked for",
+    tagClass: "tag tag-accent",
+    price: "£2,400+",
+    note: "Three to five weeks, fixed scope",
+    border: "var(--color-accent)",
+    cta: "Start a build",
+    items: [
+      "Custom Shopify theme or web build",
+      "Up to 8 templates / page types",
+      "Cloudflare caching set up",
+      "Performance budget enforced",
+      "30 days post-launch support",
+    ],
+  },
+  {
+    name: "Ongoing",
+    tag: "Retainer",
+    tagClass: "tag tag-neutral",
+    price: "£600/mo",
+    note: "Rolling, cancel with 30 days notice",
+    border: "var(--color-divider)",
+    cta: "Enquire",
+    items: [
+      "Two days of work a month",
+      "Priority on urgent fixes",
+      "Monthly performance report",
+      "Roadmap call every month",
+    ],
+  },
+];
