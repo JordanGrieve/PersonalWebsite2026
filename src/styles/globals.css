@@ -447,8 +447,15 @@ a:hover {
     scroll-snap-type: x mandatory;
     scroll-padding-left: clamp(18px, 4cqw, 48px);
     gap: 12px !important;
-    margin: 0 calc(-1 * clamp(18px, 4cqw, 48px)) 0 0 !important;
-    padding: 2px 0 12px !important;
+    /* Bleed off BOTH edges, not just the right: the negative left margin puts
+       the scrollport's edge at the screen edge, and the matching left padding
+       keeps the first card on the content measure at rest. Without the pair,
+       cards vanish at the 18px content inset on the way out instead of
+       running off the screen. Right side deliberately has no padding, so the
+       last card still ends flush with the screen edge. */
+    margin: 0 calc(-1 * clamp(18px, 4cqw, 48px)) 0
+      calc(-1 * clamp(18px, 4cqw, 48px)) !important;
+    padding: 2px 0 12px clamp(18px, 4cqw, 48px) !important;
     scrollbar-width: none;
   }
   #featGrid::-webkit-scrollbar,
