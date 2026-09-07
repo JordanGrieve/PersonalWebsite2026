@@ -38,20 +38,10 @@ export const socials: Social[] = [
     icon: "ph ph-github-logo",
   },
   {
-    // TODO: needs the profile URL (linkedin.com/in/…). The one supplied was
-    // linkedin.com/feed/, which is the logged-in home feed — a visitor
-    // clicking it lands on their own feed or a login wall, not this profile.
     label: "LinkedIn",
-    handle: "linkedin.com/in/…",
-    href: null,
+    handle: "linkedin.com/in/jordan-grieve-48818a170",
+    href: "https://www.linkedin.com/in/jordan-grieve-48818a170/",
     icon: "ph ph-linkedin-logo",
-  },
-  {
-    // TODO: no account given. Delete this entry if there is not one.
-    label: "X",
-    handle: "x.com/…",
-    href: null,
-    icon: "ph ph-x-logo",
   },
 ];
 
