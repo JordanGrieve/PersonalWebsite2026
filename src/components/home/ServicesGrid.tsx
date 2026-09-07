@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { services } from "@/data/home";
 
 /**
@@ -14,6 +14,20 @@ import { services } from "@/data/home";
  */
 export default function ServicesGrid() {
   const [open, setOpen] = useState<number | null>(0);
+  /* Whether the accordion is actually live. Only used for ARIA, never for
+     layout, so there is no hydration flash: server and first client render
+     both start false and this settles after mount. Above 640px every body is
+     visible and the control expands nothing, so announcing aria-expanded
+     there would describe a state that does not exist. */
+  const [isAccordion, setIsAccordion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    const sync = () => setIsAccordion(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   return (
     <div
@@ -26,11 +40,19 @@ export default function ServicesGrid() {
       }}
     >
       {services.map((sv, i) => (
-        <div
+        <button
           key={sv.no}
+          type="button"
           className="hov-lift"
           onClick={() => setOpen(open === i ? null : i)}
+          aria-expanded={isAccordion ? open === i : undefined}
+          aria-controls={isAccordion ? `svc-body-${i}` : undefined}
           style={{
+            font: "inherit",
+            color: "inherit",
+            textAlign: "left",
+            width: "100%",
+            cursor: "pointer",
             background: "var(--color-surface)",
             border: "1px solid var(--color-divider)",
             borderRadius: "var(--radius-lg)",
@@ -48,7 +70,7 @@ export default function ServicesGrid() {
           <b style={{ display: "none", fontWeight: 400, color: "var(--color-neutral-500)" }}>
             <i className={open === i ? "ph ph-minus" : "ph ph-plus"} style={{ fontSize: 16 }} />
           </b>
-          <div className="svc-body" data-open={open === i}>
+          <div className="svc-body" id={`svc-body-${i}`} data-open={open === i}>
             {/* This div is what clips to the collapsing row, so it carries no
                 padding of its own — padding on a grid item does not shrink
                 with the row, and would leave a closed row 10px tall. */}
@@ -70,12 +92,12 @@ export default function ServicesGrid() {
               marginTop: "auto",
               font: "500 11px/1 var(--font-heading)",
               letterSpacing: ".1em",
-              color: "var(--color-neutral-600)",
+              color: "var(--color-neutral-500)",
             }}
           >
             {sv.no}
           </span>
-        </div>
+        </button>
       ))}
     </div>
   );

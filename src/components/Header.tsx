@@ -112,7 +112,7 @@ export default function Header() {
               font: "500 10.5px/1 var(--font-heading)",
               letterSpacing: ".18em",
               textTransform: "uppercase",
-              color: "var(--color-neutral-600)",
+              color: "var(--color-neutral-500)",
             }}
           >
             Menu
@@ -121,7 +121,7 @@ export default function Header() {
             className="btn btn-secondary"
             onClick={closeMenu}
             aria-label="Close menu"
-            style={{ width: 40, height: 40, padding: 0 }}
+            style={{ width: 44, height: 44, padding: 0 }}
           >
             <i className="ph ph-x" style={{ fontSize: 20 }} />
           </button>

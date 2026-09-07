@@ -83,7 +83,7 @@ export default function ProjectGrid() {
                 <span className="tag tag-outline" style={{ fontSize: 10.5 }}>
                   {p.kind}
                 </span>
-                <span style={{ fontSize: 11, color: "var(--color-neutral-600)" }}>{p.year}</span>
+                <span style={{ fontSize: 11, color: "var(--color-neutral-500)" }}>{p.year}</span>
               </div>
               <div
                 style={{

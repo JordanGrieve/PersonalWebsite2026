@@ -156,7 +156,9 @@ a:hover {
    columns, 885px gives three. */
 @container (min-width: 883px) {
   #featGrid > *:nth-child(4) {
-    display: none;
+    /* !important because the card is a Link carrying an inline
+       `display: block`, which would otherwise win. */
+    display: none !important;
   }
 }
 
@@ -191,6 +193,16 @@ a:hover {
     right: auto !important;
     transform: none !important;
   }
+}
+
+/* Icon buttons: the design sized these 36px. Bumped to 44 so every icon-only
+   control matches the burger and clears the touch-target guidance. */
+.btn-icon {
+  width: 44px !important;
+  height: 44px !important;
+  /* Without this the flex row shrinks it back below 44 — it measured 31 wide
+     next to the card's growing text column. */
+  flex: none !important;
 }
 
 /* Hover states — the design tool expressed these as `style-hover`
@@ -323,7 +335,7 @@ a:hover {
     gap: 0 !important;
     margin-top: 6px;
   }
-  #svcGrid > div {
+  #svcGrid > button {
     flex-direction: row !important;
     flex-wrap: wrap !important;
     align-items: center !important;
@@ -339,34 +351,37 @@ a:hover {
     row-gap: 0 !important;
     cursor: pointer;
   }
-  #svcGrid > div:last-child {
+  .feat-arrow {
+    display: none !important;
+  }
+  #svcGrid > button:last-child {
     border-bottom: 1px solid var(--color-divider) !important;
   }
   /* No lift on the accordion rows: `.hov-lift` raises a card by 3px, which
      on a stacked list just makes the row twitch — and on touch the hover
      state sticks after the tap that opened it. */
-  #svcGrid > div:hover {
+  #svcGrid > button:hover {
     transform: none;
   }
-  #svcGrid > div > i {
+  #svcGrid > button > i {
     font-size: 20px !important;
   }
-  #svcGrid > div > h4 {
+  #svcGrid > button > h4 {
     flex: 1 !important;
   }
-  #svcGrid > div > b {
+  #svcGrid > button > b {
     display: block !important;
   }
-  #svcGrid > div > span {
+  #svcGrid > button > span {
     display: none !important;
   }
-  #svcGrid > div > .svc-body {
+  #svcGrid > button > .svc-body {
     flex: 0 0 100% !important;
   }
-  #svcGrid > div > .svc-body[data-open="false"] {
+  #svcGrid > button > .svc-body[data-open="false"] {
     grid-template-rows: 0fr;
   }
-  #svcGrid > div > .svc-body p {
+  #svcGrid > button > .svc-body p {
     padding: 10px 0 0 32px;
   }
   #ctaBtn {

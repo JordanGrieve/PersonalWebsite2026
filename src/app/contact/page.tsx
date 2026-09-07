@@ -7,11 +7,14 @@ export const metadata: Metadata = {
   description: "Tell me what you're building and roughly when you need it. I reply within a day.",
 };
 
+/* minHeight clears the 24px target minimum — these rows were 23px. */
 const linkRow = {
   display: "flex",
   alignItems: "center",
   gap: 11,
   fontSize: 15,
+  minHeight: 24,
+  padding: "4px 0",
 } as const;
 
 export default function ContactPage() {

@@ -1,6 +1,14 @@
 import { site } from "@/data/site";
 
-const linkStyle = { fontSize: 12.5, color: "var(--color-neutral-400)" } as const;
+/* padding gets these to the 24px target minimum; they were 19px tall. */
+const linkStyle = {
+  fontSize: 12.5,
+  color: "var(--color-neutral-400)",
+  display: "inline-flex",
+  alignItems: "center",
+  minHeight: 24,
+  padding: "2px 0",
+} as const;
 
 export default function Footer() {
   return (
@@ -16,7 +24,7 @@ export default function Footer() {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ fontSize: 12.5, color: "var(--color-neutral-600)" }}>
+        <div style={{ fontSize: 12.5, color: "var(--color-neutral-500)" }}>
           © {new Date().getFullYear()} {site.name} · {site.role}, Scotland
         </div>
         <div style={{ display: "flex", gap: 14 }}>

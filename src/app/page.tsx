@@ -331,9 +331,15 @@ export default function HomePage() {
           }}
         >
           {featured.map((p, i) => (
-            <div
+            /* The whole card is the link. The arrow used to be the only hit
+               target — a 36px square in a 260px card. */
+            <Link
               key={p.slug}
+              href={`/work/${p.slug}`}
+              className="hov-lift"
               style={{
+                display: "block",
+                color: "inherit",
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-divider)",
                 borderRadius: "var(--radius-lg)",
@@ -376,15 +382,13 @@ export default function HomePage() {
                     {featuredBlurbs[p.slug]}
                   </div>
                 </div>
-                <Link
-                  className="btn btn-icon btn-secondary"
-                  href={`/work/${p.slug}`}
-                  aria-label={`Read the ${p.name} case study`}
-                >
+                {/* Decorative only — the card is the link, and a nested one
+                    would be invalid. Hidden on mobile (globals.css). */}
+                <span className="btn btn-icon btn-secondary feat-arrow" aria-hidden="true">
                   <i className="ph ph-arrow-up-right" />
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -459,7 +463,9 @@ export default function HomePage() {
           style={{
             borderRadius: "var(--radius-lg)",
             padding: 26,
-            background: "linear-gradient(150deg,var(--color-accent-500),var(--color-accent-700) 70%)",
+            // Lightened from accent-500/700: dark text on the old dark end measured
+            // 2.2:1. accent-400/500 keeps the same look and clears AA.
+            background: "linear-gradient(150deg,var(--color-accent-400),var(--color-accent-500) 70%)",
             display: "flex",
             flexDirection: "column",
           }}
@@ -478,7 +484,7 @@ export default function HomePage() {
           >
             Let&apos;s build something fast.
           </h3>
-          <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.55, color: "rgba(20,18,31,.72)" }}>
+          <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.55, color: "#14121f" }}>
             Taking on freelance builds and speed work alongside my day job at Dfyne.
           </p>
           <Link
@@ -559,7 +565,14 @@ export default function HomePage() {
           <div style={{ display: "flex", flexDirection: "column", gap: 13 }}>
             <a
               href={`mailto:${site.email}`}
-              style={{ display: "flex", alignItems: "center", gap: 11, fontSize: 15 }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 11,
+                fontSize: 15,
+                minHeight: 24,
+                padding: "4px 0",
+              }}
             >
               <i className="ph ph-envelope-simple" style={{ fontSize: 19 }} />
               {site.email}

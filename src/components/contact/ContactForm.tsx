@@ -220,7 +220,7 @@ export default function ContactForm() {
             Send message
             <i className="ph ph-arrow-up-right" />
           </button>
-          <div style={{ fontSize: 11.5, color: "var(--color-neutral-600)" }}>
+          <div style={{ fontSize: 11.5, color: "var(--color-neutral-500)" }}>
             No newsletters, no CRM sequences.
           </div>
         </form>

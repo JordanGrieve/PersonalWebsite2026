@@ -24,7 +24,7 @@ export default function ImageSlot({ placeholder }: { placeholder: string }) {
         background:
           "linear-gradient(140deg, color-mix(in srgb, var(--color-accent) 7%, var(--color-neutral-900)), var(--color-neutral-900))",
         border: "1px dashed var(--color-neutral-800)",
-        color: "var(--color-neutral-600)",
+        color: "var(--color-neutral-500)",
       }}
     >
       <i className="ph ph-image" style={{ fontSize: 26, color: "var(--color-neutral-700)" }} />

@@ -54,7 +54,12 @@ export default function Post() {
         Image first. Shopify will serve WebP and the right size if you ask it to, and the hero is
         the one image worth preloading by hand:
       </p>
+      {/* Scrolls horizontally, so it needs to be reachable by keyboard —
+          otherwise the overflowing content is unreachable without a mouse. */}
       <pre
+        tabIndex={0}
+        role="region"
+        aria-label="Code example: preloading the hero image"
         style={{
           margin: "0 0 22px",
           padding: "16px 18px",
