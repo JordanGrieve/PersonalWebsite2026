@@ -20,13 +20,42 @@ export const navItems = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export const socials = [
-  { label: "GitHub", handle: "github.com/jordan", href: "#", icon: "ph ph-github-logo" },
+export type Social = {
+  label: string;
+  /** Shown as the visible text on the contact page. */
+  handle: string;
+  /** null = not wired up yet. Anything without a real URL is not rendered,
+      rather than shipping a link that goes nowhere. */
+  href: string | null;
+  icon: string;
+};
+
+export const socials: Social[] = [
   {
+    label: "GitHub",
+    handle: "github.com/JordanGrieve",
+    href: "https://github.com/JordanGrieve",
+    icon: "ph ph-github-logo",
+  },
+  {
+    // TODO: needs the profile URL (linkedin.com/in/…). The one supplied was
+    // linkedin.com/feed/, which is the logged-in home feed — a visitor
+    // clicking it lands on their own feed or a login wall, not this profile.
     label: "LinkedIn",
-    handle: "linkedin.com/in/jordan",
-    href: "#",
+    handle: "linkedin.com/in/…",
+    href: null,
     icon: "ph ph-linkedin-logo",
   },
-  { label: "X", handle: "x.com/jordan", href: "#", icon: "ph ph-x-logo" },
-] as const;
+  {
+    // TODO: no account given. Delete this entry if there is not one.
+    label: "X",
+    handle: "x.com/…",
+    href: null,
+    icon: "ph ph-x-logo",
+  },
+];
+
+/** Only the ones that actually point somewhere. */
+export const liveSocials = socials.filter(
+  (s): s is Social & { href: string } => Boolean(s.href),
+);

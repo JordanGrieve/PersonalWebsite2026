@@ -11,7 +11,7 @@ import {
   featuredSlugs,
   getProject,
 } from "@/data/projects";
-import { site } from "@/data/site";
+import { liveSocials, site } from "@/data/site";
 
 const sectionHeading = {
   fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
@@ -618,14 +618,12 @@ export default function HomePage() {
               gap: 10,
             }}
           >
-            {[
-              { label: "GitHub", icon: "ph ph-github-logo", href: "#" },
-              { label: "LinkedIn", icon: "ph ph-linkedin-logo", href: "#" },
-              { label: "X", icon: "ph ph-x-logo", href: "#" },
-            ].map((s) => (
+            {liveSocials.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
+                target="_blank"
+                rel="noreferrer"
                 className="hov-border"
                 style={{
                   display: "flex",

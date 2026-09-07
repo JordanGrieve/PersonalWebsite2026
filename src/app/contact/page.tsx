@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/contact/ContactForm";
-import { site, socials } from "@/data/site";
+import { liveSocials, site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -78,14 +78,18 @@ export default function ContactPage() {
             <i className="ph ph-envelope-simple" style={{ fontSize: 19 }} />
             {site.email}
           </a>
-          {socials
-            .filter((s) => s.label !== "X")
-            .map((s) => (
-              <a key={s.label} href={s.href} style={linkRow}>
-                <i className={s.icon} style={{ fontSize: 19 }} />
-                {s.handle}
-              </a>
-            ))}
+          {liveSocials.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              style={linkRow}
+            >
+              <i className={s.icon} style={{ fontSize: 19 }} />
+              {s.handle}
+            </a>
+          ))}
           <div style={{ ...linkRow, color: "var(--color-neutral-400)" }}>
             <i className="ph ph-map-pin" style={{ fontSize: 19, color: "var(--color-accent)" }} />
             {site.location}

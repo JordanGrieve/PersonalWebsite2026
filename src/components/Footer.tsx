@@ -1,4 +1,4 @@
-import { site } from "@/data/site";
+import { liveSocials, site } from "@/data/site";
 
 /* padding gets these to the 24px target minimum; they were 19px tall. */
 const linkStyle = {
@@ -28,12 +28,17 @@ export default function Footer() {
           © {new Date().getFullYear()} {site.name} · {site.role}, Scotland
         </div>
         <div style={{ display: "flex", gap: 14 }}>
-          <a href="#" style={linkStyle}>
-            GitHub
-          </a>
-          <a href="#" style={linkStyle}>
-            LinkedIn
-          </a>
+          {liveSocials.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              style={linkStyle}
+            >
+              {s.label}
+            </a>
+          ))}
           <a href={`mailto:${site.email}`} style={linkStyle}>
             Email
           </a>
