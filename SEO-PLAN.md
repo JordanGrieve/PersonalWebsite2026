@@ -49,7 +49,7 @@ This is the single biggest gap; everything below is secondary.
 
 ## Task 2 — `robots.ts`, canonicals, sitemap detail
 
-> **Done.** `src/app/robots.ts` serves `/robots.txt` with host and sitemap. Canonicals on all 21 indexable routes, verified one by one against the built HTML. Sitemap carries `lastModified`, `changeFrequency` and `priority`. The 404 is marked `noindex`.
+> **Done.** `/robots.txt` serves host and sitemap (later moved to `src/app/robots.txt/route.ts` — see the follow-up at the end of this file). Canonicals on all 21 indexable routes, verified one by one against the built HTML. Sitemap carries `lastModified`, `changeFrequency` and `priority`. The 404 is marked `noindex`.
 
 **Problem.** No `/robots.txt` at all, so the sitemap is discoverable only by luck. No
 canonical URL on any route, so `www` / apex and every Vercel preview deployment compete
