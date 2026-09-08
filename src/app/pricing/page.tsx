@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { tiers } from "@/data/pricing";
+import JsonLd from "@/components/JsonLd";
+import { pricingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/pricing" },
   title: "Pricing",
   description:
-    "Indicative prices so you know if we're in the same range. Final quote comes after a short call.",
+    "Indicative prices for speed audits, Shopify and web builds, and monthly retainers. Final quote comes after a short call.",
 };
 
 export default function PricingPage() {
   return (
+    <>
+      <JsonLd data={pricingSchema()} />
     <section
       style={{ padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) clamp(40px,6cqw,84px)" }}
     >
@@ -43,8 +48,8 @@ export default function PricingPage() {
           color: "var(--color-neutral-400)",
         }}
       >
-        Indicative prices so you know if we&apos;re in the same range. Final quote comes after a
-        short call.
+        Indicative prices for speed audits, Shopify and web builds, and monthly retainers — so you
+        know if we&apos;re in the same range. Final quote comes after a short call.
       </p>
       <div
         style={{
@@ -127,5 +132,6 @@ export default function PricingPage() {
         Retainers from £600/month for ongoing storefront and performance work.
       </div>
     </section>
+    </>
   );
 }

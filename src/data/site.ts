@@ -1,12 +1,30 @@
 export const site = {
+  /** Short form. The design uses it for the logo and the drawer. */
   name: "Jordan",
+  /** The form a search or answer engine needs in order to match a person to a
+      site. Use it anywhere the output is read rather than looked at: titles,
+      metadata, structured data, the footer byline. */
+  fullName: "Jordan Grieve",
   role: "Frontend developer",
   location: "Scotland, UK — remote worldwide",
   email: "jordangrieve.dev@gmail.com",
-  tagline: "I build fast Shopify and web front ends, back end included.",
+  tagline: "I build fast Shopify and web front ends from Scotland, back end included.",
   description:
-    "Frontend developer in Scotland. Shopify storefronts, custom apps, and making slow sites fast.",
+    "Jordan Grieve is a frontend developer in Scotland building Shopify storefronts, custom Shopify apps, and Cloudflare setups that make slow sites fast.",
   url: "https://www.jordangrieve.com",
+  /** Subjects the site is actually about. Feeds `Person.knowsAbout`. */
+  expertise: [
+    "Shopify theme development",
+    "Shopify app development",
+    "Headless commerce",
+    "Core Web Vitals",
+    "Web performance optimisation",
+    "Cloudflare Workers",
+    "Next.js",
+    "Frontend development",
+  ],
+  /** For `PostalAddress` in the schema graph. Region only — no street address. */
+  address: { region: "Scotland", country: "GB" },
 } as const;
 
 /** Header / drawer navigation, in order. */

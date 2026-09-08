@@ -3,6 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImageSlot from "@/components/ImageSlot";
 import { getCaseStudy, getProject, nextProject, projects } from "@/data/projects";
+import { site } from "@/data/site";
+import JsonLd from "@/components/JsonLd";
+import { caseStudySchema } from "@/lib/schema";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -14,7 +17,17 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
-  return { title: project.name, description: project.result };
+  return {
+    title: `${project.name} — ${project.kind}`,
+    description: project.result,
+    alternates: { canonical: `/work/${slug}` },
+    openGraph: {
+      title: `${project.name} — ${project.kind}`,
+      description: project.result,
+      type: "article",
+      url: `${site.url}/work/${slug}`,
+    },
+  };
 }
 
 export default async function CaseStudyPage({ params }: Params) {
@@ -27,6 +40,7 @@ export default async function CaseStudyPage({ params }: Params) {
 
   return (
     <>
+      <JsonLd data={caseStudySchema(project)} />
       <section style={{ padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) 0" }}>
         <Link className="btn btn-ghost" href="/work" style={{ fontSize: 12, marginBottom: 20 }}>
           <i className="ph ph-arrow-left" />

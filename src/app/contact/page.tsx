@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/contact/ContactForm";
 import { liveSocials, site } from "@/data/site";
+import JsonLd from "@/components/JsonLd";
+import { contactSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact",
-  description: "Tell me what you're building and roughly when you need it. I reply within a day.",
+  description:
+    "Hire Jordan Grieve for Shopify, web or performance work. Tell me what you're building and roughly when you need it — I reply within a day.",
 };
 
 /* minHeight clears the 24px target minimum — these rows were 23px. */
@@ -19,6 +23,8 @@ const linkRow = {
 
 export default function ContactPage() {
   return (
+    <>
+      <JsonLd data={contactSchema()} />
     <section
       style={{
         padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) clamp(40px,6cqw,84px)",
@@ -71,7 +77,8 @@ export default function ContactPage() {
             color: "var(--color-neutral-300)",
           }}
         >
-          Tell me what you&apos;re building and roughly when you need it. I reply within a day.
+          Tell me what you&apos;re building and roughly when you need it — Shopify, web or
+          performance work, anywhere from Scotland outwards. I reply within a day.
         </p>
         <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14 }}>
           <a href={`mailto:${site.email}`} style={linkRow}>
@@ -98,5 +105,6 @@ export default function ContactPage() {
       </div>
       <ContactForm />
     </section>
+    </>
   );
 }

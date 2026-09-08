@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { serviceDetail } from "@/data/services";
+import JsonLd from "@/components/JsonLd";
+import { servicesSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services" },
   title: "Services",
   description:
-    "Six things I do often enough to be quick at. Fixed scope where possible, day rate where it isn't.",
+    "Shopify, web builds, performance, Cloudflare and analytics work. Fixed scope where possible, day rate where it isn't.",
 };
 
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd data={servicesSchema()} />
       <section style={{ padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) 0" }}>
         <div
           style={{
@@ -42,8 +46,8 @@ export default function ServicesPage() {
             color: "var(--color-neutral-400)",
           }}
         >
-          Six things I do often enough to be quick at. Fixed scope where possible, day rate where it
-          isn&apos;t.
+          Six things I do often enough to be quick at — Shopify, web builds, performance,
+          Cloudflare and analytics. Fixed scope where possible, day rate where it isn&apos;t.
         </p>
       </section>
 

@@ -3,7 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImageSlot from "@/components/ImageSlot";
 import { getPostBody } from "@/content/posts";
-import { getPost, posts, relatedPosts } from "@/data/posts";
+import { displayDate, getPost, posts, relatedPosts } from "@/data/posts";
+import { site } from "@/data/site";
+import JsonLd from "@/components/JsonLd";
+import { postSchema } from "@/lib/schema";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -18,7 +21,15 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: post.title,
     description: post.dek,
-    openGraph: { title: post.title, description: post.dek, type: "article" },
+    alternates: { canonical: `/writing/${slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.dek,
+      type: "article",
+      url: `${site.url}/writing/${slug}`,
+      authors: [site.fullName],
+      publishedTime: post.published,
+    },
   };
 }
 
@@ -32,6 +43,7 @@ export default async function PostPage({ params }: Params) {
 
   return (
     <>
+      <JsonLd data={postSchema(post)} />
       <article>
         <section style={{ padding: "clamp(26px,4cqw,56px) clamp(18px,4cqw,48px) 0" }}>
           <Link className="btn btn-ghost" href="/writing" style={{ fontSize: 12, marginBottom: 20 }}>
@@ -52,7 +64,7 @@ export default async function PostPage({ params }: Params) {
             }}
           >
             <span style={{ color: "var(--color-accent)" }}>{post.category}</span>
-            <span>{post.date}</span>
+            <time dateTime={post.published}>{displayDate(post.published)}</time>
             <span>{post.read} read</span>
           </div>
           <h1
@@ -158,7 +170,7 @@ export default async function PostPage({ params }: Params) {
               }}
             >
               <div style={{ fontSize: 11.5, color: "var(--color-neutral-500)" }}>
-                {r.date} · {r.read}
+                <time dateTime={r.published}>{displayDate(r.published)}</time> · {r.read}
               </div>
               <div
                 style={{

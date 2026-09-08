@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollReveal from "@/components/ScrollReveal";
 import { site } from "@/data/site";
+import "@/styles/phosphor-subset.css";
 import "@/styles/nocturne.css";
 import "@/styles/globals.css";
 
@@ -31,34 +32,38 @@ const dancingScript = Dancing_Script({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.role}`,
-    template: `%s · ${site.name}`,
+    default: `${site.fullName} — ${site.role} in Scotland`,
+    template: `%s · ${site.fullName}`,
   },
   description: site.description,
+  authors: [{ name: site.fullName, url: site.url }],
+  creator: site.fullName,
+  publisher: site.fullName,
   openGraph: {
-    title: `${site.name} — ${site.role}`,
+    title: `${site.fullName} — ${site.role} in Scotland`,
     description: site.description,
     type: "website",
+    siteName: site.fullName,
+    locale: "en_GB",
+    url: site.url,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.fullName} — ${site.role} in Scotland`,
+    description: site.description,
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       className={`${inter.variable} ${anton.variable} ${dancingScript.variable}`}
       // The inline script below adds `js-reveal` here before React hydrates,
       // so the client's class list legitimately differs from the server's.
       suppressHydrationWarning
     >
       <head>
-        {/* Phosphor icon font, used as `<i className="ph ph-…">` throughout —
-            the same source the design project pulled from. */}
-        <link rel="preconnect" href="https://unpkg.com" />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"
-        />
         {/* Runs before first paint, so the scroll-reveal start state is never
             visible as a flash. Gated this way rather than in the stylesheet so
             that a browser without JS never hides anything. */}

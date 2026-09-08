@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { posts } from "@/data/posts";
+import { displayDate, posts } from "@/data/posts";
+import JsonLd from "@/components/JsonLd";
+import { writingSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/writing" },
   title: "Blog",
   description: "Short posts on Shopify, caching and the boring parts of making sites fast.",
 };
 
 export default function WritingPage() {
   return (
+    <>
+      <JsonLd data={writingSchema()} />
     <section
       style={{ padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) clamp(40px,6cqw,84px)" }}
     >
@@ -62,7 +67,7 @@ export default function WritingPage() {
             }}
           >
             <div style={{ fontSize: 12, color: "var(--color-neutral-500)" }}>
-              {p.date} · {p.read}
+              <time dateTime={p.published}>{displayDate(p.published)}</time> · {p.read}
             </div>
             <div style={{ gridColumn: "span 2" }}>
               <div
@@ -89,5 +94,6 @@ export default function WritingPage() {
         ))}
       </div>
     </section>
+    </>
   );
 }

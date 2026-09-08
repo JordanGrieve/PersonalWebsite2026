@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
 import ProjectGrid from "@/components/work/ProjectGrid";
+import JsonLd from "@/components/JsonLd";
+import { workSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/work" },
   title: "Projects",
   description:
-    "Storefronts, apps and speed work. Every project lists what changed, not just what it looks like.",
+    "Shopify storefronts, custom apps and performance work by Jordan Grieve. Every project lists what changed, not just what it looks like.",
 };
 
 export default function WorkPage() {
   return (
+    <>
+      <JsonLd data={workSchema()} />
     <section
       style={{
         padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) clamp(38px,6cqw,84px)",
@@ -44,10 +49,11 @@ export default function WorkPage() {
           color: "var(--color-neutral-400)",
         }}
       >
-        Storefronts, apps and speed work. Every project lists what changed, not just what it looks
-        like.
+        Shopify storefronts, custom apps and performance work. Every project lists what changed,
+        not just what it looks like.
       </p>
       <ProjectGrid />
     </section>
+    </>
   );
 }

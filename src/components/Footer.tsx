@@ -25,7 +25,7 @@ export default function Footer() {
         }}
       >
         <div style={{ fontSize: 12.5, color: "var(--color-neutral-500)" }}>
-          © {new Date().getFullYear()} {site.name} · {site.role}, Scotland
+          © {new Date().getFullYear()} {site.fullName} · {site.role}, Scotland
         </div>
         <div style={{ display: "flex", gap: 14 }}>
           {liveSocials.map((s) => (

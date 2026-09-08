@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
@@ -12,6 +13,12 @@ import {
   getProject,
 } from "@/data/projects";
 import { liveSocials, site } from "@/data/site";
+import JsonLd from "@/components/JsonLd";
+import { homeSchema } from "@/lib/schema";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const sectionHeading = {
   fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
@@ -26,6 +33,7 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd data={homeSchema()} />
       <section
         id="heroSection"
         style={{
