@@ -214,3 +214,30 @@ and the copy has been reviewed.
   cite, but that is the content work you said comes next.
 - **`Review` / `AggregateRating` on the testimonials.** Valid only if the quotes are
   attributable and the people would stand behind them publicly. Your call, later.
+
+---
+
+## Follow-up — AI crawler policy (9 September 2026)
+
+After the first deploy, the live `/robots.txt` turned out not to be the one this
+repo serves. Cloudflare’s **managed robots.txt** setting (Security Settings → Bot
+traffic) was prepending its own block, which disallowed every major AI crawler
+outright — ClaudeBot and GPTBot included. Classic search was unaffected
+(Googlebot is not on that list), but the two crawlers that build the indexes
+answer engines cite from were blocked, which is precisely the half of task 3
+that pays off.
+
+The managed block is all-or-nothing — there is no per-crawler exception inside
+it — so the file moved into the site: `src/app/robots.txt/route.ts`, replacing
+`robots.ts` because `MetadataRoute.Robots` cannot emit a `Content-Signal` line.
+It keeps Cloudflare’s stance and its block list, minus ClaudeBot and GPTBot,
+which are now named and allowed explicitly.
+
+**This file only takes effect with the Cloudflare toggle turned off.** While the
+managed setting is on, Cloudflare prepends its block regardless of what the
+origin returns, leaving two conflicting groups for the same user-agent.
+
+Note on GPTBot: OpenAI documents it as the crawler used to gather training data,
+so allowing it while signalling `ai-train=no` leaves the preference resting on
+the `Content-Signal` line alone. OAI-SearchBot and ChatGPT-User — the retrieval
+fetchers behind ChatGPT search — are separate agents and were never blocked.
