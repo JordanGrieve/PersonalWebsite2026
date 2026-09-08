@@ -12,12 +12,13 @@ import { site } from "@/data/site";
  * use=reference`, and it is a stated preference rather than an enforcement —
  * robots.txt is voluntary. The crawlers listed under `BLOCKED` below are asked
  * to stay away outright; the ones that build the indexes answer engines cite
- * from are deliberately not on that list.
+ * from are deliberately not on that list, since a site absent from those
+ * indexes never gets cited by them.
  *
  * IMPORTANT: Cloudflare's managed robots.txt setting (Security Settings → Bot
  * traffic) prepends its own block to whatever this file returns, and that block
- * disallows ClaudeBot and GPTBot. This file only takes effect with that setting
- * turned off.
+ * disallows ClaudeBot. This file only takes effect with that setting turned
+ * off.
  */
 
 /** The Content Signals Policy, as published at contentsignals.org. */
@@ -51,7 +52,7 @@ const CONTENT_SIGNALS_PREAMBLE = `# As a condition of accessing this website, yo
 
 /**
  * Crawlers asked to stay off the site entirely. This is Cloudflare's managed
- * list minus ClaudeBot and GPTBot — see ALLOWED below.
+ * list, minus ClaudeBot — see ALLOWED below.
  */
 const BLOCKED = [
   "Amazonbot",
@@ -60,19 +61,27 @@ const BLOCKED = [
   "CCBot",
   "CloudflareBrowserRenderingCrawler",
   "Google-Extended",
+  /* OpenAI documents GPTBot as the crawler that gathers training data, which is
+     the one use this site does not grant. ChatGPT can still reach and cite the
+     site through OAI-SearchBot and ChatGPT-User — see ALLOWED. */
+  "GPTBot",
   "meta-externalagent",
 ];
 
 /**
  * Named explicitly so the intent is legible, even though `User-agent: *`
- * already allows them. These are the crawlers behind the answer engines — being
- * absent from their index means never being cited by them. The `ai-train=no`
- * signal above still applies to everything they take.
+ * already allows it. Being absent from an answer engine's index means never
+ * being cited by it, and citation is the whole point of the structured data
+ * this site serves. The `ai-train=no` signal above still applies to everything
+ * taken this way.
  *
- * OAI-SearchBot and ChatGPT-User (OpenAI's retrieval and on-demand fetchers,
- * as distinct from GPTBot) were never blocked, and are covered by `*`.
+ * Only ClaudeBot needs naming. OpenAI splits the job across three agents:
+ * GPTBot gathers training data and stays blocked above, while OAI-SearchBot
+ * (its search index) and ChatGPT-User (fetching a page when someone asks about
+ * it) were never blocked and are covered by `*`. So ChatGPT can still find and
+ * cite the site without it becoming training data.
  */
-const ALLOWED = ["ClaudeBot", "GPTBot"];
+const ALLOWED = ["ClaudeBot"];
 
 function build(): string {
   return [
