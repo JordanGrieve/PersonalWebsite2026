@@ -162,6 +162,19 @@ a:hover {
   }
 }
 
+/* Drops the About portrait so its top edge sits alongside the body copy
+   rather than level with the heading.
+
+   Only while the two columns are side by side. Below 641px the section
+   collapses to a single column and `#aboutPhoto` takes `order: -1`, putting
+   the photo first — a top margin there would be 150px of dead space above the
+   page's opening image rather than an offset against anything. */
+@container (min-width: 641px) {
+  #aboutPhoto {
+    margin-top: 150px;
+  }
+}
+
 /* Four toolkit columns only fit once the card is wide enough to hold four
    labels side by side — the card is one of three in an auto-fit section, so
    it is at its narrowest just as that section goes three-up. Below that,
