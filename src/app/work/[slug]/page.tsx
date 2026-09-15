@@ -30,6 +30,33 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
+/**
+ * Case-study body copy. Splits on blank lines so a long `problem` or
+ * `approach` reads as paragraphs rather than one unbroken block — a single
+ * `<p>` swallows the newlines, which is easy to miss until a study is long
+ * enough for it to matter.
+ */
+function Prose({ text }: { text: string }) {
+  const paragraphs = text.split(/\n\s*\n/).filter(Boolean);
+  return (
+    <>
+      {paragraphs.map((p, i) => (
+        <p
+          key={i}
+          style={{
+            margin: i === 0 ? 0 : "14px 0 0",
+            fontSize: 15,
+            lineHeight: 1.65,
+            color: "var(--color-neutral-400)",
+          }}
+        >
+          {p}
+        </p>
+      ))}
+    </>
+  );
+}
+
 export default async function CaseStudyPage({ params }: Params) {
   const { slug } = await params;
   const project = getProject(slug);
@@ -126,15 +153,11 @@ export default async function CaseStudyPage({ params }: Params) {
       >
         <div>
           <h3 style={{ margin: "0 0 12px", fontSize: 20, letterSpacing: "-.01em" }}>The problem</h3>
-          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.65, color: "var(--color-neutral-400)" }}>
-            {study.problem}
-          </p>
+          <Prose text={study.problem} />
         </div>
         <div>
           <h3 style={{ margin: "0 0 12px", fontSize: 20, letterSpacing: "-.01em" }}>What I did</h3>
-          <p style={{ margin: 0, fontSize: 15, lineHeight: 1.65, color: "var(--color-neutral-400)" }}>
-            {study.approach}
-          </p>
+          <Prose text={study.approach} />
         </div>
       </section>
 

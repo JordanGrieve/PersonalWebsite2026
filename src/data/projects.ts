@@ -60,6 +60,15 @@ export const projects: Project[] = [
     tag: "Infrastructure",
   },
   {
+    slug: "dfyne-fit-finder",
+    name: "DFYNE size advisor",
+    kind: "Integration",
+    year: "2026",
+    result: "AI size advisor wired into two Shopify Plus storefronts, end to end",
+    ph: "Product page — the size advisor call to action",
+    tag: "Shopify",
+  },
+  {
     slug: "open-door-bakery",
     name: "Open Door Bakery",
     kind: "Web build",
@@ -97,13 +106,17 @@ export const projectFilters = [
  */
 export const featuredSlugs = [
   "dfyne-cloudflare-migration",
+  "dfyne-fit-finder",
   "essential-upsell",
+  /* Fourth slot: seen on tablet and mobile, hidden once the grid goes
+     three-up. Postbox came out of the four to make room for the size advisor;
+     it is still on /work. */
   "amoria",
-  "postbox",
 ];
 
 export const featuredBlurbs: Record<string, string> = {
   "dfyne-cloudflare-migration": "Cloudflare · US shoppers on the wrong store, 35% → 6%",
+  "dfyne-fit-finder": "Integration · AI size advisor across two Shopify Plus stores",
   "dfyne-storefront-refactor": "Performance · LCP 2.3s → 1.6s, six apps removed",
   "essential-upsell": "Shopify app · Vector search over sales and returns",
   amoria: "Headless Shopify · Next.js, built end to end",
@@ -115,6 +128,7 @@ export const featuredPlaceholders: Record<string, string> = {
   "essential-upsell": "Project shot — recommendations on the product page",
   amoria: "Project shot — headless storefront",
   "dfyne-cloudflare-migration": "Project shot — edge routing",
+  "dfyne-fit-finder": "Project shot — size advisor on the product page",
   "dfyne-storefront-refactor": "Project shot — before / after",
   "open-door-bakery": "Project shot — storefront on mobile",
   postbox: "Project shot — ticket thread",
@@ -329,6 +343,44 @@ const caseStudies: Record<string, CaseStudy> = {
     },
   },
 
+  /* Deliberately absent from this write-up, and worth keeping absent: the
+     storage bucket and service hostnames, the shape of the customer-hash
+     secret, the vendor's name, and the contract term. The integration is not
+     live yet either, so there is no returns figure to quote — the numbers
+     below are all delivery facts, not business outcomes. */
+  "dfyne-fit-finder": {
+    tags: ["Shopify Plus", "Integration", "2026"],
+    heading: "GETTING THE SIZE RIGHT BEFORE THE PARCEL SHIPS",
+    intro:
+      "Activewear gets returned because it does not fit. DFYNE took on an AI size advisor that recommends a size on the product page and learns from what people actually keep, and I owned the technical integration across both storefronts — the data the model trains on, the identity that joins a recommendation to a purchase, and the two objects the vendor reads. Sole frontend delivery, with one backend developer working to written briefs.",
+    meta: [
+      { l: "Client", v: "DFYNE" },
+      { l: "Scope", v: "Data feeds, identity service, PDP and order objects, consent, vendor QA" },
+      { l: "Timeline", v: "Spec May 2026, build from July, vendor sign-off late August" },
+      {
+        l: "Stack",
+        v: "Shopify Plus, Liquid, Custom Web Pixels, BigQuery, Cloud Workflows, Cloud Run, Cloudflare",
+      },
+      { l: "Role", v: "Integration lead — architecture, build, data contract, vendor management" },
+    ],
+    problem:
+      "A size recommender is only as good as what it learns from, and what it learns from is your catalogue and your returns. So the real work is not the button on the product page — it is a data contract that has to be exactly right, twice over, because DFYNE runs two stores for two markets. Every product needs a size system, a taxonomy category and a size type the model understands. Every purchase needs to join back to the recommendation that produced it, without a customer identifier that carries personal data, and without tracking anyone who has not consented. And all of it has to survive Shopify's checkout, where you do not get to run your own code on the thank-you page.\n\nSome of that is harder than it sounds. Google's product taxonomy, which the model categorises against, has no node for a hoodie — so somebody has to choose the nearest honest category and get the vendor to agree it in writing. Two stores selling the same garments could plausibly be graded to two different measurement standards, and the answer changes every product row in both feeds; that one came down to asking the apparel team rather than assuming.\n\nThere was a clock on it too. The vendor's onboarding only starts counting once the data passes their validation, so every day spent in review was a day not spent integrating.",
+    approach:
+      "Four daily feeds — products and returns, per store — export from BigQuery on a schedule into private cloud storage the vendor reads with its own credentials. I specified the pipeline and verified every release myself against the bucket, joining on variant id and diffing column by column, which is how two reported validation failures turned out to be a stale sample on their side rather than gaps in ours. When their full pass asked for three schema changes, I wrote the brief, reviewed the pull requests, and checked the redeployed files against all seven acceptance criteria the same day.\n\nFor identity, a small service hashes the Shopify customer id behind a server-side salt and serves it to the storefront through an app proxy, so the same value appears on the product page and on the completed order — stable across devices, meaningless to anyone who intercepts it, and null for guests. The product-page object carries product identity, live size availability, consent state and hooks the vendor's script calls to select a size or add to cart. The order object is a Custom Web Pixel, because checkout extensibility rules out theme code, and it rebuilds the purchase payload with the raw ids that match the feeds. Consent runs through Shopify's privacy API and fails closed.\n\nAbout ten instrumented test purchases turned up three Shopify behaviours that are not in the documentation and would each have broken the integration quietly: pixels cannot read private cart attributes even though the order record has them, a checkout snapshots cart attributes when it opens so later writes never arrive, and the pixel sandbox is invisible to the top window by design. That last one let me answer a reported defect with evidence — the object was there, it had been tested from the wrong context — rather than spending a sprint looking for a bug that did not exist.",
+    /* TODO: once Fit Finder has been live long enough to read, the figures that
+       matter are returns rate and size-related revenue, not any of these. */
+    results: [
+      { n: "4 × daily", l: "Automated feeds, around 10,000 catalogue rows verified a day" },
+      { n: "7 / 7", l: "Vendor acceptance criteria passed, every finding closed the same day" },
+      { n: "3", l: "Undocumented Shopify checkout behaviours found and engineered around" },
+      { n: "~7 weeks", l: "Spec to vendor sign-off, across two storefronts" },
+    ],
+    slots: {
+      hero: "Product page — the size advisor in the storefront's own design language",
+      shot1: "The data contract — how a product reaches the model",
+      shot2: "Recommendation to purchase — how a sale joins back to the size it was shown",
+    },
+  },
 };
 
 export function getProject(slug: string): Project | undefined {
