@@ -126,6 +126,18 @@ a:hover {
   font-size: 16px !important;
   padding: 14px 24px !important;
 }
+
+/* The "All projects" / "All posts" back links measured 93x28. That clears
+   WCAG 2.2's 24px minimum target, but everything else you tap on this site is
+   44px, and on a phone 28px is a miss waiting to happen.
+
+   Padding rather than font size: the small type is deliberate — these are a
+   way back, not a call to action — and only the target was wrong. Later in the
+   cascade than nocturne.css, so no !important needed. */
+.btn-ghost {
+  min-height: 44px;
+  padding-inline: 12px;
+}
 #toolGrid > button:nth-child(4n) span {
   left: auto !important;
   right: 0 !important;
