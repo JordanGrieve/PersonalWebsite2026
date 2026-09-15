@@ -26,7 +26,13 @@ export const tiers = [
     note: "Two to three weeks, fixed scope",
     border: "var(--color-accent)",
     cta: "Start a build",
-    /* Six templates plus analytics inside £2,400 — eight days at the project
+    /* Shopify work here is customising and extending the theme the client
+       already has — new sections, new templates, changes to existing ones. Not
+       a theme from scratch, which is not what the experience covers. Non-Shopify
+       builds genuinely are from nothing; AMORIA, Open Door Bakery and Postbox
+       are all evidence of that, so the tier says both.
+
+       Six templates plus analytics inside £2,400 — eight days at the project
        rate, so this is the tier with the least slack in it. If builds start
        overrunning, this is the line to look at first.
 
@@ -34,11 +40,10 @@ export const tiers = [
        in the other direction by choice: it is £300 on its own, and a build that
        launches without working tracking cannot prove it worked.
 
-       The speed line is a promise, not a description. It is the reason someone
-       picks this over a cheaper theme customiser — do not quote a build you
-       cannot hold it on. */
+       The speed line is a promise, not a description. It is what separates this
+       from cheaper theme work — do not quote a build you cannot hold it on. */
     items: [
-      "Custom Shopify theme or web build, six templates",
+      "Your Shopify theme extended, or a web build from scratch — six templates",
       "Extra templates and page types quoted per template",
       "Built from your design — design available as an add-on",
       "Ships green on Core Web Vitals, measured before handover",

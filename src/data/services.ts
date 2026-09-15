@@ -18,9 +18,11 @@ export const serviceDetail = [
     icon: "ph ph-storefront",
     title: "Shopify & ecommerce",
     from: "From £1,600",
-    body: "Custom themes and app work for brands that have outgrown a template.",
+    /* Extending the theme they have, not building one from scratch — the DFYNE
+       work is an Impulse theme, and that is the honest shape of this. */
+    body: "Theme customisation and app work for brands that have outgrown how their theme ships.",
     items: [
-      "Custom theme or section development",
+      "Sections and templates built into your existing theme",
       "Shopify app builds (Node + Workers)",
       "Checkout and cart improvements",
       "App audit — remove what you pay for twice",

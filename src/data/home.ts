@@ -16,7 +16,7 @@ export const services = [
     icon: "ph ph-storefront",
     no: "02",
     title: "Shopify & ecommerce",
-    body: "Custom themes, sections, and checkout paths that do not fight the shopper.",
+    body: "Sections, templates and checkout paths built into the theme you already run.",
   },
   {
     icon: "ph ph-lightning",
