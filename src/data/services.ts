@@ -47,14 +47,32 @@ export const serviceDetail = [
     icon: "ph ph-lightning",
     title: "Performance",
     from: "From £400",
-    body: "A measured audit, then the fixes. You get before and after numbers, not adjectives.",
+    body: "A measured audit and an ordered list of what to do about it. You get numbers, not adjectives.",
     /* Mirrors the Speed audit tier in pricing.ts. If one changes, change both —
-       these are the same thing sold from two pages. */
+       these are the same thing sold from two pages. The last line matters: the
+       audit stops at the report, so the page has to say where the fixing
+       goes, or the offer has a hole in it. */
     items: [
       "App audit — what you are paying for twice",
       "Core Web Vitals measured across every template",
-      "The wins implemented, not just written down",
-      "Re-measured after two weeks, with a call to talk it through",
+      "Prioritised fix list with effort estimates",
+      "Fixes quoted from the list, or rolled into a retainer",
+    ],
+  },
+  /* Technical only, on purpose. Structured data, crawler policy and canonicals
+     are things that either exist or do not — no promises about rankings, which
+     are not ours to control. The demo is this site: everything listed here is
+     live on jordangrieve.com and readable by anyone who views source. */
+  {
+    icon: "ph ph-magnifying-glass",
+    title: "SEO & GEO",
+    from: "From £600",
+    body: "Being findable by search engines and quotable by AI answer engines. Mostly structured data and crawler policy — the machine-readable half, rather than the guesswork half.",
+    items: [
+      "Structured data generated from your content, so it cannot drift",
+      "Crawler policy — robots.txt, Content Signals, llms.txt",
+      "Canonicals, sitemaps and a share image per page",
+      "A written record of what changed and why",
     ],
   },
   {

@@ -3,19 +3,19 @@ export const tiers = [
     name: "Speed audit",
     tag: "Fixed",
     tagClass: "tag tag-outline",
-    price: "£1,500",
-    note: "One week, whole site, fixes included",
+    price: "£400",
+    note: "One day, whole site, written report",
     border: "var(--color-divider)",
     cta: "Book an audit",
-    /* The app audit leads deliberately: it is the line that pays for the
-       engagement. Removing £400/month of apps is £4,800 a year against a
-       £1,500 fee, and that arithmetic sells better than a Lighthouse score. */
+    /* Report only — implementation came out when the price came down, because
+       a week of fixing does not fit in £400 at any rate worth working for.
+       That makes this the cheap front door: the call at the end is where the
+       fixing gets quoted, so keep the call. */
     items: [
       "App audit — what you are paying for twice",
       "Core Web Vitals measured across every template",
       "Prioritised fix list with effort estimates",
-      "The wins implemented, not just written down",
-      "Re-measured after two weeks, with a call to talk it through",
+      "A call to walk through it and agree what is worth doing",
     ],
   },
   {

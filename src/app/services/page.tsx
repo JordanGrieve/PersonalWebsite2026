@@ -8,10 +8,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
   title: "Services",
   description:
-    "Shopify, web builds, performance, Cloudflare and analytics work. Fixed scope where possible, day rate where it isn't.",
+    "Shopify, web builds, web apps, performance, SEO and GEO, Cloudflare and analytics work. Fixed scope where possible, day rate where it isn't.",
 };
 
 export default function ServicesPage() {
+  /* Spelled out rather than a numeral, and counted rather than typed. The deck
+     said "Six things" for two services past the point it was true — hardcoded
+     copy about a list is copy that goes stale the moment the list changes. */
+  const words = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+  const count = words[serviceDetail.length] ?? String(serviceDetail.length);
+
   return (
     <>
       <JsonLd data={servicesSchema()} />
@@ -46,8 +52,9 @@ export default function ServicesPage() {
             color: "var(--color-neutral-400)",
           }}
         >
-          Six things I do often enough to be quick at — Shopify, web builds, performance,
-          Cloudflare and analytics. Fixed scope where possible, day rate where it isn&apos;t.
+          {count} things I do often enough to be quick at — Shopify, web builds, web apps,
+          performance, SEO, Cloudflare and analytics. Fixed scope where possible, day rate where
+          it isn&apos;t.
         </p>
       </section>
 
