@@ -62,12 +62,12 @@ export const serviceDetail = [
   {
     icon: "ph ph-lifebuoy",
     title: "Maintenance & support",
-    from: "From £600/mo",
+    from: "From £400/mo",
     body: "A standing slot each month for fixes, updates and the small jobs that pile up.",
     items: [
-      "Two days of work a month",
+      "Two days of work a month, unused time rolls over once",
       "Theme and dependency updates",
-      "Priority on urgent fixes",
+      "Urgent fixes answered the next working day",
       "Monthly note on what changed",
     ],
   },
