@@ -2,7 +2,7 @@ export const serviceDetail = [
   {
     icon: "ph ph-code",
     title: "Web development",
-    from: "From £2,400",
+    from: "From £600",
     /* Eight days at the project rate. "Web apps front to back" used to be in
        this description and does not fit in eight days — the scope was narrowed
        to match the price rather than the other way round. */
@@ -14,10 +14,27 @@ export const serviceDetail = [
       "Deploy pipeline and staging URL",
     ],
   },
+  /* Every line here is evidenced on /work: Postbox is the multi-tenant SaaS
+     with the auth, the schema and the email loop; Open Door Bakery is the
+     storefront, admin and API in one app; Essential Upsell is the Shopify app.
+     `ph-database` because it is already in the icon subset — a new glyph means
+     regenerating the font with `npm run build:icons`. */
+  {
+    icon: "ph ph-database",
+    title: "Web apps & SaaS",
+    from: "From £2,400",
+    body: "Products with real accounts, real data and an admin behind them. The parts that are tedious rather than difficult are where these usually go wrong, so that is where the time goes.",
+    items: [
+      "Next.js and TypeScript, front to back",
+      "Postgres and a schema that survives contact with users",
+      "Accounts, sessions and multi-tenant boundaries",
+      "Transactional email that threads instead of landing in spam",
+    ],
+  },
   {
     icon: "ph ph-storefront",
     title: "Shopify & ecommerce",
-    from: "From £4,500",
+    from: "From £2,400",
     body: "Custom themes and app work for brands that have outgrown a template.",
     items: [
       "Custom theme or section development",
@@ -29,7 +46,7 @@ export const serviceDetail = [
   {
     icon: "ph ph-lightning",
     title: "Performance",
-    from: "From £1,500",
+    from: "From £400",
     body: "A measured audit, then the fixes. You get before and after numbers, not adjectives.",
     /* Mirrors the Speed audit tier in pricing.ts. If one changes, change both —
        these are the same thing sold from two pages. */
