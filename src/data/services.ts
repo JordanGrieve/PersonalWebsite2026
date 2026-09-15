@@ -2,11 +2,14 @@ export const serviceDetail = [
   {
     icon: "ph ph-code",
     title: "Web development",
-    from: "From £1,800",
-    body: "Marketing sites and web apps built front to back. Clean components, sensible CMS, no framework churn for its own sake.",
+    from: "From £2,400",
+    /* Eight days at the project rate. "Web apps front to back" used to be in
+       this description and does not fit in eight days — the scope was narrowed
+       to match the price rather than the other way round. */
+    body: "Marketing and brochure sites built front to back. Clean components, a CMS your team can actually edit, and no framework churn for its own sake.",
     items: [
-      "Design build from Figma or from scratch",
-      "Node/API work where needed",
+      "Built from your design — design available as an add-on",
+      "Node and API work where the site needs it",
       "CMS your team can actually edit",
       "Deploy pipeline and staging URL",
     ],
@@ -28,22 +31,29 @@ export const serviceDetail = [
     title: "Performance",
     from: "From £1,500",
     body: "A measured audit, then the fixes. You get before and after numbers, not adjectives.",
+    /* Mirrors the Speed audit tier in pricing.ts. If one changes, change both —
+       these are the same thing sold from two pages. */
     items: [
-      "Core Web Vitals audit with a written plan",
-      "Script, image and font clean-up",
-      "Caching and edge rules",
-      "Follow-up report after two weeks",
+      "App audit — what you are paying for twice",
+      "Core Web Vitals measured across every template",
+      "The wins implemented, not just written down",
+      "Re-measured after two weeks, with a call to talk it through",
     ],
   },
   {
     icon: "ph ph-cloud",
     title: "Cloudflare & cloud setup",
     from: "From £600",
-    body: "DNS, Workers, cache rules and deploys configured so traffic spikes stop being a problem.",
+    /* Narrowed on purpose. This used to promise image delivery and WAF work,
+       which is past what the experience actually covers — DNS migration,
+       Workers and cache rules is the honest boundary, and the price stays at
+       the cheap end to match. Do not widen these bullets without the work to
+       back them. */
+    body: "DNS migrations, Workers and cache rules — the edge logic that decides which page a visitor gets, and how quickly.",
     items: [
+      "DNS and nameserver migration",
+      "Workers for redirects, geo-routing and edge logic",
       "Cache rules per route or collection",
-      "Workers for redirects, edge logic and APIs",
-      "Image delivery and WAF basics",
       "Handover doc for your team",
     ],
   },
@@ -52,11 +62,16 @@ export const serviceDetail = [
     title: "Analytics & tracking",
     from: "From £900",
     body: "Tracking set up once, properly — so the numbers you report are the numbers that happened.",
+    /* GA4 and Clarity only. Server-side tagging through a Worker and consent
+       banner configuration were both listed here and are past what the
+       experience covers — the remaining two bullets are diligence on the same
+       two tools rather than extra tools. Do not re-add the others without the
+       work behind them. */
     items: [
       "GA4 with ecommerce events",
-      "Server-side tagging through a Cloudflare Worker",
       "Microsoft Clarity session recording",
-      "Consent banner that does not block data it should not",
+      "Events checked against real orders, not assumed correct",
+      "A written note of what is tracked and where it goes",
     ],
   },
   {
