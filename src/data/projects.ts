@@ -372,7 +372,7 @@ const caseStudies: Record<string, CaseStudy> = {
       { n: "35% → 6%", l: "US shoppers on the rest-of-world store, priced and stocked for someone else" },
       { n: "45% → <9%", l: "Non-US shoppers on the US store, after enforcement went on" },
       { n: "4", l: "Production conflicts surfaced by proxying the apex, and fixed" },
-      { n: "113k", l: "Search Console items from Google fetching the apex, cleared" },
+      { n: "113k", l: "Search Console items from Google fetching the apex, before bypassing on network operator" },
     ],
     slots: {
       hero: "Who decides — explicit choice, geography, and the order they are read in",
@@ -457,6 +457,7 @@ const caseStudies: Record<string, CaseStudy> = {
         v: "Shopify Plus, Liquid, Custom Web Pixels, BigQuery, Cloud Workflows, Cloud Run, Cloudflare",
       },
       { l: "Role", v: "Integration lead — architecture, build, data contract, vendor management" },
+      { l: "Status", v: "Pre-integration complete and signed off — go-live in progress" },
     ],
     problem:
       "A size recommender is only as good as what it learns from, and what it learns from is your catalogue and your returns. So the real work is not the button on the product page — it is a data contract that has to be exactly right, twice over, because DFYNE runs two stores for two markets. Every product needs a size system, a taxonomy category and a size type the model understands. Every purchase needs to join back to the recommendation that produced it, without a customer identifier that carries personal data, and without tracking anyone who has not consented. And all of it has to survive Shopify's checkout, where you do not get to run your own code on the thank-you page.\n\nSome of that is harder than it sounds. Google's product taxonomy, which the model categorises against, has no node for a hoodie — so somebody has to choose the nearest honest category and get the vendor to agree it in writing. Two stores selling the same garments could plausibly be graded to two different measurement standards, and the answer changes every product row in both feeds; that one came down to asking the apparel team rather than assuming.\n\nThere was a clock on it too. The vendor's onboarding only starts counting once the data passes their validation, so every day spent in review was a day not spent integrating.",

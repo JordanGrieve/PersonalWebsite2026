@@ -269,7 +269,7 @@ export default async function CaseStudyPage({ params }: Params) {
 
       <DetailList
         title="What proxying Shopify cost"
-        note="Putting a worker in front of a platform activates it on paths nobody was thinking about. These four surfaced in production and were fixed, three of them without a code deploy."
+        note="Putting a worker in front of a platform activates it on paths nobody was thinking about. These four surfaced in production and were fixed, most of them by route configuration rather than an application change."
         items={study.incidents}
       />
 
