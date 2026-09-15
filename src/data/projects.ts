@@ -52,11 +52,11 @@ export const projects: Project[] = [
   },
   {
     slug: "dfyne-cloudflare-migration",
-    name: "DFYNE Cloudflare migration",
+    name: "DFYNE geo-routing",
     kind: "Infrastructure",
     year: "2026",
-    result: "US shoppers on the wrong store: 35% → 6%",
-    ph: "Edge routing — US and rest-of-world stores",
+    result: "Shoppers on the wrong store: 35% → 6% one way, 45% → under 9% the other",
+    ph: "Traffic share by store — both directions, across two releases",
     tag: "Infrastructure",
   },
   {
@@ -124,7 +124,7 @@ export const featuredSlugs = [
 ];
 
 export const featuredBlurbs: Record<string, string> = {
-  "dfyne-cloudflare-migration": "Cloudflare · US shoppers on the wrong store, 35% → 6%",
+  "dfyne-cloudflare-migration": "Cloudflare · Shoppers on the wrong store, 35% → single digits",
   "dfyne-fit-finder": "Integration · AI size advisor across two Shopify Plus stores",
   "dfyne-storefront-refactor": "Performance · LCP 2.3s → 1.6s, six apps removed",
   "essential-upsell": "Shopify app · Vector search over sales and returns",
@@ -158,6 +158,10 @@ export type CaseStudy = {
       filling in where it exists: what got rejected and why is usually a better
       read on how someone works than the list of things that shipped. */
   rejected?: { what: string; why: string }[];
+  /** Things that broke as a consequence of the change, and what fixed them.
+      Not a list of mistakes — it is what a given approach actually costs,
+      which is the part most write-ups leave out. */
+  incidents?: { what: string; why: string }[];
   /** Omit when there is no testimonial. */
   quote?: { text: string; who: string };
   /** Placeholder copy for the three image slots. */
@@ -329,30 +333,51 @@ const caseStudies: Record<string, CaseStudy> = {
 
   "dfyne-cloudflare-migration": {
     tags: ["Infrastructure", "Cloudflare", "2026"],
-    heading: "CLOUDFLARE MIGRATION",
+    heading: "SENDING SHOPPERS TO THE STORE THAT CAN SELL TO THEM",
     intro:
-      "DFYNE runs two Shopify stores on two domains — US and rest of world — that have to feel like one shop. Getting a shopper to the right one is not a nicety: on the wrong store they cannot check out at all. I moved DNS to Cloudflare and did the routing at the edge.",
+      "DFYNE runs two Shopify stores behind one brand — one for the US, one for everywhere else. Land on the wrong one and you are looking at the wrong currency, the wrong shipping rates and stock you cannot have. At its worst, a third of the traffic on the rest-of-world store was American, and nearly half the traffic on the US store was not. Fixing it properly meant work at the edge and work in the theme, and neither half is any use without the other.",
     meta: [
       { l: "Client", v: "DFYNE" },
-      { l: "Scope", v: "DNS and nameserver migration, edge routing Worker" },
-      { l: "Timeline", v: "—" },
-      { l: "Stack", v: "Cloudflare DNS, Cloudflare Workers, Shopify" },
+      { l: "Scope", v: "Cloudflare Worker, apex DNS, in-house region switcher on both themes" },
+      { l: "Timeline", v: "Routing rework late July 2026, enforcement mid-August" },
+      { l: "Stack", v: "Cloudflare Workers, Cloudflare DNS, Shopify, Liquid, Dash0" },
+      { l: "Monitoring", v: "Both directions, alerting at a 35% threshold" },
     ],
+    /* Frank about what the first pass missed — that is the point of the page.
+       The third-party region-switching app is not named: the criticism is of a
+       gap in how we used it, and naming a vendor for that is gratuitous. */
     problem:
-      "Two stores, two domains, one brand. A shopper in the US who lands on the rest-of-world store cannot complete a purchase — their market is not served there — so routing decides whether the sale happens at all. The redirect was being handled by a Shopify app, and Shopify apps are JavaScript: the whole page has to load before the redirect can fire, so the shopper sees the wrong store, waits, and only then gets moved. Around 35% of US shoppers were on the wrong one.",
+      "Routing had been moved to the edge already, and it was still wrong. Auditing it turned up three causes, in order of how much damage they did.\n\nThe apex domain was a DNS-only record pointing at Shopify, not proxied through Cloudflare. A Worker route only fires on traffic that actually reaches Cloudflare, so anyone typing the bare domain was never geo-routed at all — the routing worked perfectly on every hostname except the one people type.\n\nSecond, the worker set a region cookie on every proxied pageview. Land once on the wrong store, and that mistake was written down and honoured from then on. The system was pinning people to the error it had just made.\n\nThird, region switching belonged to a third-party app whose links set no cookie the worker understood. So a shopper could deliberately choose a region, and the next navigation would silently overrule them. Three different mechanisms, none of which agreed on who decides.",
     approach:
-      "I migrated DFYNE's DNS and nameservers to Cloudflare, which put a layer we controlled in front of both stores. The routing then became a Worker: the decision happens at the edge on the first request, before anything renders, so the shopper lands on the right store first time with no second load. Misrouted US traffic fell from around 35% to 6%, and conversion rose with it — a share of those shoppers had not been able to check out at all.",
-    /* TODO: add the conversion-rate figure once you have it — you mentioned CVR
-       rose but not by how much. Fill in Timeline above. */
+      "The fix is one rule: an explicit choice beats geography, always, and geography only decides for visitors who have not chosen. Everything else follows from making that rule true in both places at once.\n\nAt the edge, the apex flipped from DNS-only to proxied so the route finally fires. A single endpoint became the only thing that may set the choice cookie, which means a deliberate switch is now a fact the worker can read rather than a guess. Non-document requests, checkout and account paths, and bots bypass the worker entirely.\n\nIn the theme, the third-party switcher was replaced with an in-house one rendered from a single snippet in two places per page, namespaced so both instances work independently, with every link pointing at that one endpoint. A confirmation card appears only on a genuine mismatch between where you are and the store you are on, and snoozes for an hour if you dismiss it. The whole thing sits behind one theme setting, so reverting to the old app needs no deploy.\n\nThe enforcement flag shipped switched off, on purpose. Turning it on before the switcher was live on both stores would have meant bouncing mismatched visitors while the only way to choose a region still set no cookie the worker recognised — a shopper would have been thrown back every time they tried to leave. It went on once both themes were serving the new switcher. That coupling is permanent and worth writing on the wall: with enforcement on, turning the theme setting off breaks region switching completely.",
+    incidents: [
+      {
+        what: "Gift card links looped forever",
+        why: "Shopify serves gift cards only from the store's primary domain and 302s them back from any regional host. Fixed with a more specific Cloudflare route that excludes the worker.",
+      },
+      {
+        what: "Shopify Markets links fought the worker",
+        why: "Links carrying a country parameter looped against the worker's own redirect. Fixed by stripping the parameter once it had been spent.",
+      },
+      {
+        what: "Customer-account sign-in broke",
+        why: "OAuth does not survive a proxy in the middle of it. Fixed by excluding the account subdomains at route level.",
+      },
+      {
+        what: "Google indexed the redirects",
+        why: "Google was fetching the apex with user agents no regex could keep up with, producing 113,000 “alternative page with proper canonical” and 7,600 “page with redirect” items in Search Console. Bypassing on network operator rather than user agent fixed what string matching could not.",
+      },
+    ],
     results: [
-      { n: "35% → 6%", l: "US shoppers landing on the store they cannot buy from" },
-      { n: "0", l: "Double page loads — the decision is made at the edge, before render" },
-      { n: "2", l: "Storefronts routed as one brand, US and rest of world" },
+      { n: "35% → 6%", l: "US shoppers on the rest-of-world store, priced and stocked for someone else" },
+      { n: "45% → <9%", l: "Non-US shoppers on the US store, after enforcement went on" },
+      { n: "4", l: "Production conflicts surfaced by proxying the apex, and fixed" },
+      { n: "113k", l: "Search Console items from Google fetching the apex, cleared" },
     ],
     slots: {
-      hero: "Edge routing — how a request reaches the right store",
-      shot1: "Before — app-based redirect",
-      shot2: "After — Worker at the edge",
+      hero: "Who decides — explicit choice, geography, and the order they are read in",
+      shot1: "Traffic share by store, both directions, across the two releases",
+      shot2: "The region switcher and the mismatch confirmation card",
     },
   },
 
