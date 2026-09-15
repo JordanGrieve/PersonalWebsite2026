@@ -14,7 +14,7 @@ export const serviceDetail = [
   {
     icon: "ph ph-storefront",
     title: "Shopify & ecommerce",
-    from: "From £2,400",
+    from: "From £4,500",
     body: "Custom themes and app work for brands that have outgrown a template.",
     items: [
       "Custom theme or section development",

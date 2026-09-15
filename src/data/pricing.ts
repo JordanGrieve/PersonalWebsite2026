@@ -18,7 +18,7 @@ export const tiers = [
     name: "Storefront build",
     tag: "Most asked for",
     tagClass: "tag tag-accent",
-    price: "£2,400+",
+    price: "£4,500+",
     note: "Three to five weeks, fixed scope",
     border: "var(--color-accent)",
     cta: "Start a build",

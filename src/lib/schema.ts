@@ -16,7 +16,7 @@ import { liveSocials, site } from "@/data/site";
 export const PERSON_ID = `${site.url}/#person`;
 export const WEBSITE_ID = `${site.url}/#website`;
 
-/** "From £1,800" / "£2,400+" / "£600/mo" -> 1800 / 2400 / 600. */
+/** "From £1,800" / "£4,500+" / "£600/mo" -> 1800 / 4500 / 600. */
 function priceOf(text: string): number | undefined {
   const digits = text.replace(/[^\d,]/g, "").replace(/,/g, "");
   return digits ? Number(digits) : undefined;
