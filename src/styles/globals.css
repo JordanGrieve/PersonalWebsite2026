@@ -157,6 +157,12 @@ a:hover {
   #caseStudyCtas > .btn {
     width: 100%;
   }
+  /* `!important` because the element carries `align-self: flex-start` inline,
+     which a stylesheet cannot outrank on its own. */
+  #servicesCta {
+    align-self: stretch !important;
+    width: 100%;
+  }
 }
 #toolGrid > button:nth-child(4n) span {
   left: auto !important;

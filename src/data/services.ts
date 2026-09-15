@@ -50,7 +50,7 @@ export const serviceDetail = [
   {
     icon: "ph ph-chart-line",
     title: "Analytics & tracking",
-    from: "From £450",
+    from: "From £900",
     body: "Tracking set up once, properly — so the numbers you report are the numbers that happened.",
     items: [
       "GA4 with ecommerce events",

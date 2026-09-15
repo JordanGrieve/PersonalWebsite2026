@@ -140,7 +140,14 @@ export default function ServicesPage() {
             </div>
           </div>
         ))}
-        <Link className="btn btn-primary" href="/pricing" style={{ alignSelf: "flex-start" }}>
+        {/* `alignSelf` keeps it to its own width on desktop; the rule in
+            globals.css stretches it across the column on a phone. */}
+        <Link
+          id="servicesCta"
+          className="btn btn-primary"
+          href="/pricing"
+          style={{ alignSelf: "flex-start" }}
+        >
           See packages &amp; prices
           <i className="ph ph-arrow-right" />
         </Link>
