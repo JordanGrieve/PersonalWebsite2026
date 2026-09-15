@@ -162,16 +162,32 @@ a:hover {
   }
 }
 
-/* Drops the About portrait so its top edge sits alongside the body copy
-   rather than level with the heading.
+/* Takes 150px off the About portrait, which otherwise fills its whole grid
+   column. Shrinking the wrapper rather than the `img` keeps the accent glow
+   behind it in step, since that is positioned as an inset of this element.
+   `margin-left: auto` spends the 150px on the inside edge, so the photo stays
+   flush with the section padding and the page keeps its outer alignment.
 
    Only while the two columns are side by side. Below 641px the section
-   collapses to a single column and `#aboutPhoto` takes `order: -1`, putting
-   the photo first — a top margin there would be 150px of dead space above the
-   page's opening image rather than an offset against anything. */
+   collapses to a single column and `#aboutPhoto` takes `order: -1`, so the
+   photo leads the page at full width — taking 150px off a 375px screen would
+   leave it a stamp.
+
+   `width` rather than `max-width`: `margin-left: auto` turns off the grid
+   item's stretch, and a shrink-to-fit box would then try to size itself from
+   an `img` whose own width is `100%` of that box. Circular, so it collapses to
+   zero — and a zero-height lazy image never enters the viewport to load. A
+   definite width breaks the loop.
+
+   The `max()` is a floor. 150px is a fixed subtraction from a fluid column, so
+   it bites harder the narrower the column gets: the full 150px comes off at
+   desktop, but at 660px it would leave a 140px photo beside a full-height
+   column of text. Below roughly a 900px viewport the 62% floor takes over and
+   the photo shrinks proportionally instead. */
 @container (min-width: 641px) {
   #aboutPhoto {
-    margin-top: 150px;
+    width: max(62%, calc(100% - 150px));
+    margin-left: auto;
   }
 }
 
