@@ -22,21 +22,26 @@ export const tiers = [
     name: "Storefront build",
     tag: "Most asked for",
     tagClass: "tag tag-accent",
-    price: "£4,500+",
-    note: "Three to five weeks, fixed scope",
+    price: "£2,400+",
+    note: "Two to three weeks, fixed scope",
     border: "var(--color-accent)",
     cta: "Start a build",
-    /* Six templates, not eight: £4,500 at £300/day is fifteen days, and eight
-       templates inside that is under two days each with revisions — which is
-       how a fixed-price build turns into free work.
+    /* Four templates, not six: £2,400 is eight days, and six templates inside
+       that is under a day and a half each with revisions — which is how a
+       fixed-price build turns into unpaid evenings. Extra templates are quoted,
+       not absorbed.
 
-       The speed line is a promise, not a description. Do not soften it to
-       something unmeasurable, and do not quote a build you cannot hold it on. */
+       Cloudflare caching came out when Cloudflare became its own £600 service.
+       Bundling it here was giving away a quarter of the build fee.
+
+       The speed line is a promise, not a description. It is the reason someone
+       picks this over a cheaper theme customiser, so it survived the price cut
+       — but do not quote a build you cannot hold it on. */
     items: [
-      "Custom Shopify theme or web build, six templates",
+      "Custom Shopify theme or web build, four core templates",
+      "Extra templates and page types quoted per template",
       "Built from your design — design available as an add-on",
       "Ships green on Core Web Vitals, measured before handover",
-      "Cloudflare caching configured",
       "30 days of bug fixes after launch; new work is the retainer",
     ],
   },
