@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
   title: "Services",
   description:
-    "Shopify, web builds, web apps, performance, SEO and GEO, Cloudflare and analytics work. Fixed scope where possible, day rate where it isn't.",
+    "Shopify, web builds, performance, SEO and GEO, Cloudflare and analytics work. Fixed scope where possible, day rate where it isn't.",
 };
 
 export default function ServicesPage() {
@@ -52,9 +52,8 @@ export default function ServicesPage() {
             color: "var(--color-neutral-400)",
           }}
         >
-          {count} things I do often enough to be quick at — Shopify, web builds, web apps,
-          performance, SEO, Cloudflare and analytics. Fixed scope where possible, day rate where
-          it isn&apos;t.
+          {count} things I do often enough to be quick at — Shopify, web builds, performance,
+          SEO, Cloudflare and analytics. Fixed scope where possible, day rate where it isn&apos;t.
         </p>
       </section>
 

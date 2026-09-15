@@ -14,23 +14,6 @@ export const serviceDetail = [
       "Deploy pipeline and staging URL",
     ],
   },
-  /* Every line here is evidenced on /work: Postbox is the multi-tenant SaaS
-     with the auth, the schema and the email loop; Open Door Bakery is the
-     storefront, admin and API in one app; Essential Upsell is the Shopify app.
-     `ph-database` because it is already in the icon subset — a new glyph means
-     regenerating the font with `npm run build:icons`. */
-  {
-    icon: "ph ph-database",
-    title: "Web apps & SaaS",
-    from: "From £2,400",
-    body: "Products with real accounts, real data and an admin behind them. The parts that are tedious rather than difficult are where these usually go wrong, so that is where the time goes.",
-    items: [
-      "Next.js and TypeScript, front to back",
-      "Postgres and a schema that survives contact with users",
-      "Accounts, sessions and multi-tenant boundaries",
-      "Transactional email that threads instead of landing in spam",
-    ],
-  },
   {
     icon: "ph ph-storefront",
     title: "Shopify & ecommerce",
