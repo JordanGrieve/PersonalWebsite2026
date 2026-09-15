@@ -26,7 +26,7 @@ export const serviceDetail = [
   {
     icon: "ph ph-lightning",
     title: "Performance",
-    from: "From £750",
+    from: "From £1,500",
     body: "A measured audit, then the fixes. You get before and after numbers, not adjectives.",
     items: [
       "Core Web Vitals audit with a written plan",

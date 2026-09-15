@@ -3,7 +3,7 @@ export const tiers = [
     name: "Speed audit",
     tag: "Fixed",
     tagClass: "tag tag-outline",
-    price: "£750",
+    price: "£1,500",
     note: "One week, one report, one round of fixes",
     border: "var(--color-divider)",
     cta: "Book an audit",
