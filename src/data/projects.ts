@@ -69,6 +69,15 @@ export const projects: Project[] = [
     tag: "Shopify",
   },
   {
+    slug: "dfyne-mobile-performance",
+    name: "DFYNE mobile performance",
+    kind: "Performance",
+    year: "2026",
+    result: "Blocking time on mobile down 70% — 3.8s to 1.1s",
+    ph: "Main thread — before and after",
+    tag: "Performance",
+  },
+  {
     slug: "open-door-bakery",
     name: "Open Door Bakery",
     kind: "Web build",
@@ -145,6 +154,10 @@ export type CaseStudy = {
   approach: string;
   /** Omit until there are real numbers — the section hides rather than showing blanks. */
   results?: { n: string; l: string }[];
+  /** Work that was built, measured and then thrown away. Optional, and worth
+      filling in where it exists: what got rejected and why is usually a better
+      read on how someone works than the list of things that shipped. */
+  rejected?: { what: string; why: string }[];
   /** Omit when there is no testimonial. */
   quote?: { text: string; who: string };
   /** Placeholder copy for the three image slots. */
@@ -340,6 +353,63 @@ const caseStudies: Record<string, CaseStudy> = {
       hero: "Edge routing — how a request reaches the right store",
       shot1: "Before — app-based redirect",
       shot2: "After — Worker at the edge",
+    },
+  },
+
+  /* Every figure here is from a preview environment on a branch, which the
+     copy says plainly. Do not quietly promote these to live numbers when it
+     deploys — re-measure and replace them. */
+  "dfyne-mobile-performance": {
+    tags: ["Performance", "Shopify", "2026"],
+    heading: "TAKING SEVENTY PERCENT OFF THE MAIN THREAD",
+    intro:
+      "A phone loading DFYNE's home page spent nearly four seconds unable to respond to a tap — not downloading, just busy running scripts. I took that to just over one second. This is a branch, not a deploy: every number below comes from a preview environment, and the preview carries measurement tooling the live site never sends, so live should land somewhat better than this.",
+    meta: [
+      { l: "Client", v: "DFYNE" },
+      { l: "Scope", v: "Mobile home page — third-party scripts, image delivery, bundles" },
+      { l: "Timeline", v: "One engagement, September 2026" },
+      { l: "Stack", v: "Shopify, Impulse theme, Lighthouse, Chrome tracing, Cloudflare Observatory" },
+      { l: "Status", v: "On a branch — measured in preview, not yet deployed" },
+    ],
+    problem:
+      "The home page scored 51 on mobile and took over eighteen seconds to become interactive. The obvious suspect on a storefront is the hero image, and that is where I started. It was the wrong place.\n\nBefore any of that, though, I had to fix the instrument. Runs kept producing fourteen to seventeen second paint times that nothing on the page explained. A saved trace showed the emulated viewport sitting at zero height for a second and a half with the compositor presenting no frames — an artefact of driving a browser window I could see. I threw away every figure collected that way and moved the harness to headless. Roughly one run in three had been failing falsely, which would have sent me hunting a live problem that did not exist.\n\nThe second correction was to take a third-party tool seriously. It reported blocking time a hundred times worse than my own harness, which is easy to dismiss as noise. Turning the CPU throttle up to 8x reproduced the same shape locally — and a reproducible problem is an attributable one, script by script, instead of an argument about whose number is right.",
+    approach:
+      "Tracing settled where the time actually went. The hero image finished downloading 150ms before first paint rather than after it, and first paint landed 30ms after the document finished streaming. So the paint was gated by document delivery and script execution, not by the image. That redirected the whole engagement away from image work and onto the main thread.\n\nThe pattern for the fixes was the same each time: tie third-party code to the intent that needs it rather than to page load. The review widget waits for first interaction — I proved the star ratings on product cards are server-rendered and revealed by CSS, so the vendor's 120KB script was never needed to display them, only to track clicks. Email capture loads near the form, the loyalty widget on a rewards click, the announcement rotator on first interaction. That last one had been counting as continuous visual change and inflating Speed Index on its own.\n\nThe rest was delivery. The platform CDN re-encodes every image at a fixed WebP quality with no control, and uploading a smaller source changes nothing because it re-encodes anyway — pre-encoded renditions served as theme assets skip the pipeline entirely. Theme bundles now wait for the hero to paint. Four per-section scripts that were being inlined once per instance moved to cached files. And a loyalty app turned out to have never started at all: its loader does its real work inside a window load listener, so a deferred release after that event attached to something that would never fire again.",
+    rejected: [
+      {
+        what: "Early Hints for the hero image",
+        why: "The browser ignored an early-hint entry carrying a responsive source set while honouring stylesheet hints in the same response — then downgraded the hero to low priority and had desktop download the mobile file.",
+      },
+      {
+        what: "Moving the webfont out of early hints",
+        why: "A clean 43KB saving on paper. Measured as a regression: score 90–91 down to 85–86, LCP 2.84–3.06s out to 3.50–3.68s, because the font moved into the hero's download window.",
+      },
+      {
+        what: "Externalising the region banner script",
+        why: "Reintroduced layout shift, 0.000 to 0.064, for visitors whose region does not match the store — a population a default test run never covers.",
+      },
+      {
+        what: "Disabling an apparently unused form app",
+        why: "Broke the form it powers. The block depends on the embed's loader.",
+      },
+      {
+        what: "Rendering fewer product cards",
+        why: "My own top recommendation, and a one-line setting to test before building anything. Cutting 35% of the cards — 62 down to 40, elements 3,850 down to 3,146 — moved nothing: LCP 2.75s to 2.80s, FCP 2.44s to 2.43s. I withdrew it.",
+      },
+    ],
+    /* The 92-vs-67 Lighthouse comparison is deliberately not a tile. The live
+       site is a separately maintained theme, so that gap is not all this work.
+       These four are same-URL, same-tool, same afternoon. */
+    results: [
+      { n: "−70%", l: "Total blocking time on mobile, 3,757ms down to 1,138ms" },
+      { n: "18.5s → 10.8s", l: "Time to interactive, down 42%" },
+      { n: "51 → 65", l: "Performance score, same URL and tool, one afternoon" },
+      { n: "5 + 5", l: "Changes shipped, and five built, measured and reverted" },
+    ],
+    slots: {
+      hero: "Main thread before and after — the same page, the same trace view",
+      shot1: "The trace that redirected the work — hero image done before first paint",
+      shot2: "Blocking time under an 8x CPU slowdown, per script",
     },
   },
 

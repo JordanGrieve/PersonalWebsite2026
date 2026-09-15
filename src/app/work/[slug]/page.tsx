@@ -205,6 +205,57 @@ export default async function CaseStudyPage({ params }: Params) {
       </section>
       ) : null}
 
+      {study.rejected?.length ? (
+        <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)" }}>
+          <h3 style={{ margin: "0 0 6px", fontSize: 20, letterSpacing: "-.01em" }}>
+            What I tried and threw away
+          </h3>
+          <p
+            style={{
+              margin: "0 0 18px",
+              maxWidth: "62ch",
+              fontSize: 14,
+              lineHeight: 1.6,
+              color: "var(--color-neutral-500)",
+            }}
+          >
+            Built, measured, reverted. Each of these looked right on paper.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {study.rejected.map((r) => (
+              <div
+                key={r.what}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+                  gap: "8px clamp(16px,3cqw,36px)",
+                  padding: "16px 0",
+                  borderTop: "1px solid var(--color-divider)",
+                }}
+              >
+                <div
+                  style={{
+                    font: "500 15px/1.45 var(--font-heading)",
+                    color: "var(--color-text)",
+                  }}
+                >
+                  {r.what}
+                </div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    lineHeight: 1.6,
+                    color: "var(--color-neutral-400)",
+                  }}
+                >
+                  {r.why}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section
         style={{
           padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)",
