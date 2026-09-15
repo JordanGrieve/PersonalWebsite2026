@@ -99,7 +99,10 @@ export default function AboutPage() {
             alt="Jordan"
             width={1086}
             height={1448}
-            sizes="(max-width: 640px) 100vw, 50vw"
+            /* Above 640px the portrait is a fixed 480x600 (see `#aboutPhoto`
+               in globals.css), so saying `50vw` here would have the browser
+               fetch a file twice the size it can use. */
+            sizes="(max-width: 640px) 100vw, 480px"
             style={{
               position: "relative",
               width: "100%",
