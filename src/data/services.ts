@@ -60,7 +60,7 @@ export const serviceDetail = [
   {
     icon: "ph ph-chart-line",
     title: "Analytics & tracking",
-    from: "From £900",
+    from: "From £300",
     body: "Tracking set up once, properly — so the numbers you report are the numbers that happened.",
     /* GA4 and Clarity only. Server-side tagging through a Worker and consent
        banner configuration were both listed here and are past what the
