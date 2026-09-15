@@ -322,7 +322,14 @@ export default async function CaseStudyPage({ params }: Params) {
             </figcaption>
           </figure>
         ) : null}
-        <div style={{ marginTop: 34, display: "flex", gap: 10, flexWrap: "wrap" }}>
+        {/* The pair spans the full measure: side by side and equal above
+            640px, stacked and full width below it. `minWidth: 0` because a
+            flex item defaults to min-content and the longer label would
+            otherwise refuse to share the row evenly. */}
+        <div
+          id="caseStudyCtas"
+          style={{ marginTop: 34, display: "flex", gap: 10, flexWrap: "wrap" }}
+        >
           <Link className="btn btn-primary" href="/contact">
             Start a project like this
             <i className="ph ph-arrow-right" />

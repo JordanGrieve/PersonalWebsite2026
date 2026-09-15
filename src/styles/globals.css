@@ -138,6 +138,26 @@ a:hover {
   min-height: 44px;
   padding-inline: 12px;
 }
+
+/* The two calls to action at the foot of a case study fill the measure
+   rather than sitting as two small pills against a wide column: equal
+   halves side by side, stacked and full width on a phone.
+
+   `flex: 1 1 0` with `min-width: 0` — a flex item is floored at min-content
+   by default, so "Start a project like this" would otherwise claim more of
+   the row than "Next project" and the two would never match. */
+#caseStudyCtas > .btn {
+  flex: 1 1 0;
+  min-width: 0;
+}
+@container (max-width: 640px) {
+  #caseStudyCtas {
+    flex-direction: column;
+  }
+  #caseStudyCtas > .btn {
+    width: 100%;
+  }
+}
 #toolGrid > button:nth-child(4n) span {
   left: auto !important;
   right: 0 !important;
