@@ -26,22 +26,23 @@ export const tiers = [
     note: "Two to three weeks, fixed scope",
     border: "var(--color-accent)",
     cta: "Start a build",
-    /* Four templates, not six: £2,400 is eight days, and six templates inside
-       that is under a day and a half each with revisions — which is how a
-       fixed-price build turns into unpaid evenings. Extra templates are quoted,
-       not absorbed.
+    /* Six templates plus analytics inside £2,400 — eight days at the project
+       rate, so this is the tier with the least slack in it. If builds start
+       overrunning, this is the line to look at first.
 
-       Cloudflare caching came out when Cloudflare became its own £600 service.
-       Bundling it here was giving away a quarter of the build fee.
+       Cloudflare came out when it became its own £600 service. Analytics went
+       in the other direction by choice: it is £300 on its own, and a build that
+       launches without working tracking cannot prove it worked.
 
        The speed line is a promise, not a description. It is the reason someone
-       picks this over a cheaper theme customiser, so it survived the price cut
-       — but do not quote a build you cannot hold it on. */
+       picks this over a cheaper theme customiser — do not quote a build you
+       cannot hold it on. */
     items: [
-      "Custom Shopify theme or web build, four core templates",
+      "Custom Shopify theme or web build, six templates",
       "Extra templates and page types quoted per template",
       "Built from your design — design available as an add-on",
       "Ships green on Core Web Vitals, measured before handover",
+      "GA4 and Clarity configured before you launch",
       "30 days of bug fixes after launch; new work is the retainer",
     ],
   },
