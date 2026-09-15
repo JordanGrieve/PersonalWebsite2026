@@ -12,6 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default function PricingPage() {
+  /* "£400/mo" -> "£400/month", so the footnote reads as a sentence while
+     still coming from the tier itself. */
+  const retainer = tiers.find((t) => t.price.includes("/mo"));
+  const retainerPrice = retainer?.price.replace("/mo", "/month") ?? "";
+
   return (
     <>
       <JsonLd data={pricingSchema()} />
@@ -128,8 +133,11 @@ export default function PricingPage() {
           </div>
         ))}
       </div>
+      {/* Reads the figure off the retainer tier rather than repeating it. It
+          was hardcoded at £600 and quietly went stale the moment that tier
+          changed — three feet below the card saying £400. */}
       <div style={{ marginTop: 26, fontSize: 13.5, color: "var(--color-neutral-500)" }}>
-        Retainers from £600/month for ongoing storefront and performance work.
+        Retainers from {retainerPrice} for ongoing storefront and performance work.
       </div>
     </section>
     </>
