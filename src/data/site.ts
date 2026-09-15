@@ -14,7 +14,7 @@ export const site = {
   url: "https://www.jordangrieve.com",
   /** Subjects the site is actually about. Feeds `Person.knowsAbout`. */
   expertise: [
-    "Shopify theme development",
+    "Shopify theme customisation",
     "Shopify app development",
     "Headless commerce",
     "Core Web Vitals",
