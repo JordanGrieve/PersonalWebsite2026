@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
+import PortfolioWord from "@/components/PortfolioWord";
 import SpinBadge from "@/components/SpinBadge";
 import ServicesGrid from "@/components/home/ServicesGrid";
 import Toolkit from "@/components/home/Toolkit";
@@ -118,17 +119,23 @@ export default function HomePage() {
             <span style={{ display: "block", color: "var(--color-accent)" }}>Frontend</span>
             <span style={{ display: "block", color: "var(--color-neutral-200)" }}>Developer</span>
           </h1>
+          {/* Outlines, not live text — see PortfolioWord. The font-size here
+              still drives it: the SVG is sized in `em`, so the clamp below is
+              unchanged and so is the box it occupies. */}
           <div
             style={{
-              fontFamily: "var(--font-dancing), 'Dancing Script', cursive",
-              fontWeight: 600,
+              /* `flow-root` so the SVG's negative block margins shrink this
+                 box instead of collapsing through it. Without it the wrapper
+                 takes the glyphs' full 1.2em content area, grows from 62px to
+                 74px at the top of the clamp, and pushes #heroMeta down. */
+              display: "flow-root",
               fontSize: "clamp(26px,5.4cqw,62px)",
               lineHeight: 1,
               color: "var(--color-accent)",
               margin: "-0.30em 0 0 clamp(6px,38cqw,420px)",
             }}
           >
-            Portfolio
+            <PortfolioWord />
           </div>
         </div>
 
