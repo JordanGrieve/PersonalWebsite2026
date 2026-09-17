@@ -295,6 +295,29 @@ a:hover {
 .hov-border:hover {
   border-color: var(--color-accent) !important;
 }
+/* The whole featured card is the link, so the arrow has to answer to the
+   card's hover rather than only to its own 44px square — otherwise the one
+   part of the card that looks like a button is the one part that stays inert
+   while you are pointing at it.
+
+   It takes the wash `.btn-secondary:hover` already gives, plus the accent
+   border and icon the card itself takes from `.hov-lift:hover`, so pointing
+   at the arrow and pointing anywhere else on the card produce one state
+   rather than two. `:focus-visible` as well: the card is a link, and a
+   keyboard should see what a pointer sees.
+
+   The id in the selector already outweighs `.btn-secondary`, so none of this
+   needs `!important` — and leaving it out keeps the `display: none` that
+   hides the arrow on mobile untouched. */
+.feat-arrow {
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+#featGrid > a:hover .feat-arrow,
+#featGrid > a:focus-visible .feat-arrow {
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
 /* Accordion body. Animating `height: auto` is not possible, so the wrapper is
    a single-row grid and the row itself is animated from 0fr to 1fr — the
    paragraph inside clips to whatever height the row currently is. Above the
