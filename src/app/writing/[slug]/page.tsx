@@ -46,7 +46,7 @@ export default async function PostPage({ params }: Params) {
       <JsonLd data={postSchema(post)} />
       <article>
         <section style={{ padding: "clamp(26px,4cqw,56px) clamp(18px,4cqw,48px) 0" }}>
-          <Link className="btn btn-ghost" href="/writing" style={{ fontSize: 12, marginBottom: 20 }}>
+          <Link className="btn btn-ghost" href="/writing" style={{ marginBottom: 20 }}>
             <i className="ph ph-arrow-left" />
             &nbsp;All posts
           </Link>

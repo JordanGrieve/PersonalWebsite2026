@@ -80,7 +80,6 @@ function DetailList({
       <p
         style={{
           margin: "0 0 18px",
-          maxWidth: "62ch",
           fontSize: 14,
           lineHeight: 1.6,
           color: "var(--color-neutral-500)",
@@ -125,7 +124,7 @@ export default async function CaseStudyPage({ params }: Params) {
     <>
       <JsonLd data={caseStudySchema(project)} />
       <section style={{ padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) 0" }}>
-        <Link className="btn btn-ghost" href="/work" style={{ fontSize: 12, marginBottom: 20 }}>
+        <Link className="btn btn-ghost" href="/work" style={{ marginBottom: 20 }}>
           <i className="ph ph-arrow-left" />
           &nbsp;All projects
         </Link>
@@ -307,7 +306,7 @@ export default async function CaseStudyPage({ params }: Params) {
 
       <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(40px,6cqw,84px)" }}>
         {study.quote?.text ? (
-          <figure style={{ maxWidth: "60ch" }}>
+          <figure>
             <blockquote
               style={{
                 margin: 0,

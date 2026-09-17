@@ -339,7 +339,7 @@ export default function HomePage() {
           <Link
             className="btn btn-ghost"
             href="/work"
-            style={{ fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase" }}
+            style={{ letterSpacing: ".1em", textTransform: "uppercase" }}
           >
             All projects
             <i className="ph ph-arrow-right" />
