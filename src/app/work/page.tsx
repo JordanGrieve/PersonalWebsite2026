@@ -43,7 +43,6 @@ export default function WorkPage() {
       <p
         style={{
           margin: "18px 0 0",
-          maxWidth: "64ch",
           fontSize: 16,
           lineHeight: 1.6,
           color: "var(--color-neutral-400)",
