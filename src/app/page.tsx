@@ -145,9 +145,16 @@ export default function HomePage() {
           <div>
             <p
               id="heroTagline"
+              /* 26ch was 260px inside a 985px column, which broke a
+                 73-character line into four. 44ch lands it on two and still
+                 leaves the badge column its room. Uppercase and letterspaced,
+                 so it wants a shorter measure than body copy — the column
+                 itself is 99ch and nowhere near readable at that width.
+                 Dropped entirely below 640px, see `#heroTagline` in
+                 globals.css. */
               style={{
                 margin: 0,
-                maxWidth: "26ch",
+                maxWidth: "44ch",
                 font: "500 clamp(13px,1.3cqw,15px)/1.45 var(--font-heading)",
                 letterSpacing: ".05em",
                 textTransform: "uppercase",
@@ -167,7 +174,7 @@ export default function HomePage() {
             >
               &lt;/ Build. Ship. Speed up. /&gt;
             </p>
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
+            <div id="heroActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
               <Link className="btn btn-primary" href="/contact">
                 Get a quote
                 <i className="ph ph-arrow-right" style={{ fontSize: 18 }} />

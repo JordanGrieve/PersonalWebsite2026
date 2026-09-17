@@ -46,7 +46,7 @@ export default function ServicesPage() {
         <p
           style={{
             margin: "20px 0 0",
-            maxWidth: "50ch",
+            maxWidth: "64ch",
             fontSize: 16,
             lineHeight: 1.65,
             color: "var(--color-neutral-400)",
