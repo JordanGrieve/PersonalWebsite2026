@@ -197,11 +197,14 @@ export default async function CaseStudyPage({ params }: Params) {
         </div>
       </section>
 
+      {/* One column, not two: "The problem" and "What I did" each run the full
+          content measure, the way the intro and the section notes do. The gap
+          is now the space between them rather than beside them. */}
       <section
         style={{
           padding: "clamp(32px,5cqw,64px) clamp(18px,4cqw,48px)",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+          gridTemplateColumns: "1fr",
           gap: "clamp(22px,4cqw,48px)",
         }}
       >
