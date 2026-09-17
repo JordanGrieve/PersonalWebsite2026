@@ -42,6 +42,11 @@ export default function Toolkit() {
             onClick={() => setOpen(open === i ? null : i)}
             aria-expanded={open === i}
             style={{
+              /* A button does not inherit its font — the UA stylesheet sets
+                 Arial on it — so without this the twelve tool labels were the
+                 only text on the site not set in Inter. Nothing looks broken,
+                 which is why it survived this long. */
+              font: "inherit",
               position: "relative",
               cursor: "pointer",
               background: "none",
