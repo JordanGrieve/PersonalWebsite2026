@@ -106,9 +106,11 @@ export const toolkit: Tool[] = [
     what: "CDN, Workers and cache rules that keep sites fast.",
   },
   {
-    name: "Redis",
+    /* Same `ph-database` glyph as before, so the subset font in
+       `phosphor-subset.css` does not need rebuilding. */
+    name: "Postgres",
     icon: "ph ph-database",
-    what: "In-memory cache for data that would be slow to fetch twice.",
+    what: "The database behind the apps I build — pgvector when they need search.",
   },
   {
     name: "Git",
