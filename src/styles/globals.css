@@ -295,6 +295,51 @@ a:hover {
 .hov-border:hover {
   border-color: var(--color-accent) !important;
 }
+/* The whole featured card is the link, so the arrow has to answer to the
+   card's hover rather than only to its own 44px square — otherwise the one
+   part of the card that looks like a button is the one part that stays inert
+   while you are pointing at it.
+
+   It takes the wash `.btn-secondary:hover` already gives, plus the accent
+   border and icon the card itself takes from `.hov-lift:hover`, so pointing
+   at the arrow and pointing anywhere else on the card produce one state
+   rather than two. `:focus-visible` as well: the card is a link, and a
+   keyboard should see what a pointer sees.
+
+   The id in the selector already outweighs `.btn-secondary`, so none of this
+   needs `!important` — and leaving it out keeps the `display: none` that
+   hides the arrow on mobile untouched. */
+.feat-arrow {
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+#featGrid > a:hover .feat-arrow,
+#featGrid > a:focus-visible .feat-arrow {
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+/* The CTA card's button is a plain `.btn` — it carries none of the
+   `-primary`/`-secondary` modifiers, and those are where every hover in
+   nocturne.css lives, so it had no hover state at all.
+
+   It is a dark block on a purple card, so the usual translucent wash would
+   not read against either. Instead the fill lifts toward the accent it is
+   sitting on and the label goes to the brightest accent step. `!important`
+   is unavoidable here: the element carries its colours inline, and inline
+   beats an id selector.
+
+   No transform, deliberately. `.hov-lift` raises cards, but this is a button
+   inside one of them, and moving it would set the card's own contents
+   sliding under the pointer. */
+#ctaBtn {
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+#ctaBtn:hover,
+#ctaBtn:focus-visible {
+  background: color-mix(in srgb, #14121f 88%, var(--color-accent)) !important;
+  border-color: color-mix(in srgb, #14121f 88%, var(--color-accent)) !important;
+  color: var(--color-accent-100) !important;
+}
 /* Accordion body. Animating `height: auto` is not possible, so the wrapper is
    a single-row grid and the row itself is animated from 0fr to 1fr — the
    paragraph inside clips to whatever height the row currently is. Above the
@@ -339,6 +384,34 @@ a:hover {
   }
 }
 
+/* The nav collapses to the burger at tablet width, not phone width. Seven
+   links plus the CTA stop fitting well before they stop fitting at all: by
+   the iPad range they are cramped against the wordmark on one line, which is
+   where this used to let them sit and scroll sideways. 921px is the iPad line
+   this site draws.
+
+   `@media`, not `@container`, and this is the one rule in the file that
+   deviates. Every container query here resolves against `.wrap`'s CONTENT
+   box, which is 92% of the viewport once the 4% side padding is taken off —
+   so `@container (max-width: 921px)` would actually fire at about 1001px of
+   viewport, and the number in the file would not mean what it says. The
+   header spans the viewport and the breakpoint is a viewport decision, so it
+   is written in viewport terms. Measured: 921px viewport gives an 847px
+   content box, 1024px gives 942px.
+
+   The `#siteNav` scroll rules further down are unreachable while this holds —
+   the nav is hidden everywhere they apply. They are kept rather than deleted
+   because they come back the moment this breakpoint moves down again. */
+@media (max-width: 921px) {
+  #siteNav,
+  #headerCta {
+    display: none !important;
+  }
+  #burger {
+    display: inline-flex !important;
+  }
+}
+
 @container (max-width: 640px) {
   #heroWrap {
     padding-right: 0 !important;
@@ -378,6 +451,22 @@ a:hover {
   }
   #availPill {
     width: 100% !important;
+  }
+  /* The 26ch measure is a desktop treatment — it sits beside the badge column
+     there, so a short line is deliberate. In one column it just leaves a
+     ragged gap down the right, so the line runs the full width instead. */
+  #heroTagline {
+    max-width: none !important;
+  }
+  /* Two tiles across on a phone. A lone tile on the last row spans the row
+     rather than sitting half-width next to a gap. `:nth-child(odd)` rather
+     than a count, so this keeps working whatever `liveSocials` holds — three
+     tiles span the third, four sit as a clean 2x2. */
+  #connectGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  #connectGrid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
   #availPill br {
     display: none;
@@ -516,13 +605,6 @@ a:hover {
   #siteNav button,
   #siteNav a {
     white-space: nowrap;
-  }
-  #siteNav,
-  #headerCta {
-    display: none !important;
-  }
-  #burger {
-    display: inline-flex !important;
   }
   #featGrid,
   #testGrid {

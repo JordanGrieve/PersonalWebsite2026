@@ -48,10 +48,16 @@ export default function AboutPage() {
           >
             I MAKE WEBSITES FEEL QUICK.
           </h1>
+          {/* No measure cap on either intro paragraph: the column is the
+              measure. `.wrap` stops at 1500px, so this text column tops out at
+              676px — around 68ch, still inside a readable measure — and the
+              paragraphs then share their left and right edges with the h1
+              above them, which runs the full column. The 48ch they used to
+              carry stopped them at 480px and left ~200px of the column empty
+              beside a heading that used all of it. */}
           <p
             style={{
               margin: "22px 0 0",
-              maxWidth: "48ch",
               fontSize: 16,
               lineHeight: 1.65,
               color: "var(--color-neutral-300)",
@@ -64,7 +70,6 @@ export default function AboutPage() {
           <p
             style={{
               margin: "14px 0 0",
-              maxWidth: "48ch",
               fontSize: 16,
               lineHeight: 1.65,
               color: "var(--color-neutral-400)",

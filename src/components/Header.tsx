@@ -137,7 +137,7 @@ export default function Header() {
           right: 0,
           bottom: 0,
           width: "85%",
-          maxWidth: 420,
+          maxWidth: 400,
           zIndex: 41,
           overflowY: "auto",
           background: "var(--color-bg)",
@@ -256,7 +256,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 style={{
-                  font: "500 13px/1 var(--font-heading)",
+                  font: "500 14px/1 var(--font-heading)",
                   padding: "7px 10px",
                   borderRadius: "var(--radius-sm)",
                   color: isActive(pathname, item.href)
