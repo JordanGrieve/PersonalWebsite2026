@@ -308,7 +308,7 @@ export default function HomePage() {
             <p
               style={{
                 margin: "18px 0 0",
-                maxWidth: "50ch",
+                maxWidth: "42ch",
                 fontSize: 15,
                 lineHeight: 1.6,
                 color: "var(--color-neutral-400)",

@@ -149,7 +149,6 @@ export default async function CaseStudyPage({ params }: Params) {
         <p
           style={{
             margin: "20px 0 0",
-            maxWidth: "50ch",
             fontSize: 17,
             lineHeight: 1.6,
             color: "var(--color-neutral-300)",
