@@ -318,6 +318,28 @@ a:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
 }
+/* The CTA card's button is a plain `.btn` — it carries none of the
+   `-primary`/`-secondary` modifiers, and those are where every hover in
+   nocturne.css lives, so it had no hover state at all.
+
+   It is a dark block on a purple card, so the usual translucent wash would
+   not read against either. Instead the fill lifts toward the accent it is
+   sitting on and the label goes to the brightest accent step. `!important`
+   is unavoidable here: the element carries its colours inline, and inline
+   beats an id selector.
+
+   No transform, deliberately. `.hov-lift` raises cards, but this is a button
+   inside one of them, and moving it would set the card's own contents
+   sliding under the pointer. */
+#ctaBtn {
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+#ctaBtn:hover,
+#ctaBtn:focus-visible {
+  background: color-mix(in srgb, #14121f 88%, var(--color-accent)) !important;
+  border-color: color-mix(in srgb, #14121f 88%, var(--color-accent)) !important;
+  color: var(--color-accent-100) !important;
+}
 /* Accordion body. Animating `height: auto` is not possible, so the wrapper is
    a single-row grid and the row itself is animated from 0fr to 1fr — the
    paragraph inside clips to whatever height the row currently is. Above the
