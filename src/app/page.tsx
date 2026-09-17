@@ -198,6 +198,13 @@ export default function HomePage() {
               style={{
                 display: "flex",
                 alignItems: "center",
+                /* The dot is 9px with a 5px `box-shadow` ring — 19px of paint
+                   inside an 11px/1.3 line box, so the ring spilled 2.5px past
+                   the pill. On mobile the pill is the last thing in
+                   `#heroSection`, which clips (`overflow: hidden`, to contain
+                   the hero glow), and the bottom of the ring was cut off.
+                   Reserving the ring's full height fixes it at the cause. */
+                minHeight: 19,
                 gap: 9,
                 font: "500 11px/1.3 var(--font-heading)",
                 letterSpacing: ".16em",
@@ -301,7 +308,7 @@ export default function HomePage() {
             <p
               style={{
                 margin: "18px 0 0",
-                maxWidth: "30ch",
+                maxWidth: "50ch",
                 fontSize: 15,
                 lineHeight: 1.6,
                 color: "var(--color-neutral-400)",
