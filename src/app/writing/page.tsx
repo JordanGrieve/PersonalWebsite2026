@@ -53,6 +53,9 @@ export default function WritingPage() {
           <Link
             key={p.slug}
             href={`/writing/${p.slug}`}
+            /* As with the project grid: one post gets read, not four.
+               58.6kB of prefetch on this page down to 21.5kB. */
+            prefetch={false}
             className="hov-fade"
             style={{
               width: "100%",

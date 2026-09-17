@@ -180,6 +180,8 @@ export default function Header() {
           <Link
             key={item.href}
             href={item.href}
+            /* Same seven links as the header nav — see the note there. */
+            prefetch={false}
             style={{
               textAlign: "left",
               fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
@@ -255,6 +257,20 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
+                /* The nav points at every page on the site and sits on
+                   every page, so the default pulled six RSC payloads and their
+                   route chunks on every load — 35.8kB on the home page, and
+                   86kB on /work once its eight cards joined in.
+
+                   Note this turns prefetching off outright. Next 15 does not
+                   fall back to prefetching on hover, measured: hovering a nav
+                   link with this set fires no request at all. What pays for
+                   that is how little there is to fetch — every route is
+                   prerendered and tiny, so a cold click still renders its h1
+                   in about 100ms locally and 246ms on Fast 3G. The load saving
+                   lands on every visitor; the nav cost only lands on the ones
+                   who click. */
+                prefetch={false}
                 style={{
                   font: "500 14px/1 var(--font-heading)",
                   padding: "7px 10px",

@@ -56,6 +56,11 @@ export default function ProjectGrid() {
           <Link
             key={p.slug}
             href={`/work/${p.slug}`}
+            /* Eight case studies prefetching on sight cost 86kB on /work,
+               of which a reader uses at most one. Off entirely — Next 15 does
+               not prefetch on hover as a fallback — which takes the page to
+               23.1kB of prefetch. See the note in Header.tsx. */
+            prefetch={false}
             className="hov-lift"
             style={{
               display: "block",
