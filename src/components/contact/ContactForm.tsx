@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { budgetOptions, topicOptions } from "@/data/contact";
+import { topicOptions } from "@/data/contact";
 import { site } from "@/data/site";
 
 const chip = (on: boolean) =>
@@ -85,7 +85,6 @@ export default function ContactForm() {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const [topic, setTopic] = useState("");
-  const [budget, setBudget] = useState("");
   const [err, setErr] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -102,7 +101,6 @@ export default function ContactForm() {
       name && `Name: ${name}`,
       `Email: ${email}`,
       topic && `Topic: ${topic}`,
-      budget && `Budget: ${budget}`,
       "",
       msg,
     ]
@@ -121,7 +119,6 @@ export default function ContactForm() {
     setEmail("");
     setMsg("");
     setTopic("");
-    setBudget("");
   }
 
   return (
@@ -192,13 +189,6 @@ export default function ContactForm() {
             options={topicOptions}
             value={topic}
             onSelect={setTopic}
-          />
-          <ChipGroup
-            label="Budget range"
-            id="cf-budget-label"
-            options={budgetOptions}
-            value={budget}
-            onSelect={setBudget}
           />
           <div className="field">
             <label htmlFor="cf-msg">What do you need?</label>
