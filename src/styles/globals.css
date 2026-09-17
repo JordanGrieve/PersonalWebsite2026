@@ -614,20 +614,46 @@ a:hover {
     scroll-snap-type: x mandatory;
     scroll-padding-left: clamp(18px, 4cqw, 48px);
     gap: 12px !important;
-    /* Bleed off BOTH edges, not just the right: the negative left margin puts
-       the scrollport's edge at the screen edge, and the matching left padding
-       keeps the first card on the content measure at rest. Without the pair,
-       cards vanish at the 18px content inset on the way out instead of
-       running off the screen. Right side deliberately has no padding, so the
-       last card still ends flush with the screen edge. */
+    /* Bleed off BOTH edges: the negative margins put the scrollport's edges
+       at the screen edges, and the matching padding keeps the cards on the
+       content measure at rest. Without the pair, cards vanish at the 18px
+       content inset on the way out instead of running off the screen.
+
+       The right padding used to be 0, so the last card ended flush against
+       the screen with no inset at all once you scrolled to the end. It now
+       matches the left, which puts the last card's right edge on the same
+       measure as the first card's left edge. */
     margin: 0 calc(-1 * clamp(18px, 4cqw, 48px)) 0
       calc(-1 * clamp(18px, 4cqw, 48px)) !important;
-    padding: 2px 0 12px clamp(18px, 4cqw, 48px) !important;
+    padding: 2px clamp(18px, 4cqw, 48px) 12px clamp(18px, 4cqw, 48px) !important;
     scrollbar-width: none;
   }
   #featGrid::-webkit-scrollbar,
   #testGrid::-webkit-scrollbar {
     display: none;
+  }
+  /* Paired calls to action go half and half on a phone rather than sizing to
+     their own labels, which left "See the work" and "Say hello" visibly
+     narrower than the button beside them. Grid rather than `flex: 1`, so the
+     two tracks are equal regardless of what the labels say.
+
+     The 24px side padding every `.btn` carries is too much inside a 172px
+     track — "Download CV" and its icon do not fit — so it comes down here.
+     The 14px vertical stays, which is what holds the 44px touch target. */
+  #heroActions,
+  #aboutActions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+  }
+  #heroActions > *,
+  #aboutActions > * {
+    padding-inline: 10px !important;
+    min-width: 0;
+    /* "Download CV" broke onto a second line inside its track and made that
+       row 68px tall against the hero row's 49px. The label fits on one line
+       at this padding — it was wrapping because it could, not because it had
+       to — so it is told not to. */
+    white-space: nowrap;
   }
   #featGrid > *,
   #testGrid > * {

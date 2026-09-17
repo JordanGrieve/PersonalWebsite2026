@@ -174,7 +174,7 @@ export default function HomePage() {
             >
               &lt;/ Build. Ship. Speed up. /&gt;
             </p>
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
+            <div id="heroActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
               <Link className="btn btn-primary" href="/contact">
                 Get a quote
                 <i className="ph ph-arrow-right" style={{ fontSize: 18 }} />

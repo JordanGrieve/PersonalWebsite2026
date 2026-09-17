@@ -79,7 +79,7 @@ export default function AboutPage() {
             strategy, and getting out of the customer&apos;s way. Outside it I take on freelance
             builds — Shopify themes, custom apps, and rescue work on sites that have got slow.
           </p>
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 26 }}>
+          <div id="aboutActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 26 }}>
             <a className="btn btn-primary" href="#" download>
               <i className="ph ph-download-simple" />
               &nbsp;Download CV
