@@ -144,6 +144,7 @@ export default function HomePage() {
         >
           <div>
             <p
+              id="heroTagline"
               style={{
                 margin: 0,
                 maxWidth: "26ch",
@@ -620,6 +621,7 @@ export default function HomePage() {
             LET&apos;S CONNECT
           </h2>
           <div
+            id="connectGrid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))",
