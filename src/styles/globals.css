@@ -358,6 +358,26 @@ a:hover {
 /* Scroll reveal — see ScrollReveal.tsx. The `.js-reveal` gate is set by an
    inline script before first paint, so the hidden state only ever exists in a
    browser that will also run the observer that clears it. */
+/* The two looping animations — the badge and the hero glow — only run once
+   `DeferMotion` has seen the visitor interact. Before that the badge sits
+   still and the glow is painted but static.
+
+   The reason is Speed Index: it integrates how visually incomplete the
+   viewport is over time, so a loop that never stops means the page never
+   reaches a final frame. Measured at 412x823, 24 screenshots over six
+   seconds: 24 of 24 distinct as shipped, 1 of 24 with both of these stopped.
+   Stopping only one was not enough — 23 and 24 respectively.
+
+   Keeping the declarations here rather than inline on the elements is what
+   lets a class gate them at all; an inline `animation` would need
+   `!important` to override. */
+.motion-on .spin-badge {
+  animation: spin 22s linear infinite;
+}
+.motion-on .hero-glow {
+  animation: glowPulse 7s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .js-reveal main > * {
     opacity: 0;

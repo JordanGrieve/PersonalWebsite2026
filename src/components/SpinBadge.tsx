@@ -14,7 +14,10 @@ export default function SpinBadge({
       <svg
         viewBox="0 0 100 100"
         aria-hidden
-        style={{ width: "100%", height: "100%", animation: "spin 22s linear infinite", transformOrigin: "50% 50%" }}
+        /* The spin itself lives in globals.css behind `.motion-on`, which
+           DeferMotion adds on first interaction. */
+        className="spin-badge"
+        style={{ width: "100%", height: "100%", transformOrigin: "50% 50%" }}
       >
         <defs>
           <path

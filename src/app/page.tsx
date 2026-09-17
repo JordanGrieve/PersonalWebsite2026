@@ -42,7 +42,10 @@ export default function HomePage() {
           overflow: "hidden",
         }}
       >
+        {/* The pulse lives in globals.css behind `.motion-on` — see
+            DeferMotion. The gradient itself is always painted. */}
         <div
+          className="hero-glow"
           style={{
             position: "absolute",
             top: -180,
@@ -52,7 +55,6 @@ export default function HomePage() {
             borderRadius: "50%",
             background: "radial-gradient(circle,rgba(145,132,217,.30),transparent 66%)",
             filter: "blur(12px)",
-            animation: "glowPulse 7s ease-in-out infinite",
             pointerEvents: "none",
           }}
         />
