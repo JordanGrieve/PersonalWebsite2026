@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Anton, Dancing_Script, Inter } from "next/font/google";
+import DeferMotion from "@/components/DeferMotion";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ScrollReveal />
+        <DeferMotion />
         <div className="site">
           <Header />
           <main className="wrap" style={{ animation: "riseIn .45s ease both" }}>
