@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Dancing_Script, Inter } from "next/font/google";
+import { Anton, Inter } from "next/font/google";
 import DeferMotion from "@/components/DeferMotion";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -21,13 +21,6 @@ const anton = Anton({
   weight: "400",
   display: "swap",
   variable: "--font-anton",
-});
-
-const dancingScript = Dancing_Script({
-  subsets: ["latin"],
-  weight: "600",
-  display: "swap",
-  variable: "--font-dancing",
 });
 
 export const metadata: Metadata = {
@@ -59,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en-GB"
-      className={`${inter.variable} ${anton.variable} ${dancingScript.variable}`}
+      className={`${inter.variable} ${anton.variable}`}
       // The inline script below adds `js-reveal` here before React hydrates,
       // so the client's class list legitimately differs from the server's.
       suppressHydrationWarning
