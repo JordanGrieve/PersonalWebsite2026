@@ -660,4 +660,34 @@ a:hover {
     flex: 0 0 82% !important;
     scroll-snap-align: start;
   }
+  /* The case study's two supporting shots stack on a phone, so the reader
+     scrolls past two near-identical boxes one after the other. Same carousel
+     the featured cards use: one shot at a time, swipe for the second.
+
+     Written out rather than folded into the `#featGrid, #testGrid` rule above
+     because this one IS the section, not a grid inside one. Two consequences.
+     It keeps its own bottom padding instead of taking the carousel's 12px.
+     And it takes NO negative margin: `#featGrid` needs one to escape the
+     padding of the section wrapping it, but this element's containing block
+     is the wrap itself, so it already starts at the screen edge — adding the
+     bleed pulled it 18px further out and left both shots flush against the
+     screen instead of inset on the content measure. Its own padding is the
+     inset, and the scrollport still runs edge to edge so cards scroll off. */
+  #studyShots {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: clamp(18px, 4cqw, 48px);
+    gap: 12px !important;
+    padding: 2px clamp(18px, 4cqw, 48px) clamp(32px, 5cqw, 64px) !important;
+    scrollbar-width: none;
+  }
+  #studyShots::-webkit-scrollbar {
+    display: none;
+  }
+  #studyShots > * {
+    flex: 0 0 82% !important;
+    scroll-snap-align: start;
+  }
 }

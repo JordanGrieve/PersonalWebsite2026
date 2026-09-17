@@ -272,7 +272,10 @@ export default async function CaseStudyPage({ params }: Params) {
         items={study.incidents}
       />
 
+      {/* Two up on desktop; a swipeable carousel on a phone — see
+          `#studyShots` in globals.css. */}
       <section
+        id="studyShots"
         style={{
           padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)",
           display: "grid",
