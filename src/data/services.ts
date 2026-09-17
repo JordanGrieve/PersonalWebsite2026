@@ -3,9 +3,14 @@ export const serviceDetail = [
     icon: "ph ph-code",
     title: "Web development",
     from: "From £600",
-    /* Eight days at the project rate. "Web apps front to back" used to be in
-       this description and does not fit in eight days — the scope was narrowed
-       to match the price rather than the other way round. */
+    /* Two days at the project rate, and the small end on purpose: a brochure
+       site, not the multi-template build. Anything with its own templates and a
+       Core Web Vitals promise attached is the Storefront build tier in
+       pricing.ts, which starts at £1,600 — this floor sits under that rather
+       than competing with it. "Web apps front to back" used to be in this
+       description and does not fit in two days; the scope was narrowed to match
+       the price rather than the other way round. (The note said eight days for
+       a long time, which was the build tier's costing on this tier's price.) */
     body: "Marketing and brochure sites built front to back. Clean components, a CMS your team can actually edit, and no framework churn for its own sake.",
     items: [
       "Built from your design — design available as an add-on",
@@ -19,7 +24,12 @@ export const serviceDetail = [
     title: "Shopify & ecommerce",
     from: "From £1,600",
     /* Extending the theme they have, not building one from scratch — the DFYNE
-       work is an Impulse theme, and that is the honest shape of this. */
+       work is an Impulse theme, and that is the honest shape of this.
+
+       £1,600 is the same floor the Storefront build tier leads with in
+       pricing.ts, and deliberately so: this page said £1,600 while that page
+       said £2,400+ for the same work, so anyone reading both got two anchors
+       and quoted back the lower one. Change these together. */
     body: "Theme customisation and app work for brands that have outgrown how their theme ships.",
     items: [
       "Sections and templates built into your existing theme",
@@ -31,7 +41,7 @@ export const serviceDetail = [
   {
     icon: "ph ph-lightning",
     title: "Performance",
-    from: "From £400",
+    from: "From £300",
     body: "A measured audit and an ordered list of what to do about it. You get numbers, not adjectives.",
     /* Mirrors the Speed audit tier in pricing.ts. If one changes, change both —
        these are the same thing sold from two pages. The last line matters: the
@@ -97,10 +107,14 @@ export const serviceDetail = [
   {
     icon: "ph ph-lifebuoy",
     title: "Maintenance & support",
-    from: "From £400/mo",
+    from: "From £220/mo",
     body: "A standing slot each month for fixes, updates and the small jobs that pile up.",
+    /* Mirrors the Ongoing tier in pricing.ts — same two units, £220 for one day
+       a month and £400 for two. If one changes, change both; they are the same
+       thing sold from two pages, and they disagreed once already. */
     items: [
-      "Two days of work a month, unused time rolls over once",
+      "One day of work a month at £220, or two days at £400",
+      "Unused time rolls over once",
       "Theme and dependency updates",
       "Urgent fixes answered the next working day",
       "Monthly note on what changed",
