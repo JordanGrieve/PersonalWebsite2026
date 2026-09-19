@@ -1,5 +1,4 @@
 import { displayDate, posts } from "@/data/posts";
-import { tiers } from "@/data/pricing";
 import { getCaseStudy, projects } from "@/data/projects";
 import { serviceDetail } from "@/data/services";
 import { liveSocials, site } from "@/data/site";
@@ -39,17 +38,6 @@ function build(): string {
     for (const item of s.items) lines.push(`- ${item}`);
     lines.push("");
   }
-
-  lines.push("## Pricing");
-  lines.push("");
-  for (const t of tiers) {
-    lines.push(`### ${t.name} — ${t.price}`);
-    lines.push(t.note);
-    for (const item of t.items) lines.push(`- ${item}`);
-    lines.push("");
-  }
-  lines.push("Prices are indicative; the final quote follows a short call.");
-  lines.push("");
 
   lines.push("## Projects");
   lines.push("");

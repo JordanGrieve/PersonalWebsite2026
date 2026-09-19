@@ -136,24 +136,28 @@ export default async function PostPage({ params }: Params) {
             <i className="ph ph-arrow-up-right" />
           </Link>
         </div>
-        <h3
-          style={{
-            margin: "30px 0 16px",
-            fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
-            fontWeight: 400,
-            fontSize: "clamp(22px,2.6cqw,30px)",
-            color: "var(--color-accent)",
-          }}
-        >
-          READ NEXT
-        </h3>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
-            gap: 14,
-          }}
-        >
+        {/* Only rendered when there is somewhere to go next. With one post on
+            the site this was a heading above an empty grid. */}
+        {related.length ? (
+          <>
+            <h3
+              style={{
+                margin: "30px 0 16px",
+                fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
+                fontWeight: 400,
+                fontSize: "clamp(22px,2.6cqw,30px)",
+                color: "var(--color-accent)",
+              }}
+            >
+              READ NEXT
+            </h3>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+                gap: 14,
+              }}
+            >
           {related.map((r) => (
             <Link
               key={r.slug}
@@ -182,8 +186,10 @@ export default async function PostPage({ params }: Params) {
                 {r.title}
               </div>
             </Link>
-          ))}
-        </div>
+              ))}
+            </div>
+          </>
+        ) : null}
       </section>
     </>
   );

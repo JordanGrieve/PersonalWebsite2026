@@ -16,24 +16,6 @@ export type Post = {
 
 export const posts: Post[] = [
   {
-    slug: "two-shopify-apps-you-can-delete",
-    published: "2026-07-01",
-    read: "6 min",
-    title: "The two Shopify apps you can delete today",
-    dek: "Most bundle and cart-drawer apps ship 300kb to do what 90 lines of Liquid can.",
-    category: "Shopify",
-    ph: "App audit screenshot",
-  },
-  {
-    slug: "cache-rules-for-every-cloudflare-zone",
-    published: "2026-06-01",
-    read: "4 min",
-    title: "Cache rules I set on every Cloudflare zone",
-    dek: "A starting configuration for ecommerce, and the one rule that breaks carts.",
-    category: "Cloudflare",
-    ph: "Cache rule configuration",
-  },
-  {
     slug: "lcp-4-8s-to-1-3s",
     published: "2026-05-01",
     read: "8 min",
@@ -41,15 +23,6 @@ export const posts: Post[] = [
     dek: "The full waterfall, what I cut, and what turned out not to matter.",
     category: "Performance",
     ph: "Lighthouse before / after screenshot",
-  },
-  {
-    slug: "one-year-on-a-fast-growing-storefront",
-    published: "2026-04-01",
-    read: "5 min",
-    title: "One year in, working on a fast-growing storefront",
-    dek: "What shipping to real traffic every week teaches you that tutorials do not.",
-    category: "Notes",
-    ph: "Desk / workflow shot",
   },
 ];
 

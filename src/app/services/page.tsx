@@ -150,10 +150,10 @@ export default function ServicesPage() {
         <Link
           id="servicesCta"
           className="btn btn-primary"
-          href="/pricing"
+          href="/contact"
           style={{ alignSelf: "flex-start" }}
         >
-          See packages &amp; prices
+          Tell me what you need
           <i className="ph ph-arrow-right" />
         </Link>
       </section>

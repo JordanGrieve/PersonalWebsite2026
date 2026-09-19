@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 1,
   };
 
-  const indexes = ["/work", "/services", "/pricing", "/about", "/writing", "/contact"].map(
+  const indexes = ["/work", "/services", "/about", "/writing", "/contact"].map(
     (path) => ({
       url: `${site.url}${path}`,
       lastModified: built,

@@ -10,13 +10,12 @@
 import { posts, type Post } from "@/data/posts";
 import { getCaseStudy, projects, type Project } from "@/data/projects";
 import { serviceDetail } from "@/data/services";
-import { tiers } from "@/data/pricing";
 import { liveSocials, site } from "@/data/site";
 
 export const PERSON_ID = `${site.url}/#person`;
 export const WEBSITE_ID = `${site.url}/#website`;
 
-/** "From £1,800" / "£4,500+" / "£600/mo" -> 1800 / 4500 / 600. */
+/** "From £600" / "From £2,400" / "From £400/mo" -> 600 / 2400 / 400. */
 function priceOf(text: string): number | undefined {
   const digits = text.replace(/[^\d,]/g, "").replace(/,/g, "");
   return digits ? Number(digits) : undefined;
@@ -156,52 +155,6 @@ export function servicesSchema() {
     ),
     breadcrumb([{ name: "Services", path: "/services" }]),
     ...services,
-  );
-}
-
-export function pricingSchema() {
-  return graph(
-    page(
-      "CollectionPage",
-      "/pricing",
-      `Pricing — ${site.fullName}`,
-      "Indicative prices for audits, builds and retainers.",
-    ),
-    breadcrumb([{ name: "Pricing", path: "/pricing" }]),
-    {
-      "@type": "OfferCatalog",
-      "@id": `${site.url}/pricing#catalog`,
-      name: "Engagements",
-      itemListElement: tiers.map((t, i) => {
-        const price = priceOf(t.price);
-        const monthly = t.price.includes("/mo");
-        return {
-          "@type": "Offer",
-          position: i + 1,
-          name: t.name,
-          description: t.note,
-          seller: { "@id": PERSON_ID },
-          priceCurrency: "GBP",
-          ...(price
-            ? {
-                priceSpecification: {
-                  "@type": monthly ? "UnitPriceSpecification" : "PriceSpecification",
-                  price,
-                  priceCurrency: "GBP",
-                  ...(monthly ? { unitCode: "MON", billingDuration: 1 } : {}),
-                  valueAddedTaxIncluded: false,
-                },
-              }
-            : {}),
-          itemOffered: {
-            "@type": "Service",
-            name: t.name,
-            description: t.items.join(". "),
-            provider: { "@id": PERSON_ID },
-          },
-        };
-      }),
-    },
   );
 }
 
