@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import ImageSlot from "@/components/ImageSlot";
+import CardThumb from "@/components/CardThumb";
 import { projectFilters, projects } from "@/data/projects";
 
 const chip = (on: boolean) =>
@@ -74,7 +74,7 @@ export default function ProjectGrid() {
             }}
           >
             <div style={{ position: "relative", height: 184 }}>
-              <ImageSlot placeholder={p.ph} />
+              <CardThumb slug={p.slug} placeholder={p.ph} />
             </div>
             <div style={{ padding: "16px 18px" }}>
               <div

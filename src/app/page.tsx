@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import ImageSlot from "@/components/ImageSlot";
+import CardThumb from "@/components/CardThumb";
 import PortfolioWord from "@/components/PortfolioWord";
 import SpinBadge from "@/components/SpinBadge";
 import ServicesGrid from "@/components/home/ServicesGrid";
@@ -379,7 +379,7 @@ export default function HomePage() {
               }}
             >
               <div style={{ position: "relative", height: 190 }}>
-                <ImageSlot placeholder={featuredPlaceholders[p.slug]} />
+                <CardThumb slug={p.slug} placeholder={featuredPlaceholders[p.slug]} />
                 <span
                   style={{
                     position: "absolute",

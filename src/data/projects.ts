@@ -1,3 +1,5 @@
+import { heroImages } from "@/data/heroImages";
+
 export type ProjectTag =
   | "Shopify"
   | "Apps"
@@ -401,10 +403,7 @@ const caseStudies: Record<string, CaseStudy> = {
        the shape of the work and nothing else. The two shots are the evidence
        for the headline number and for the theme half of the fix. */
     shots: {
-      hero: {
-        src: "/images/work/dfyne-cloudflare-migration/hero.png",
-        alt: "An illustration of one stream of light entering from the left, passing through a single glowing gateway marked with a globe, and splitting into two clean paths that each end at a storefront.",
-      },
+      hero: heroImages["dfyne-cloudflare-migration"],
       shot1: {
         src: "/images/work/dfyne-cloudflare-migration/traffic-drop.png",
         alt: "A line chart of US traffic share on the rest-of-world store, running between roughly 15 and 35 percent and repeatedly hitting the alert threshold, then dropping to a flat low line.",
