@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import ImageSlot from "@/components/ImageSlot";
+import Zoomable from "@/components/work/Zoomable";
 import { getCaseStudy, getProject, nextProject, projects, type Shot } from "@/data/projects";
 import { site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
@@ -139,11 +139,10 @@ function DetailList({
  * when there is not. A study can gain images one at a time without the page
  * changing shape.
  *
- * `fill` because every caller already gives the wrapper a height — that is
- * what reserves the space, so nothing shifts when an image arrives.
- * `contain` rather than `cover`: these are screenshots of charts and tables,
- * and cropping one to fill a box loses the axis or the header that makes it
- * worth showing.
+ * A real image goes in as `Zoomable`, which fills the wrapper the same way a
+ * bare `next/image` did and adds click-to-enlarge — these are screenshots of
+ * charts and tables shown at 400px tall, which is enough to see what they
+ * are and not enough to read them.
  */
 function Slot({
   shot,
@@ -155,16 +154,7 @@ function Slot({
   priority?: boolean;
 }) {
   if (!shot) return <ImageSlot placeholder={placeholder} />;
-  return (
-    <Image
-      src={shot.src}
-      alt={shot.alt}
-      fill
-      priority={priority}
-      sizes="(max-width: 640px) 100vw, 50vw"
-      style={{ objectFit: "contain", objectPosition: "center" }}
-    />
-  );
+  return <Zoomable src={shot.src} alt={shot.alt} priority={priority} />;
 }
 
 /**
@@ -202,13 +192,7 @@ function Gallery({ items }: { items?: Shot[] }) {
                 border: "1px solid var(--color-divider)",
               }}
             >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 640px) 100vw, 50vw"
-                style={{ objectFit: "contain", objectPosition: "center" }}
-              />
+              <Zoomable src={item.src} alt={item.alt} />
             </div>
             {item.caption ? (
               <figcaption

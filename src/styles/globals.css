@@ -716,3 +716,96 @@ a:hover {
     scroll-snap-align: start;
   }
 }
+
+/* — click-to-enlarge screenshots (see components/work/Zoomable.tsx) — */
+
+/* The thumbnail's button. It replaces a bare <img> inside a wrapper that
+   already has the height and the rounded corners, so it takes no box of its
+   own: it fills that wrapper and stays invisible until pointed at. `font:
+   inherit` because a <button> otherwise takes Arial from the UA sheet, and
+   the hint below inherits from here. */
+.zoom-trigger {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: zoom-in;
+}
+/* The one affordance that says it is clickable. Bottom right, out of the way
+   of the axis labels and headers these shots are usually showing. */
+.zoom-hint {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-neutral-900) 78%, transparent);
+  border: 1px solid var(--color-divider);
+  color: var(--color-neutral-300);
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+}
+/* Shown on hover for a pointer, on focus for a keyboard — and always on a
+   touch screen, which has no hover state to reveal it with. */
+.zoom-trigger:hover .zoom-hint,
+.zoom-trigger:focus-visible .zoom-hint {
+  opacity: 1;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+@media (hover: none) {
+  .zoom-hint {
+    opacity: 1;
+  }
+}
+
+/* The enlarged view. A <dialog> defaults to a small centred white box with a
+   border, so nearly all of this is undoing that. */
+.lightbox {
+  max-width: 100vw;
+  max-height: 100dvh;
+  width: 100vw;
+  height: 100dvh;
+  margin: 0;
+  padding: clamp(16px, 4vw, 56px);
+  border: 0;
+  background: none;
+  overflow: hidden;
+  /* The scrim is the click target for closing, so it has to cover the
+     viewport rather than only the image. */
+  cursor: zoom-out;
+}
+.lightbox::backdrop {
+  background: color-mix(in srgb, var(--color-neutral-950, #000) 88%, transparent);
+  backdrop-filter: blur(3px);
+}
+/* `contain` inside a box the size of the padded viewport, so a wide chart
+   gets the full width and a tall one the full height, and neither is
+   cropped or scaled past its own resolution. */
+.lightbox-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
+.lightbox-close {
+  position: absolute;
+  top: clamp(12px, 2vw, 24px);
+  right: clamp(12px, 2vw, 24px);
+  z-index: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox[open],
+  .lightbox[open]::backdrop {
+    animation: fadeScrim 0.18s ease-out;
+  }
+}
