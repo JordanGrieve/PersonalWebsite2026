@@ -44,15 +44,6 @@ export const projects: Project[] = [
     tag: "Shopify",
   },
   {
-    slug: "dfyne-storefront-refactor",
-    name: "DFYNE storefront refactor",
-    kind: "Performance",
-    year: "2026",
-    result: "LCP 2.3s → 1.6s, six apps removed",
-    ph: "Before / after — home page",
-    tag: "Performance",
-  },
-  {
     slug: "dfyne-cloudflare-migration",
     name: "DFYNE geo-routing",
     kind: "Infrastructure",
@@ -128,7 +119,6 @@ export const featuredSlugs = [
 export const featuredBlurbs: Record<string, string> = {
   "dfyne-cloudflare-migration": "Cloudflare · Shoppers on the wrong store, 35% → single digits",
   "dfyne-fit-finder": "Integration · AI size advisor across two Shopify Plus stores",
-  "dfyne-storefront-refactor": "Performance · LCP 2.3s → 1.6s, six apps removed",
   "essential-upsell": "Shopify app · Vector search over sales and returns",
   amoria: "Headless Shopify · Next.js, built end to end",
   "open-door-bakery": "Web build · Storefront, admin and API in one app",
@@ -140,7 +130,6 @@ export const featuredPlaceholders: Record<string, string> = {
   amoria: "Project shot — headless storefront",
   "dfyne-cloudflare-migration": "Project shot — edge routing",
   "dfyne-fit-finder": "Project shot — size advisor on the product page",
-  "dfyne-storefront-refactor": "Project shot — before / after",
   "open-door-bakery": "Project shot — storefront on mobile",
   postbox: "Project shot — ticket thread",
 };
@@ -310,37 +299,6 @@ const caseStudies: Record<string, CaseStudy> = {
       hero: "Storefront — home page",
       shot1: "Product page",
       shot2: "Collection page",
-    },
-  },
-
-  "dfyne-storefront-refactor": {
-    tags: ["Performance", "Shopify", "2026"],
-    heading: "STOREFRONT REFACTOR",
-    intro:
-      "DFYNE's storefront had accumulated the usual: apps nobody could account for, metafields nothing read, and scripts blocking the first paint. I took the home page from 2.3s to 1.6s and cut roughly £400 a month of subscriptions out along the way.",
-    meta: [
-      { l: "Client", v: "DFYNE" },
-      { l: "Scope", v: "Storefront refactor, app audit, script loading" },
-      { l: "Timeline", v: "—" },
-      { l: "Stack", v: "Shopify, Liquid, JavaScript" },
-    ],
-    problem:
-      "The home page took 2.3 seconds to paint its largest element. No single thing was to blame — it was accumulation. Six third-party apps were each shipping their own JavaScript on every page, metafields nothing rendered were still sitting in the theme, and scripts with no part in the first paint were blocking it anyway.",
-    approach:
-      "I went through the theme and removed what nothing used: dead code, unused metafields, and six apps including Selecty — several of them doing work the theme could do itself. What had to stay was deferred wherever deferring it was safe, so the first paint stopped waiting on scripts it did not need. The apps that came out were worth about £400 a month on their own.",
-    results: [
-      { n: "1.6s", l: "Largest Contentful Paint on the home page, down from 2.3s" },
-      { n: "−30%", l: "Time to the home page's largest paint" },
-      { n: "6", l: "Third-party apps removed, Selecty among them" },
-      { n: "~£400", l: "A month of app subscriptions, no longer being paid" },
-    ],
-    /* TODO: fill in Timeline above. Worth adding the JS weight before/after and
-       whether PDP and collection pages moved too — those matter more
-       commercially than the home page. */
-    slots: {
-      hero: "Before / after — home page waterfall",
-      shot1: "Lighthouse — before",
-      shot2: "Lighthouse — after",
     },
   },
 

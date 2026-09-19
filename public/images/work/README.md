@@ -20,14 +20,13 @@ right place with the right name needs no decision from anyone to hook up.
 | --- | --- |
 | `essential-upsell` | Essential Upsell |
 | `amoria` | AMORIA |
-| `dfyne-storefront-refactor` | DFYNE storefront refactor |
 | `dfyne-cloudflare-migration` | **DFYNE geo-routing** |
 | `dfyne-fit-finder` | DFYNE size advisor |
 | `dfyne-mobile-performance` | **DFYNE site performance** |
 | `open-door-bakery` | Open Door Bakery |
 | `postbox` | Postbox |
 
-Four of those folder names do not match what the page is called. The
+Three of those folder names do not match what the page is called. The
 geo-routing work in particular lives under `dfyne-cloudflare-migration`,
 because the page was renamed after publication and keeping the URL was worth
 more than a tidy folder name. The performance study is the same story: it was

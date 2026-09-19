@@ -18,6 +18,17 @@ const nextConfig: NextConfig = {
         destination: "/services",
         permanent: true,
       },
+      {
+        /* The storefront refactor was published, in the sitemap and indexed.
+           It has been taken down, so the URL goes to the project list rather
+           than a 404 — there is no single page it maps onto, and /work is
+           where someone following an old link was trying to get to anyway.
+
+           Permanent, same reasoning as above: the page is not coming back. */
+        source: "/work/dfyne-storefront-refactor",
+        destination: "/work",
+        permanent: true,
+      },
     ];
   },
 };
