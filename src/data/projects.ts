@@ -528,6 +528,7 @@ const caseStudies: Record<string, CaseStudy> = {
       shot2: "Blocking time under an 8x CPU slowdown, per script",
     },
     shots: {
+      hero: heroImages["dfyne-mobile-performance"],
       shot1: {
         src: "/images/work/dfyne-mobile-performance/showing-both-stores-last-3-days-p75.png",
         alt: "A chart of 75th-percentile largest contentful paint over three days for both storefronts. The US store runs around one second; the rest-of-world store runs between 1.2 and 1.9 seconds and trends down across the window.",

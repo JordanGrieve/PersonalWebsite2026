@@ -16,4 +16,10 @@ export const heroImages: Record<string, Shot> = {
     src: "/images/work/dfyne-cloudflare-migration/hero.png",
     alt: "An illustration of one stream of light entering from the left, passing through a single glowing gateway marked with a globe, and splitting into two clean paths that each end at a storefront.",
   },
+  /* Folder named for the old slug. The project is "DFYNE site performance"
+     now; the URL, and so the folder, stayed. */
+  "dfyne-mobile-performance": {
+    src: "/images/work/dfyne-mobile-performance/hero.png",
+    alt: "An illustration of a glowing track running left to right. At the left it is buried under a jam of dark blocks; the blocks thin out across the frame until the track runs clear and unbroken into a lit panel at the right.",
+  },
 };
