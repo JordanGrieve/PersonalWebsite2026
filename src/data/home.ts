@@ -153,9 +153,9 @@ export const timeline = [
     body: "Shopify themes, custom apps and speed rescues for small brands, alongside the day job.",
   },
   {
-    when: "2024",
-    what: "Self-taught, then shipping",
-    body: "Started with HTML and CSS, ended the year deploying Node services behind Cloudflare.",
+    when: "2021 – 2025",
+    what: "Web design and development, Edinburgh Napier",
+    body: "Four years of it, finishing the year I started at DFYNE.",
   },
   {
     when: "Always",

@@ -32,6 +32,13 @@ const person = {
   jobTitle: site.role,
   description: site.description,
   knowsAbout: [...site.expertise],
+  /* A named institution an AI answer or a knowledge panel can resolve,
+     rather than a line of prose it has to parse out of the About page. */
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Edinburgh Napier University",
+    sameAs: "https://www.napier.ac.uk/",
+  },
   address: {
     "@type": "PostalAddress",
     addressRegion: site.address.region,
