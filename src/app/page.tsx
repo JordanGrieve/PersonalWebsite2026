@@ -517,7 +517,7 @@ export default function HomePage() {
             Let&apos;s build something fast.
           </h3>
           <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.55, color: "#14121f" }}>
-            Taking on freelance builds and speed work alongside my day job at Dfyne.
+            Taking on freelance builds and speed work alongside my day job at DFYNE.
           </p>
           <Link
             id="ctaBtn"

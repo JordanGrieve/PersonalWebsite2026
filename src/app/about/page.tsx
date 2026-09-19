@@ -63,7 +63,7 @@ export default function AboutPage() {
               color: "var(--color-neutral-300)",
             }}
           >
-            I&apos;m Jordan, a frontend developer based in Scotland. I spend my days at Dfyne — one
+            I&apos;m Jordan, a frontend developer based in Scotland. I spend my days at DFYNE — one
             of the fastest-growing businesses in the country — working on the storefront thousands
             of people shop through every week.
           </p>
