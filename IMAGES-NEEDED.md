@@ -31,7 +31,12 @@ blurred at source. Easier than remembering later.
 
 ## 1. DFYNE geo-routing — `/work/dfyne-cloudflare-migration`
 
-### Hero — "Who decides: explicit choice, geography, and the order they are read in"
+### Hero — DONE (AI-generated promotional image, wired in)
+
+What follows was the original brief, kept because the argument for a diagram
+still stands if the illustration is ever replaced.
+
+#### Original brief — "Who decides: explicit choice, geography, and the order they are read in"
 **This one is a diagram, not a screenshot.** The page's whole argument is a
 precedence rule, and there is no screen anywhere that shows it. A simple flow:
 request arrives → has the visitor chosen? → yes, honour it → no, use geography →

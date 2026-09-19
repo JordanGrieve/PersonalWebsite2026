@@ -396,10 +396,15 @@ const caseStudies: Record<string, CaseStudy> = {
       shot1: "US share of traffic on the rest-of-world store, falling to single digits",
       shot2: "The region switcher, rebuilt in-house — six stores instead of every country",
     },
-    /* No hero yet — that slot keeps its placeholder until the promotional
-       image exists. The two shots are the evidence for the headline number
-       and for the theme half of the fix. */
+    /* The hero is the one illustration on the page rather than evidence: it
+       is what a reader sees before they have read anything, so it carries
+       the shape of the work and nothing else. The two shots are the evidence
+       for the headline number and for the theme half of the fix. */
     shots: {
+      hero: {
+        src: "/images/work/dfyne-cloudflare-migration/hero.png",
+        alt: "An illustration of one stream of light entering from the left, passing through a single glowing gateway marked with a globe, and splitting into two clean paths that each end at a storefront.",
+      },
       shot1: {
         src: "/images/work/dfyne-cloudflare-migration/traffic-drop.png",
         alt: "A line chart of US traffic share on the rest-of-world store, running between roughly 15 and 35 percent and repeatedly hitting the alert threshold, then dropping to a flat low line.",
