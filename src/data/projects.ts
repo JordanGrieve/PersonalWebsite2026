@@ -75,7 +75,7 @@ export const projects: Project[] = [
     name: "DFYNE mobile performance",
     kind: "Performance",
     year: "2026",
-    result: "Blocking time on mobile down 70% — 3.8s to 1.1s",
+    result: "LCP for real visitors: 1.81s → 1.31s, and under a second on the US store",
     ph: "Main thread — before and after",
     tag: "Performance",
   },
@@ -448,25 +448,35 @@ const caseStudies: Record<string, CaseStudy> = {
     ],
   },
 
-  /* Every figure here is from a preview environment on a branch, which the
-     copy says plainly. Do not quietly promote these to live numbers when it
-     deploys — re-measure and replace them. */
+  /* This shipped, and the figures were re-measured against the live site
+     rather than promoted from the preview ones. Two sources: Dash0 for what
+     real sessions saw, Cloudflare Observatory for the daily synthetic run.
+     Anything still quoted from the preview says so where it appears — the
+     problem and approach sections describe work in progress and keep their
+     original numbers. */
   "dfyne-mobile-performance": {
     tags: ["Performance", "Shopify", "2026"],
-    heading: "TAKING SEVENTY PERCENT OFF THE MAIN THREAD",
+    /* Was "taking seventy percent off the main thread" — a preview figure,
+       and the wrong promise now there is field data. Both stores came down
+       by at least half a second for real sessions, which is the same work
+       described in terms of who felt it. */
+    heading: "HALF A SECOND OFF, FOR EVERY VISITOR",
     intro:
-      "A phone loading DFYNE's home page spent nearly four seconds unable to respond to a tap — not downloading, just busy running scripts. I took that to just over one second. This is a branch, not a deploy: every number below comes from a preview environment, and the preview carries measurement tooling the live site never sends, so live should land somewhat better than this.",
+      "The largest thing on DFYNE's page now paints in 1.31 seconds for real visitors to the rest-of-world store, and in under a second on the US one. Before this shipped those figures were 1.81 and 1.61 seconds. The work behind them was main-thread work — a phone loading the home page spent nearly four seconds unable to respond to a tap, not downloading anything, just running scripts — and the fix turned out to have nothing to do with the hero image everyone suspects first.",
     meta: [
       { l: "Client", v: "DFYNE" },
-      { l: "Scope", v: "Mobile home page — third-party scripts, image delivery, bundles" },
+      { l: "Scope", v: "Home page — third-party scripts, image delivery, bundles" },
       { l: "Timeline", v: "One engagement, September 2026" },
-      { l: "Stack", v: "Shopify, Impulse theme, Lighthouse, Chrome tracing, Cloudflare Observatory" },
-      { l: "Status", v: "On a branch — measured in preview, not yet deployed" },
+      {
+        l: "Stack",
+        v: "Shopify, Impulse theme, Lighthouse, Chrome tracing, Cloudflare Observatory, Dash0",
+      },
+      { l: "Status", v: "Shipped — live on both storefronts" },
     ],
     problem:
       "The home page scored 51 on mobile and took over eighteen seconds to become interactive. The obvious suspect on a storefront is the hero image, and that is where I started. It was the wrong place.\n\nBefore any of that, though, I had to fix the instrument. Runs kept producing fourteen to seventeen second paint times that nothing on the page explained. A saved trace showed the emulated viewport sitting at zero height for a second and a half with the compositor presenting no frames — an artefact of driving a browser window I could see. I threw away every figure collected that way and moved the harness to headless. Roughly one run in three had been failing falsely, which would have sent me hunting a live problem that did not exist.\n\nThe second correction was to take a third-party tool seriously. It reported blocking time a hundred times worse than my own harness, which is easy to dismiss as noise. Turning the CPU throttle up to 8x reproduced the same shape locally — and a reproducible problem is an attributable one, script by script, instead of an argument about whose number is right.",
     approach:
-      "Tracing settled where the time actually went. The hero image finished downloading 150ms before first paint rather than after it, and first paint landed 30ms after the document finished streaming. So the paint was gated by document delivery and script execution, not by the image. That redirected the whole engagement away from image work and onto the main thread.\n\nThe pattern for the fixes was the same each time: tie third-party code to the intent that needs it rather than to page load. The review widget waits for first interaction — I proved the star ratings on product cards are server-rendered and revealed by CSS, so the vendor's 120KB script was never needed to display them, only to track clicks. Email capture loads near the form, the loyalty widget on a rewards click, the announcement rotator on first interaction. That last one had been counting as continuous visual change and inflating Speed Index on its own.\n\nThe rest was delivery. The platform CDN re-encodes every image at a fixed WebP quality with no control, and uploading a smaller source changes nothing because it re-encodes anyway — pre-encoded renditions served as theme assets skip the pipeline entirely. Theme bundles now wait for the hero to paint. Four per-section scripts that were being inlined once per instance moved to cached files. And a loyalty app turned out to have never started at all: its loader does its real work inside a window load listener, so a deferred release after that event attached to something that would never fire again.",
+      "Tracing settled where the time actually went. The hero image finished downloading 150ms before first paint rather than after it, and first paint landed 30ms after the document finished streaming. So the paint was gated by document delivery and script execution, not by the image. That redirected the whole engagement away from image work and onto the main thread.\n\nThe pattern for the fixes was the same each time: tie third-party code to the intent that needs it rather than to page load. The review widget waits for first interaction — I proved the star ratings on product cards are server-rendered and revealed by CSS, so the vendor's 120KB script was never needed to display them, only to track clicks. Email capture loads near the form, the loyalty widget on a rewards click, the announcement rotator on first interaction. That last one had been counting as continuous visual change and inflating Speed Index on its own.\n\nThe rest was delivery. The platform CDN re-encodes every image at a fixed WebP quality with no control, and uploading a smaller source changes nothing because it re-encodes anyway — pre-encoded renditions served as theme assets skip the pipeline entirely. Theme bundles now wait for the hero to paint. Four per-section scripts that were being inlined once per instance moved to cached files. And a loyalty app turned out to have never started at all: its loader does its real work inside a window load listener, so a deferred release after that event attached to something that would never fire again.\n\nIt shipped in the middle of September, and the field data moved the week after. On the rest-of-world store, the 11th and 12th against the 19th: LCP 1.81s to 1.31s. On the US store, the week to the 12th against the week to the 19th: 1.61s to 999ms. Interaction and layout shift were already inside the thresholds and stayed there.\n\nThe synthetic tests moved with them, and on both surfaces. Cloudflare's daily run against the live UK store went from 42 to 62 on mobile — blocking time 1,817ms to 782ms, time to interactive 15.4s to 7.8s — and from 91 to 97 on desktop over the same three days. Desktop was never the reason for the engagement, which is exactly why it is worth saying: the work was cutting script execution, and script execution is not a phone problem. Phones are just where you notice it first.",
     rejected: [
       {
         what: "Early Hints for the hero image",
@@ -489,20 +499,72 @@ const caseStudies: Record<string, CaseStudy> = {
         why: "My own top recommendation, and a one-line setting to test before building anything. Cutting 35% of the cards — 62 down to 40, elements 3,850 down to 3,146 — moved nothing: LCP 2.75s to 2.80s, FCP 2.44s to 2.43s. I withdrew it.",
       },
     ],
-    /* The 92-vs-67 Lighthouse comparison is deliberately not a tile. The live
-       site is a separately maintained theme, so that gap is not all this work.
-       These four are same-URL, same-tool, same afternoon. */
+    /* These are live now, not preview figures — the branch shipped. The two
+       LCP tiles are field data from real sessions, the two scores are the
+       same synthetic test on the same URL before and after. Each label names
+       its measurement window, because a number without one is a claim rather
+       than a result. */
     results: [
-      { n: "−70%", l: "Total blocking time on mobile, 3,757ms down to 1,138ms" },
-      { n: "18.5s → 10.8s", l: "Time to interactive, down 42%" },
-      { n: "51 → 65", l: "Performance score, same URL and tool, one afternoon" },
-      { n: "5 + 5", l: "Changes shipped, and five built, measured and reverted" },
+      { n: "1.81s → 1.31s", l: "LCP for real visitors on the rest-of-world store" },
+      { n: "1.61s → 1.00s", l: "LCP for real visitors on the US store" },
+      { n: "42 → 62", l: "Lighthouse on mobile, live site, same URL and region" },
+      { n: "91 → 97", l: "The same test on desktop — this was never only a mobile problem" },
     ],
     slots: {
       hero: "Main thread before and after — the same page, the same trace view",
       shot1: "The trace that redirected the work — hero image done before first paint",
       shot2: "Blocking time under an 8x CPU slowdown, per script",
     },
+    shots: {
+      shot1: {
+        src: "/images/work/dfyne-mobile-performance/showing-both-stores-last-3-days-p75.png",
+        alt: "A chart of 75th-percentile largest contentful paint over three days for both storefronts. The US store runs around one second; the rest-of-world store runs between 1.2 and 1.9 seconds and trends down across the window.",
+      },
+      shot2: {
+        src: "/images/work/dfyne-mobile-performance/cloudfalre-uk-dfyne-history-phone.png",
+        alt: "Cloudflare Observatory's mobile history for uk.dfyne.com over four days: scores rising 42, 43, 43, 46, 46, 62, 62, with blocking time falling from 1,817ms to 782ms and time to interactive from 15.4 seconds to 7.8.",
+      },
+    },
+    /* Before and after, in pairs, one store at a time — then the same story
+       from the synthetic side. The pairs are what make the numbers checkable:
+       same dashboard, same filters, two windows. */
+    gallery: [
+      {
+        src: "/images/work/dfyne-mobile-performance/ROW-OldPerformance.png",
+        alt: "Field metrics for the rest-of-world store over 11 and 12 September: largest contentful paint 1.81 seconds, interaction to next paint 127.19ms, layout shift 0.0098.",
+        caption:
+          "Rest-of-world store, before: LCP 1.81s across the 11th and 12th. Everything already rated Good — this was not a broken site, it was a slow one.",
+      },
+      {
+        src: "/images/work/dfyne-mobile-performance/ROW-New-Perfromance.png",
+        alt: "The same dashboard for 19 September: largest contentful paint 1.31 seconds, interaction to next paint 121.29ms, layout shift 0.0089.",
+        caption:
+          "The same store on the 19th: 1.31s. Half a second off the paint that decides whether a page feels fast, for every visitor, not a lab.",
+      },
+      {
+        src: "/images/work/dfyne-mobile-performance/US-Store-Last-2-Weeks.png",
+        alt: "Field metrics for the US store over the week to 12 September: largest contentful paint 1.61 seconds.",
+        caption: "US store, the week to the 12th: 1.61s.",
+      },
+      {
+        src: "/images/work/dfyne-mobile-performance/US-Store-New-Perforamnce.png",
+        alt: "The same dashboard for 14 to 19 September: largest contentful paint 999.81 milliseconds.",
+        caption:
+          "The week to the 19th: 999ms. Under a second on the store that takes the most traffic.",
+      },
+      {
+        src: "/images/work/dfyne-mobile-performance/cloudfalre-uk-dfyne-history.png",
+        alt: "Cloudflare Observatory's desktop history for uk.dfyne.com: scores of 91, 90, 92, 86, 92, 95 and 97 across 15 to 18 September, with largest contentful paint falling from 1,257ms to 838ms.",
+        caption:
+          "Desktop, the same daily test: 91 to 97, LCP 1,257ms to 838ms. Cutting script execution helps every device — a phone is only where it shows up first.",
+      },
+      {
+        src: "/images/work/dfyne-mobile-performance/cloudflare-synthtic.png",
+        alt: "A Cloudflare Observatory desktop speed test of uk.dfyne.com scoring 97, with time to first byte 12ms, first contentful paint 636ms, largest contentful paint 838ms and total blocking time 6ms.",
+        caption:
+          "The best of those runs in full. Blocking time of 6ms is the number the whole engagement was aimed at — that figure is what a main thread with nothing queued on it looks like.",
+      },
+    ],
   },
 
   /* Deliberately absent from this write-up, and worth keeping absent: the

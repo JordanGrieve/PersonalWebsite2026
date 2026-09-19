@@ -62,6 +62,12 @@ front-end half actually exists, which the "two halves must agree" argument needs
 
 ## 2. DFYNE mobile performance — `/work/dfyne-mobile-performance`
 
+**Eight images supplied and wired in** — the two slots now hold the P75 field
+chart and the mobile Observatory history, and the gallery holds four
+before/after dashboards plus the desktop synthetic run. The briefs below are
+still open: they are trace captures, and no trace has been supplied. They would
+show *why* the work went where it did, which the dashboards cannot.
+
 ### Hero — Main thread before and after
 Two Chrome Performance panel captures, same page, same trace view, stacked or
 side by side, **with the same time axis on both**. The long yellow scripting
