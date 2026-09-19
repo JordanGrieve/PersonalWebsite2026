@@ -51,11 +51,32 @@ function Prose({ text }: { text: string }) {
             color: "var(--color-neutral-400)",
           }}
         >
-          {p}
+          {linked(p)}
         </p>
       ))}
     </>
   );
+}
+
+/**
+ * Turns `[text](https://…)` into a link, and leaves everything else alone.
+ *
+ * The case-study copy is plain strings, so naming a third-party product
+ * without this means either a bare URL in the middle of a sentence or no
+ * reference at all. Deliberately only links — no other markdown — because
+ * the moment this understands emphasis it becomes a renderer to maintain.
+ */
+function linked(text: string) {
+  const parts = text.split(/(\[[^\]]+\]\(https?:\/\/[^)]+\))/g);
+  return parts.map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+    if (!m) return part;
+    return (
+      <a key={i} href={m[2]} target="_blank" rel="noreferrer noopener">
+        {m[1]}
+      </a>
+    );
+  });
 }
 
 /**
