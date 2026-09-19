@@ -60,7 +60,7 @@ front-end half actually exists, which the "two halves must agree" argument needs
 
 ---
 
-## 2. DFYNE mobile performance — `/work/dfyne-mobile-performance`
+## 2. DFYNE site performance — `/work/dfyne-mobile-performance`
 
 **Eight images supplied and wired in** — the two slots now hold the P75 field
 chart and the mobile Observatory history, and the gallery holds four

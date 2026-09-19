@@ -15,7 +15,7 @@ import { useEffect } from "react";
  * and no real visitor was harmed, but a red Speed Index on the site of someone
  * who sells speed audits is its own kind of problem.
  *
- * The same shape as the fix in the DFYNE mobile performance case study: tie the
+ * The same shape as the fix in the DFYNE site performance case study: tie the
  * work to the intent that needs it. Nobody is watching a badge rotate before
  * they have touched the page, and Lighthouse never interacts at all.
  *

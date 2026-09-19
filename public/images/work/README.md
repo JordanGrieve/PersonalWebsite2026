@@ -23,14 +23,16 @@ right place with the right name needs no decision from anyone to hook up.
 | `dfyne-storefront-refactor` | DFYNE storefront refactor |
 | `dfyne-cloudflare-migration` | **DFYNE geo-routing** |
 | `dfyne-fit-finder` | DFYNE size advisor |
-| `dfyne-mobile-performance` | DFYNE mobile performance |
+| `dfyne-mobile-performance` | **DFYNE site performance** |
 | `open-door-bakery` | Open Door Bakery |
 | `postbox` | Postbox |
 
-Three of those folder names do not match what the page is called. The
+Four of those folder names do not match what the page is called. The
 geo-routing work in particular lives under `dfyne-cloudflare-migration`,
 because the page was renamed after publication and keeping the URL was worth
-more than a tidy folder name. Go by the table, not by the title.
+more than a tidy folder name. The performance study is the same story: it was
+named for mobile before the desktop numbers came in. Go by the table, not by
+the title.
 
 ## What to put in
 

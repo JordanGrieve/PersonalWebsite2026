@@ -72,7 +72,7 @@ export const projects: Project[] = [
   },
   {
     slug: "dfyne-mobile-performance",
-    name: "DFYNE mobile performance",
+    name: "DFYNE site performance",
     kind: "Performance",
     year: "2026",
     result: "LCP for real visitors: 1.81s → 1.31s, and under a second on the US store",
