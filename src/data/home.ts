@@ -154,8 +154,8 @@ export const timeline = [
   },
   {
     when: "2021 – 2025",
-    what: "Web design and development, Edinburgh Napier",
-    body: "Four years of it, finishing the year I started at DFYNE.",
+    what: "BSc Web Design and Development, Edinburgh Napier",
+    body: "Four years, a 2:1, finishing the year I started at DFYNE.",
   },
   {
     when: "Always",

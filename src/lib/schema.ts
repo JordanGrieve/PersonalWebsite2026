@@ -33,11 +33,25 @@ const person = {
   description: site.description,
   knowsAbout: [...site.expertise],
   /* A named institution an AI answer or a knowledge panel can resolve,
-     rather than a line of prose it has to parse out of the About page. */
+     rather than a line of prose it has to parse out of the About page.
+     The credential is separate from the institution on purpose: one says
+     where, the other says what, and a reader of the graph wanting "is this
+     person qualified" is asking the second question. */
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Edinburgh Napier University",
     sameAs: "https://www.napier.ac.uk/",
+  },
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    name: "BSc Web Design and Development",
+    credentialCategory: "Bachelor's Degree",
+    educationalLevel: "Upper second-class honours (2:1)",
+    recognizedBy: {
+      "@type": "CollegeOrUniversity",
+      name: "Edinburgh Napier University",
+      sameAs: "https://www.napier.ac.uk/",
+    },
   },
   address: {
     "@type": "PostalAddress",

@@ -424,8 +424,12 @@ export default async function CaseStudyPage({ params }: Params) {
             Start a project like this
             <i className="ph ph-arrow-right" />
           </Link>
+          {/* Named, because "Next project" tells you there is one and
+              nothing about whether you want it. The name is the reason to
+              click. */}
           <Link className="btn btn-secondary" href={`/work/${next.slug}`}>
-            Next project
+            Another project — {next.name}
+            <i className="ph ph-arrow-right" />
           </Link>
         </div>
       </section>
