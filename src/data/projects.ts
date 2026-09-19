@@ -361,47 +361,6 @@ const caseStudies: Record<string, CaseStudy> = {
         l: "WAVE accessibility score out of 10 — 9.7 on a product page, 9.4 on the home page, with no errors and no contrast errors",
       },
     ],
-    incidentsTitle: "What went wrong",
-    incidentsNote:
-      "Some of this is the review company's, some of it is mine. The pattern is the same throughout: things that told me they were working while they were not.",
-    incidents: [
-      {
-        what: "Reviews ignored which product they belonged to",
-        why: "I asked for one product's reviews and got the same list whatever I asked for — even for products that do not exist. Left alone, every item in the shop would have shown every review in the shop. Fixed by looking the product up properly first and checking that what came back is what I asked for.",
-      },
-      {
-        what: "Fifteen reviews went nowhere",
-        why: "A single wrong setting in an optional field made the system answer \"created\" and save nothing. \"It worked\" is not the same as \"it is there\".",
-      },
-      {
-        what: "The review count was wrong on purpose",
-        why: "It was counting the reviews on the current page rather than all of them, so the page would have told Google there were twenty, however many there really were.",
-      },
-      {
-        what: "Review photos appeared as text",
-        why: "For security, the site has a list of places it is allowed to load images from, and it has to be kept by hand. The review company was not on it. This caught me out three separate times before the lesson stuck.",
-      },
-      {
-        what: "Both forms said they had sent, and had not",
-        why: "One stray line at the top of the code stopped the send before it started. The contact form checked what you typed, cleared itself and thanked you — for months. Nothing you could see would have told you otherwise.",
-      },
-      {
-        what: "The newsletter form crashed the page",
-        why: "It was submitting to the wrong place — the address I was posting to belongs to the layout, which has nothing listening. The first fix worked but left people on an ugly URL afterwards, so it went in behind the scenes instead.",
-      },
-      {
-        what: "The cart promised free delivery the checkout then charged for",
-        why: "A £75 free-delivery threshold was written into two parts of the cart, while the delivery settings said there was no free threshold anywhere. Customers would have been congratulated on the way to being charged.",
-      },
-      {
-        what: "A button that disappeared when you pointed at it",
-        why: "On hover it fills with near-black — which on a near-black panel is invisible. The outline that appears when you tab to it with a keyboard had the same problem.",
-      },
-      {
-        what: "The accessibility testing quietly stopped running",
-        why: "An update meant the testing tool and the browser it drives no longer matched. Nothing failed — it just stopped checking, which is worse, because you carry on believing it is.",
-      },
-    ],
     slots: {
       hero: "Storefront — home page",
       shot1: "A product page — the whole design, at full width",
