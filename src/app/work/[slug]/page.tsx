@@ -345,9 +345,15 @@ export default async function CaseStudyPage({ params }: Params) {
         items={study.rejected}
       />
 
+      {/* The heading belongs to the study, not to this page. It was written
+          for the geo-routing worker and then appeared, wrongly, above every
+          other study's incidents — including one with no worker in it. */}
       <DetailList
-        title="What proxying Shopify cost"
-        note="Putting a worker in front of a platform activates it on paths nobody was thinking about. These four surfaced in production and were fixed, most of them by route configuration rather than an application change."
+        title={study.incidentsTitle ?? "What it cost"}
+        note={
+          study.incidentsNote ??
+          "Every approach has a bill. These are the things that broke as a consequence of this one, and what fixed them."
+        }
         items={study.incidents}
       />
 

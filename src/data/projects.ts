@@ -39,7 +39,7 @@ export const projects: Project[] = [
     name: "AMORIA",
     kind: "Headless Shopify",
     year: "2026",
-    result: "Headless storefront built end to end — Next.js on Shopify",
+    result: "Headless storefront built end to end — Hydrogen on Shopify Oxygen",
     ph: "Storefront — product page",
     tag: "Shopify",
   },
@@ -120,7 +120,7 @@ export const featuredBlurbs: Record<string, string> = {
   "dfyne-cloudflare-migration": "Cloudflare · Shoppers on the wrong store, 35% → single digits",
   "dfyne-fit-finder": "Integration · AI size advisor across two Shopify Plus stores",
   "essential-upsell": "Shopify app · Vector search over sales and returns",
-  amoria: "Headless Shopify · Next.js, built end to end",
+  amoria: "Headless Shopify · Hydrogen on Oxygen, built end to end",
   "open-door-bakery": "Web build · Storefront, admin and API in one app",
   postbox: "SaaS · Contact form and support email in one inbox",
 };
@@ -153,6 +153,11 @@ export type CaseStudy = {
       Not a list of mistakes — it is what a given approach actually costs,
       which is the part most write-ups leave out. */
   incidents?: { what: string; why: string }[];
+  /** Heading and standfirst for that list. Both optional — the page has a
+      generic pair, and a study only names its own when the cost is specific
+      enough to be worth naming. */
+  incidentsTitle?: string;
+  incidentsNote?: string;
   /** Omit when there is no testimonial. */
   quote?: { text: string; who: string };
   /** Placeholder copy for the three image slots. Still required: it is what
@@ -281,24 +286,100 @@ const caseStudies: Record<string, CaseStudy> = {
     tags: ["Shopify", "Headless build", "2026"],
     heading: "AMORIA",
     intro:
-      "A silk sleepwear brand starting from nothing. I built the whole thing — the Shopify backend behind it, the markets and delivery rules, and a headless Next.js storefront in front.",
+      "AMORIA is my own brand — soft-luxury silk sleepwear — and the storefront is a headless Shopify front end rather than a theme. That was not a business case worked out after the fact. In this category the look is most of the product, I had designed the thing myself, and a theme is a set of somebody else's decisions you then spend your time arguing with. Headless meant every element on the page was mine to decide, and every one a theme gives away free was mine to build.",
     meta: [
-      { l: "Client", v: "AMORIA — freelance" },
-      { l: "Scope", v: "Headless storefront, Shopify setup, markets and delivery" },
-      { l: "Timeline", v: "—" },
-      { l: "Stack", v: "Next.js, Shopify Storefront API" },
+      { l: "Client", v: "My own business — brand, design and build" },
+      { l: "Scope", v: "Storefront, cart, reviews, account routes, markets, CI" },
+      { l: "Timeline", v: "Summer 2026 to now — launching February 2027" },
+      {
+        l: "Stack",
+        v: "Hydrogen 2026.4.3, React Router 7, Vite 8, TypeScript, Shopify Oxygen, Judge.me, PostBox",
+      },
+      { l: "Status", v: "Storefront done, launch configuration pending" },
+      { l: "Live", v: "byamoria.com — password page until launch" },
     ],
     problem:
-      "A new brand with nothing in place: no product data in Shopify, no markets, no delivery rules and no storefront. Everything from the catalogue structure upwards had to be built, and it had to be fast and accessible rather than whatever a stock theme happened to hand over.",
+      "Silk sleepwear sells on how it looks on the page. Spacing, type, the exact weight of a hover state — that is the product argument, not decoration, and a design of my own is worth nothing if the storefront renders an approximation of it. So the brief I set myself was that the built page matches the style guide, and the style guide is the source of truth rather than a mood board the code drifts away from.\n\nThe cost of that decision is the whole of the rest of this page. A Shopify theme hands you a reviews widget, a working contact form, a returns flow, and an editor a non-developer can change copy in. Headless hands you none of them. Everything below is either something I built because the platform stopped providing it, or something that broke because I had to build it.",
     approach:
-      "I built it end to end. On the Shopify side that meant modelling the products properly, setting up markets, and configuring delivery. On the front, a headless Next.js storefront against the Storefront API, so the brand got the pages it actually wanted rather than a theme's version of them. Performance and accessibility were built in as I went rather than audited on at the end — WCAG 2.0 throughout, including colour contrast, which shaped the palette as much as the design did.",
-    /* TODO: no results tiles yet — nothing has been measured. Worth adding once
-       you have Lighthouse/CWV figures, and the counts for markets, currencies,
-       delivery zones and page types. Also fill in Timeline above. */
+      "Hydrogen on React Router 7, Vite and TypeScript, server-rendered at the edge on Shopify's Oxygen and streaming deferred data through Suspense. There is no static generation or incremental regeneration in this stack and no way to add it: Oxygen is a V8 worker runtime with no filesystem and no Node APIs, so every page is rendered per request, close to the visitor.\n\nProduct data comes from the Storefront API with generated types, customer data from the Customer Account API — which rules out classic customer accounts, they are incompatible. The cart is Hydrogen's cart handler behind a drawer built on a native dialog element, and checkout is Shopify's own, reached through the cart's checkout URL. Markets are an optional locale segment in the route, with hreflang and a canonical per route and the buyer's country passed into the API, rather than a separate store per market.\n\nReviews are the clearest example of what the decision bought and cost. Judge.me ships a widget that drops into a theme; what it does not ship is a presentation I would choose. So the reviews are fetched server-side from its REST API behind a five-minute cache, and the front of it is mine: a score and histogram, a featured pull-quote, six per page, a photo lightbox on a native dialog, and a submission form that posts through a server route. Both site forms do the same thing — they post to route actions rather than fetching from the browser, which is not what the form service recommends, but it means spam can be dropped server-side and the forms still work with JavaScript off.\n\nThe build is AI-assisted, which is worth saying plainly because it shaped what went wrong. It is quick at the parts that are typing and confident at the parts that need looking: the review photos that rendered as alt text, the contact form that reported success while sending nothing, and the fifteen reviews posted into a 201 response and no database row were all caught by a person opening the page, not by the code that wrote it. What it is good at is the work either side of that — the typed API layer, the route scaffolding, the CI.\n\nOn which: every pull request runs typecheck, lint and a set of CSS guards, and every deploy is audited afterwards with Lighthouse and axe against the real preview. Afterwards rather than before, because a Hydrogen build cannot serve a page without Storefront credentials — there is nothing to audit until it is deployed.",
+    /* The SEO score is the one number that needs its caveat kept next to it
+       wherever it appears, so it is in the label rather than a footnote. */
+    results: [
+      {
+        n: "0.97–0.99",
+        l: "Lighthouse performance across the four page types — CI median of three runs, desktop, 11 September",
+      },
+      { n: "0.9–1.0s", l: "LCP on those same runs, with CLS at 0 or 0.009 and no blocking time" },
+      {
+        n: "0 of 30",
+        l: "axe-core audits finding a violation — 15 routes at two viewports, WCAG 2.2 AA",
+      },
+      { n: "1.00", l: "Accessibility score on every page measured" },
+    ],
+    rejected: [
+      {
+        what: "A 15px offset in the cart drawer's inset",
+        why: "Measured as an identical 15px at 1100, 1440 and 1920, which looked like a stable relationship worth encoding. It was the scrollbar: the measurement read window width, which includes it, while the page lays out 15px narrower. The same error three times is not a pattern.",
+      },
+      {
+        what: "Champagne as the hover colour on the star-rating input",
+        why: "Hovering a five-star answer paled it before refilling, so the answer appeared to vanish under the cursor at the moment of choosing it. Gold instead.",
+      },
+      {
+        what: "Social links in the footer and contact block",
+        why: "Every one pointed at a platform's home page rather than at AMORIA, because the accounts do not exist yet. A link that goes to instagram.com is not a social link.",
+      },
+      {
+        what: "Driving the admin through Shopify's Admin API",
+        why: "No static access token exists for this store, so there is no unattended path to it. Abandoned rather than worked around.",
+      },
+      {
+        what: "Testing keyboard and scroll behaviour in an automated browser pane",
+        why: "It could not be trusted — a plain dialog element ignored its own Escape key in that environment. Switched to driving real Chrome, which is where the contact-form bug finally showed itself.",
+      },
+    ],
+    incidents: [
+      {
+        what: "Judge.me ignored the filter that picks the product",
+        why: "Passing a nonsense handle returned the same reviews as a real one. Left alone, every product page would have shown every review on the store. Fixed by resolving the handle to an internal id first and checking the handle that comes back.",
+      },
+      {
+        what: "Fifteen review submissions went nowhere",
+        why: "An invalid value in an optional field made the API answer 201 and create nothing. A success response is not evidence of a saved row.",
+      },
+      {
+        what: "The review count was the size of the page, not the total",
+        why: "Twenty per page meant the structured data would have told Google there were twenty reviews however many there actually were.",
+      },
+      {
+        what: "Review photos rendered as alt text",
+        why: "The content security policy has to be maintained by hand, and a third-party image host is not in it until you add it. This one bit three separate times before the lesson took.",
+      },
+      {
+        what: "Both forms reported success and sent nothing",
+        why: "An unconditional preventDefault left at the top of the handler. The contact form validated, cleared itself and said the message had been received, for months. Nothing in the UI could have told you otherwise.",
+      },
+      {
+        what: "The newsletter form crashed to the error boundary",
+        why: "Posting to the site root targets the locale layout route, which has no action. It needs the index query parameter — and fixing it that way left subscribers looking at a URL with ?index in it, so it became a fetcher instead.",
+      },
+      {
+        what: "The cart promised free shipping the checkout then charged for",
+        why: "A £75 threshold hardcoded in two components while the shipping configuration said there was no free threshold in any market. Customers would have been congratulated on the way to being charged.",
+      },
+      {
+        what: "A button that disappeared when you pointed at it",
+        why: "The light button fills with warm black on hover, and on a warm-black panel that is 1.00:1 against its background. Its focus ring had no on-dark variant either, so a keyboard lost it in the same place.",
+      },
+      {
+        what: "The accessibility gate quietly stopped running",
+        why: "CI's Chrome drifted away from the bundled driver. Nothing failed — it just stopped testing, which is the worse of the two outcomes.",
+      },
+    ],
     slots: {
       hero: "Storefront — home page",
-      shot1: "Product page",
-      shot2: "Collection page",
+      shot1: "Product page — the full design, at 1440",
+      shot2: "The reviews overview — score, histogram and a featured quote",
     },
   },
 
@@ -322,6 +403,9 @@ const caseStudies: Record<string, CaseStudy> = {
       "Both stores carry the same products, so a shopper on the wrong one sees nothing amiss. Prices in another currency do not stop anyone — plenty of sites quote in dollars. The problem is delivery: that store will not ship to their address, and Shopify does not mention it until checkout.\n\nSo the cost is not a moment of confusion. It is five or ten minutes of someone browsing, picking sizes and filling a basket, and being told no at the last step. Nor can they simply move: the two stores do not share a session, so the basket does not travel. Starting again on the right store means doing all of it a second time, and most people do not. They leave, and the ones who say anything say it in public rather than to us — which was worst during launches, when traffic was at its peak and a post complaining that the site will not ship to you is read by everyone waiting to buy. At its worst that was a third of the traffic on one store and nearly half on the other, which makes routing a revenue problem rather than a tidiness one.\n\nIt had been handled by a Shopify app, [Selecty](https://apps.shopify.com/selectors). Shopify apps are JavaScript, and an app cannot act until the page it is on has loaded — so the shopper watched the wrong store render in full, then got sent somewhere else and watched a second page load. Two page loads to arrive at the shop they should have been given first. Being an app also meant the logic was not ours to change and the switcher was not ours to style, so it never looked like the rest of the site. It carried a monthly fee for the privilege.\n\nA Cloudflare worker had since taken over the decision of which store to send someone to, and people were still landing on the wrong one. Auditing it turned up three causes, worst first.\n\nThe apex domain was a DNS-only record pointing at Shopify, not proxied through Cloudflare. A Worker route only fires on traffic that actually reaches Cloudflare, so anyone typing the bare domain was never geo-routed at all — the routing worked perfectly on every hostname except the one people type.\n\nSecond, the worker set a region cookie on every proxied pageview. Land once on the wrong store, and that mistake was written down and honoured from then on. The system was pinning people to the error it had just made.\n\nThird, region switching still belonged to the app, whose links set no cookie the worker understood. So a shopper could deliberately choose a region, and the next navigation would silently overrule them. Three different mechanisms, none of which agreed on who decides.",
     approach:
       "The fix is one rule: an explicit choice beats geography, always, and geography only decides for visitors who have not chosen. Everything else follows from making that rule true in both places at once.\n\nAt the edge, the apex flipped from DNS-only to proxied so the route finally fires. Deciding there rather than in an app is what removes the second page load — the redirect happens on the first request, before anything renders, so there is no wrong store to sit through. A single endpoint became the only thing that may set the choice cookie, which means a deliberate switch is now a fact the worker can read rather than a guess. Non-document requests, checkout and account paths, and bots bypass the worker entirely.\n\nIn the theme, the app's switcher was replaced with an in-house one rendered from a single snippet in two places per page, namespaced so both instances work independently, with every link pointing at that one endpoint. Six stores and their currencies, in the site's own type and spacing, instead of every country in the world alphabetically. A confirmation card appears only on a genuine mismatch between where you are and the store you are on, and snoozes for an hour if you dismiss it. The whole thing sits behind one theme setting, so reverting to the old app needs no deploy.\n\nThe enforcement flag shipped switched off, on purpose. Turning it on before the switcher was live on both stores would have meant bouncing mismatched visitors while the only way to choose a region still set no cookie the worker recognised — a shopper would have been thrown back every time they tried to leave. It went on once both themes were serving the new switcher. That coupling is permanent and worth writing on the wall: with enforcement on, turning the theme setting off breaks region switching completely.\n\nWhat replacing the app bought, beyond the routing: the monthly fee stopped and nothing took its place. Cloudflare was already paid for, so the worker runs at no marginal cost. The logic became ours to change, the switcher became ours to style, and the whole thing became measurable — the numbers on this page exist because the traffic now passes through something we own.",
+    incidentsTitle: "What proxying Shopify cost",
+    incidentsNote:
+      "Putting a worker in front of a platform activates it on paths nobody was thinking about. These four surfaced in production and were fixed, most of them by route configuration rather than an application change.",
     incidents: [
       {
         what: "Gift card links looped forever",
