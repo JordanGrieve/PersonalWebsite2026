@@ -357,8 +357,8 @@ const caseStudies: Record<string, CaseStudy> = {
         l: "How much the page shifts around as it loads, where anything under 0.1 counts as good",
       },
       {
-        n: "0 of 30",
-        l: "Accessibility checks that found a fault — 15 pages tested at phone and desktop size",
+        n: "9.4–9.7",
+        l: "WAVE accessibility score out of 10 — 9.7 on a product page, 9.4 on the home page, with no errors and no contrast errors",
       },
     ],
     rejected: [
