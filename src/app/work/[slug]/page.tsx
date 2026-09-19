@@ -286,7 +286,12 @@ export default async function CaseStudyPage({ params }: Params) {
         }}
       >
         <div>
-          <h3 style={{ margin: "0 0 12px", fontSize: 20, letterSpacing: "-.01em" }}>The problem</h3>
+          {/* Not every study starts from a problem. One of these is a brand
+              I started myself, where the first section is what I wanted to
+              make rather than what was wrong. */}
+          <h3 style={{ margin: "0 0 12px", fontSize: 20, letterSpacing: "-.01em" }}>
+            {study.problemTitle ?? "The problem"}
+          </h3>
           <Prose text={study.problem} />
         </div>
         <div>

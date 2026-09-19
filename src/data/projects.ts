@@ -142,6 +142,9 @@ export type CaseStudy = {
   intro: string;
   meta: { l: string; v: string }[];
   problem: string;
+  /** Heading for that section. Defaults to "The problem" — override where a
+      project did not start from one. */
+  problemTitle?: string;
   approach: string;
   /** Omit until there are real numbers — the section hides rather than showing blanks. */
   results?: { n: string; l: string }[];
@@ -321,100 +324,104 @@ const caseStudies: Record<string, CaseStudy> = {
     tags: ["Shopify", "Headless build", "2026"],
     heading: "AMORIA",
     intro:
-      "AMORIA is my own brand — soft-luxury silk sleepwear — and the storefront is a headless Shopify front end rather than a theme. That was not a business case worked out after the fact. In this category the look is most of the product, I had designed the thing myself, and a theme is a set of somebody else's decisions you then spend your time arguing with. Headless meant every element on the page was mine to decide, and every one a theme gives away free was mine to build.",
+      "AMORIA is my own brand — silk sleepwear — and I built the shop as well as starting the business. Most Shopify stores use a ready-made theme, which is somebody else's design that you adjust at the edges. I built the front of this one from scratch instead, so every part of the page is a decision I made. The trade is simple and it runs through this whole page: you get exactly what you wanted, and you have to build everything a theme would have handed you free.",
+    problemTitle: "The vision",
+    problem:
+      "Nothing was broken here. There was no old site limping along and no client with a list of complaints. I wanted to make something, and the shop is part of the thing I wanted to make.\n\nWhen you sell silk sleepwear, the way it looks on screen is most of what you are selling. Somebody decides whether this brand is for them in a couple of seconds, on a phone, before they have read a word — so the spacing, the type and the way a page settles as it loads are the product argument, not decoration. I had designed how it should look. A theme would have got me close to that, and close was not the point of doing it.\n\nSo the goal was simple to say: the site should look exactly like the design, and the design should stay the thing everything is checked against rather than a nice picture the code slowly drifts away from.",
     meta: [
       { l: "Client", v: "My own business — brand, design and build" },
-      { l: "Scope", v: "Storefront, cart, reviews, account routes, markets, CI" },
+      { l: "Scope", v: "Shop, cart, reviews, customer accounts, currencies, testing" },
       { l: "Timeline", v: "Summer 2026 to now — launching February 2027" },
       {
         l: "Stack",
         v: "Hydrogen 2026.4.3, React Router 7, Vite 8, TypeScript, Shopify Oxygen, Judge.me, PostBox",
       },
-      { l: "Status", v: "Storefront done, launch configuration pending" },
+      { l: "Status", v: "Shop finished, launch setup still to do" },
       { l: "Live", v: "byamoria.com — password page until launch" },
     ],
-    problem:
-      "Silk sleepwear sells on how it looks on the page. Spacing, type, the exact weight of a hover state — that is the product argument, not decoration, and a design of my own is worth nothing if the storefront renders an approximation of it. So the brief I set myself was that the built page matches the style guide, and the style guide is the source of truth rather than a mood board the code drifts away from.\n\nThe cost of that decision is the whole of the rest of this page. A Shopify theme hands you a reviews widget, a working contact form, a returns flow, and an editor a non-developer can change copy in. Headless hands you none of them. Everything below is either something I built because the platform stopped providing it, or something that broke because I had to build it.",
     approach:
-      "Hydrogen on React Router 7, Vite and TypeScript, server-rendered at the edge on Shopify's Oxygen and streaming deferred data through Suspense. There is no static generation or incremental regeneration in this stack and no way to add it: Oxygen is a V8 worker runtime with no filesystem and no Node APIs, so every page is rendered per request, close to the visitor.\n\nProduct data comes from the Storefront API with generated types, customer data from the Customer Account API — which rules out classic customer accounts, they are incompatible. The cart is Hydrogen's cart handler behind a drawer built on a native dialog element, and checkout is Shopify's own, reached through the cart's checkout URL. Markets are an optional locale segment in the route, with hreflang and a canonical per route and the buyer's country passed into the API, rather than a separate store per market.\n\nReviews are the clearest example of what the decision bought and cost. Judge.me ships a widget that drops into a theme; what it does not ship is a presentation I would choose. So the reviews are fetched server-side from its REST API behind a five-minute cache, and the front of it is mine: a score and histogram, a featured pull-quote, six per page, a photo lightbox on a native dialog, and a submission form that posts through a server route. Both site forms do the same thing — they post to route actions rather than fetching from the browser, which is not what the form service recommends, but it means spam can be dropped server-side and the forms still work with JavaScript off.\n\nThe build is AI-assisted, which is worth saying plainly because it shaped what went wrong. It is quick at the parts that are typing and confident at the parts that need looking: the review photos that rendered as alt text, the contact form that reported success while sending nothing, and the fifteen reviews posted into a 201 response and no database row were all caught by a person opening the page, not by the code that wrote it. What it is good at is the work either side of that — the typed API layer, the route scaffolding, the CI.\n\nOn which: every pull request runs typecheck, lint and a set of CSS guards, and every deploy is audited afterwards with Lighthouse and axe against the real preview. Afterwards rather than before, because a Hydrogen build cannot serve a page without Storefront credentials — there is nothing to audit until it is deployed.",
-    /* The SEO score is the one number that needs its caveat kept next to it
-       wherever it appears, so it is in the label rather than a footnote. */
+      "Shopify still runs the business end of it — the products, the payments, the checkout. What I replaced is everything the customer looks at, which Shopify calls a headless setup: my own code at the front, their platform behind it. It runs on Shopify's own hosting, which builds each page fresh when someone asks for it, from whichever of their servers is nearest.\n\nThe reviews are the clearest example of what that buys and what it costs. The review company I use hands you a ready-made block you drop into a normal theme, and it works fine — it just does not look like my site. So I ask them for the reviews directly, keep a copy for five minutes so the page is not waiting on them, and then display them my way: a score and a breakdown, one review pulled out and featured, six to a page, photos that open full size, and a form of my own for leaving one.\n\nBoth forms on the site send through my own server rather than from the browser, which is not what the form service suggests. It means I can throw away spam before it gets anywhere, and the forms still work for anyone browsing with JavaScript turned off.\n\nI build with AI assistance, which is worth saying plainly because it shaped what went wrong. It is fast at the parts that are mostly typing and confident about parts it has not checked. The review photos that showed up as text, the contact form that said \"message received\" and sent nothing, and fifteen reviews that vanished into thin air were all found by a person opening the page and looking — not by the code that wrote it. What it is genuinely good at is the scaffolding either side of that, and the testing.\n\nOn which: every change I make gets checked automatically before it can go in, and every version that goes up is tested again on the real thing for speed and for accessibility. It has to be that way round — this kind of site cannot show you a single page without being connected to the shop, so there is nothing to test until it is live somewhere.",
+    /* Field data is not possible yet — the store is not open, so there are no
+       real visitors to measure. These are lab runs, and the labels say so. */
     results: [
       {
         n: "0.97–0.99",
-        l: "Lighthouse performance across the four page types — CI median of three runs, desktop, 11 September",
+        l: "Speed score out of 1 across the four main page types — automated test, median of three runs, 11 September",
       },
-      { n: "0.9–1.0s", l: "LCP on those same runs, with CLS at 0 or 0.009 and no blocking time" },
+      { n: "0.9–1.0s", l: "How long the main image or heading takes to appear, in those same runs" },
       {
         n: "0 of 30",
-        l: "axe-core audits finding a violation — 15 routes at two viewports, WCAG 2.2 AA",
+        l: "Accessibility checks that found a fault — 15 pages tested at phone and desktop size",
       },
       { n: "1.00", l: "Accessibility score on every page measured" },
     ],
     rejected: [
       {
-        what: "A 15px offset in the cart drawer's inset",
-        why: "Measured as an identical 15px at 1100, 1440 and 1920, which looked like a stable relationship worth encoding. It was the scrollbar: the measurement read window width, which includes it, while the page lays out 15px narrower. The same error three times is not a pattern.",
+        what: "A 15-pixel gap I thought I had found",
+        why: "The cart panel seemed to sit 15px further in than everything else, at three different screen sizes. It was the scrollbar: I was measuring the window, which includes it, while the page is laid out 15px narrower. The same mistake three times looks exactly like a pattern.",
       },
       {
-        what: "Champagne as the hover colour on the star-rating input",
-        why: "Hovering a five-star answer paled it before refilling, so the answer appeared to vanish under the cursor at the moment of choosing it. Gold instead.",
+        what: "A pale gold hover on the star rating",
+        why: "Hovering over five stars made them fade before they refilled, so your answer seemed to disappear at the moment you picked it. A stronger gold instead.",
       },
       {
-        what: "Social links in the footer and contact block",
-        why: "Every one pointed at a platform's home page rather than at AMORIA, because the accounts do not exist yet. A link that goes to instagram.com is not a social link.",
+        what: "Social links in the footer",
+        why: "The accounts do not exist yet, so every one of them went to the platform's own home page. A link to instagram.com is not a social link.",
       },
       {
-        what: "Driving the admin through Shopify's Admin API",
-        why: "No static access token exists for this store, so there is no unattended path to it. Abandoned rather than worked around.",
+        what: "Automating the Shopify admin side",
+        why: "There is no way to get a permanent key for this store, so there was no reliable way to do it. Dropped rather than bodged.",
       },
       {
-        what: "Testing keyboard and scroll behaviour in an automated browser pane",
-        why: "It could not be trusted — a plain dialog element ignored its own Escape key in that environment. Switched to driving real Chrome, which is where the contact-form bug finally showed itself.",
+        what: "Testing keyboard and scrolling in an automated browser",
+        why: "It could not be trusted — basic things behaved differently there than in a real browser. I switched to driving actual Chrome, which is how the broken contact form finally showed itself.",
       },
     ],
+    incidentsTitle: "What went wrong",
+    incidentsNote:
+      "Some of this is the review company's, some of it is mine. The pattern is the same throughout: things that told me they were working while they were not.",
     incidents: [
       {
-        what: "Judge.me ignored the filter that picks the product",
-        why: "Passing a nonsense handle returned the same reviews as a real one. Left alone, every product page would have shown every review on the store. Fixed by resolving the handle to an internal id first and checking the handle that comes back.",
+        what: "Reviews ignored which product they belonged to",
+        why: "I asked for one product's reviews and got the same list whatever I asked for — even for products that do not exist. Left alone, every item in the shop would have shown every review in the shop. Fixed by looking the product up properly first and checking that what came back is what I asked for.",
       },
       {
-        what: "Fifteen review submissions went nowhere",
-        why: "An invalid value in an optional field made the API answer 201 and create nothing. A success response is not evidence of a saved row.",
+        what: "Fifteen reviews went nowhere",
+        why: "A single wrong setting in an optional field made the system answer \"created\" and save nothing. \"It worked\" is not the same as \"it is there\".",
       },
       {
-        what: "The review count was the size of the page, not the total",
-        why: "Twenty per page meant the structured data would have told Google there were twenty reviews however many there actually were.",
+        what: "The review count was wrong on purpose",
+        why: "It was counting the reviews on the current page rather than all of them, so the page would have told Google there were twenty, however many there really were.",
       },
       {
-        what: "Review photos rendered as alt text",
-        why: "The content security policy has to be maintained by hand, and a third-party image host is not in it until you add it. This one bit three separate times before the lesson took.",
+        what: "Review photos appeared as text",
+        why: "For security, the site has a list of places it is allowed to load images from, and it has to be kept by hand. The review company was not on it. This caught me out three separate times before the lesson stuck.",
       },
       {
-        what: "Both forms reported success and sent nothing",
-        why: "An unconditional preventDefault left at the top of the handler. The contact form validated, cleared itself and said the message had been received, for months. Nothing in the UI could have told you otherwise.",
+        what: "Both forms said they had sent, and had not",
+        why: "One stray line at the top of the code stopped the send before it started. The contact form checked what you typed, cleared itself and thanked you — for months. Nothing you could see would have told you otherwise.",
       },
       {
-        what: "The newsletter form crashed to the error boundary",
-        why: "Posting to the site root targets the locale layout route, which has no action. It needs the index query parameter — and fixing it that way left subscribers looking at a URL with ?index in it, so it became a fetcher instead.",
+        what: "The newsletter form crashed the page",
+        why: "It was submitting to the wrong place — the address I was posting to belongs to the layout, which has nothing listening. The first fix worked but left people on an ugly URL afterwards, so it went in behind the scenes instead.",
       },
       {
-        what: "The cart promised free shipping the checkout then charged for",
-        why: "A £75 threshold hardcoded in two components while the shipping configuration said there was no free threshold in any market. Customers would have been congratulated on the way to being charged.",
+        what: "The cart promised free delivery the checkout then charged for",
+        why: "A £75 free-delivery threshold was written into two parts of the cart, while the delivery settings said there was no free threshold anywhere. Customers would have been congratulated on the way to being charged.",
       },
       {
         what: "A button that disappeared when you pointed at it",
-        why: "The light button fills with warm black on hover, and on a warm-black panel that is 1.00:1 against its background. Its focus ring had no on-dark variant either, so a keyboard lost it in the same place.",
+        why: "On hover it fills with near-black — which on a near-black panel is invisible. The outline that appears when you tab to it with a keyboard had the same problem.",
       },
       {
-        what: "The accessibility gate quietly stopped running",
-        why: "CI's Chrome drifted away from the bundled driver. Nothing failed — it just stopped testing, which is the worse of the two outcomes.",
+        what: "The accessibility testing quietly stopped running",
+        why: "An update meant the testing tool and the browser it drives no longer matched. Nothing failed — it just stopped checking, which is worse, because you carry on believing it is.",
       },
     ],
     slots: {
       hero: "Storefront — home page",
-      shot1: "Product page — the full design, at 1440",
-      shot2: "The reviews overview — score, histogram and a featured quote",
+      shot1: "A product page — the whole design, at full width",
+      shot2: "The reviews section — score, breakdown and a featured review",
     },
   },
 
