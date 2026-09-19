@@ -361,28 +361,6 @@ const caseStudies: Record<string, CaseStudy> = {
         l: "WAVE accessibility score out of 10 — 9.7 on a product page, 9.4 on the home page, with no errors and no contrast errors",
       },
     ],
-    rejected: [
-      {
-        what: "A 15-pixel gap I thought I had found",
-        why: "The cart panel seemed to sit 15px further in than everything else, at three different screen sizes. It was the scrollbar: I was measuring the window, which includes it, while the page is laid out 15px narrower. The same mistake three times looks exactly like a pattern.",
-      },
-      {
-        what: "A “Choose options” bar across every product card",
-        why: "The whole card already goes to the product, so the bar was a second control to the same place, and it sat on top of the photograph — which is the thing doing the selling. The card is quieter without it.",
-      },
-      {
-        what: "A wider gallery on the product page",
-        why: "The image column was about 100px wider than it ended up. On its own the bigger photograph looked better; next to the description and the size row it left them cramped, and those are what someone reads before buying.",
-      },
-      {
-        what: "A pale gold hover on the star rating",
-        why: "Hovering over five stars made them fade before they refilled, so your answer seemed to disappear at the moment you picked it. A stronger gold instead.",
-      },
-      {
-        what: "Testing keyboard and scrolling in an automated browser",
-        why: "It could not be trusted — basic things behaved differently there than in a real browser. I switched to driving actual Chrome, which is how the broken contact form finally showed itself.",
-      },
-    ],
     incidentsTitle: "What went wrong",
     incidentsNote:
       "Some of this is the review company's, some of it is mine. The pattern is the same throughout: things that told me they were working while they were not.",
