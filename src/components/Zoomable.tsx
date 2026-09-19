@@ -21,6 +21,36 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * has a height, exactly like the plain `Slot` it replaces — the button is
  * what fills that wrapper, and the image fills the button.
  */
+/**
+ * Is the pointer over the picture itself, rather than the dark space
+ * around it?
+ *
+ * Not the same question as "is the target the `<img>`". The image is laid
+ * out to fill the window and `object-fit: contain` letterboxes the picture
+ * inside that box, so the bands either side of a wide chart are part of the
+ * element and answer to it — which made the most obvious place to click to
+ * dismiss the one place that did nothing. This works out where the picture
+ * is actually drawn: the same scale `contain` picks, centred.
+ *
+ * An image that has not loaded reports no natural size; there is nothing
+ * drawn yet, so the pointer cannot be over it.
+ */
+function overPicture(e: { clientX: number; currentTarget: HTMLElement; clientY: number }) {
+  const img = e.currentTarget.querySelector("img");
+  if (!img?.naturalWidth || !img.naturalHeight) return false;
+
+  const box = img.getBoundingClientRect();
+  const scale = Math.min(box.width / img.naturalWidth, box.height / img.naturalHeight);
+  const width = img.naturalWidth * scale;
+  const height = img.naturalHeight * scale;
+  const left = box.left + (box.width - width) / 2;
+  const top = box.top + (box.height - height) / 2;
+
+  return (
+    e.clientX >= left && e.clientX <= left + width && e.clientY >= top && e.clientY <= top + height
+  );
+}
+
 export default function Zoomable({
   src,
   alt,
@@ -133,14 +163,16 @@ export default function Zoomable({
           ref={dialogRef}
           className="lightbox"
           aria-label={alt}
-          /* Click-off. A click on the backdrop reports the dialog itself as
-             its target, because the backdrop is the dialog's own pseudo
-             element and has nothing to hit. Anything inside the figure below
-             reports that instead, so this closes on the scrim only — and the
-             padding around the image is part of the scrim, which is what
-             makes "click off it" forgiving rather than pixel-accurate. */
           onClick={(e) => {
-            if (e.target === dialogRef.current) close();
+            if ((e.target as HTMLElement).closest(".lightbox-close")) return;
+            if (!overPicture(e)) close();
+          }}
+          /* Matching cursor: the pointer says "dismiss" everywhere it will,
+             and stops saying it over the picture. Set here rather than in
+             CSS because CSS can only see the element, and the element is
+             bigger than what it draws. */
+          onMouseMove={(e) => {
+            e.currentTarget.style.cursor = overPicture(e) ? "default" : "zoom-out";
           }}
         >
           <div className="lightbox-frame">
