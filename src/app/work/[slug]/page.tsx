@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import ImageSlot from "@/components/ImageSlot";
-import { getCaseStudy, getProject, nextProject, projects } from "@/data/projects";
+import { getCaseStudy, getProject, nextProject, projects, type Shot } from "@/data/projects";
 import { site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
 import { caseStudySchema } from "@/lib/schema";
@@ -112,6 +113,101 @@ function DetailList({
   );
 }
 
+/**
+ * One image slot: the real image when there is one, the dashed placeholder
+ * when there is not. A study can gain images one at a time without the page
+ * changing shape.
+ *
+ * `fill` because every caller already gives the wrapper a height — that is
+ * what reserves the space, so nothing shifts when an image arrives.
+ * `contain` rather than `cover`: these are screenshots of charts and tables,
+ * and cropping one to fill a box loses the axis or the header that makes it
+ * worth showing.
+ */
+function Slot({
+  shot,
+  placeholder,
+  priority,
+}: {
+  shot?: Shot;
+  placeholder: string;
+  priority?: boolean;
+}) {
+  if (!shot) return <ImageSlot placeholder={placeholder} />;
+  return (
+    <Image
+      src={shot.src}
+      alt={shot.alt}
+      fill
+      priority={priority}
+      sizes="(max-width: 640px) 100vw, 50vw"
+      style={{ objectFit: "contain", objectPosition: "center" }}
+    />
+  );
+}
+
+/**
+ * Supporting evidence under the incidents, for a study with more of it than
+ * three slots can hold. Each image is captioned, because a screenshot of a
+ * dashboard proves nothing to a reader who cannot see what they are meant to
+ * be looking at.
+ */
+function Gallery({ items }: { items?: Shot[] }) {
+  if (!items?.length) return null;
+
+  return (
+    <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)" }}>
+      <h3 style={{ margin: "0 0 18px", fontSize: 20, letterSpacing: "-.01em" }}>
+        The evidence
+      </h3>
+      {/* Two across at most. At four these were 150px wide and the routes
+          table was unreadable, which defeats the point of showing it. */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,560px),1fr))",
+          gap: "clamp(16px,3cqw,28px)",
+        }}
+      >
+        {items.map((item) => (
+          <figure key={item.src} style={{ margin: 0 }}>
+            <div
+              style={{
+                position: "relative",
+                height: "clamp(240px,30cqw,400px)",
+                borderRadius: "var(--radius-lg)",
+                overflow: "hidden",
+                background: "var(--color-surface)",
+                border: "1px solid var(--color-divider)",
+              }}
+            >
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                style={{ objectFit: "contain", objectPosition: "center" }}
+              />
+            </div>
+            {item.caption ? (
+              <figcaption
+                style={{
+                  marginTop: 10,
+                  fontSize: 13.5,
+                  lineHeight: 1.55,
+                  color: "var(--color-neutral-400)",
+                }}
+              >
+                {item.caption}
+              </figcaption>
+            ) : null}
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default async function CaseStudyPage({ params }: Params) {
   const { slug } = await params;
   const project = getProject(slug);
@@ -164,7 +260,7 @@ export default async function CaseStudyPage({ params }: Params) {
             position: "relative",
           }}
         >
-          <ImageSlot placeholder={study.slots.hero} />
+          <Slot shot={study.shots?.hero} placeholder={study.slots.hero} priority />
         </div>
         <div
           style={{
@@ -274,6 +370,7 @@ export default async function CaseStudyPage({ params }: Params) {
         items={study.incidents}
       />
 
+
       {/* Two up on desktop; a swipeable carousel on a phone — see
           `#studyShots` in globals.css. */}
       <section
@@ -293,7 +390,7 @@ export default async function CaseStudyPage({ params }: Params) {
             overflow: "hidden",
           }}
         >
-          <ImageSlot placeholder={study.slots.shot1} />
+          <Slot shot={study.shots?.shot1} placeholder={study.slots.shot1} />
         </div>
         <div
           style={{
@@ -303,7 +400,7 @@ export default async function CaseStudyPage({ params }: Params) {
             overflow: "hidden",
           }}
         >
-          <ImageSlot placeholder={study.slots.shot2} />
+          <Slot shot={study.shots?.shot2} placeholder={study.slots.shot2} />
         </div>
       </section>
 
@@ -343,6 +440,8 @@ export default async function CaseStudyPage({ params }: Params) {
           </Link>
         </div>
       </section>
+      <Gallery items={study.gallery} />
+
     </>
   );
 }

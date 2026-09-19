@@ -164,9 +164,20 @@ export type CaseStudy = {
   incidents?: { what: string; why: string }[];
   /** Omit when there is no testimonial. */
   quote?: { text: string; who: string };
-  /** Placeholder copy for the three image slots. */
+  /** Placeholder copy for the three image slots. Still required: it is what
+      renders while a slot has no real image, and it doubles as the alt text
+      once one arrives. */
   slots: { hero: string; shot1: string; shot2: string };
+  /** Real images, as they arrive. Keyed to the same three slots, so a study
+      can have one, two or all three without anything else changing. */
+  shots?: { hero?: Shot; shot1?: Shot; shot2?: Shot };
+  /** Supporting images below the incidents. For a study with more evidence
+      than the three slots can hold. */
+  gallery?: Shot[];
 };
+
+/** `src` is a path under /public. `alt` describes it; `caption` is printed. */
+export type Shot = { src: string; alt: string; caption?: string };
 
 const caseStudies: Record<string, CaseStudy> = {
   postbox: {
@@ -376,9 +387,49 @@ const caseStudies: Record<string, CaseStudy> = {
     ],
     slots: {
       hero: "Who decides — explicit choice, geography, and the order they are read in",
-      shot1: "Traffic share by store, both directions, across the two releases",
-      shot2: "The region switcher and the mismatch confirmation card",
+      shot1: "US share of traffic on the rest-of-world store, falling to single digits",
+      shot2: "The region switcher, rebuilt in-house — six stores instead of every country",
     },
+    /* No hero yet — that slot keeps its placeholder until the promotional
+       image exists. The two shots are the evidence for the headline number
+       and for the theme half of the fix. */
+    shots: {
+      shot1: {
+        src: "/images/work/dfyne-cloudflare-migration/traffic-drop.png",
+        alt: "A line chart of US traffic share on the rest-of-world store, running between roughly 15 and 35 percent and repeatedly hitting the alert threshold, then dropping to a flat low line.",
+      },
+      shot2: {
+        src: "/images/work/dfyne-cloudflare-migration/switcher-new.png",
+        alt: "The in-house region switcher open, listing United Kingdom, United States, Europe, Canada, Australia and International, each with its currency.",
+      },
+    },
+    /* Sits under the incidents, which is where the routes table belongs: every
+       fix in that list is visible in it as a disabled route. */
+    gallery: [
+      {
+        src: "/images/work/dfyne-cloudflare-migration/worker-routes.png",
+        alt: "Cloudflare worker routes. The apex and wildcard routes run the worker; gift cards, both customer-account subdomains and the /cdn-cgi paths are set to disable it.",
+        caption:
+          "Every incident above, as a route. The apex finally bound to the worker — and gift cards, both account subdomains and /cdn-cgi explicitly excluded from it.",
+      },
+      {
+        src: "/images/work/dfyne-cloudflare-migration/switcher-old.png",
+        alt: "The previous region switcher, an alphabetical list of every country from Andorra onwards, with Argentina selected.",
+        caption:
+          "What it replaced: every country in the world, alphabetically, defaulting to Argentina. Switching region here set no cookie the worker understood.",
+      },
+      {
+        src: "/images/work/dfyne-cloudflare-migration/switcher-mobile.png",
+        alt: "The rebuilt region switcher on a phone, showing the same six stores.",
+        caption: "The same switcher on a phone. One snippet, rendered twice per page.",
+      },
+      {
+        src: "/images/work/dfyne-cloudflare-migration/worker-metrics.png",
+        alt: "Cloudflare metrics for the routing worker: 2.61 billion invocations, 766.6 requests per second, a 0% error rate and 0.63ms median CPU time.",
+        caption:
+          "What it carries: 766 requests a second at a 0% error rate, on 0.63ms of CPU each. Per-host traffic volumes cropped out.",
+      },
+    ],
   },
 
   /* Every figure here is from a preview environment on a branch, which the
