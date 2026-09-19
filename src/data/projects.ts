@@ -505,10 +505,22 @@ const caseStudies: Record<string, CaseStudy> = {
        its measurement window, because a number without one is a claim rather
        than a result. */
     results: [
-      { n: "1.81s → 1.31s", l: "LCP for real visitors on the rest-of-world store" },
-      { n: "1.61s → 1.00s", l: "LCP for real visitors on the US store" },
-      { n: "42 → 62", l: "Lighthouse on mobile, live site, same URL and region" },
-      { n: "91 → 97", l: "The same test on desktop — this was never only a mobile problem" },
+      {
+        n: "1.81s → 1.31s",
+        l: "LCP for real visitors, rest-of-world store — 11–12 September against the 19th",
+      },
+      {
+        n: "1.61s → 1.00s",
+        l: "LCP for real visitors, US store — the week to 12 September against the week to the 19th",
+      },
+      {
+        n: "42 → 62",
+        l: "Lighthouse on mobile, live site — 15 against 18 September, same URL and region",
+      },
+      {
+        n: "91 → 97",
+        l: "The same test on desktop, the same three days — this was never only a mobile problem",
+      },
     ],
     slots: {
       hero: "Main thread before and after — the same page, the same trace view",
@@ -533,36 +545,36 @@ const caseStudies: Record<string, CaseStudy> = {
         src: "/images/work/dfyne-mobile-performance/ROW-OldPerformance.png",
         alt: "Field metrics for the rest-of-world store over 11 and 12 September: largest contentful paint 1.81 seconds, interaction to next paint 127.19ms, layout shift 0.0098.",
         caption:
-          "Rest-of-world store, before: LCP 1.81s across the 11th and 12th. Everything already rated Good — this was not a broken site, it was a slow one.",
+          "Rest-of-world store, before: LCP 1.81s across 11 and 12 September. Everything already rated Good — this was not a broken site, it was a slow one.",
       },
       {
         src: "/images/work/dfyne-mobile-performance/ROW-New-Perfromance.png",
         alt: "The same dashboard for 19 September: largest contentful paint 1.31 seconds, interaction to next paint 121.29ms, layout shift 0.0089.",
         caption:
-          "The same store on the 19th: 1.31s. Half a second off the paint that decides whether a page feels fast, for every visitor, not a lab.",
+          "The same store, same dashboard, on 19 September: 1.31s. Half a second off the paint that decides whether a page feels fast, for every visitor, not a lab.",
       },
       {
         src: "/images/work/dfyne-mobile-performance/US-Store-Last-2-Weeks.png",
         alt: "Field metrics for the US store over the week to 12 September: largest contentful paint 1.61 seconds.",
-        caption: "US store, the week to the 12th: 1.61s.",
+        caption: "US store, the week to 12 September: 1.61s.",
       },
       {
         src: "/images/work/dfyne-mobile-performance/US-Store-New-Perforamnce.png",
         alt: "The same dashboard for 14 to 19 September: largest contentful paint 999.81 milliseconds.",
         caption:
-          "The week to the 19th: 999ms. Under a second on the store that takes the most traffic.",
+          "The week to 19 September: 999ms. Under a second on the store that takes the most traffic.",
       },
       {
         src: "/images/work/dfyne-mobile-performance/cloudfalre-uk-dfyne-history.png",
         alt: "Cloudflare Observatory's desktop history for uk.dfyne.com: scores of 91, 90, 92, 86, 92, 95 and 97 across 15 to 18 September, with largest contentful paint falling from 1,257ms to 838ms.",
         caption:
-          "Desktop, the same daily test: 91 to 97, LCP 1,257ms to 838ms. Cutting script execution helps every device — a phone is only where it shows up first.",
+          "Desktop, the same daily test, 15 to 18 September: 91 to 97, LCP 1,257ms to 838ms. Cutting script execution helps every device — a phone is only where it shows up first.",
       },
       {
         src: "/images/work/dfyne-mobile-performance/cloudflare-synthtic.png",
         alt: "A Cloudflare Observatory desktop speed test of uk.dfyne.com scoring 97, with time to first byte 12ms, first contentful paint 636ms, largest contentful paint 838ms and total blocking time 6ms.",
         caption:
-          "The best of those runs in full. Blocking time of 6ms is the number the whole engagement was aimed at — that figure is what a main thread with nothing queued on it looks like.",
+          "The best of those runs in full — 18 September, London, desktop. Blocking time of 6ms is the number the whole engagement was aimed at: that is what a main thread with nothing queued on it looks like.",
       },
     ],
   },
