@@ -367,16 +367,16 @@ const caseStudies: Record<string, CaseStudy> = {
         why: "The cart panel seemed to sit 15px further in than everything else, at three different screen sizes. It was the scrollbar: I was measuring the window, which includes it, while the page is laid out 15px narrower. The same mistake three times looks exactly like a pattern.",
       },
       {
+        what: "A “Choose options” bar across every product card",
+        why: "The whole card already goes to the product, so the bar was a second control to the same place, and it sat on top of the photograph — which is the thing doing the selling. The card is quieter without it.",
+      },
+      {
+        what: "A wider gallery on the product page",
+        why: "The image column was about 100px wider than it ended up. On its own the bigger photograph looked better; next to the description and the size row it left them cramped, and those are what someone reads before buying.",
+      },
+      {
         what: "A pale gold hover on the star rating",
         why: "Hovering over five stars made them fade before they refilled, so your answer seemed to disappear at the moment you picked it. A stronger gold instead.",
-      },
-      {
-        what: "Social links in the footer",
-        why: "The accounts do not exist yet, so every one of them went to the platform's own home page. A link to instagram.com is not a social link.",
-      },
-      {
-        what: "Automating the Shopify admin side",
-        why: "There is no way to get a permanent key for this store, so there was no reliable way to do it. Dropped rather than bodged.",
       },
       {
         what: "Testing keyboard and scrolling in an automated browser",
