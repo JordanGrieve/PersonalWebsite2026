@@ -302,13 +302,10 @@ export default async function CaseStudyPage({ params }: Params) {
 
       {study.results?.length ? (
       <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
-            gap: 16,
-          }}
-        >
+        {/* Columns come from globals.css: four tiles were breaking three and
+            one just below desktop, which reads as a mistake rather than a
+            layout. Two by two instead, until there is room for the lot. */}
+        <div className="result-grid" style={{ display: "grid", gap: 16 }}>
           {study.results.map((r) => (
             <div
               key={r.l}

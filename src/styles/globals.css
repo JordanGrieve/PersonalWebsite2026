@@ -823,3 +823,27 @@ a:hover {
     animation: fadeScrim 0.18s ease-out;
   }
 }
+
+/* — case study result tiles — */
+
+/* One column on a phone, two in the middle, and the real row only once
+   every tile can sit on it. The old `auto-fit, minmax(200px, 1fr)` went
+   straight from four columns to three, which left a row of three and a
+   lonely fourth underneath at around 900px — the one arrangement that
+   looks accidental. Two by two is the same information, evenly.
+
+   Above 960px it goes back to auto-fit, which gives four tiles a row of
+   four and the one study with three tiles a row of three. */
+.result-grid {
+  grid-template-columns: 1fr;
+}
+@container (min-width: 520px) {
+  .result-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@container (min-width: 960px) {
+  .result-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}

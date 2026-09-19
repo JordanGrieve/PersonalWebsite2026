@@ -348,15 +348,18 @@ const caseStudies: Record<string, CaseStudy> = {
        real visitors to measure. These are lab runs, and the labels say so. */
     results: [
       {
-        n: "0.97–0.99",
-        l: "Speed score out of 1 across the four main page types — automated test, median of three runs, 11 September",
+        n: "0.9–1.0s",
+        l: "How long the main image or heading takes to appear — all four main page types, automated test, median of three runs, 11 September",
       },
-      { n: "0.9–1.0s", l: "How long the main image or heading takes to appear, in those same runs" },
+      { n: "0ms", l: "Time the page spends unable to respond while it loads, in those same runs" },
+      {
+        n: "0–0.009",
+        l: "How much the page shifts around as it loads, where anything under 0.1 counts as good",
+      },
       {
         n: "0 of 30",
         l: "Accessibility checks that found a fault — 15 pages tested at phone and desktop size",
       },
-      { n: "1.00", l: "Accessibility score on every page measured" },
     ],
     rejected: [
       {
