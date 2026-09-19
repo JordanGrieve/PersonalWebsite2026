@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ImageSlot from "@/components/ImageSlot";
+import Figure from "@/components/Figure";
 import { getPostBody } from "@/content/posts";
 import { displayDate, getPost, posts, relatedPosts } from "@/data/posts";
 import { site } from "@/data/site";
@@ -92,16 +92,14 @@ export default async function PostPage({ params }: Params) {
           >
             {post.dek}
           </p>
-          <div
-            style={{
-              marginTop: 28,
-              height: "clamp(200px,30cqw,380px)",
-              borderRadius: "var(--radius-lg)",
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
-            <ImageSlot placeholder={post.ph} />
+          <div style={{ marginTop: 28 }}>
+            <Figure
+              shot={post.hero}
+              placeholder={post.ph}
+              height="clamp(200px,30cqw,380px)"
+              priority
+              sizes="(max-width: 900px) 100vw, 900px"
+            />
           </div>
         </section>
 

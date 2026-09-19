@@ -1,3 +1,5 @@
+import type { Shot } from "@/data/projects";
+
 export type Post = {
   slug: string;
   /** ISO 8601 date. The only date stored — the display string is derived from
@@ -12,6 +14,9 @@ export type Post = {
   category: string;
   /** Placeholder copy for the post's hero image slot. */
   ph: string;
+  /** The real hero image, once there is one — same shape a case study's
+      images use, and shown the same way: click to read it full size. */
+  hero?: Shot;
 };
 
 export const posts: Post[] = [

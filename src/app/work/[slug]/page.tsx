@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Figure from "@/components/Figure";
 import ImageSlot from "@/components/ImageSlot";
-import Zoomable from "@/components/work/Zoomable";
+import Zoomable from "@/components/Zoomable";
 import { getCaseStudy, getProject, nextProject, projects, type Shot } from "@/data/projects";
 import { site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
@@ -181,32 +182,7 @@ function Gallery({ items }: { items?: Shot[] }) {
         }}
       >
         {items.map((item) => (
-          <figure key={item.src} style={{ margin: 0 }}>
-            <div
-              style={{
-                position: "relative",
-                height: "clamp(240px,30cqw,400px)",
-                borderRadius: "var(--radius-lg)",
-                overflow: "hidden",
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-divider)",
-              }}
-            >
-              <Zoomable src={item.src} alt={item.alt} />
-            </div>
-            {item.caption ? (
-              <figcaption
-                style={{
-                  marginTop: 10,
-                  fontSize: 13.5,
-                  lineHeight: 1.55,
-                  color: "var(--color-neutral-400)",
-                }}
-              >
-                {item.caption}
-              </figcaption>
-            ) : null}
-          </figure>
+          <Figure key={item.src} shot={item} height="clamp(240px,30cqw,400px)" />
         ))}
       </div>
     </section>

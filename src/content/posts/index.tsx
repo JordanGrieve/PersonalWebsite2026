@@ -2,7 +2,12 @@ import type { ComponentType } from "react";
 import Lcp from "./lcp-4-8s-to-1-3s";
 import { para } from "./prose";
 
-/* TODO: only the LCP post has a body written — it is the one the design
+/* A body is an ordinary component, so an image inside one is
+   `<Figure shot={{ src, alt, caption }} height="…" />` from
+   `@/components/Figure` — the same framed, click-to-enlarge image the case
+   studies use. Files go in `public/images/writing/<slug>/`.
+
+   TODO: only the LCP post has a body written — it is the one the design
    wrote out in full. Add a component per slug here as the others get
    written; anything missing falls back to the stub below. */
 const bodies: Record<string, ComponentType> = {
