@@ -225,65 +225,64 @@ const caseStudies: Record<string, CaseStudy> = {
        has not been asked, and that is not a thing to assume on her behalf.
        Hamilton is fine; the address is not, and nothing here narrows it. */
     intro:
-      "An online-only bakery in Hamilton, near Glasgow, run by one baker. Storefront, admin dashboard and API in a single application, built around the thing that actually limits a bakery: not stock, but oven time on a particular morning. It has never traded — the engineering is finished and the business is not, which is the honest shape of this one.",
+      "An online-only bakery near Glasgow, run by one person. I built the shop customers order from, the dashboard she runs it from, and everything underneath both. The interesting part is what actually limits a bakery, which is not how much you have in stock — it is how much you can get out of one oven on a particular morning. The build is finished and deployed. What is left before it opens is not code.",
     meta: [
       { l: "Client", v: "Open Door Bakery — Hamilton, Scotland" },
-      { l: "Scope", v: "Storefront, admin dashboard, API, database, deployment" },
+      { l: "Scope", v: "Customer shop, admin dashboard, everything behind both" },
       { l: "Timeline", v: "July to September 2026, evenings and weekends" },
       {
         l: "Stack",
         v: "Next.js 15, React 19, TypeScript, Neon Postgres, raw SQL, Stripe, Resend, Cloudinary, Vercel",
       },
-      { l: "Status", v: "Built and deployed, not launched" },
-      { l: "Live", v: "opendoorbakery.com — password-locked until the business opens" },
+      { l: "Status", v: "Built, deployed and handed over" },
+      { l: "Live", v: "opendoorbakery.com — password-locked until opening day" },
     ],
     problem:
-      "A bakery does not run out of stock the way a shop does. It runs out of Saturday morning. Twelve products, each with its own lead time, all competing for the same oven and the same pair of hands, and an order is only possible if the work fits in the days before the date the customer wants it.\n\nThat is three different scarcities pulling on one another. A product has a lead time, and a basket inherits the longest one in it — order a croissant and a celebration cake together and the whole order moves to the cake's timeline. A collection slot has a capacity, which may be unlimited, may be a number, and may be zero to close it. And a product can be unavailable on a given day regardless of either. None of the three composes neatly with the others, which is the interesting part of the domain and the part no off-the-shelf checkout models.\n\nThere is no before here, and the page should not pretend otherwise. The business has never taken an order by any method — not by spreadsheet, not by direct message, not at all. Nothing was replaced and nothing got faster. What exists is a first system, built to the rules the baker described about how the work actually happens.",
+      "A bakery does not run out of stock the way a shop does. It runs out of Saturday morning. Twelve products, each needing its own amount of notice, all wanting the same oven and the same pair of hands — and an order only works if the baking fits into the days before the date the customer wants it.\n\nThat is three separate limits pulling against each other. Each product needs a certain number of days' notice, and a basket takes the longest one in it: order a croissant and a celebration cake together and the whole order moves to the cake's timetable. Each collection slot has a number of places, which might be unlimited, might be four, might be zero to close it for the day. And any product can simply be off on a given day regardless of both. None of the three lines up neatly with the others, and that is the part no ready-made checkout has an answer for.\n\nThere is nothing being replaced here. No spreadsheet was retired, no old system was migrated, and nothing got faster than it used to be — the shop is the first one there has been, built to the rules the baker described about how the work really goes.",
     approach:
-      "Build or buy is worth answering honestly: a mix of wanting to and needing to. Every rule above can be forced onto a hosted platform with enough apps bolted to it, so the build was not strictly necessary. What it bought was rules that behave exactly as described rather than approximately, and a stack with no monthly fee for a business with no revenue.\n\nIt is one Next.js application with three surfaces: eleven storefront pages, twelve admin pages, and around thirty-five API routes. Postgres underneath with hand-written SQL migrations and no ORM.\n\nThe rules are enforced where they cannot be argued with. Booked places are derived by counting live orders rather than kept in a counter, so they cannot drift and a cancellation genuinely frees the place. Capacity is re-checked on the server at checkout rather than trusted from the page that offered the slot, because a client-side check is bypassable and two people can submit at the same moment. Delivery matches on the outward part of the postcode rather than a radius, which is fiddlier than it sounds — ML10 is not in ML1, and a naive prefix match says it is. Money is pence throughout, with the rounding unit-tested.\n\nThe admin is the half that decides whether any of this gets used, because the person using it runs the bakery alone between bakes and has no patience for software. So it is shaped around not making her think: leaving a capacity blank means unlimited rather than demanding a number, margin health reads as words rather than percentages, and a product whose recipe has any uncosted ingredient reports that its cost is unknown instead of showing a confident partial figure that happens to be wrong.\n\nThe decision that paid for itself repeatedly was zero-config local development. Clone it, install, run — no database, no API keys, nothing to provision. A WASM Postgres builds and seeds itself, and every external service degrades to logging what it would have done, with checkout confirming directly when there are no payment keys. It is what makes the whole thing testable, and 136 tests run against it.",
-    /* No results tiles. Nothing has been measured, because nothing has run:
-       no orders, no traffic, no conversion. Page counts and test counts are
-       not results, and dressing them up as a row of numbers would be the
-       exact move this study spends a section criticising. */
+      "Build it or buy it is worth answering straight: a bit of wanting to and a bit of needing to. Every rule above could be forced onto a ready-made platform with enough add-ons bolted to it, so this was not the only way. What building it bought was rules that behave exactly as described instead of roughly, and a running cost of nothing while the business has no money coming in.\n\nIt is one application wearing three faces: eleven pages for customers, twelve for the baker, and the machinery in between. The database is plain SQL with no layer of translation on top, which is a deliberate choice — it is a small system and I would rather read what it is actually doing.\n\nThe rules are enforced in the one place they cannot be got around. The number of places left in a slot is counted from the real orders every time rather than kept as a running total, so it cannot drift and cancelling genuinely gives the place back. Capacity is checked again on the server when the order is placed, not taken on trust from the page that offered the slot — anyone can edit what a page sends, and two people can click at the same moment. Delivery is worked out from the first half of the postcode rather than a distance on a map, which is fiddlier than it sounds: ML10 is not inside ML1, and the obvious way of checking says it is. Money is counted in pence the whole way through, with the rounding tested.\n\nThe dashboard is the half that decides whether any of this gets used, because the person using it runs the bakery on her own between bakes and has no patience for software. So it is built around not making her think. Leaving the number of places blank means unlimited rather than nagging her for a number. How healthy a price is shows up as a word rather than a percentage. And if any ingredient in a recipe has no cost against it yet, the product says its cost is unknown instead of showing a confident figure that happens to be wrong.\n\nThe decision that kept paying off was making it run on a laptop with nothing set up. No database to install, no accounts, no keys — download it, start it, and it builds and fills its own database. Every outside service quietly writes down what it would have done instead of falling over, and the checkout completes without a payment provider attached. That is what makes it testable, and 136 tests run against it.",
+    /* No results tiles. Nothing has been measured, because it has not opened:
+       no orders, no visitors. Page counts and a test count are not results,
+       and a row of them would be the exact move this study criticises. */
     rejected: [
       {
-        what: "CSS keyframes for the mobile drawer, then requestAnimationFrame",
-        why: "Both are throttled when the tab is in the background or being previewed, so the drawer opened to nothing and stayed there. A plain timeout was the thing that worked, which is not the answer anyone wants.",
+        what: "Two different ways of animating the mobile menu",
+        why: "Both the CSS version and the JavaScript version stop running when the tab is not the one you are looking at, so the menu would open to nothing and stay there. The dull option — a plain timer — was the one that worked.",
       },
       {
-        what: "Dropping SMS notifications for launch",
-        why: "My own recommendation — email only, one fewer service to configure. Reversed: a baker is not at a screen, and an order placed for tomorrow morning is only useful if it reaches her.",
+        what: "Dropping text-message alerts before opening",
+        why: "My own suggestion: one less thing to set up. I reversed it. A baker is not sitting at a screen, and an order for tomorrow morning is only useful if it reaches her tonight.",
       },
       {
-        what: "A regex over the build output as proof a script was bundled",
-        why: "It reported the anti-spam script missing and I believed it. The pattern could not handle the parentheses in App Router route-group paths, so it was scanning for something it could never match. Verify the tool before you accept its conclusion.",
+        what: "Trusting a script that checked my own work",
+        why: "I wrote something to confirm the anti-spam code had made it into the finished site. It said no, and I believed it. It was searching for a file path it could never have matched. Check the tool before you accept what it tells you.",
       },
     ],
     incidentsTitle: "What went wrong",
     incidentsNote:
-      "Nothing here was found by a customer, because there have not been any. Each of these was found by going looking, and each is the kind that reports success while doing nothing.",
+      "None of this was found by a customer, because there have not been any yet. Each one was found by going looking — and each one had been quietly reporting that it was fine.",
     incidents: [
       {
         what: "The contact form was dead for six weeks",
-        why: "Every submission answered \"couldn't send your message\", and nothing anywhere said why. The cause was trivial — an integration key in production had stopped being valid — but the failure path logged nothing, so the one piece of evidence that would have identified it in a single submission was thrown away every time. Found by deliberately sending an invalid request to see what came back, then confirming against the database rather than believing the interface. Not one enquiry had ever arrived.",
+        why: "Every message got \"couldn't send your message\" back, and nothing anywhere recorded why. The cause was small — a key had stopped being valid — but the code threw away the explanation every time it failed, so the one thing that would have identified it in a single message was never written down. I found it by deliberately sending a broken message to see what came back, then checking the database rather than believing the screen. Not one enquiry had ever arrived.",
       },
       {
-        what: "The site made claims that were not true",
-        why: "Three testimonials, a star rating and an order count sat on the home page of a shop that had never sold anything, and a section headed \"bestselling\" listed products nobody had ever bought. Placeholder marketing copy written to fill a layout had quietly become factual claims the moment the site went up. Removed: the page now shows only real approved reviews, with an empty state that says there are none yet.",
+        what: "The site said things that were not true",
+        why: "Customer quotes, a star rating and a count of orders sat on the home page of a shop that had never sold anything, and a section headed \"bestselling\" listed things nobody had ever bought. Placeholder words written to fill out a layout had turned into claims the moment the site went up. All of it removed.",
       },
       {
-        what: "Local databases silently stopped applying migrations",
-        why: "The bootstrap only ran when the main table was missing, so any sandbox that already existed kept whatever schema it was first created with. Every migration after the first had never been applied locally, and nothing failed to announce it. Fixed by tracking applied migrations in a table, the way the real database does.",
+        what: "My laptop copy of the database quietly stopped updating itself",
+        why: "It only rebuilt itself when it was completely empty, so once it existed it kept whatever shape it started with, and every change to the structure after that had never been applied. Nothing complained. Fixed by keeping a record of which changes have been applied, the way the real database does.",
       },
       {
         what: "Every customer's text message would have failed, silently",
-        why: "Checkout only checked that a phone number was not empty, so \"07700 900123\" was stored exactly as typed — and the provider requires the international form. The send path swallowed the rejection without logging it. Worse, the owner's own alerts were written in international form and would have gone through, so from the inside it would have looked like it worked. Fixed with a normaliser and twelve tests, before any credentials existed to fail with.",
+        why: "The checkout only checked that a phone number was not blank, so it stored exactly what people type — and the messaging service only accepts the full international form. The failures were being swallowed. Worse, the baker's own alerts were written the correct way and would have arrived, so from the inside everything would have looked fine. Fixed with twelve tests, before there were any credentials to fail with.",
       },
     ],
     slots: {
-      hero: "The storefront on a phone — the ordering flow the customer sees",
-      shot1: "Checkout's slot picker — one slot fully booked, another with places left",
-      shot2: "The order queue in the dashboard, with a day's orders on it",
+      hero: "The shop on a phone — what the customer orders through",
+      shot1: "Choosing a collection slot — one full, one with places left",
+      shot2: "The day's orders, as the baker sees them",
     },
   },
 
