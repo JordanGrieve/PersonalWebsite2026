@@ -248,41 +248,6 @@ const caseStudies: Record<string, CaseStudy> = {
     /* No results tiles. Nothing has been measured, because it has not opened:
        no orders, no visitors. Page counts and a test count are not results,
        and a row of them would be the exact move this study criticises. */
-    rejected: [
-      {
-        what: "Two different ways of animating the mobile menu",
-        why: "Both the CSS version and the JavaScript version stop running when the tab is not the one you are looking at, so the menu would open to nothing and stay there. The dull option — a plain timer — was the one that worked.",
-      },
-      {
-        what: "Dropping text-message alerts before opening",
-        why: "My own suggestion: one less thing to set up. I reversed it. A baker is not sitting at a screen, and an order for tomorrow morning is only useful if it reaches her tonight.",
-      },
-      {
-        what: "Trusting a script that checked my own work",
-        why: "I wrote something to confirm the anti-spam code had made it into the finished site. It said no, and I believed it. It was searching for a file path it could never have matched. Check the tool before you accept what it tells you.",
-      },
-    ],
-    incidentsTitle: "What went wrong",
-    incidentsNote:
-      "None of this was found by a customer, because there have not been any yet. Each one was found by going looking — and each one had been quietly reporting that it was fine.",
-    incidents: [
-      {
-        what: "The contact form was dead for six weeks",
-        why: "Every message got \"couldn't send your message\" back, and nothing anywhere recorded why. The cause was small — a key had stopped being valid — but the code threw away the explanation every time it failed, so the one thing that would have identified it in a single message was never written down. I found it by deliberately sending a broken message to see what came back, then checking the database rather than believing the screen. Not one enquiry had ever arrived.",
-      },
-      {
-        what: "The site said things that were not true",
-        why: "Customer quotes, a star rating and a count of orders sat on the home page of a shop that had never sold anything, and a section headed \"bestselling\" listed things nobody had ever bought. Placeholder words written to fill out a layout had turned into claims the moment the site went up. All of it removed.",
-      },
-      {
-        what: "My laptop copy of the database quietly stopped updating itself",
-        why: "It only rebuilt itself when it was completely empty, so once it existed it kept whatever shape it started with, and every change to the structure after that had never been applied. Nothing complained. Fixed by keeping a record of which changes have been applied, the way the real database does.",
-      },
-      {
-        what: "Every customer's text message would have failed, silently",
-        why: "The checkout only checked that a phone number was not blank, so it stored exactly what people type — and the messaging service only accepts the full international form. The failures were being swallowed. Worse, the baker's own alerts were written the correct way and would have arrived, so from the inside everything would have looked fine. Fixed with twelve tests, before there were any credentials to fail with.",
-      },
-    ],
     slots: {
       hero: "The shop on a phone — what the customer orders through",
       shot1: "Choosing a collection slot — one full, one with places left",
