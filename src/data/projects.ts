@@ -433,7 +433,7 @@ const caseStudies: Record<string, CaseStudy> = {
         src: "/images/work/dfyne-cloudflare-migration/new-selecty-working.png",
         alt: "The US store on a phone with a card over it reading 'Continue on the UK store?' — 'Shop in your own market for local pricing, currency and delivery. Orders placed on the US store can't be delivered to a UK address.' — above a 'Shop UK store' button and a 'Stay on US' link. A bar pinned to the top of the page asks the same thing.",
         caption:
-          "The mismatch card, on the store that cannot ship to this shopper. It says so on the product page rather than at checkout, and taking it is what sets the cookie the worker reads. Dismissing it is a choice too, and sticks for an hour.",
+          "The mismatch card, on the store that cannot ship to this shopper. It says so on the product page rather than at checkout, and taking it is what sets the cookie the worker reads. Moving is not a reset either: the product and size they had come with them, and they land on the same page on the store that can actually deliver — so the journey they were on carries on instead of starting again. Dismissing it is a choice too, and sticks for an hour.",
       },
       {
         src: "/images/work/dfyne-cloudflare-migration/worker-metrics.png",
