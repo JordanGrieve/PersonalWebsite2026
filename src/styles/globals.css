@@ -657,6 +657,21 @@ a:hover {
   #testGrid::-webkit-scrollbar {
     display: none;
   }
+  /* No lift inside the carousel. `overflow-x: auto` makes the scrollport clip
+     vertically too, so the 3px rise takes the card's top border out of the
+     box and the card appears to lose its top edge — and on a touch screen
+     the state sticks after the tap, so it stays lost.
+
+     DFYNE's own carousels do the same thing: their cards never move on
+     hover, they change colour, underline the title and invert the chevron.
+     The accent border below is that treatment — the state is still legible,
+     it just no longer moves anything that something else is clipping. */
+  #featGrid > *:hover,
+  #featGrid > *:focus-visible,
+  #testGrid > *:hover,
+  #testGrid > *:focus-visible {
+    transform: none !important;
+  }
   /* Paired calls to action go half and half on a phone rather than sizing to
      their own labels, which left "See the work" and "Say hello" visibly
      narrower than the button beside them. Grid rather than `flex: 1`, so the
