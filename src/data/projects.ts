@@ -26,6 +26,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "land",
+    name: "Land",
+    kind: "AI app",
+    year: "2026",
+    result: "Live spoken mock interviews, scored against the job advert you paste in",
+    ph: "The interview in progress — the voice call and the live transcript",
+    tag: "Apps",
+  },
+  {
     slug: "essential-upsell",
     name: "Essential Upsell",
     kind: "Shopify app",
@@ -112,6 +121,7 @@ export const featuredSlugs = [
   "dfyne-cloudflare-migration",
   "dfyne-fit-finder",
   "essential-upsell",
+  "land",
   /* Fourth slot: seen on tablet and mobile, hidden once the grid goes
      three-up. Postbox came out of the four to make room for the size advisor;
      it is still on /work. */
@@ -123,6 +133,7 @@ export const featuredBlurbs: Record<string, string> = {
   "dfyne-cloudflare-migration": "Cloudflare · Shoppers on the wrong store, 35% → single digits",
   "dfyne-fit-finder": "Integration · AI size advisor across two Shopify Plus stores",
   "essential-upsell": "Shopify app · Vector search over sales and returns",
+  land: "AI app · Voice mock interviews scored against a real job advert",
   // HIDDEN with AMORIA.
 //   amoria: "Headless Shopify · Hydrogen on Oxygen, built end to end",
   "open-door-bakery": "Web build · Storefront, admin and API in one app",
@@ -131,6 +142,7 @@ export const featuredBlurbs: Record<string, string> = {
 
 export const featuredPlaceholders: Record<string, string> = {
   "essential-upsell": "Project shot — recommendations on the product page",
+  land: "Project shot — the voice interview in progress",
   // HIDDEN with AMORIA.
 //   amoria: "Project shot — headless storefront",
   "dfyne-cloudflare-migration": "Project shot — edge routing",
@@ -184,6 +196,62 @@ export type CaseStudy = {
 export type Shot = { src: string; alt: string; caption?: string };
 
 const caseStudies: Record<string, CaseStudy> = {
+  land: {
+    tags: ["AI", "App", "2026"],
+    heading: "LAND",
+    intro:
+      "Paste in the job advert for a role you actually want. Land gives you a live spoken mock interview with an AI that asks follow-ups based on that specific role, then scores how you did across seven categories. Two other things hang off the same advert: technical questions at a difficulty you pick, and a review of your CV against that role. Everything comes back as a rating out of ten with written feedback, so you can watch the scores move across attempts instead of guessing whether you are getting better.",
+    meta: [
+      { l: "Client", v: "Personal project — my own" },
+      { l: "Scope", v: "Voice interview, question practice, CV review, accounts, billing" },
+      { l: "Timeline", v: "2026" },
+      {
+        l: "Stack",
+        v: "Next.js 16, React 19, TypeScript, Postgres, Drizzle, Gemini via the Vercel AI SDK, Hume EVI, Clerk, Arcjet, Vercel",
+      },
+      { l: "Status", v: "Deployed — not publicly launched" },
+    ],
+    problemTitle: "The idea",
+    problem:
+      "Interview practice is either generic or expensive. A list of common questions does not know what you applied for. A friend will ask you three things and run out. A coach costs more than most people are willing to spend on one application.\n\nMeanwhile the thing you are actually frightened of is specific: this advert, these requirements, and the bit where you say something out loud, badly, and someone asks you about it.\n\nSo Land is built around one advert at a time. You paste it in once and it becomes the context for everything — the questions the interviewer asks, the difficulty of the practice questions, and what your CV is judged against. The part that makes it worth using is the voice interview: typed questions and answers are a commodity, and speaking an answer to something that then asks a follow-up is the part you cannot get anywhere else without booking a human.",
+    approach:
+      "The advert is not a prompt the model skims. It goes into the voice session as four named variables — your name, the title, the description and the experience level — so the interviewer's questions come from that role rather than a generic script. The model that scores you afterwards gets the advert and the transcript in separately marked blocks, and is told to judge the answers against that role rather than against an ideal candidate.\n\nThe transcript is more than words. The voice service returns emotion intensities per utterance, and the rubric uses them: confidence is scored from those cues alongside what you actually said, and pacing from the gaps between question and answer. A list of questions cannot tell you that you hesitated.\n\nEverything a model returns is a structured object rather than prose — a rating from one to ten, and markdown feedback, checked against a schema before it is allowed anywhere near the database. That is what makes progress possible: a number that can be compared with last week's number. Prose cannot be charted.\n\nThe CV reviewer is under one rule I would not ship without: it does not know your numbers, and it is forbidden from inventing them. Where a line would be stronger with a figure, it emits a placeholder — [N], [X]%, [duration] — and it never states a metric, a team size or a result your CV does not already contain. That is the difference between a rewrite you can send and one that lies on your behalf.\n\nAnd everything a user types is treated as untrusted. A job advert is a document somebody else wrote, and it arrives in the same context window as the rules for marking you. All three system prompts say that the delimited content is data and never instructions, and name the attempts they expect: changing the rubric, demanding a particular score, asking for the prompt back.",
+    /* The truncation work is the strongest technical story here, so it gets
+       its own section rather than a line in the approach. */
+    incidentsTitle: "The hard part",
+    incidentsNote:
+      "One bug, in two halves, and the second half is the one worth knowing about. It is the reason I trust what this app stores.",
+    incidents: [
+      {
+        what: "Question generation failed every single time",
+        why: "Not intermittently — one hundred per cent. The error said the response could not be parsed, which points at the parser or the prompt, and both are the wrong place to look. The model reasons before it writes, and those reasoning tokens are billed against the same output budget. A 512-token ceiling was generous for a one-sentence question and got entirely eaten before a single visible character appeared: it returned a 107-character fragment and a reason of \"length\", every time.",
+      },
+      {
+        what: "The same ceiling failed silently on the CV reviewer",
+        why: "This is the nastier half. A model can run out of budget having already closed the JSON, so the object is structurally perfect and the feedback stops mid-sentence. Nothing throws. The parser is satisfied. A half-finished analysis reaches the user looking exactly like a finished one — the same CV, on the same model, produced 4,126 characters on one call and 842 on the next.",
+      },
+      {
+        what: "Two defences, because either alone is not enough",
+        why: "The finish reason is now checked on the success path, not only where something threw, and a truncated result is a typed error that refuses to be saved. And the budgets were resized against measured output rather than guessed: 2,048 for a question, 8,192 for the seven-section interview feedback, 12,000 for a CV analysis with its before-and-after pairs. Catching truncation only turns a silent half-answer into a retry; the headroom is what stops it happening.",
+      },
+      {
+        what: "The error messages now name the cause",
+        why: "\"Output truncated at maxOutputTokens=2048 (produced 107 chars) — raise the budget; reasoning tokens count toward it.\" Whoever meets this next gets the answer instead of the hunt, and the measured character counts are recorded in the code beside the fix.",
+      },
+    ],
+    results: [
+      { n: "63", l: "Unit tests passing across six files — 20 September" },
+      { n: "0 / 0", l: "Lint warnings and type errors, checked on every pull request" },
+      { n: "21", l: "Pull requests, each one gated by that check before it could merge" },
+    ],
+    slots: {
+      hero: "The voice interview in progress",
+      shot1: "Seven-category feedback with the rating",
+      shot2: "A CV rewrite, with a bracketed placeholder where a number would go",
+    },
+  },
+
+
   postbox: {
     tags: ["App", "SaaS", "2026"],
     heading: "POSTBOX",
