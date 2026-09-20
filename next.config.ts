@@ -29,6 +29,18 @@ const nextConfig: NextConfig = {
         destination: "/work",
         permanent: true,
       },
+      {
+        /* AMORIA is hidden for now, not gone — the case study is commented
+           out in src/data/projects.ts and comes back by un-commenting it.
+
+           Temporary (307), unlike the two above: a permanent redirect asks
+           search engines to drop the URL and move its history elsewhere,
+           which is exactly wrong for a page that is coming back. Remove
+           this entry at the same time as un-commenting the study. */
+        source: "/work/amoria",
+        destination: "/work",
+        permanent: false,
+      },
     ];
   },
 };

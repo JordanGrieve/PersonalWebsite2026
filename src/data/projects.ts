@@ -34,15 +34,17 @@ export const projects: Project[] = [
     ph: "Admin — placement configuration",
     tag: "Apps",
   },
-  {
-    slug: "amoria",
-    name: "AMORIA",
-    kind: "Headless Shopify",
-    year: "2026",
-    result: "Headless storefront built end to end — Hydrogen on Shopify Oxygen",
-    ph: "Storefront — product page",
-    tag: "Shopify",
-  },
+  // HIDDEN — AMORIA is off the site for now. Un-comment these lines, and the
+// other blocks marked HIDDEN, to bring it back. Nothing has been deleted.
+//   {
+//     slug: "amoria",
+//     name: "AMORIA",
+//     kind: "Headless Shopify",
+//     year: "2026",
+//     result: "Headless storefront built end to end — Hydrogen on Shopify Oxygen",
+//     ph: "Storefront — product page",
+//     tag: "Shopify",
+//   },
   {
     slug: "dfyne-cloudflare-migration",
     name: "DFYNE geo-routing",
@@ -113,21 +115,24 @@ export const featuredSlugs = [
   /* Fourth slot: seen on tablet and mobile, hidden once the grid goes
      three-up. Postbox came out of the four to make room for the size advisor;
      it is still on /work. */
-  "amoria",
+  // HIDDEN with AMORIA — this is the fourth featured card.
+//   "amoria",
 ];
 
 export const featuredBlurbs: Record<string, string> = {
   "dfyne-cloudflare-migration": "Cloudflare · Shoppers on the wrong store, 35% → single digits",
   "dfyne-fit-finder": "Integration · AI size advisor across two Shopify Plus stores",
   "essential-upsell": "Shopify app · Vector search over sales and returns",
-  amoria: "Headless Shopify · Hydrogen on Oxygen, built end to end",
+  // HIDDEN with AMORIA.
+//   amoria: "Headless Shopify · Hydrogen on Oxygen, built end to end",
   "open-door-bakery": "Web build · Storefront, admin and API in one app",
   postbox: "SaaS · Contact form and support email in one inbox",
 };
 
 export const featuredPlaceholders: Record<string, string> = {
   "essential-upsell": "Project shot — recommendations on the product page",
-  amoria: "Project shot — headless storefront",
+  // HIDDEN with AMORIA.
+//   amoria: "Project shot — headless storefront",
   "dfyne-cloudflare-migration": "Project shot — edge routing",
   "dfyne-fit-finder": "Project shot — size advisor on the product page",
   "open-door-bakery": "Project shot — storefront on mobile",
@@ -288,50 +293,52 @@ const caseStudies: Record<string, CaseStudy> = {
     },
   },
 
-  amoria: {
-    tags: ["Shopify", "Headless build", "2026"],
-    heading: "AMORIA",
-    intro:
-      "AMORIA is my own brand — silk sleepwear — and I built the shop as well as starting the business. Most Shopify stores use a ready-made theme, which is somebody else's design that you adjust at the edges. I built the front of this one from scratch instead, so every part of the page is a decision I made. The trade is simple and it runs through this whole page: you get exactly what you wanted, and you have to build everything a theme would have handed you free.",
-    problemTitle: "The vision",
-    problem:
-      "Nothing was broken here. There was no old site limping along and no client with a list of complaints. I wanted to make something, and the shop is part of the thing I wanted to make.\n\nWhen you sell silk sleepwear, the way it looks on screen is most of what you are selling. Somebody decides whether this brand is for them in a couple of seconds, on a phone, before they have read a word — so the spacing, the type and the way a page settles as it loads are the product argument, not decoration. I had designed how it should look. A theme would have got me close to that, and close was not the point of doing it.\n\nSo the goal was simple to say: the site should look exactly like the design, and the design should stay the thing everything is checked against rather than a nice picture the code slowly drifts away from.",
-    meta: [
-      { l: "Client", v: "My own business — brand, design and build" },
-      { l: "Scope", v: "Shop, cart, reviews, customer accounts, currencies, testing" },
-      { l: "Timeline", v: "Summer 2026 to now — launching February 2027" },
-      {
-        l: "Stack",
-        v: "Hydrogen 2026.4.3, React Router 7, Vite 8, TypeScript, Shopify Oxygen, Judge.me, PostBox",
-      },
-      { l: "Status", v: "Shop finished, launch setup still to do" },
-      { l: "Live", v: "byamoria.com — password page until launch" },
-    ],
-    approach:
-      "Shopify still runs the business end of it — the products, the payments, the checkout. What I replaced is everything the customer looks at, which Shopify calls a headless setup: my own code at the front, their platform behind it. It runs on Shopify's own hosting, which builds each page fresh when someone asks for it, from whichever of their servers is nearest.\n\nThe reviews are the clearest example of what that buys and what it costs. The review company I use hands you a ready-made block you drop into a normal theme, and it works fine — it just does not look like my site. So I ask them for the reviews directly, keep a copy for five minutes so the page is not waiting on them, and then display them my way: a score and a breakdown, one review pulled out and featured, six to a page, photos that open full size, and a form of my own for leaving one.\n\nWhat the control is for is the feel of the thing. The background is ivory rather than white and the text is a soft black rather than black, so nothing on the page is at full contrast and nothing glares on a phone in bed. There is not a rounded corner anywhere. Headings are set large but in ordinary sentence case, so they carry without shouting, and the small labels above them — NEW COLLECTION, OUR PROMISE — are in capitals with the letters spaced far apart, which is the one bit of typographic styling doing most of the work. Every product photograph is the same tall shape, so a row of them lines up exactly and the eye runs along the clothes rather than the edges of the boxes.\n\nAccessibility is the part that shaped the design rather than being checked off at the end, and I would rather say that plainly than let it sound like a badge. Colour contrast decided the palette: the ivory and the soft black are a pairing that passes comfortably, and a few colours I liked did not survive contact with a contrast check. It catches the things eyes miss, too — one button filled with near-black on hover, sitting on a near-black panel, which is a contrast of one to one, meaning it vanished at the exact moment you pointed at it. The same button's focus outline, the one you see when tabbing with a keyboard, had the same problem. Fifteen pages are now checked at phone and desktop size on every deploy, and the point of running it that often is that it stays a design constraint I work inside rather than a report somebody reads afterwards.",
-    /* Field data is not possible yet — the store is not open, so there are no
-       real visitors to measure. These are lab runs, and the labels say so. */
-    results: [
-      {
-        n: "0.9–1.0s",
-        l: "How long the main image or heading takes to appear — all four main page types, automated test, median of three runs, 11 September",
-      },
-      { n: "0ms", l: "Time the page spends unable to respond while it loads, in those same runs" },
-      {
-        n: "0–0.009",
-        l: "How much the page shifts around as it loads, where anything under 0.1 counts as good",
-      },
-      {
-        n: "9.4–9.7",
-        l: "WAVE accessibility score out of 10 — 9.7 on a product page, 9.4 on the home page, with no errors and no contrast errors",
-      },
-    ],
-    slots: {
-      hero: "Storefront — home page",
-      shot1: "A product page — the whole design, at full width",
-      shot2: "The reviews section — score, breakdown and a featured review",
-    },
-  },
+  // HIDDEN — AMORIA is off the site for now. Un-comment these lines, and the
+// other blocks marked HIDDEN, to bring it back. Nothing has been deleted.
+//   amoria: {
+//     tags: ["Shopify", "Headless build", "2026"],
+//     heading: "AMORIA",
+//     intro:
+//       "AMORIA is my own brand — silk sleepwear — and I built the shop as well as starting the business. Most Shopify stores use a ready-made theme, which is somebody else's design that you adjust at the edges. I built the front of this one from scratch instead, so every part of the page is a decision I made. The trade is simple and it runs through this whole page: you get exactly what you wanted, and you have to build everything a theme would have handed you free.",
+//     problemTitle: "The vision",
+//     problem:
+//       "Nothing was broken here. There was no old site limping along and no client with a list of complaints. I wanted to make something, and the shop is part of the thing I wanted to make.\n\nWhen you sell silk sleepwear, the way it looks on screen is most of what you are selling. Somebody decides whether this brand is for them in a couple of seconds, on a phone, before they have read a word — so the spacing, the type and the way a page settles as it loads are the product argument, not decoration. I had designed how it should look. A theme would have got me close to that, and close was not the point of doing it.\n\nSo the goal was simple to say: the site should look exactly like the design, and the design should stay the thing everything is checked against rather than a nice picture the code slowly drifts away from.",
+//     meta: [
+//       { l: "Client", v: "My own business — brand, design and build" },
+//       { l: "Scope", v: "Shop, cart, reviews, customer accounts, currencies, testing" },
+//       { l: "Timeline", v: "Summer 2026 to now — launching February 2027" },
+//       {
+//         l: "Stack",
+//         v: "Hydrogen 2026.4.3, React Router 7, Vite 8, TypeScript, Shopify Oxygen, Judge.me, PostBox",
+//       },
+//       { l: "Status", v: "Shop finished, launch setup still to do" },
+//       { l: "Live", v: "byamoria.com — password page until launch" },
+//     ],
+//     approach:
+//       "Shopify still runs the business end of it — the products, the payments, the checkout. What I replaced is everything the customer looks at, which Shopify calls a headless setup: my own code at the front, their platform behind it. It runs on Shopify's own hosting, which builds each page fresh when someone asks for it, from whichever of their servers is nearest.\n\nThe reviews are the clearest example of what that buys and what it costs. The review company I use hands you a ready-made block you drop into a normal theme, and it works fine — it just does not look like my site. So I ask them for the reviews directly, keep a copy for five minutes so the page is not waiting on them, and then display them my way: a score and a breakdown, one review pulled out and featured, six to a page, photos that open full size, and a form of my own for leaving one.\n\nWhat the control is for is the feel of the thing. The background is ivory rather than white and the text is a soft black rather than black, so nothing on the page is at full contrast and nothing glares on a phone in bed. There is not a rounded corner anywhere. Headings are set large but in ordinary sentence case, so they carry without shouting, and the small labels above them — NEW COLLECTION, OUR PROMISE — are in capitals with the letters spaced far apart, which is the one bit of typographic styling doing most of the work. Every product photograph is the same tall shape, so a row of them lines up exactly and the eye runs along the clothes rather than the edges of the boxes.\n\nAccessibility is the part that shaped the design rather than being checked off at the end, and I would rather say that plainly than let it sound like a badge. Colour contrast decided the palette: the ivory and the soft black are a pairing that passes comfortably, and a few colours I liked did not survive contact with a contrast check. It catches the things eyes miss, too — one button filled with near-black on hover, sitting on a near-black panel, which is a contrast of one to one, meaning it vanished at the exact moment you pointed at it. The same button's focus outline, the one you see when tabbing with a keyboard, had the same problem. Fifteen pages are now checked at phone and desktop size on every deploy, and the point of running it that often is that it stays a design constraint I work inside rather than a report somebody reads afterwards.",
+//     /* Field data is not possible yet — the store is not open, so there are no
+//        real visitors to measure. These are lab runs, and the labels say so. */
+//     results: [
+//       {
+//         n: "0.9–1.0s",
+//         l: "How long the main image or heading takes to appear — all four main page types, automated test, median of three runs, 11 September",
+//       },
+//       { n: "0ms", l: "Time the page spends unable to respond while it loads, in those same runs" },
+//       {
+//         n: "0–0.009",
+//         l: "How much the page shifts around as it loads, where anything under 0.1 counts as good",
+//       },
+//       {
+//         n: "9.4–9.7",
+//         l: "WAVE accessibility score out of 10 — 9.7 on a product page, 9.4 on the home page, with no errors and no contrast errors",
+//       },
+//     ],
+//     slots: {
+//       hero: "Storefront — home page",
+//       shot1: "A product page — the whole design, at full width",
+//       shot2: "The reviews section — score, breakdown and a featured review",
+//     },
+//   },
 
   "dfyne-cloudflare-migration": {
     tags: ["Infrastructure", "Cloudflare", "2026"],
