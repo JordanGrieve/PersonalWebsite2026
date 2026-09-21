@@ -12,3 +12,7 @@ yarn-error.log*
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+
+# Headless Chrome profiles, written by local screenshot/crop scripts.
+chrome-crop/
+chrome-profile*/

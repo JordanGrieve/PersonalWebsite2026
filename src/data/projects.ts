@@ -304,10 +304,32 @@ const caseStudies: Record<string, CaseStudy> = {
        no orders, no visitors. Page counts and a test count are not results,
        and a row of them would be the exact move this study criticises. */
     slots: {
-      hero: "The shop on a phone — what the customer orders through",
-      shot1: "Choosing a collection slot — one full, one with places left",
-      shot2: "The day's orders, as the baker sees them",
+      hero: "The shop — what the customer orders through",
+      shot1: "A product page — lead time, allergens and the pre-launch state",
+      shot2: "A celebration cake — sizes, and the box personalised with a message",
     },
+    shots: {
+      hero: {
+        src: "/images/work/open-door-bakery/03-home-desktop.png",
+        alt: "The Open Door Bakery home page: a watercolour hero reading Welcome to Open Door Bakery, buttons to shop and to order something custom, and a row of category cards for brownies, cakes, celebration boxes and cookies.",
+      },
+      shot1: {
+        src: "/images/work/open-door-bakery/07-pdp-desktop.png",
+        alt: "A product page for a lemon drizzle loaf at £4. A badge on the photograph reads Ready in 2 days, allergens are tagged beneath the price, and the buy button reads Coming soon.",
+      },
+      shot2: {
+        src: "/images/work/open-door-bakery/09-pdp-celebration.png",
+        alt: "A celebration cake box at £45, with a second size serving 16 to 20 at £60, four allergen tags, and a free-text box for the message and flavour to be written on the cake.",
+      },
+    },
+    gallery: [
+      {
+        src: "/images/work/open-door-bakery/13-cart.png",
+        alt: "An empty basket, headed Your box, reading \"Your box is empty — let's fix that, the croissants are still warm\", with a button to start shopping.",
+        caption:
+          "Even the empty state is the bakery talking. It is also the state everything else depends on: the basket is what carries the longest lead time in it, so it decides the earliest day the whole order can be ready.",
+      },
+    ],
   },
 
   // HIDDEN — Essential Upsell is off the site for now. Un-comment these
