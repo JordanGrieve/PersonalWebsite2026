@@ -41,6 +41,13 @@ const nextConfig: NextConfig = {
         destination: "/work",
         permanent: false,
       },
+      {
+        /* Hidden the same way and for the same reason — commented out in
+           src/data/projects.ts, temporary until it comes back. */
+        source: "/work/essential-upsell",
+        destination: "/work",
+        permanent: false,
+      },
     ];
   },
 };

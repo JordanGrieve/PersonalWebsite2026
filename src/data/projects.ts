@@ -34,15 +34,17 @@ export const projects: Project[] = [
     ph: "The interview in progress — the voice call and the live transcript",
     tag: "Apps",
   },
-  {
-    slug: "essential-upsell",
-    name: "Essential Upsell",
-    kind: "Shopify app",
-    year: "2026",
-    result: "Vector recommendations across five storefront placements",
-    ph: "Admin — placement configuration",
-    tag: "Apps",
-  },
+  // HIDDEN — Essential Upsell is off the site for now. Un-comment these
+// lines, and the other blocks marked HIDDEN, to bring it back.
+//   {
+//     slug: "essential-upsell",
+//     name: "Essential Upsell",
+//     kind: "Shopify app",
+//     year: "2026",
+//     result: "Vector recommendations across five storefront placements",
+//     ph: "Admin — placement configuration",
+//     tag: "Apps",
+//   },
   // HIDDEN — AMORIA is off the site for now. Un-comment these lines, and the
 // other blocks marked HIDDEN, to bring it back. Nothing has been deleted.
 //   {
@@ -120,7 +122,8 @@ export const projectFilters = [
 export const featuredSlugs = [
   "dfyne-cloudflare-migration",
   "dfyne-fit-finder",
-  "essential-upsell",
+  // HIDDEN with Essential Upsell — this was a featured card.
+//   "essential-upsell",
   "land",
   /* Fourth slot: seen on tablet and mobile, hidden once the grid goes
      three-up. Postbox came out of the four to make room for the size advisor;
@@ -132,7 +135,8 @@ export const featuredSlugs = [
 export const featuredBlurbs: Record<string, string> = {
   "dfyne-cloudflare-migration": "Cloudflare · Shoppers on the wrong store, 35% → single digits",
   "dfyne-fit-finder": "Integration · AI size advisor across two Shopify Plus stores",
-  "essential-upsell": "Shopify app · Vector search over sales and returns",
+  // HIDDEN with Essential Upsell.
+//   "essential-upsell": "Shopify app · Vector search over sales and returns",
   land: "AI app · Voice mock interviews scored against a real job advert",
   // HIDDEN with AMORIA.
 //   amoria: "Headless Shopify · Hydrogen on Oxygen, built end to end",
@@ -141,7 +145,8 @@ export const featuredBlurbs: Record<string, string> = {
 };
 
 export const featuredPlaceholders: Record<string, string> = {
-  "essential-upsell": "Project shot — recommendations on the product page",
+  // HIDDEN with Essential Upsell.
+//   "essential-upsell": "Project shot — recommendations on the product page",
   land: "Project shot — the voice interview in progress",
   // HIDDEN with AMORIA.
 //   amoria: "Project shot — headless storefront",
@@ -328,38 +333,40 @@ const caseStudies: Record<string, CaseStudy> = {
     },
   },
 
-  "essential-upsell": {
-    tags: ["Shopify", "App", "2026"],
-    heading: "ESSENTIAL UPSELL",
-    intro:
-      "DFYNE lists every colourway as its own product, which breaks the assumption every off-the-shelf recommendations app is built on. So I built them their own — a vector search over sales and returns data, running in five places across the storefront.",
-    meta: [
-      { l: "Client", v: "DFYNE" },
-      { l: "Scope", v: "Internal Shopify app, five storefront placements" },
-      { l: "Timeline", v: "3 months, alongside other work" },
-      { l: "Stack", v: "Remix, Polaris, Cloud Run, Postgres + pgvector, BigQuery" },
-    ],
-    problem:
-      "Shopify's native recommended-products API was returning weak results, because the store's sales data was never reaching it correctly — the backend had been set up wrong long before. Public recommendation apps were not an option either: they expect the standard metafields to be populated, colour above all, and DFYNE creates a separate product for every colourway. Anything off the shelf either returned nothing useful or treated eight colours of the same shorts as eight unrelated products.",
-    approach:
-      "I built an internal app instead. Nightly jobs pull every sale and return out of the BigQuery warehouse and embed them into a Postgres vector index, so recommendations come from what actually sells and what actually comes back — no hand-picked rules and no merchandiser input. The storefront gets five placements: two on the product page, plus search, cart and basket. Each one can be pointed at a different question — what pairs well with this, what sells best alongside it, what resembles it — so a shorts page and a cart drawer ask for different things. Where a shopper has accepted cookies the list also folds in what they have recently viewed, added or removed; where they haven't, Shopify metafields serve a cached fallback, which doubles as the fast path. It runs on Cloud Run behind its own subdomain on DFYNE's Cloudflare DNS, so storefront requests never hit a bot challenge.",
-    /* TODO: swap in the AOV / attributed-revenue numbers once it has launched
-       and the data exists. These four are all true today. */
-    results: [
-      {
-        n: "5",
-        l: "Storefront placements — two on the product page, plus search, cart and basket",
-      },
-      { n: "3", l: "Questions each placement can ask, from pairs-well-with to resembles-this" },
-      { n: "0", l: "Hand-picked rules — every recommendation comes from sales and returns data" },
-      { n: "3 mo", l: "Planning through to deployment, around other projects" },
-    ],
-    slots: {
-      hero: "Admin — placement configuration",
-      shot1: "Product page recommendations",
-      shot2: "Cart recommendations",
-    },
-  },
+  // HIDDEN — Essential Upsell is off the site for now. Un-comment these
+// lines, and the other blocks marked HIDDEN, to bring it back.
+//   "essential-upsell": {
+//     tags: ["Shopify", "App", "2026"],
+//     heading: "ESSENTIAL UPSELL",
+//     intro:
+//       "DFYNE lists every colourway as its own product, which breaks the assumption every off-the-shelf recommendations app is built on. So I built them their own — a vector search over sales and returns data, running in five places across the storefront.",
+//     meta: [
+//       { l: "Client", v: "DFYNE" },
+//       { l: "Scope", v: "Internal Shopify app, five storefront placements" },
+//       { l: "Timeline", v: "3 months, alongside other work" },
+//       { l: "Stack", v: "Remix, Polaris, Cloud Run, Postgres + pgvector, BigQuery" },
+//     ],
+//     problem:
+//       "Shopify's native recommended-products API was returning weak results, because the store's sales data was never reaching it correctly — the backend had been set up wrong long before. Public recommendation apps were not an option either: they expect the standard metafields to be populated, colour above all, and DFYNE creates a separate product for every colourway. Anything off the shelf either returned nothing useful or treated eight colours of the same shorts as eight unrelated products.",
+//     approach:
+//       "I built an internal app instead. Nightly jobs pull every sale and return out of the BigQuery warehouse and embed them into a Postgres vector index, so recommendations come from what actually sells and what actually comes back — no hand-picked rules and no merchandiser input. The storefront gets five placements: two on the product page, plus search, cart and basket. Each one can be pointed at a different question — what pairs well with this, what sells best alongside it, what resembles it — so a shorts page and a cart drawer ask for different things. Where a shopper has accepted cookies the list also folds in what they have recently viewed, added or removed; where they haven't, Shopify metafields serve a cached fallback, which doubles as the fast path. It runs on Cloud Run behind its own subdomain on DFYNE's Cloudflare DNS, so storefront requests never hit a bot challenge.",
+//     /* TODO: swap in the AOV / attributed-revenue numbers once it has launched
+//        and the data exists. These four are all true today. */
+//     results: [
+//       {
+//         n: "5",
+//         l: "Storefront placements — two on the product page, plus search, cart and basket",
+//       },
+//       { n: "3", l: "Questions each placement can ask, from pairs-well-with to resembles-this" },
+//       { n: "0", l: "Hand-picked rules — every recommendation comes from sales and returns data" },
+//       { n: "3 mo", l: "Planning through to deployment, around other projects" },
+//     ],
+//     slots: {
+//       hero: "Admin — placement configuration",
+//       shot1: "Product page recommendations",
+//       shot2: "Cart recommendations",
+//     },
+//   },
 
   // HIDDEN — AMORIA is off the site for now. Un-comment these lines, and the
 // other blocks marked HIDDEN, to bring it back. Nothing has been deleted.
