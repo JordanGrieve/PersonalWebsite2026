@@ -14,6 +14,7 @@ import type { Shot } from "@/data/projects";
 export const heroImages: Record<string, Shot> = {
   "dfyne-cloudflare-migration": {
     src: "/images/work/dfyne-cloudflare-migration/hero.png",
+    cardPosition: "72% center",
     fit: "contain",
     alt: "An illustration of one stream of light entering from the left, passing through a single glowing gateway marked with a globe, and splitting into two clean paths that each end at a storefront.",
   },

@@ -41,7 +41,7 @@ export default function CardThumb({
          link goes, so a screen reader announcing the picture as well would
          be repeating the link it is already inside. */
       aria-hidden
-      style={{ objectFit: "cover", objectPosition: "72% center" }}
+      style={{ objectFit: "cover", objectPosition: hero.cardPosition ?? "center" }}
     />
   );
 }

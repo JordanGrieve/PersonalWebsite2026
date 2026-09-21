@@ -207,6 +207,10 @@ export type Shot = {
       whole page, which is too tall to fit a wide slot without leaving most
       of the row empty. Clicking it still shows the whole thing. */
   fit?: "contain" | "cover";
+  /** Where to crop from when this image is the small picture on a project
+      card. Defaults to the middle. Set it where the subject is not in the
+      middle — an illustration that builds towards one side, say. */
+  cardPosition?: string;
 };
 
 const caseStudies: Record<string, CaseStudy> = {
