@@ -121,16 +121,11 @@ export const projectFilters = [
  */
 export const featuredSlugs = [
   "dfyne-cloudflare-migration",
-  "dfyne-fit-finder",
-  // HIDDEN with Essential Upsell — this was a featured card.
-//   "essential-upsell",
   "land",
+  "dfyne-mobile-performance",
+  /* Fourth card: hidden between 883 and 1119px, where the grid is three
+     across and this one would start a second row on its own. */
   "open-door-bakery",
-  /* Fourth slot: seen on tablet and mobile, hidden once the grid goes
-     three-up. Postbox came out of the four to make room for the size advisor;
-     it is still on /work. */
-  // HIDDEN with AMORIA — this is the fourth featured card.
-//   "amoria",
 ];
 
 export const featuredBlurbs: Record<string, string> = {
@@ -139,6 +134,8 @@ export const featuredBlurbs: Record<string, string> = {
   // HIDDEN with Essential Upsell.
 //   "essential-upsell": "Shopify app · Vector search over sales and returns",
   land: "AI app · Voice mock interviews scored against a real job advert",
+  "dfyne-mobile-performance":
+    "Performance · LCP 1.81s → 1.31s for real visitors, and faster on desktop too",
   // HIDDEN with AMORIA.
 //   amoria: "Headless Shopify · Hydrogen on Oxygen, built end to end",
   "open-door-bakery": "Web build · Storefront, admin and API in one app",
@@ -149,6 +146,7 @@ export const featuredPlaceholders: Record<string, string> = {
   // HIDDEN with Essential Upsell.
 //   "essential-upsell": "Project shot — recommendations on the product page",
   land: "Project shot — the voice interview in progress",
+  "dfyne-mobile-performance": "Project shot — main thread, before and after",
   // HIDDEN with AMORIA.
 //   amoria: "Project shot — headless storefront",
   "dfyne-cloudflare-migration": "Project shot — edge routing",
