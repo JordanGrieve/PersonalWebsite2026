@@ -3,6 +3,22 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
+  images: {
+    /* Next's default is 60 seconds, which is meant for images that can
+       change behind a stable URL. Every image on this site is a file in
+       /public: it cannot change without a deploy, and a deploy changes the
+       URL's underlying content hash anyway.
+
+       At 60 seconds the optimised variants were being sent with
+       `max-age=60, must-revalidate`, so a reader who scrolled back up a
+       case study re-requested every screenshot, and Cloudflare would not
+       hold them at the edge either. On the pages with nine images that is
+       nine round trips to the origin for pictures that will never differ.
+
+       A year, matching what the JS and CSS already get. */
+    minimumCacheTTL: 31536000,
+  },
+
   async redirects() {
     return [
       {
