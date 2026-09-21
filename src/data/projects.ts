@@ -221,29 +221,6 @@ const caseStudies: Record<string, CaseStudy> = {
       "Interview practice is either generic or expensive. A list of common questions does not know what you applied for. A friend will ask you three things and run out. A coach costs more than most people are willing to spend on one application.\n\nMeanwhile the thing you are actually frightened of is specific: this advert, these requirements, and the bit where you say something out loud, badly, and someone asks you about it.\n\nSo Land is built around one advert at a time. You paste it in once and it becomes the context for everything — the questions the interviewer asks, the difficulty of the practice questions, and what your CV is judged against. The part that makes it worth using is the voice interview: typed questions and answers are a commodity, and speaking an answer to something that then asks a follow-up is the part you cannot get anywhere else without booking a human.",
     approach:
       "The advert is not a prompt the model skims. It goes into the voice session as four named variables — your name, the title, the description and the experience level — so the interviewer's questions come from that role rather than a generic script. The model that scores you afterwards gets the advert and the transcript in separately marked blocks, and is told to judge the answers against that role rather than against an ideal candidate.\n\nThe transcript is more than words. The voice service returns emotion intensities per utterance, and the rubric uses them: confidence is scored from those cues alongside what you actually said, and pacing from the gaps between question and answer. A list of questions cannot tell you that you hesitated.\n\nEverything a model returns is a structured object rather than prose — a rating from one to ten, and markdown feedback, checked against a schema before it is allowed anywhere near the database. That is what makes progress possible: a number that can be compared with last week's number. Prose cannot be charted.\n\nThe CV reviewer is under one rule I would not ship without: it does not know your numbers, and it is forbidden from inventing them. Where a line would be stronger with a figure, it emits a placeholder — [N], [X]%, [duration] — and it never states a metric, a team size or a result your CV does not already contain. That is the difference between a rewrite you can send and one that lies on your behalf.\n\nAnd everything a user types is treated as untrusted. A job advert is a document somebody else wrote, and it arrives in the same context window as the rules for marking you. All three system prompts say that the delimited content is data and never instructions, and name the attempts they expect: changing the rubric, demanding a particular score, asking for the prompt back.",
-    /* The truncation work is the strongest technical story here, so it gets
-       its own section rather than a line in the approach. */
-    incidentsTitle: "The hard part",
-    incidentsNote:
-      "One bug, in two halves, and the second half is the one worth knowing about. It is the reason I trust what this app stores.",
-    incidents: [
-      {
-        what: "Question generation failed every single time",
-        why: "Not intermittently — one hundred per cent. The error said the response could not be parsed, which points at the parser or the prompt, and both are the wrong place to look. The model reasons before it writes, and those reasoning tokens are billed against the same output budget. A 512-token ceiling was generous for a one-sentence question and got entirely eaten before a single visible character appeared: it returned a 107-character fragment and a reason of \"length\", every time.",
-      },
-      {
-        what: "The same ceiling failed silently on the CV reviewer",
-        why: "This is the nastier half. A model can run out of budget having already closed the JSON, so the object is structurally perfect and the feedback stops mid-sentence. Nothing throws. The parser is satisfied. A half-finished analysis reaches the user looking exactly like a finished one — the same CV, on the same model, produced 4,126 characters on one call and 842 on the next.",
-      },
-      {
-        what: "Two defences, because either alone is not enough",
-        why: "The finish reason is now checked on the success path, not only where something threw, and a truncated result is a typed error that refuses to be saved. And the budgets were resized against measured output rather than guessed: 2,048 for a question, 8,192 for the seven-section interview feedback, 12,000 for a CV analysis with its before-and-after pairs. Catching truncation only turns a silent half-answer into a retry; the headroom is what stops it happening.",
-      },
-      {
-        what: "The error messages now name the cause",
-        why: "\"Output truncated at maxOutputTokens=2048 (produced 107 chars) — raise the budget; reasoning tokens count toward it.\" Whoever meets this next gets the answer instead of the hunt, and the measured character counts are recorded in the code beside the fix.",
-      },
-    ],
     results: [
       { n: "63", l: "Unit tests passing across six files — 20 September" },
       { n: "0 / 0", l: "Lint warnings and type errors, checked on every pull request" },
