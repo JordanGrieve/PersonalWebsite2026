@@ -196,8 +196,13 @@ a:hover {
    reaches three columns (three 260px tracks plus two 16px gaps, inside the
    section's 4% padding), and at three-up the fourth card would start a second
    row on its own — so it goes. Measured, not guessed: 875px gives two
-   columns, 885px gives three. */
-@container (min-width: 883px) {
+   columns, 885px gives three.
+
+   Only in that band, though. Once the grid reaches four columns there is
+   no orphan to avoid and the fourth card is simply the fourth card, so it
+   comes back. Four 260px tracks and three 16px gaps need 1,088px, and the
+   next size up from three columns is where that fits. */
+@container (min-width: 883px) and (max-width: 1119px) {
   #featGrid > *:nth-child(4) {
     /* !important because the card is a Link carrying an inline
        `display: block`, which would otherwise win. */

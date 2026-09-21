@@ -22,4 +22,11 @@ export const heroImages: Record<string, Shot> = {
     src: "/images/work/dfyne-mobile-performance/hero.png",
     alt: "An illustration of a glowing track running left to right. At the left it is buried under a jam of dark blocks; the blocks thin out across the frame until the track runs clear and unbroken into a lit panel at the right.",
   },
+  /* A screenshot rather than an illustration, so it is cropped rather
+     than fitted — see `fit` on the Shot type. */
+  "open-door-bakery": {
+    src: "/images/work/open-door-bakery/03-home-desktop.png",
+    alt: "The Open Door Bakery home page: a watercolour hero reading Welcome to Open Door Bakery, buttons to shop and to order something custom, and a row of category cards.",
+    fit: "cover",
+  },
 };

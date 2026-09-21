@@ -125,6 +125,7 @@ export const featuredSlugs = [
   // HIDDEN with Essential Upsell — this was a featured card.
 //   "essential-upsell",
   "land",
+  "open-door-bakery",
   /* Fourth slot: seen on tablet and mobile, hidden once the grid goes
      three-up. Postbox came out of the four to make room for the size advisor;
      it is still on /work. */
@@ -317,11 +318,7 @@ const caseStudies: Record<string, CaseStudy> = {
       shot2: "A celebration cake — sizes, and the box personalised with a message",
     },
     shots: {
-      hero: {
-        src: "/images/work/open-door-bakery/03-home-desktop.png",
-        fit: "cover",
-        alt: "The Open Door Bakery home page: a watercolour hero reading Welcome to Open Door Bakery, buttons to shop and to order something custom, and a row of category cards for brownies, cakes, celebration boxes and cookies.",
-      },
+      hero: heroImages["open-door-bakery"],
       shot1: {
         src: "/images/work/open-door-bakery/07-pdp-desktop.png",
         alt: "A product page for a lemon drizzle loaf at £4. A badge on the photograph reads Ready in 2 days, allergens are tagged beneath the price, and the buy button reads Coming soon.",
