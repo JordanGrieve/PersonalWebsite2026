@@ -27,7 +27,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "land",
-    name: "Land",
+    name: "Callback",
     kind: "AI app",
     year: "2026",
     result: "Live spoken mock interviews, scored against the job advert you paste in",
@@ -212,9 +212,9 @@ export type Shot = {
 const caseStudies: Record<string, CaseStudy> = {
   land: {
     tags: ["AI", "App", "2026"],
-    heading: "LAND",
+    heading: "CALLBACK",
     intro:
-      "Paste in the job advert for a role you actually want. Land gives you a live spoken mock interview with an AI that asks follow-ups based on that specific role, then scores how you did across seven categories. Two other things hang off the same advert: technical questions at a difficulty you pick, and a review of your CV against that role. Everything comes back as a rating out of ten with written feedback, so you can watch the scores move across attempts instead of guessing whether you are getting better.",
+      "Paste in the job advert for a role you actually want. Callback gives you a live spoken mock interview with an AI that asks follow-ups based on that specific role, then scores how you did across seven categories. Two other things hang off the same advert: technical questions at a difficulty you pick, and a review of your CV against that role. Everything comes back as a rating out of ten with written feedback, so you can watch the scores move across attempts instead of guessing whether you are getting better.",
     meta: [
       { l: "Client", v: "Personal project — my own" },
       { l: "Scope", v: "Voice interview, question practice, CV review, accounts, billing" },
@@ -227,7 +227,7 @@ const caseStudies: Record<string, CaseStudy> = {
     ],
     problemTitle: "The idea",
     problem:
-      "Interview practice is either generic or expensive. A list of common questions does not know what you applied for. A friend will ask you three things and run out. A coach costs more than most people are willing to spend on one application.\n\nMeanwhile the thing you are actually frightened of is specific: this advert, these requirements, and the bit where you say something out loud, badly, and someone asks you about it.\n\nSo Land is built around one advert at a time. You paste it in once and it becomes the context for everything — the questions the interviewer asks, the difficulty of the practice questions, and what your CV is judged against. The part that makes it worth using is the voice interview: typed questions and answers are a commodity, and speaking an answer to something that then asks a follow-up is the part you cannot get anywhere else without booking a human.",
+      "Interview practice is either generic or expensive. A list of common questions does not know what you applied for. A friend will ask you three things and run out. A coach costs more than most people are willing to spend on one application.\n\nMeanwhile the thing you are actually frightened of is specific: this advert, these requirements, and the bit where you say something out loud, badly, and someone asks you about it.\n\nSo Callback is built around one advert at a time. You paste it in once and it becomes the context for everything — the questions the interviewer asks, the difficulty of the practice questions, and what your CV is judged against. The part that makes it worth using is the voice interview: typed questions and answers are a commodity, and speaking an answer to something that then asks a follow-up is the part you cannot get anywhere else without booking a human.",
     approach:
       "The advert is not a prompt the model skims. It goes into the voice session as four named variables — your name, the title, the description and the experience level — so the interviewer's questions come from that role rather than a generic script. The model that scores you afterwards gets the advert and the transcript in separately marked blocks, and is told to judge the answers against that role rather than against an ideal candidate.\n\nThe transcript is more than words. The voice service returns emotion intensities per utterance, and the rubric uses them: confidence is scored from those cues alongside what you actually said, and pacing from the gaps between question and answer. A list of questions cannot tell you that you hesitated.\n\nEverything a model returns is a structured object rather than prose — a rating from one to ten, and markdown feedback, checked against a schema before it is allowed anywhere near the database. That is what makes progress possible: a number that can be compared with last week's number. Prose cannot be charted.\n\nThe CV reviewer is under one rule I would not ship without: it does not know your numbers, and it is forbidden from inventing them. Where a line would be stronger with a figure, it emits a placeholder — [N], [X]%, [duration] — and it never states a metric, a team size or a result your CV does not already contain. That is the difference between a rewrite you can send and one that lies on your behalf.\n\nAnd everything a user types is treated as untrusted. A job advert is a document somebody else wrote, and it arrives in the same context window as the rules for marking you. All three system prompts say that the delimited content is data and never instructions, and name the attempts they expect: changing the rubric, demanding a particular score, asking for the prompt back.",
     results: [
@@ -239,6 +239,18 @@ const caseStudies: Record<string, CaseStudy> = {
       hero: "The voice interview in progress",
       shot1: "Seven-category feedback with the rating",
       shot2: "A CV rewrite, with a bracketed placeholder where a number would go",
+    },
+    /* Only the signed-out surface so far. The two slots still describing
+       the interview and the CV rewrite are the ones worth having — this
+       page argues about scoring and structured output, and none of that
+       is visible from outside the login. */
+    shots: {
+      hero: heroImages["land"],
+      shot1: {
+        src: "/images/work/ai-job-prep/how-it-works.png",
+        fit: "contain",
+        alt: "Three steps from the landing page: paste the job description, talk to an AI interviewer, then get scored specific feedback — clarity, confidence, pacing and role fit, each rated out of ten with quotes from your own answers.",
+      },
     },
   },
 
