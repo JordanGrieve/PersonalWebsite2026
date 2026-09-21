@@ -14,19 +14,18 @@ import type { Shot } from "@/data/projects";
 export const heroImages: Record<string, Shot> = {
   "dfyne-cloudflare-migration": {
     src: "/images/work/dfyne-cloudflare-migration/hero.png",
+    fit: "contain",
     alt: "An illustration of one stream of light entering from the left, passing through a single glowing gateway marked with a globe, and splitting into two clean paths that each end at a storefront.",
   },
   /* Folder named for the old slug. The project is "DFYNE site performance"
      now; the URL, and so the folder, stayed. */
   "dfyne-mobile-performance": {
     src: "/images/work/dfyne-mobile-performance/hero.png",
+    fit: "contain",
     alt: "An illustration of a glowing track running left to right. At the left it is buried under a jam of dark blocks; the blocks thin out across the frame until the track runs clear and unbroken into a lit panel at the right.",
   },
-  /* A screenshot rather than an illustration, so it is cropped rather
-     than fitted — see `fit` on the Shot type. */
   "open-door-bakery": {
     src: "/images/work/open-door-bakery/03-home-desktop.png",
     alt: "The Open Door Bakery home page: a watercolour hero reading Welcome to Open Door Bakery, buttons to shop and to order something custom, and a row of category cards.",
-    fit: "cover",
   },
 };

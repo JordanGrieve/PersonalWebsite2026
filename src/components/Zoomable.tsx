@@ -55,7 +55,7 @@ export default function Zoomable({
   src,
   alt,
   priority,
-  fit = "contain",
+  fit = "cover",
   sizes = "(max-width: 640px) 100vw, 50vw",
 }: {
   src: string;
@@ -153,12 +153,13 @@ export default function Zoomable({
           fill
           priority={priority}
           sizes={sizes}
-          /* `contain` by default, because a chart cropped to fill a box has
-             lost the axis that made it worth showing. `cover` for the ones
-             where filling the width matters more than seeing all of it —
-             a screenshot of a whole web page, say, which is tall enough
-             that fitting it whole leaves half the row empty. Enlarging it
-             still shows the lot. */
+          /* Cropped to fill by default: an image that fits its box whole
+             leaves dead space either side, and a row of screenshots in
+             different shapes reads as a mistake rather than a set. Clicking
+             any of them shows the whole picture, which is what makes
+             cropping the small one safe. Pass fit="contain" for an image
+             whose edges carry the meaning — a chart with its axis along the
+             bottom, a table whose last column is the point. */
           style={{ objectFit: fit, objectPosition: fit === "cover" ? "top" : "center" }}
         />
         <span className="zoom-hint" aria-hidden="true">

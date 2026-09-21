@@ -331,6 +331,7 @@ const caseStudies: Record<string, CaseStudy> = {
     gallery: [
       {
         src: "/images/work/open-door-bakery/13-cart.png",
+        fit: "contain",
         alt: "An empty basket, headed Your box, reading \"Your box is empty — let's fix that, the croissants are still warm\", with a button to start shopping.",
         caption:
           "Even the empty state is the bakery talking. It is also the state everything else depends on: the basket is what carries the longest lead time in it, so it decides the earliest day the whole order can be ready.",
@@ -485,10 +486,12 @@ const caseStudies: Record<string, CaseStudy> = {
       hero: heroImages["dfyne-cloudflare-migration"],
       shot1: {
         src: "/images/work/dfyne-cloudflare-migration/traffic-drop.png",
+        fit: "contain",
         alt: "A line chart of US traffic share on the rest-of-world store, running between roughly 15 and 35 percent and repeatedly hitting the alert threshold, then dropping to a flat low line.",
       },
       shot2: {
         src: "/images/work/dfyne-cloudflare-migration/switcher-new.png",
+        fit: "contain",
         alt: "The in-house region switcher open, listing United Kingdom, United States, Europe, Canada, Australia and International, each with its currency.",
       },
     },
@@ -497,29 +500,34 @@ const caseStudies: Record<string, CaseStudy> = {
     gallery: [
       {
         src: "/images/work/dfyne-cloudflare-migration/worker-routes.png",
+        fit: "contain",
         alt: "Cloudflare worker routes. The apex and wildcard routes run the worker; gift cards, both customer-account subdomains and the /cdn-cgi paths are set to disable it.",
         caption:
           "Every incident above, as a route. The apex finally bound to the worker — and gift cards, both account subdomains and /cdn-cgi explicitly excluded from it.",
       },
       {
         src: "/images/work/dfyne-cloudflare-migration/switcher-old.png",
+        fit: "contain",
         alt: "The previous region switcher, an alphabetical list of every country from Andorra onwards, with Argentina selected.",
         caption:
           "What it replaced: every country in the world, alphabetically, defaulting to Argentina. Switching region here set no cookie the worker understood.",
       },
       {
         src: "/images/work/dfyne-cloudflare-migration/switcher-mobile.png",
+        fit: "contain",
         alt: "The rebuilt region switcher on a phone, showing the same six stores.",
         caption: "The same switcher on a phone. One snippet, rendered twice per page.",
       },
       {
         src: "/images/work/dfyne-cloudflare-migration/new-selecty-working.png",
+        fit: "contain",
         alt: "The US store on a phone with a card over it reading 'Continue on the UK store?' — 'Shop in your own market for local pricing, currency and delivery. Orders placed on the US store can't be delivered to a UK address.' — above a 'Shop UK store' button and a 'Stay on US' link. A bar pinned to the top of the page asks the same thing.",
         caption:
           "The mismatch card, on the store that cannot ship to this shopper. It says so on the product page rather than at checkout, and taking it is what sets the cookie the worker reads. Moving is not a reset either: the product and size they had come with them, and they land on the same page on the store that can actually deliver — so the journey they were on carries on instead of starting again. Dismissing it is a choice too, and sticks for an hour.",
       },
       {
         src: "/images/work/dfyne-cloudflare-migration/worker-metrics.png",
+        fit: "contain",
         alt: "Cloudflare metrics for the routing worker: 2.61 billion invocations, 766.6 requests per second, a 0% error rate and 0.63ms median CPU time.",
         caption:
           "What it carries: 766 requests a second at a 0% error rate, on 0.63ms of CPU each. Per-host traffic volumes cropped out.",
@@ -623,23 +631,27 @@ const caseStudies: Record<string, CaseStudy> = {
     gallery: [
       {
         src: "/images/work/dfyne-mobile-performance/ROW-OldPerformance.png",
+        fit: "contain",
         alt: "Field metrics for the rest-of-world store over 11 and 12 September: largest contentful paint 1.81 seconds, interaction to next paint 127.19ms, layout shift 0.0098.",
         caption:
           "Rest-of-world store, before: LCP 1.81s across 11 and 12 September. Everything already rated Good — this was not a broken site, it was a slow one.",
       },
       {
         src: "/images/work/dfyne-mobile-performance/ROW-New-Perfromance.png",
+        fit: "contain",
         alt: "The same dashboard for 19 September: largest contentful paint 1.31 seconds, interaction to next paint 121.29ms, layout shift 0.0089.",
         caption:
           "The same store, same dashboard, on 19 September: 1.31s. Half a second off the paint that decides whether a page feels fast, for every visitor, not a lab.",
       },
       {
         src: "/images/work/dfyne-mobile-performance/US-Store-Last-2-Weeks.png",
+        fit: "contain",
         alt: "Field metrics for the US store over the week to 12 September: largest contentful paint 1.61 seconds.",
         caption: "US store, the week to 12 September: 1.61s.",
       },
       {
         src: "/images/work/dfyne-mobile-performance/US-Store-New-Perforamnce.png",
+        fit: "contain",
         alt: "The same dashboard for 14 to 19 September: largest contentful paint 999.81 milliseconds.",
         caption:
           "The week to 19 September: 999ms. Under a second on the store that takes the most traffic.",
