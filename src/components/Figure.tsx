@@ -47,7 +47,7 @@ export default function Figure({
         }}
       >
         {shot ? (
-          <Zoomable src={shot.src} alt={shot.alt} priority={priority} sizes={sizes} />
+          <Zoomable src={shot.src} alt={shot.alt} priority={priority} fit={shot.fit} sizes={sizes} />
         ) : (
           <ImageSlot placeholder={placeholder!} />
         )}

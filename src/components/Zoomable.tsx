@@ -55,11 +55,13 @@ export default function Zoomable({
   src,
   alt,
   priority,
+  fit = "contain",
   sizes = "(max-width: 640px) 100vw, 50vw",
 }: {
   src: string;
   alt: string;
   priority?: boolean;
+  fit?: "contain" | "cover";
   sizes?: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -151,7 +153,13 @@ export default function Zoomable({
           fill
           priority={priority}
           sizes={sizes}
-          style={{ objectFit: "contain", objectPosition: "center" }}
+          /* `contain` by default, because a chart cropped to fill a box has
+             lost the axis that made it worth showing. `cover` for the ones
+             where filling the width matters more than seeing all of it —
+             a screenshot of a whole web page, say, which is tall enough
+             that fitting it whole leaves half the row empty. Enlarging it
+             still shows the lot. */
+          style={{ objectFit: fit, objectPosition: fit === "cover" ? "top" : "center" }}
         />
         <span className="zoom-hint" aria-hidden="true">
           <i className="ph ph-arrows-out" />

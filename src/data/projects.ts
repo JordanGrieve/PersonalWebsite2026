@@ -198,7 +198,15 @@ export type CaseStudy = {
 };
 
 /** `src` is a path under /public. `alt` describes it; `caption` is printed. */
-export type Shot = { src: string; alt: string; caption?: string };
+export type Shot = {
+  src: string;
+  alt: string;
+  caption?: string;
+  /** "cover" fills the box and crops from the bottom. For a screenshot of a
+      whole page, which is too tall to fit a wide slot without leaving most
+      of the row empty. Clicking it still shows the whole thing. */
+  fit?: "contain" | "cover";
+};
 
 const caseStudies: Record<string, CaseStudy> = {
   land: {
@@ -311,6 +319,7 @@ const caseStudies: Record<string, CaseStudy> = {
     shots: {
       hero: {
         src: "/images/work/open-door-bakery/03-home-desktop.png",
+        fit: "cover",
         alt: "The Open Door Bakery home page: a watercolour hero reading Welcome to Open Door Bakery, buttons to shop and to order something custom, and a row of category cards for brownies, cakes, celebration boxes and cookies.",
       },
       shot1: {

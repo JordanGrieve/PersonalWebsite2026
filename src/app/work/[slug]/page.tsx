@@ -155,7 +155,7 @@ function Slot({
   priority?: boolean;
 }) {
   if (!shot) return <ImageSlot placeholder={placeholder} />;
-  return <Zoomable src={shot.src} alt={shot.alt} priority={priority} />;
+  return <Zoomable src={shot.src} alt={shot.alt} priority={priority} fit={shot.fit} />;
 }
 
 /**
@@ -237,7 +237,10 @@ export default async function CaseStudyPage({ params }: Params) {
             marginTop: 30,
             borderRadius: "var(--radius-lg)",
             overflow: "hidden",
-            height: "clamp(220px,34cqw,420px)",
+            /* Taller than it was. A page screenshot is about 3:2, so at the
+               old height it sat in the middle of the row with a third of the
+               width empty either side. */
+            height: "clamp(240px,44cqw,560px)",
             position: "relative",
           }}
         >
