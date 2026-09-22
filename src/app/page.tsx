@@ -6,7 +6,7 @@ import PortfolioWord from "@/components/PortfolioWord";
 import SpinBadge from "@/components/SpinBadge";
 import ServicesGrid from "@/components/home/ServicesGrid";
 import Toolkit from "@/components/home/Toolkit";
-import { process, stats, testimonials } from "@/data/home";
+import { stats, testimonials } from "@/data/home";
 import {
   featuredBlurbs,
   featuredPlaceholders,
@@ -437,60 +437,6 @@ export default function HomePage() {
       >
         <Toolkit />
 
-        <div
-          style={{
-            background: "var(--color-surface)",
-            border: "1px solid var(--color-divider)",
-            borderRadius: "var(--radius-lg)",
-            padding: 24,
-          }}
-        >
-          <h3 style={{ ...sectionHeading, margin: "0 0 18px", fontSize: "clamp(24px,2.6cqw,32px)" }}>
-            WORK PROCESS
-          </h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            {process.map((p) => (
-              <div key={p.no} style={{ display: "flex", gap: 14 }}>
-                <span
-                  style={{
-                    flex: "none",
-                    width: 30,
-                    height: 30,
-                    borderRadius: "50%",
-                    border: "1px solid var(--color-accent-700)",
-                    display: "grid",
-                    placeItems: "center",
-                    font: "500 11px/1 var(--font-heading)",
-                    color: "var(--color-accent)",
-                  }}
-                >
-                  {p.no}
-                </span>
-                <div>
-                  <div
-                    style={{
-                      font: "500 13px/1.3 var(--font-heading)",
-                      letterSpacing: ".06em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {p.title}
-                  </div>
-                  <div
-                    style={{
-                      marginTop: 4,
-                      fontSize: 13,
-                      lineHeight: 1.5,
-                      color: "var(--color-neutral-400)",
-                    }}
-                  >
-                    {p.body}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         <div
           id="ctaCard"

@@ -23,15 +23,23 @@ const nextConfig: NextConfig = {
     return [
       {
         /* /pricing was a real page, in the sitemap, and is indexed. It now
-           404s, so send it to /services — which is where the prices went, as
-           the "From £x" line on each card, rather than an unrelated page.
+           404s. It first went to /services, and that page has gone too, so
+           both now land on the work — which is what someone following an old
+           pricing link is really looking for.
 
-           Permanent (308), because the page is not coming back. That is the
+           Permanent (308), because neither page is coming back. That is the
            instruction that gets the old URL dropped and any link equity moved
            across; a temporary redirect would leave search engines checking
            back indefinitely. */
         source: "/pricing",
-        destination: "/services",
+        destination: "/work",
+        permanent: true,
+      },
+      {
+        /* /services was published, in the sitemap and indexed, and listed
+           prices for freelance work that is no longer on offer. */
+        source: "/services",
+        destination: "/work",
         permanent: true,
       },
       {

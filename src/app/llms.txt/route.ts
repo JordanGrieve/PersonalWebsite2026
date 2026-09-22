@@ -1,6 +1,5 @@
 import { displayDate, posts } from "@/data/posts";
 import { getCaseStudy, projects } from "@/data/projects";
-import { serviceDetail } from "@/data/services";
 import { liveSocials, site } from "@/data/site";
 
 /**
@@ -29,15 +28,6 @@ function build(): string {
   for (const s of liveSocials) lines.push(`- ${s.label}: ${s.href}`);
   lines.push(`- Works on: ${site.expertise.join(", ")}`);
   lines.push("");
-
-  lines.push("## Services");
-  lines.push("");
-  for (const s of serviceDetail) {
-    lines.push(`### ${s.title} (${s.from})`);
-    lines.push(s.body);
-    for (const item of s.items) lines.push(`- ${item}`);
-    lines.push("");
-  }
 
   lines.push("## Projects");
   lines.push("");

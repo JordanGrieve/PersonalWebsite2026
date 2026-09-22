@@ -124,17 +124,6 @@ export const toolkit: Tool[] = [
   },
 ];
 
-export const process = [
-  { no: "01", title: "Call", body: "Twenty minutes on what you sell and what is in the way." },
-  { no: "02", title: "Scope", body: "A written plan with a price and a date, before any code." },
-  { no: "03", title: "Build", body: "Weekly previews on a staging URL you can click through." },
-  {
-    no: "04",
-    title: "Ship & measure",
-    body: "Launch, then numbers a week later to prove it worked.",
-  },
-];
-
 /* The design's three testimonials were invented, and attributed to named
    people at companies that do not exist. Removed rather than left in.
    The home page hides the section while this is empty — add real quotes

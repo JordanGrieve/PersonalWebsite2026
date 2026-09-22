@@ -9,17 +9,10 @@
  */
 import { posts, type Post } from "@/data/posts";
 import { getCaseStudy, projects, type Project } from "@/data/projects";
-import { serviceDetail } from "@/data/services";
 import { liveSocials, site } from "@/data/site";
 
 export const PERSON_ID = `${site.url}/#person`;
 export const WEBSITE_ID = `${site.url}/#website`;
-
-/** "From £600" / "From £2,400" / "From £400/mo" -> 600 / 2400 / 400. */
-function priceOf(text: string): number | undefined {
-  const digits = text.replace(/[^\d,]/g, "").replace(/,/g, "");
-  return digits ? Number(digits) : undefined;
-}
 
 const person = {
   "@type": "Person",
@@ -131,51 +124,6 @@ export function contactSchema() {
       "Enquire about Shopify, web and performance work.",
     ),
     breadcrumb([{ name: "Contact", path: "/contact" }]),
-  );
-}
-
-export function servicesSchema() {
-  const services = serviceDetail.map((s) => {
-    const from = priceOf(s.from);
-    return {
-      "@type": "Service",
-      "@id": `${site.url}/services#${s.title.toLowerCase().replace(/[^a-z]+/g, "-")}`,
-      name: s.title,
-      description: s.body,
-      serviceType: s.title,
-      provider: { "@id": PERSON_ID },
-      areaServed: [
-        { "@type": "Country", name: "United Kingdom" },
-        { "@type": "Place", name: "Worldwide — remote" },
-      ],
-      ...(from
-        ? {
-            offers: {
-              "@type": "Offer",
-              priceSpecification: {
-                "@type": "PriceSpecification",
-                price: from,
-                priceCurrency: "GBP",
-                /* The page says "From £X", and this is how schema.org says the
-                   same thing — without it the number reads as a fixed price. */
-                minPrice: from,
-                valueAddedTaxIncluded: false,
-              },
-            },
-          }
-        : {}),
-    };
-  });
-
-  return graph(
-    page(
-      "CollectionPage",
-      "/services",
-      `Services — ${site.fullName}`,
-      "Shopify, web, performance, Cloudflare and analytics work.",
-    ),
-    breadcrumb([{ name: "Services", path: "/services" }]),
-    ...services,
   );
 }
 

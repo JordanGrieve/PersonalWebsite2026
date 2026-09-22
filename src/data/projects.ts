@@ -57,6 +57,15 @@ export const projects: Project[] = [
 //     tag: "Shopify",
 //   },
   {
+    slug: "coinpulse",
+    name: "CoinPulse",
+    kind: "Web app",
+    year: "2026",
+    result: "A live crypto market dashboard — public, no login, built in five days",
+    ph: "The coin detail page — price header, candlestick chart, converter",
+    tag: "Web",
+  },
+  {
     slug: "dfyne-cloudflare-migration",
     name: "DFYNE geo-routing",
     kind: "Infrastructure",
@@ -212,6 +221,54 @@ export type Shot = {
 };
 
 const caseStudies: Record<string, CaseStudy> = {
+  coinpulse: {
+    tags: ["Web app", "Next.js", "2026"],
+    heading: "COINPULSE",
+    intro:
+      "A live cryptocurrency market dashboard: what Bitcoin is doing, which coins are moving, and the detail on any one of them. It is public, there is no login and nothing to sign up for — you open it and the numbers are there. Five days, twenty commits, and it is still running.",
+    meta: [
+      { l: "Client", v: "Personal project" },
+      { l: "Scope", v: "Market dashboard — overview, coin list, coin detail" },
+      { l: "Timeline", v: "January 2026, five days" },
+      {
+        l: "Stack",
+        v: "Next.js 16, React 19, TypeScript, Tailwind v4, lightweight-charts, CoinGecko API, Vercel",
+      },
+      { l: "Status", v: "Live and public" },
+      { l: "Live", v: "coinpulse-cyan.vercel.app" },
+    ],
+    problemTitle: "What it is, and what it is not",
+    problem:
+      "Three pages. The home page shows Bitcoin on a candlestick chart with a table of trending coins beside it and the top categories underneath — which sector is up, which coins led it. A second page lists every coin, ranked and paginated. The third is one coin in detail: price today and over thirty days, a chart you can switch between a day and a year, a currency converter, and the numbers that describe it — market cap, rank, volume.\n\nIt is worth saying plainly what this does not have, because the interesting part is not where you would look for it. There is no login, no database, no writes, no test suite. It reads a public API and shows you what came back. Nobody's data is in it and nothing can be broken by using it.\n\nSo the work is not in the domain, it is in the plumbing: how the data is fetched, what is cached and for how long, what happens when one endpoint is slow, and what happens when one fails. That is what the rest of this page is about.",
+    approach:
+      "Every request to the market API goes through one function. It is a server-only module holding a single generic fetcher, typed by the caller, and nothing else in the app talks to the API directly. That is what keeps the key out of the browser — there is exactly one place it could leak from, and it never runs there.\n\nThe key is on a demo tier with a rate limit, which decides the caching. Each fetch declares how long its answer stays good for, so the dashboard is live-ish rather than live: fresh enough that the numbers mean something, cheap enough that a visitor does not cost a call. The configuration is checked when the module loads rather than when a request arrives, so a missing key stops the app at startup instead of failing halfway through somebody's page.\n\nThe home page streams. Each section fetches its own data behind its own boundary with its own skeleton, so the trending table can be on screen while the categories are still in flight. One slow endpoint delays its own section and nothing else. On the coin page the two calls it needs — the coin and its price history — go out together rather than one after the other.\n\nThe things that can go wrong are handled where they happen. The pool lookup has two routes to the same answer and takes the second when the first has nothing to work with, and returns a fallback rather than throwing if neither works: a missing panel is a worse page, an exception is no page. Pagination lives in the URL, so a page of the list can be linked, shared and survive a refresh.",
+    /* No results tiles. Nothing has been measured — no users, no traffic, no
+       benchmarks — and a row of commit counts would be padding. */
+    incidentsTitle: "How it was built",
+    incidentsNote:
+      "A solo project with nobody waiting on it, which is exactly when the discipline is optional. This is the part I would point at.",
+    incidents: [
+      {
+        what: "Six features, six branches, six pull requests",
+        why: "Nothing went straight onto the main branch, on a project where nobody would have known. The history reads as a sequence of finished things rather than a stream of commits, which is the difference between a repository someone can review and one they can only read.",
+      },
+      {
+        what: "An AI reviewer on every pull request, and I acted on it",
+        why: "Two commits exist only because a review found something, and one refactor came straight out of the feedback — normalising the timestamps the chart receives and handling requests that are still in flight when another one starts. A review you overrule every time is theatre.",
+      },
+      {
+        what: "Five days, and it is still up",
+        why: "Twenty commits between the twentieth and the twenty-fourth of January. It has needed nothing since, which is what you would hope for from something with no state of its own to go wrong.",
+      },
+    ],
+    slots: {
+      hero: "The coin detail page — price header, candlestick chart and the currency converter",
+      shot1: "The home dashboard — the Bitcoin chart beside the trending coins table",
+      shot2: "The ranked coin list, paginated",
+    },
+  },
+
+
   land: {
     tags: ["AI", "App", "2026"],
     heading: "CALLBACK",
