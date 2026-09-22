@@ -283,6 +283,7 @@ const caseStudies: Record<string, CaseStudy> = {
         v: "Next.js 16, React 19, TypeScript, Postgres, Drizzle, Gemini via the Vercel AI SDK, Hume EVI, Clerk, Arcjet, Vercel",
       },
       { l: "Status", v: "Deployed — not publicly launched" },
+      { l: "Live", v: "jobinterview-prep.com" },
     ],
     problemTitle: "The idea",
     problem:
@@ -630,6 +631,7 @@ const caseStudies: Record<string, CaseStudy> = {
         v: "Shopify, Impulse theme, Lighthouse, Chrome tracing, Cloudflare Observatory, Dash0",
       },
       { l: "Status", v: "Shipped — live on both storefronts" },
+      { l: "Live", v: "dfyne.com" },
     ],
     problem:
       "The home page scored 51 on mobile and took over eighteen seconds to become interactive. The obvious suspect on a storefront is the hero image, and that is where I started. It was the wrong place.\n\nBefore any of that, though, I had to fix the instrument. Runs kept producing fourteen to seventeen second paint times that nothing on the page explained. A saved trace showed the emulated viewport sitting at zero height for a second and a half with the compositor presenting no frames — an artefact of driving a browser window I could see. I threw away every figure collected that way and moved the harness to headless. Roughly one run in three had been failing falsely, which would have sent me hunting a live problem that did not exist.\n\nThe second correction was to take a third-party tool seriously. It reported blocking time a hundred times worse than my own harness, which is easy to dismiss as noise. Turning the CPU throttle up to 8x reproduced the same shape locally — and a reproducible problem is an attributable one, script by script, instead of an argument about whose number is right.",
