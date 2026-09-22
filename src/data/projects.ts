@@ -266,6 +266,28 @@ const caseStudies: Record<string, CaseStudy> = {
       shot1: "The home dashboard — the Bitcoin chart beside the trending coins table",
       shot2: "The ranked coin list, paginated",
     },
+    shots: {
+      hero: heroImages["coinpulse"],
+      shot1: {
+        src: "/images/work/coinpulse/01-home-desktop.png",
+        alt: "The CoinPulse home dashboard: a Bitcoin candlestick chart with a period switcher on the left, a trending coins table on the right, and a top categories table underneath showing 24h change, market cap and volume per sector.",
+      },
+      shot2: {
+        src: "/images/work/coinpulse/02-all-coins-desktop.png",
+        fit: "contain",
+        alt: "The All Coins page: thirty rows ranked by market cap, each with rank, token, price, 24h change and market cap, and pagination running to page 100 at the foot.",
+        caption:
+          "The page number lives in the URL, so a page of the list can be linked, shared and survive a refresh.",
+      },
+    },
+    gallery: [
+      {
+        src: "/images/work/coinpulse/04-coin-detail-ethereum.png",
+        alt: "The same detail page for Ethereum at $2,753.91, with today and thirty-day changes, an hourly candlestick chart, a converter turning 10 ETH into 27,539.10 USD, and coin details including market cap rank #2.",
+        caption:
+          "One page, any coin. The route takes the coin id and the two calls it needs — the coin and its price history — go out together rather than one after the other.",
+      },
+    ],
   },
 
 

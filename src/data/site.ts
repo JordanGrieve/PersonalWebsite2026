@@ -11,7 +11,7 @@ export const site = {
   tagline:
     "I build fast, reliable, scalable frontend designs and architecture from Scotland, back end included.",
   description:
-    "Jordan Grieve is a frontend developer in Scotland building Shopify storefronts, custom Shopify apps, and Cloudflare setups that make slow sites fast.",
+    "Jordan Grieve is a frontend developer in Scotland building fast Shopify storefronts, Cloudflare routing and Next.js apps. Case studies with the numbers behind them.",
   url: "https://www.jordangrieve.com",
   /** Subjects the site is actually about. Feeds `Person.knowsAbout`. */
   expertise: [

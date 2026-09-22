@@ -12,6 +12,10 @@ import type { Shot } from "@/data/projects";
  * path and description are written down.
  */
 export const heroImages: Record<string, Shot> = {
+  coinpulse: {
+    src: "/images/work/coinpulse/03-coin-detail-bitcoin.png",
+    alt: "The CoinPulse detail page for Bitcoin: the price at $86,362 with the day's change beside it, a candlestick chart with a period switcher from one day to one year, and a panel of market cap, rank and volume.",
+  },
   "dfyne-cloudflare-migration": {
     src: "/images/work/dfyne-cloudflare-migration/hero.png",
     cardPosition: "72% center",
