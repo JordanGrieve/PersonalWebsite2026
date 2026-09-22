@@ -202,39 +202,6 @@ export default function HomePage() {
               flexWrap: "wrap",
             }}
           >
-            <div
-              id="availPill"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                /* The dot is 9px with a 5px `box-shadow` ring — 19px of paint
-                   inside an 11px/1.3 line box, so the ring spilled 2.5px past
-                   the pill. On mobile the pill is the last thing in
-                   `#heroSection`, which clips (`overflow: hidden`, to contain
-                   the hero glow), and the bottom of the ring was cut off.
-                   Reserving the ring's full height fixes it at the cause. */
-                minHeight: 19,
-                gap: 9,
-                font: "500 11px/1.3 var(--font-heading)",
-                letterSpacing: ".16em",
-                textTransform: "uppercase",
-                color: "var(--color-neutral-200)",
-              }}
-            >
-              <span
-                style={{
-                  width: 9,
-                  height: 9,
-                  borderRadius: "50%",
-                  /* Muted, not the accent: a live-looking dot next to "not
-                     available" says the opposite of the words beside it. */
-                  background: "var(--color-neutral-500)",
-                  boxShadow: "0 0 0 5px rgba(255,255,255,.06)",
-                  flex: "none",
-                }}
-              />
-              <span style={{ marginLeft: 5 }}>Not available for projects</span>
-            </div>
             <div id="heroBadge" style={{ position: "relative", width: 104, height: 104, flex: "none" }}>
               <SpinBadge arcId="badgeArc" textFill="#9397ab" initialsSize={30} />
             </div>
@@ -465,7 +432,8 @@ export default function HomePage() {
             Looking for my next role.
           </h3>
           <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.55, color: "#14121f" }}>
-            A frontend or full-stack role where the performance work matters.
+            For my next role I want to be pushed — unfamiliar problems, a bigger codebase,
+            and the kind of work that leaves me better than it found me.
           </p>
           <Link
             id="ctaBtn"

@@ -81,6 +81,28 @@ function linked(text: string) {
 }
 
 /**
+ * Turns the domain in a "Live" row into a link, and leaves the rest of the
+ * line alone — several of them read "opendoorbakery.com — password-locked
+ * until opening day", where only the first part is the address.
+ *
+ * Applied to that row only, not to every meta value. A stack line contains
+ * "Next.js 16" and "lightweight-charts", which any pattern loose enough to
+ * catch a bare domain would happily turn into broken links.
+ */
+function withLink(value: string) {
+  const parts = value.split(/([a-z0-9-]+(?:\.[a-z0-9-]+)+)/i);
+  return parts.map((part, i) =>
+    /^[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i.test(part) ? (
+      <a key={i} href={`https://${part}`} target="_blank" rel="noreferrer noopener">
+        {part}
+      </a>
+    ) : (
+      part
+    ),
+  );
+}
+
+/**
  * A titled list of `{ what, why }` pairs — used for both the rejected
  * experiments and the incidents a change caused. Renders nothing when the
  * study has no such list, so the section simply does not exist on pages
@@ -270,7 +292,7 @@ export default async function CaseStudyPage({ params }: Params) {
                 {m.l}
               </div>
               <div style={{ marginTop: 8, fontSize: 14, color: "var(--color-neutral-200)" }}>
-                {m.v}
+                {m.l === "Live" ? withLink(m.v) : m.v}
               </div>
             </div>
           ))}

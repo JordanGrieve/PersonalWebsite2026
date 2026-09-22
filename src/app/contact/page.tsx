@@ -35,29 +35,6 @@ export default function ContactPage() {
       }}
     >
       <div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 9,
-            font: "500 11px/1 var(--font-heading)",
-            letterSpacing: ".18em",
-            textTransform: "uppercase",
-            color: "var(--color-accent)",
-            marginBottom: 16,
-          }}
-        >
-          <span
-            style={{
-              width: 7,
-              height: 7,
-              borderRadius: "50%",
-              background: "var(--color-accent)",
-              boxShadow: "0 0 0 4px rgba(145,132,217,.18)",
-            }}
-          />
-          Not available for projects
-        </div>
         <h1
           style={{
             fontSize: "clamp(38px,8cqw,96px)",
@@ -76,9 +53,9 @@ export default function ContactPage() {
             color: "var(--color-neutral-300)",
           }}
         >
-          I am open to employment — frontend or full stack, Scotland or remote. If you are
-          hiring, tell me about the role and I will reply within a day. I am not taking
-          freelance work at the moment.
+          I am looking for a frontend role — Scotland or remote — with problems I have not
+          solved before and people who will stretch me. If you are hiring, tell me about the
+          role and I will reply within a day.
         </p>
         <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14 }}>
           <a href={`mailto:${site.email}`} style={linkRow}>
