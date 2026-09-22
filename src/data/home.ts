@@ -1,6 +1,6 @@
 export const stats = [
   { n: "1 yr", l: "At DFYNE, Scotland" },
-  { n: "12+", l: "Sites shipped" },
+  { n: "8+", l: "Sites shipped" },
   { n: "1.3s", l: "Typical LCP after" },
   { n: "£0", l: "Cost of a first call" },
 ];
