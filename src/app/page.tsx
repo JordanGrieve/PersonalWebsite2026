@@ -465,7 +465,7 @@ export default function HomePage() {
             Looking for my next role.
           </h3>
           <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.55, color: "#14121f" }}>
-            A frontend or full-stack role where the performance work matters. Not taking freelance.
+            A frontend or full-stack role where the performance work matters.
           </p>
           <Link
             id="ctaBtn"

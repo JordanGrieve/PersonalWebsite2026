@@ -76,8 +76,8 @@ export default function AboutPage() {
             }}
           >
             That job taught me what actually moves numbers in ecommerce: page weight, cache
-            strategy, and getting out of the customer&apos;s way. Outside it I take on freelance
-            builds — Shopify themes, custom apps, and rescue work on sites that have got slow.
+            strategy, and getting out of the customer&apos;s way. Alongside it I have built
+            Shopify themes, custom apps and rescue work on sites that had got slow.
           </p>
           <div id="aboutActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 26 }}>
             <a className="btn btn-primary" href="#" download>
