@@ -264,7 +264,7 @@ const caseStudies: Record<string, CaseStudy> = {
     slots: {
       hero: "The coin detail page — price header, candlestick chart and the currency converter",
       shot1: "The home dashboard — the Bitcoin chart beside the trending coins table",
-      shot2: "The ranked coin list, paginated",
+      shot2: "The ranked coin list",
     },
     shots: {
       hero: heroImages["coinpulse"],
@@ -272,12 +272,12 @@ const caseStudies: Record<string, CaseStudy> = {
         src: "/images/work/coinpulse/01-home-desktop.png",
         alt: "The CoinPulse home dashboard: a Bitcoin candlestick chart with a period switcher on the left, a trending coins table on the right, and a top categories table underneath showing 24h change, market cap and volume per sector.",
       },
+      /* The top of the list rather than the whole page. The full screenshot
+         is 2880x4828: in a landscape frame it is a sliver two rows tall and
+         nothing in it can be read, which is worse than showing less. */
       shot2: {
-        src: "/images/work/coinpulse/02-all-coins-desktop.png",
-        fit: "contain",
-        alt: "The All Coins page: thirty rows ranked by market cap, each with rank, token, price, 24h change and market cap, and pagination running to page 100 at the foot.",
-        caption:
-          "The page number lives in the URL, so a page of the list can be linked, shared and survive a refresh.",
+        src: "/images/work/coinpulse/02-all-coins-top.png",
+        alt: "The top of the All Coins page: rows ranked by market cap from Bitcoin at #1 down to Figure Heloc at #10, each with rank, token, price, 24h change and market cap.",
       },
     },
     gallery: [
