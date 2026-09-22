@@ -1,74 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { topicOptions } from "@/data/contact";
 import { site } from "@/data/site";
-
-const chip = (on: boolean) =>
-  on
-    ? {
-        background: "color-mix(in srgb, var(--color-accent) 16%, transparent)",
-        color: "var(--color-accent-200)",
-        borderColor: "var(--color-accent)",
-      }
-    : {
-        background: "transparent",
-        color: "var(--color-neutral-400)",
-        borderColor: "var(--color-divider)",
-      };
-
-/* Matches the design system's `.field > label`, which only styles real
-   <label> elements — a chip group is labelled by a span instead, since a
-   <label> must point at a single form control. */
-const groupLabel = {
-  display: "block",
-  fontSize: 12,
-  marginBottom: 5,
-  color: "color-mix(in srgb, var(--color-text) 70%, transparent)",
-} as const;
-
-function ChipGroup({
-  label,
-  id,
-  options,
-  value,
-  onSelect,
-}: {
-  label: string;
-  id: string;
-  options: string[];
-  value: string;
-  onSelect: (option: string) => void;
-}) {
-  return (
-    <div className="field" role="group" aria-labelledby={id}>
-      <span id={id} style={groupLabel}>
-        {label}
-      </span>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-        {options.map((option) => (
-          <button
-            key={option}
-            type="button"
-            onClick={() => onSelect(value === option ? "" : option)}
-            aria-pressed={value === option}
-            style={{
-              cursor: "pointer",
-              font: "500 12px/1 var(--font-heading)",
-              padding: "9px 13px",
-              borderRadius: 999,
-              borderStyle: "solid",
-              borderWidth: 1,
-              ...chip(value === option),
-            }}
-          >
-            {option}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /**
  * The brief form. Submitting hands the message to the visitor's own mail
@@ -84,7 +17,6 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
-  const [topic, setTopic] = useState("");
   const [err, setErr] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -96,14 +28,8 @@ export default function ContactForm() {
     }
     setErr(false);
 
-    const subject = topic ? `Portfolio enquiry — ${topic}` : "Portfolio enquiry";
-    const body = [
-      name && `Name: ${name}`,
-      `Email: ${email}`,
-      topic && `Topic: ${topic}`,
-      "",
-      msg,
-    ]
+    const subject = "Hello from your portfolio";
+    const body = [name && `Name: ${name}`, `Email: ${email}`, "", msg]
       .filter(Boolean)
       .join("\n");
 
@@ -118,7 +44,6 @@ export default function ContactForm() {
     setName("");
     setEmail("");
     setMsg("");
-    setTopic("");
   }
 
   return (
@@ -183,27 +108,20 @@ export default function ContactForm() {
               placeholder="you@company.com"
             />
           </div>
-          <ChipGroup
-            label="Topic"
-            id="cf-topic-label"
-            options={topicOptions}
-            value={topic}
-            onSelect={setTopic}
-          />
           <div className="field">
-            <label htmlFor="cf-msg">What do you need?</label>
+            <label htmlFor="cf-msg">Your message</label>
             <textarea
               className="input"
               id="cf-msg"
               name="message"
               value={msg}
               onChange={(e) => setMsg(e.target.value)}
-              placeholder="A Shopify build, a speed audit, something else…"
+              placeholder="Send a message saying hello :D"
             />
           </div>
           {err ? (
             <div role="alert" style={{ fontSize: 12.5, color: "var(--color-accent-300)" }}>
-              Add your email and a line about the project.
+              Add your email and a line or two.
             </div>
           ) : null}
           <button className="btn btn-primary btn-block" type="submit">
