@@ -185,7 +185,7 @@ export default function HomePage() {
             </p>
             <div id="heroActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
               <Link className="btn btn-primary" href="/contact">
-                Get a quote
+                Hire me
                 <i className="ph ph-arrow-right" style={{ fontSize: 18 }} />
               </Link>
               <Link className="btn btn-secondary" href="/work">
@@ -516,10 +516,10 @@ export default function HomePage() {
               color: "#14121f",
             }}
           >
-            Let&apos;s build something fast.
+            Looking for my next role.
           </h3>
           <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.55, color: "#14121f" }}>
-            Taking on freelance builds and speed work alongside my day job at DFYNE.
+            A frontend or full-stack role where the performance work matters. Not taking freelance.
           </p>
           <Link
             id="ctaBtn"
@@ -637,7 +637,7 @@ export default function HomePage() {
             </div>
           </div>
           <Link className="btn btn-primary" href="/contact" style={{ marginTop: 22 }}>
-            Send a brief
+            Get in touch
             <i className="ph ph-arrow-up-right" />
           </Link>
         </div>

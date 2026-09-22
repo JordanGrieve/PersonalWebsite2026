@@ -127,10 +127,10 @@ export default async function PostPage({ params }: Params) {
           }}
         >
           <span style={{ fontSize: 15, color: "var(--color-neutral-300)" }}>
-            Got a store that feels slow?
+            Interested in this kind of work?
           </span>
           <Link className="btn btn-primary" href="/contact">
-            Book a speed audit
+            Get in touch
             <i className="ph ph-arrow-up-right" />
           </Link>
         </div>

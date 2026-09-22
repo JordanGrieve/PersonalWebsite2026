@@ -424,7 +424,7 @@ export default async function CaseStudyPage({ params }: Params) {
           style={{ marginTop: 34, display: "flex", gap: 10, flexWrap: "wrap" }}
         >
           <Link className="btn btn-primary" href="/contact">
-            Start a project like this
+            Talk to me about a role
             <i className="ph ph-arrow-right" />
           </Link>
           {/* Named, because "Next project" tells you there is one and

@@ -76,8 +76,9 @@ export default function ContactPage() {
             color: "var(--color-neutral-300)",
           }}
         >
-          Tell me what you&apos;re building and roughly when you need it — Shopify, web or
-          performance work, anywhere from Scotland outwards. I reply within a day.
+          I am open to employment — frontend or full stack, Scotland or remote. If you are
+          hiring, tell me about the role and I will reply within a day. I am not taking
+          freelance work at the moment.
         </p>
         <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14 }}>
           <a href={`mailto:${site.email}`} style={linkRow}>

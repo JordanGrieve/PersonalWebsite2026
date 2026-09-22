@@ -198,7 +198,7 @@ export default function Header() {
           </Link>
         ))}
         <Link className="btn btn-primary btn-block" href="/contact" style={{ marginTop: 22 }}>
-          Start a project
+          Get in touch
           <i className="ph ph-arrow-up-right" />
         </Link>
         <a
@@ -285,7 +285,7 @@ export default function Header() {
             ))}
           </nav>
           <Link id="headerCta" className="btn btn-primary" href="/contact">
-            Start a project
+            Get in touch
             <i className="ph ph-arrow-up-right" />
           </Link>
           <button
