@@ -226,12 +226,14 @@ export default function HomePage() {
                   width: 9,
                   height: 9,
                   borderRadius: "50%",
-                  background: "var(--color-accent)",
-                  boxShadow: "0 0 0 5px rgba(145,132,217,.16)",
+                  /* Muted, not the accent: a live-looking dot next to "not
+                     available" says the opposite of the words beside it. */
+                  background: "var(--color-neutral-500)",
+                  boxShadow: "0 0 0 5px rgba(255,255,255,.06)",
                   flex: "none",
                 }}
               />
-              <span style={{ marginLeft: 5 }}>Available for projects</span>
+              <span style={{ marginLeft: 5 }}>Not available for projects</span>
             </div>
             <div id="heroBadge" style={{ position: "relative", width: 104, height: 104, flex: "none" }}>
               <SpinBadge arcId="badgeArc" textFill="#9397ab" initialsSize={30} />

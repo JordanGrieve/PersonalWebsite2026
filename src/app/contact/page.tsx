@@ -56,7 +56,7 @@ export default function ContactPage() {
               boxShadow: "0 0 0 4px rgba(145,132,217,.18)",
             }}
           />
-          Available for projects
+          Not available for projects
         </div>
         <h1
           style={{
