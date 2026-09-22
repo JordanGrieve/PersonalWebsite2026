@@ -192,7 +192,9 @@ export default function Header() {
               color: isActive(pathname, item.href)
                 ? "var(--color-text)"
                 : "var(--color-neutral-500)",
+              textDecoration: "wip" in item && item.wip ? "line-through" : undefined,
             }}
+            aria-label={"wip" in item && item.wip ? `${item.label} — still in progress` : undefined}
           >
             {item.label}
           </Link>
@@ -278,7 +280,13 @@ export default function Header() {
                   color: isActive(pathname, item.href)
                     ? "var(--color-text)"
                     : "var(--color-neutral-500)",
+                  /* The line says "not finished" to anyone looking at it;
+                     the label below says the same to anyone who is not. */
+                  textDecoration: "wip" in item && item.wip ? "line-through" : undefined,
                 }}
+                aria-label={
+                  "wip" in item && item.wip ? `${item.label} — still in progress` : undefined
+                }
               >
                 {item.label}
               </Link>
