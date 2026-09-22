@@ -8,7 +8,7 @@ export const site = {
   role: "Frontend developer",
   location: "Scotland, UK — remote worldwide",
   email: "jordangrieve.dev@gmail.com",
-  tagline: "I build fast front ends — web and Shopify — from Scotland, back end included.",
+  tagline: "I build fast frontends — Shopify — from Scotland, back end included.",
   description:
     "Jordan Grieve is a frontend developer in Scotland building Shopify storefronts, custom Shopify apps, and Cloudflare setups that make slow sites fast.",
   url: "https://www.jordangrieve.com",

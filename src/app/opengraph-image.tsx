@@ -8,7 +8,7 @@ export const contentType = OG_CONTENT_TYPE;
 export default function Image() {
   return ogCard({
     kicker: "Frontend developer",
-    title: "Fast Shopify and web front ends",
+    title: "Fast frontends, Shopify included",
     sub: "Shopify storefronts, custom apps, and Cloudflare setups that make slow sites fast.",
   });
 }
