@@ -176,29 +176,44 @@ export default function Header() {
             <i className="ph ph-x" style={{ fontSize: 20 }} />
           </button>
         </div>
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            /* Same seven links as the header nav — see the note there. */
-            prefetch={false}
-            style={{
-              textAlign: "left",
-              fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
-              fontSize: 27,
-              letterSpacing: ".01em",
-              textTransform: "uppercase",
-              padding: "8px 0",
-              color: isActive(pathname, item.href)
-                ? "var(--color-text)"
-                : "var(--color-neutral-500)",
-              textDecoration: "wip" in item && item.wip ? "line-through" : undefined,
-            }}
-            aria-label={"wip" in item && item.wip ? `${item.label} — still in progress` : undefined}
-          >
-            {item.label}
-          </Link>
-        ))}
+        {navItems.map((item) => {
+          const wip = "wip" in item && item.wip;
+          const style = {
+            textAlign: "left",
+            fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
+            fontSize: 27,
+            letterSpacing: ".01em",
+            textTransform: "uppercase",
+            padding: "8px 0",
+            color: isActive(pathname, item.href)
+              ? "var(--color-text)"
+              : "var(--color-neutral-500)",
+          } as const;
+
+          /* Not a link while it is unfinished — a span rather than a
+             disabled-looking anchor, so it is also out of the tab order
+             rather than being a focus stop that does nothing. */
+          return wip ? (
+            <span
+              key={item.href}
+              style={{ ...style, textDecoration: "line-through", cursor: "default" }}
+              aria-disabled="true"
+              title={`${item.label} — still in progress`}
+            >
+              {item.label}
+            </span>
+          ) : (
+            <Link
+              key={item.href}
+              href={item.href}
+              /* Same seven links as the header nav — see the note there. */
+              prefetch={false}
+              style={style}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
         <Link className="btn btn-primary btn-block" href="/contact" style={{ marginTop: 22 }}>
           Get in touch
           <i className="ph ph-arrow-up-right" />
@@ -255,42 +270,54 @@ export default function Header() {
             </span>
           </Link>
           <nav id="siteNav" style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                /* The nav points at every page on the site and sits on
-                   every page, so the default pulled six RSC payloads and their
-                   route chunks on every load — 35.8kB on the home page, and
-                   86kB on /work once its eight cards joined in.
+            {navItems.map((item) => {
+              const wip = "wip" in item && item.wip;
+              const style = {
+                font: "500 14px/1 var(--font-heading)",
+                padding: "7px 10px",
+                borderRadius: "var(--radius-sm)",
+                color: isActive(pathname, item.href)
+                  ? "var(--color-text)"
+                  : "var(--color-neutral-500)",
+              } as const;
 
-                   Note this turns prefetching off outright. Next 15 does not
-                   fall back to prefetching on hover, measured: hovering a nav
-                   link with this set fires no request at all. What pays for
-                   that is how little there is to fetch — every route is
-                   prerendered and tiny, so a cold click still renders its h1
-                   in about 100ms locally and 246ms on Fast 3G. The load saving
-                   lands on every visitor; the nav cost only lands on the ones
-                   who click. */
-                prefetch={false}
-                style={{
-                  font: "500 14px/1 var(--font-heading)",
-                  padding: "7px 10px",
-                  borderRadius: "var(--radius-sm)",
-                  color: isActive(pathname, item.href)
-                    ? "var(--color-text)"
-                    : "var(--color-neutral-500)",
-                  /* The line says "not finished" to anyone looking at it;
-                     the label below says the same to anyone who is not. */
-                  textDecoration: "wip" in item && item.wip ? "line-through" : undefined,
-                }}
-                aria-label={
-                  "wip" in item && item.wip ? `${item.label} — still in progress` : undefined
-                }
-              >
-                {item.label}
-              </Link>
-            ))}
+              /* Struck through and not a link while the section is
+                 unfinished. A span rather than a disabled anchor, so it is
+                 out of the tab order too — a focus stop that does nothing is
+                 worse than no focus stop. */
+              return wip ? (
+                <span
+                  key={item.href}
+                  style={{ ...style, textDecoration: "line-through", cursor: "default" }}
+                  aria-disabled="true"
+                  title={`${item.label} — still in progress`}
+                >
+                  {item.label}
+                </span>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  /* The nav points at every page on the site and sits on
+                     every page, so the default pulled six RSC payloads and
+                     their route chunks on every load — 35.8kB on the home
+                     page, and 86kB on /work once its eight cards joined in.
+
+                     Note this turns prefetching off outright. Next 15 does
+                     not fall back to prefetching on hover, measured:
+                     hovering a nav link with this set fires no request at
+                     all. What pays for that is how little there is to fetch
+                     — every route is prerendered and tiny, so a cold click
+                     still renders its h1 in about 100ms locally and 246ms on
+                     Fast 3G. The load saving lands on every visitor; the nav
+                     cost only lands on the ones who click. */
+                  prefetch={false}
+                  style={style}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
           <Link id="headerCta" className="btn btn-primary" href="/contact">
             Get in touch
