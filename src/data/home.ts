@@ -137,18 +137,8 @@ export const timeline = [
     body: "Storefront work at one of the fastest-growing businesses in Scotland — sections, performance, release testing.",
   },
   {
-    when: "2025",
-    what: "Freelance builds",
-    body: "Shopify themes, custom apps and speed rescues for small brands, alongside the day job.",
-  },
-  {
     when: "2021 – 2025",
     what: "BSc Web Design and Development, Edinburgh Napier",
     body: "Four years, a 2:1, finishing the year I started at DFYNE.",
-  },
-  {
-    when: "Always",
-    what: "Boring things done properly",
-    body: "Cache headers, image formats, and reading the waterfall before guessing.",
   },
 ];
