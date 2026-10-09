@@ -56,13 +56,24 @@ export default function Zoomable({
   alt,
   priority,
   fit = "cover",
-  sizes = "(max-width: 640px) 100vw, 50vw",
+  /* Measured, not guessed: the two-up shots are 45.6vw of the viewport at
+     both 1024 and 1440, and the hero is 93vw. The old default said 50vw
+     for every slot including the hero, so the hero asked the optimiser for
+     an image half the width of the box it was drawn in and arrived visibly
+     soft. Every call site passes its own now; this is the pair's width. */
+  sizes = "(max-width: 700px) 100vw, 46vw",
+  /* 75 is Next's default and is tuned for photographs, where the detail it
+     drops is noise. These are screenshots of interfaces: the detail it
+     drops is the edges of 11px type, which is the part a reader is trying
+     to read. */
+  quality = 90,
 }: {
   src: string;
   alt: string;
   priority?: boolean;
   fit?: "contain" | "cover";
   sizes?: string;
+  quality?: number;
 }) {
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -153,6 +164,7 @@ export default function Zoomable({
           fill
           priority={priority}
           sizes={sizes}
+          quality={quality}
           /* Cropped to fill by default: an image that fits its box whole
              leaves dead space either side, and a row of screenshots in
              different shapes reads as a mistake rather than a set. Clicking
@@ -190,6 +202,7 @@ export default function Zoomable({
               alt={alt}
               fill
               sizes="100vw"
+              quality={quality}
               style={{ objectFit: "contain", objectPosition: "center" }}
             />
           </div>

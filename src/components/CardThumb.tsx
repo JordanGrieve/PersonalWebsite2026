@@ -37,6 +37,7 @@ export default function CardThumb({
       alt=""
       fill
       sizes={sizes}
+      quality={90}
       /* Decorative here: the card's own title and summary say where the
          link goes, so a screen reader announcing the picture as well would
          be repeating the link it is already inside. */

@@ -171,13 +171,19 @@ function Slot({
   shot,
   placeholder,
   priority,
+  sizes,
 }: {
   shot?: Shot;
   placeholder: string;
   priority?: boolean;
+  /** How wide this slot's box actually is, so the optimiser sends an image
+      that fits it. Wrong here and the picture is upscaled in the browser. */
+  sizes?: string;
 }) {
   if (!shot) return <ImageSlot placeholder={placeholder} />;
-  return <Zoomable src={shot.src} alt={shot.alt} priority={priority} fit={shot.fit} />;
+  return (
+    <Zoomable src={shot.src} alt={shot.alt} priority={priority} fit={shot.fit} sizes={sizes} />
+  );
 }
 
 /**
@@ -204,7 +210,12 @@ function Gallery({ items }: { items?: Shot[] }) {
         }}
       >
         {items.map((item) => (
-          <Figure key={item.src} shot={item} height="clamp(240px,30cqw,400px)" />
+          <Figure
+            key={item.src}
+            shot={item}
+            height="clamp(240px,30cqw,400px)"
+            sizes="(max-width: 700px) 100vw, 46vw"
+          />
         ))}
       </div>
     </section>
@@ -266,7 +277,12 @@ export default async function CaseStudyPage({ params }: Params) {
             position: "relative",
           }}
         >
-          <Slot shot={study.shots?.hero} placeholder={study.slots.hero} priority />
+          <Slot
+            shot={study.shots?.hero}
+            placeholder={study.slots.hero}
+            priority
+            sizes="(max-width: 700px) 100vw, 93vw"
+          />
         </div>
         <div
           style={{
@@ -404,7 +420,11 @@ export default async function CaseStudyPage({ params }: Params) {
             overflow: "hidden",
           }}
         >
-          <Slot shot={study.shots?.shot1} placeholder={study.slots.shot1} />
+          <Slot
+            shot={study.shots?.shot1}
+            placeholder={study.slots.shot1}
+            sizes="(max-width: 700px) 100vw, 46vw"
+          />
         </div>
         <div
           style={{
@@ -414,7 +434,11 @@ export default async function CaseStudyPage({ params }: Params) {
             overflow: "hidden",
           }}
         >
-          <Slot shot={study.shots?.shot2} placeholder={study.slots.shot2} />
+          <Slot
+            shot={study.shots?.shot2}
+            placeholder={study.slots.shot2}
+            sizes="(max-width: 700px) 100vw, 46vw"
+          />
         </div>
       </section>
 
