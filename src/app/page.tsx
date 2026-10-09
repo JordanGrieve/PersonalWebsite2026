@@ -590,8 +590,8 @@ export default function HomePage() {
               </a>
             ))}
             <a
-              href="#"
-              download
+              href={site.cv}
+              download={site.cvName}
               className="hov-border"
               style={{
                 display: "flex",

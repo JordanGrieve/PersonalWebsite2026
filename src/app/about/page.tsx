@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { timeline } from "@/data/home";
+import { site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
 import { aboutSchema } from "@/lib/schema";
 
@@ -80,7 +81,7 @@ export default function AboutPage() {
             Shopify themes, custom apps and rescue work on sites that had got slow.
           </p>
           <div id="aboutActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 26 }}>
-            <a className="btn btn-primary" href="#" download>
+            <a className="btn btn-primary" href={site.cv} download={site.cvName}>
               <i className="ph ph-download-simple" />
               &nbsp;Download CV
             </a>

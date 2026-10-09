@@ -13,6 +13,11 @@ export const site = {
   description:
     "Jordan Grieve is a frontend developer in Scotland building fast Shopify storefronts, Cloudflare routing and Next.js apps. Case studies with the numbers behind them.",
   url: "https://www.jordangrieve.com",
+  /** The CV, served straight out of /public. `cvName` is what the browser
+      saves it as: without it the file lands under whatever the URL's last
+      segment happens to be. */
+  cv: "/Jordan-Grieve-CV.pdf",
+  cvName: "Jordan Grieve CV.pdf",
   /** Subjects the site is actually about. Feeds `Person.knowsAbout`. */
   expertise: [
     "Shopify theme customisation",
