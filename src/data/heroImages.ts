@@ -29,6 +29,11 @@ export const heroImages: Record<string, Shot> = {
     fit: "contain",
     alt: "An illustration of a glowing track running left to right. At the left it is buried under a jam of dark blocks; the blocks thin out across the frame until the track runs clear and unbroken into a lit panel at the right.",
   },
+  postbox: {
+    src: "/images/work/postbox/08-ticket-thread.png",
+    fit: "contain",
+    alt: "The Postbox inbox: a folder sidebar with counts, a list of tickets with coloured labels, and an open thread showing a customer enquiry, the automatic acknowledgement and two replies.",
+  },
   "open-door-bakery": {
     src: "/images/work/open-door-bakery/03-home-desktop.png",
     alt: "The Open Door Bakery home page: a watercolour hero reading Welcome to Open Door Bakery, buttons to shop and to order something custom, and a row of category cards.",

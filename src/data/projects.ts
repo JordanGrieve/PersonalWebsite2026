@@ -367,13 +367,49 @@ const caseStudies: Record<string, CaseStudy> = {
       { n: "260 → 180", l: "Pixels of interface above the first message on mobile" },
       { n: "0 → 27", l: "Unit tests over reply-parsing and threading logic" },
     ],
-    /* TODO: every screenshot must use seeded data — real ones would contain
-       customer names, addresses and message contents. */
+    /* Every screenshot is of a seeded demo workspace, not a client's. A
+       real one would carry customer names, addresses and the contents of
+       their messages, none of which belongs on a public page. */
     slots: {
       hero: "Desktop — inbox list beside an open ticket thread",
-      shot1: "Mobile thread — before and after the responsive work",
+      shot1: "The campaign composer, with the live preview beside it",
       shot2: "A reply arriving in Gmail and threading back",
     },
+    shots: {
+      hero: heroImages["postbox"],
+      shot1: {
+        src: "/images/work/postbox/09-newsletter-composer.png",
+        fit: "contain",
+        alt: "The newsletter composer: campaign name, subject line, preheader and layout on the left, and on the right a live preview of the email with its unsubscribe link and postal footer.",
+      },
+      shot2: {
+        src: "/images/work/postbox/10-gmail-thread.png",
+        fit: "contain",
+        alt: "One Gmail conversation holding four messages that alternate between the customer and DevBusiness, from the first enquiry through to the confirmation.",
+      },
+    },
+    gallery: [
+      {
+        src: "/images/work/postbox/01-home-hero.png",
+        alt: "The Postbox landing page, headed Every customer email in one shared inbox, with a screenshot of the product underneath it.",
+        caption:
+          "The product's own front page. Postbox is sold to small businesses one at a time rather than opened for self-signup, so this page has to do the explaining a sales call would.",
+      },
+      {
+        src: "/images/work/postbox/04-small-things.png",
+        fit: "contain",
+        alt: "Six cards headed The small things that decide whether you keep using it: out-of-hours holding, contact history, labels and stars, snooze and archive, a thirty-day trash, and inviting whoever helps out.",
+        caption:
+          "None of these is why anyone signs up. They are why nobody is back on a shared Gmail account three weeks later.",
+      },
+      {
+        src: "/images/work/postbox/07-pricing.png",
+        fit: "contain",
+        alt: "Three plans — Starter at £12, Growth at £29 and Business at £59 a month — each listing its conversation and subscriber limits, above a short FAQ.",
+        caption:
+          "One price per size, with the limits stated on the card rather than in a table somewhere else.",
+      },
+    ],
   },
 
   "open-door-bakery": {
