@@ -37,10 +37,10 @@ export const services = [
     body: "GA4, Cloudflare Workers and Clarity wired up so you can see what shoppers actually do.",
   },
   {
-    icon: "ph ph-lifebuoy",
+    icon: "ph ph-magnifying-glass",
     no: "06",
-    title: "Maintenance",
-    body: "A monthly slot for fixes, updates and the small jobs that otherwise never get done.",
+    title: "Debugging & monitoring",
+    body: "Tracing a live fault to its real cause through traces, logs and session replay, then proving the fix held.",
   },
 ];
 
