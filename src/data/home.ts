@@ -1,5 +1,5 @@
 export const stats = [
-  { n: "1 yr", l: "At DFYNE, Scotland" },
+  { n: "1 yr 5 mo", l: "At DFYNE, Scotland" },
   { n: "8+", l: "Sites shipped" },
   { n: "1.3s", l: "Typical LCP after" },
   { n: "BSc", l: "Web design & development, 2:1" },
@@ -130,7 +130,7 @@ export const timeline = [
   {
     when: "2025 →",
     what: "Frontend engineer, DFYNE",
-    body: "Glasgow. Production work on a storefront serving over a billion requests a month, and the internal tools the team runs it with — monitoring, routing at the edge, performance for real visitors, and sections marketing can run its own drops from.",
+    body: "Glasgow. Production work on a storefront serving over a billion requests a month, and the internal tools the team runs it with — monitoring, routing at the edge, performance for real visitors, and sections marketing runs its own drops from. I built the BigQuery data contract behind a multi-year size-advisor integration running across both storefronts.",
   },
   {
     when: "2023 – 2025",
