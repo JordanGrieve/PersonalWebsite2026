@@ -38,9 +38,6 @@ export const navItems = [
   { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
-  /* Struck through in the nav while there is one post on it. The link
-     still works — the post is real — but the label says not finished. */
-  { href: "/writing", label: "Blog", wip: true },
   { href: "/contact", label: "Contact" },
 ] as const;
 

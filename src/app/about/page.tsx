@@ -47,7 +47,7 @@ export default function AboutPage() {
               margin: 0,
             }}
           >
-            I BUILD THINGS THAT STAY FAST.
+            I BUILD IT AND I RUN IT.
           </h1>
           {/* No measure cap on either intro paragraph: the column is the
               measure. `.wrap` stops at 1500px, so this text column tops out at
