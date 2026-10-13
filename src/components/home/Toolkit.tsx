@@ -3,9 +3,21 @@
 import { useState } from "react";
 import { toolkit } from "@/data/home";
 
-/** Twelve tools; tapping one reveals a one-line note above it. */
+/**
+ * Twelve tools, each with a one-line note above it.
+ *
+ * Two ways in, because they answer different inputs. Hover and keyboard
+ * focus `peek` — transient, gone the moment the pointer leaves. A click
+ * `open`s, which sticks, so a tap on a touchscreen (where there is no
+ * hover to speak of) still works and still toggles off.
+ *
+ * Kept as two pieces of state rather than one: with a single value, moving
+ * the mouse away from a tile you had clicked would close it, and leaving a
+ * tile you had only hovered would clear a different tile you had pinned.
+ */
 export default function Toolkit() {
   const [open, setOpen] = useState<number | null>(null);
+  const [peek, setPeek] = useState<number | null>(null);
 
   return (
     <div
@@ -35,12 +47,20 @@ export default function Toolkit() {
         id="toolGrid"
         style={{ display: "grid", gridTemplateColumns: "repeat(4,minmax(0,1fr))", gap: 12 }}
       >
-        {toolkit.map((t, i) => (
+        {toolkit.map((t, i) => {
+          const shown = open === i || peek === i;
+          return (
           <button
             key={t.name}
             className="hov-border"
             onClick={() => setOpen(open === i ? null : i)}
-            aria-expanded={open === i}
+            onMouseEnter={() => setPeek(i)}
+            /* Only clear if this tile is the one peeking — a stale leave
+               event must not close whichever tile is showing now. */
+            onMouseLeave={() => setPeek((p) => (p === i ? null : p))}
+            onFocus={() => setPeek(i)}
+            onBlur={() => setPeek((p) => (p === i ? null : p))}
+            aria-expanded={shown}
             style={{
               /* A button does not inherit its font — the UA stylesheet sets
                  Arial on it — so without this the twelve tool labels were the
@@ -55,7 +75,7 @@ export default function Toolkit() {
               borderRadius: "var(--radius-md)",
               padding: "12px 6px",
               textAlign: "center",
-              borderColor: open === i ? "var(--color-accent)" : "var(--color-divider)",
+              borderColor: shown ? "var(--color-accent)" : "var(--color-divider)",
             }}
           >
             {t.path ? (
@@ -78,9 +98,12 @@ export default function Toolkit() {
             <div style={{ marginTop: 7, fontSize: 11, color: "var(--color-neutral-400)" }}>
               {t.name}
             </div>
-            {open === i ? (
+            {shown ? (
               <span
+                /* The note sits over the tile above it, so it must not eat
+                   that tile's own hover. */
                 style={{
+                  pointerEvents: "none",
                   position: "absolute",
                   bottom: "calc(100% + 9px)",
                   left: "50%",
@@ -102,7 +125,8 @@ export default function Toolkit() {
               </span>
             ) : null}
           </button>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
