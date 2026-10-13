@@ -9,7 +9,7 @@ export const site = {
   location: "Scotland, UK — remote worldwide",
   email: "jordangrieve.dev@gmail.com",
   tagline:
-    "I build fast, reliable, scalable software designs and architecture from Scotland, back end included.",
+    "I build fast, reliable, scalable software from Scotland — from the interface to the infrastructure.",
   description:
     "Jordan Grieve is a software developer in Scotland building fast Shopify storefronts, Cloudflare routing and Next.js apps. Case studies with the numbers behind them.",
   url: "https://www.jordangrieve.com",

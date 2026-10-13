@@ -1,7 +1,7 @@
 export const stats = [
-  { n: "1 yr 5 mo", l: "At DFYNE, Scotland" },
+  { n: "1+ year", l: "At DFYNE, Scotland" },
   { n: "8+", l: "Sites shipped" },
-  { n: "1.3s", l: "Typical LCP after" },
+  { n: "1bn+", l: "Requests a month on the platform I support" },
   { n: "BSc", l: "Web design & development, 2:1" },
 ];
 
