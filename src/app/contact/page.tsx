@@ -53,7 +53,7 @@ export default function ContactPage() {
             color: "var(--color-neutral-300)",
           }}
         >
-          I am looking for a frontend role — Scotland or remote — with problems I have not
+          I am looking for a software role — Scotland or remote — with problems I have not
           solved before and people who will stretch me. If you are hiring, tell me about the
           role and I will reply within a day.
         </p>

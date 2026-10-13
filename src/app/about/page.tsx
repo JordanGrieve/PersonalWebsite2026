@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "About",
   description:
-    "Frontend developer in Scotland, working on a storefront thousands of people shop through every week.",
+    "Software developer in Scotland, working on a storefront thousands of people shop through every week — and the applications around it.",
 };
 
 export default function AboutPage() {
@@ -47,7 +47,7 @@ export default function AboutPage() {
               margin: 0,
             }}
           >
-            I MAKE WEBSITES FEEL QUICK.
+            I BUILD THINGS THAT STAY FAST.
           </h1>
           {/* No measure cap on either intro paragraph: the column is the
               measure. `.wrap` stops at 1500px, so this text column tops out at
@@ -64,9 +64,9 @@ export default function AboutPage() {
               color: "var(--color-neutral-300)",
             }}
           >
-            I&apos;m Jordan, a frontend developer based in Scotland. I spend my days at DFYNE — one
-            of the fastest-growing businesses in the country — working on the storefront thousands
-            of people shop through every week.
+            I&apos;m Jordan, a software developer based in Scotland. I spend my days at DFYNE — one
+            of the fastest-growing businesses in the country — on the storefront thousands of
+            people shop through every week, and the internal tools the team runs it with.
           </p>
           <p
             style={{
@@ -77,8 +77,24 @@ export default function AboutPage() {
             }}
           >
             That job taught me what actually moves numbers in ecommerce: page weight, cache
-            strategy, and getting out of the customer&apos;s way. Alongside it I have built
-            Shopify themes, custom apps and rescue work on sites that had got slow.
+            strategy, and getting out of the customer&apos;s way. Away from it I build whole
+            applications — a multi-tenant help desk with its own email pipeline, a voice interview
+            app, a bakery&apos;s shop and the admin behind it — where the database, the API and the
+            deploy are mine as well.
+          </p>
+          {/* How, rather than what. Every case study on this site is an
+              example of this paragraph, so it belongs above them. */}
+          <p
+            style={{
+              margin: "14px 0 0",
+              fontSize: 16,
+              lineHeight: 1.65,
+              color: "var(--color-neutral-400)",
+            }}
+          >
+            The part I enjoy most is the investigation: reproducing something, going through
+            monitoring, logs and the data until the real cause turns up, fixing it, and then
+            checking it stayed fixed. Most of what is on this site started that way.
           </p>
           <div id="aboutActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 26 }}>
             <a className="btn btn-primary" href={site.cv} download={site.cvName}>

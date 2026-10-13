@@ -1,4 +1,4 @@
-/** The rotating "JORDAN · FRONTEND DEVELOPER · SHOPIFY · SPEED" seal. */
+/** The rotating "JORDAN · SOFTWARE DEVELOPER · SHOPIFY · SPEED" seal. */
 export default function SpinBadge({
   arcId,
   textFill,
@@ -28,7 +28,7 @@ export default function SpinBadge({
         </defs>
         <text style={{ fontSize: 8, letterSpacing: "2.4px", fill: textFill, fontFamily: "Inter, sans-serif" }}>
           <textPath href={`#${arcId}`}>
-            JORDAN · FRONTEND DEVELOPER · SHOPIFY · SPEED ·{" "}
+            JORDAN · SOFTWARE DEVELOPER · SHOPIFY · SPEED ·{" "}
           </textPath>
         </text>
       </svg>

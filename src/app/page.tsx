@@ -116,7 +116,7 @@ export default function HomePage() {
               margin: 0,
             }}
           >
-            <span style={{ display: "block", color: "var(--color-accent)" }}>Frontend</span>
+            <span style={{ display: "block", color: "var(--color-accent)" }}>Software</span>
             <span style={{ display: "block", color: "var(--color-neutral-200)" }}>Developer</span>
           </h1>
           {/* Outlines, not live text — see PortfolioWord. The font-size here
@@ -292,7 +292,7 @@ export default function HomePage() {
                 color: "var(--color-neutral-400)",
               }}
             >
-              Front end first, full stack when it&apos;s needed. Most of my work is Shopify
+              Front end, back end, and the infrastructure under both. Most of my work is Shopify
               storefronts, custom apps, and making slow sites fast.
             </p>
           </div>

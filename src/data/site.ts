@@ -5,13 +5,13 @@ export const site = {
       site. Use it anywhere the output is read rather than looked at: titles,
       metadata, structured data, the footer byline. */
   fullName: "Jordan Grieve",
-  role: "Frontend developer",
+  role: "Software developer",
   location: "Scotland, UK — remote worldwide",
   email: "jordangrieve.dev@gmail.com",
   tagline:
-    "I build fast, reliable, scalable frontend designs and architecture from Scotland, back end included.",
+    "I build fast, reliable, scalable software designs and architecture from Scotland, back end included.",
   description:
-    "Jordan Grieve is a frontend developer in Scotland building fast Shopify storefronts, Cloudflare routing and Next.js apps. Case studies with the numbers behind them.",
+    "Jordan Grieve is a software developer in Scotland building fast Shopify storefronts, Cloudflare routing and Next.js apps. Case studies with the numbers behind them.",
   url: "https://www.jordangrieve.com",
   /** The CV, served straight out of /public. `cvName` is what the browser
       saves it as: without it the file lands under whatever the URL's last
@@ -27,7 +27,7 @@ export const site = {
     "Web performance optimisation",
     "Cloudflare Workers",
     "Next.js",
-    "Frontend development",
+    "Software development",
   ],
   /** For `PostalAddress` in the schema graph. Region only — no street address. */
   address: { region: "Scotland", country: "GB" },
