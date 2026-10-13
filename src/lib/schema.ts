@@ -7,7 +7,6 @@
  * or answer engine treat eight pages as one entity instead of eight strangers
  * who happen to share a name.
  */
-import { posts, type Post } from "@/data/posts";
 import { getCaseStudy, projects, type Project } from "@/data/projects";
 import { liveSocials, site } from "@/data/site";
 
@@ -187,61 +186,3 @@ export function caseStudySchema(project: Project) {
   );
 }
 
-export function writingSchema() {
-  return graph(
-    {
-      ...page(
-        "Blog",
-        "/writing",
-        `Blog — ${site.fullName}`,
-        "Posts on Shopify, Cloudflare caching and web performance.",
-      ),
-      blogPost: posts.map((p) => ({ "@id": `${site.url}/writing/${p.slug}#post` })),
-    },
-    breadcrumb([{ name: "Blog", path: "/writing" }]),
-    /* Each post gets a node here rather than a bare `@id` pointing at another
-       page. A reference on its own is only resolvable by a consumer that has
-       already crawled the post; this way the index page stands on its own. */
-    ...posts.map((p) => ({
-      "@type": "BlogPosting",
-      "@id": `${site.url}/writing/${p.slug}#post`,
-      url: `${site.url}/writing/${p.slug}`,
-      headline: p.title,
-      description: p.dek,
-      articleSection: p.category,
-      datePublished: p.published,
-      author: { "@id": PERSON_ID },
-      publisher: { "@id": PERSON_ID },
-      inLanguage: "en-GB",
-    })),
-  );
-}
-
-export function postSchema(post: Post) {
-  return graph(
-    breadcrumb([
-      { name: "Blog", path: "/writing" },
-      { name: post.title, path: `/writing/${post.slug}` },
-    ]),
-    {
-      "@type": "BlogPosting",
-      "@id": `${site.url}/writing/${post.slug}#post`,
-      url: `${site.url}/writing/${post.slug}`,
-      mainEntityOfPage: `${site.url}/writing/${post.slug}`,
-      headline: post.title,
-      description: post.dek,
-      articleSection: post.category,
-      datePublished: post.published,
-      dateModified: post.published,
-      author: { "@id": PERSON_ID },
-      publisher: { "@id": PERSON_ID },
-      isPartOf: {
-        "@type": "Blog",
-        "@id": `${site.url}/writing#page`,
-        name: `Blog — ${site.fullName}`,
-        url: `${site.url}/writing`,
-      },
-      inLanguage: "en-GB",
-    },
-  );
-}

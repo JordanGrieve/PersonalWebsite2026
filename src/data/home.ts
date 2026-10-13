@@ -130,11 +130,16 @@ export const timeline = [
   {
     when: "2025 →",
     what: "Frontend engineer, DFYNE",
-    body: "Storefront work at one of the fastest-growing businesses in Scotland — sections, performance, release testing.",
+    body: "Glasgow. Production work on a storefront serving over a billion requests a month, and the internal tools the team runs it with — monitoring, routing at the edge, performance for real visitors, and sections marketing can run its own drops from.",
   },
   {
-    when: "2021 – 2025",
-    what: "BSc Web Design and Development, Edinburgh Napier",
-    body: "Four years, a 2:1, finishing the year I started at DFYNE.",
+    when: "2023 – 2025",
+    what: "BSc (Hons) Web Design and Development, 2:1",
+    body: "Edinburgh Napier University. Finished the year I started at DFYNE.",
+  },
+  {
+    when: "2021 – 2023",
+    what: "HND Web Development",
+    body: "Edinburgh College, and the route onto the degree.",
   },
 ];

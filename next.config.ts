@@ -36,6 +36,18 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        /* The blog is gone — routes, content and data. Both it and its one
+           post were in the sitemap, so they redirect rather than 404. */
+        source: "/writing",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/writing/:slug",
+        destination: "/",
+        permanent: true,
+      },
+      {
         /* /services was published, in the sitemap and indexed, and listed
            prices for freelance work that is no longer on offer. */
         source: "/services",

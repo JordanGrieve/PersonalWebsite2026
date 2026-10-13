@@ -1,4 +1,3 @@
-import { displayDate, posts } from "@/data/posts";
 import { getCaseStudy, projects } from "@/data/projects";
 import { liveSocials, site } from "@/data/site";
 
@@ -44,15 +43,6 @@ function build(): string {
          measured, and inventing a number here would be worse than silence. */
       for (const r of study.results ?? []) lines.push(`- ${r.n}: ${r.l}`);
     }
-    lines.push("");
-  }
-
-  lines.push("## Writing");
-  lines.push("");
-  for (const p of posts) {
-    lines.push(`### ${p.title}`);
-    lines.push(`${site.url}/writing/${p.slug} — ${p.category}, ${displayDate(p.published)}`);
-    lines.push(p.dek);
     lines.push("");
   }
 
