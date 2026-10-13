@@ -16,6 +16,11 @@ export const heroImages: Record<string, Shot> = {
     src: "/images/work/coinpulse/03-coin-detail-bitcoin.png",
     alt: "The CoinPulse detail page for Bitcoin: the price at $86,362 with the day's change beside it, a candlestick chart with a period switcher from one day to one year, and a panel of market cap, rank and volume.",
   },
+  "dfyne-homepage": {
+    src: "/images/work/dfyne-homepage/01-hero-dynamic.png",
+    fit: "contain",
+    alt: "The DFYNE homepage: a full-bleed photograph of two athletes, the word DYNAMIC set over it, and two buttons reading Shop Dynamic and Best Sellers, with the site header above.",
+  },
   "dfyne-cloudflare-migration": {
     src: "/images/work/dfyne-cloudflare-migration/hero.png",
     cardPosition: "72% center",

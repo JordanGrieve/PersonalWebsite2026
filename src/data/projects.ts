@@ -66,6 +66,15 @@ export const projects: Project[] = [
     tag: "Web",
   },
   {
+    slug: "dfyne-homepage",
+    name: "DFYNE homepage",
+    kind: "Storefront",
+    year: "2026",
+    result: "Configurable sections — marketing runs a drop without a developer",
+    ph: "The homepage hero — one campaign leading the page",
+    tag: "Shopify",
+  },
+  {
     slug: "dfyne-cloudflare-migration",
     name: "DFYNE geo-routing",
     kind: "Infrastructure",
@@ -140,6 +149,7 @@ export const featuredSlugs = [
 export const featuredBlurbs: Record<string, string> = {
   "dfyne-cloudflare-migration": "Cloudflare · Shoppers on the wrong store, 35% → single digits",
   "dfyne-fit-finder": "Integration · AI size advisor across two Shopify Plus stores",
+  "dfyne-homepage": "Shopify · Configurable sections, so marketing runs its own drops",
   // HIDDEN with Essential Upsell.
 //   "essential-upsell": "Shopify app · Vector search over sales and returns",
   land: "AI app · Voice mock interviews scored against a real job advert",
@@ -160,6 +170,7 @@ export const featuredPlaceholders: Record<string, string> = {
 //   amoria: "Project shot — headless storefront",
   "dfyne-cloudflare-migration": "Project shot — edge routing",
   "dfyne-fit-finder": "Project shot — size advisor on the product page",
+  "dfyne-homepage": "Project shot — the homepage hero",
   "open-door-bakery": "Project shot — storefront on mobile",
   postbox: "Project shot — ticket thread",
 };
@@ -550,6 +561,107 @@ const caseStudies: Record<string, CaseStudy> = {
 //       shot2: "The reviews section — score, breakdown and a featured review",
 //     },
 //   },
+
+  /* TODO, and the only things on this page I could not establish from the
+     storefront itself: what a drop cost before these sections existed, and
+     whether anything was measured afterwards — drops per month, hours per
+     drop, developer requests. If a number turns up, this page should grow a
+     results row. Until then it argues from what is visible, which is three
+     heroes and four product rails built out of two sections.
+
+     One claim to check before this is said out loud in an interview: that
+     the New / Limited Edition / Oversized / Sold Out badges come from the
+     product rather than being typed into the section. */
+  "dfyne-homepage": {
+    tags: ["Shopify", "Storefront", "2026"],
+    heading: "DFYNE HOMEPAGE",
+    intro:
+      "DFYNE runs drops. A collection lands, the homepage has to lead with it that morning, and the date is set by the shoot, the campaign email and the paid spend — not by whoever is free to build the page. I built the sections the homepage is made of, so the people running a drop can put one together themselves.",
+    meta: [
+      { l: "Client", v: "DFYNE" },
+      { l: "Scope", v: "Configurable homepage sections — heroes and product rails" },
+      { l: "Timeline", v: "2026" },
+      { l: "Stack", v: "Shopify Plus, Liquid, theme sections, Klaviyo" },
+      { l: "Status", v: "Live on both storefronts" },
+      { l: "Live", v: "dfyne.com" },
+    ],
+    problemTitle: "What the page has to carry",
+    problem:
+      "The homepage is never showing one thing. The version in these screenshots is running three campaigns at once: Dynamic, the Anisia collaboration, and the 5th Birthday collection. Each gets a full-bleed hero with its own artwork and its own two calls to action, and a product rail underneath it with its own heading, its own colourways and its own link through to the collection.\n\nThat is seven blocks of page. Built one at a time they are seven things to maintain, and every future drop is an eighth. Built once they are two things used repeatedly — which is what they are.",
+    approach:
+      "Two sections do the work.\n\nA hero takes a piece of artwork, the headline set over it, and up to two buttons pointing wherever that campaign needs them to. A product section takes an eyebrow line, a title, a row of colourway thumbnails, a link through to the full collection, and the rail of products underneath. This page uses the hero three times and the product section four, and there is nothing about Anisia, or Dynamic, or a birthday, written into either of them.\n\nThe rail reads from a collection rather than a hand-picked list, which puts the decision where it already lives: merchandising a drop is a merchandising job, and the homepage follows it. The badges on the cards — New, Limited Edition, Oversized, Sold Out — come from the product rather than being typed into the section, so a size selling out mid-drop updates the page without anyone touching it.\n\nThe same sections carry to mobile, where the rails scroll sideways and the navigation collapses into a drawer that swaps its whole tree, promo tiles included, between womenswear and menswear.\n\nThe newsletter at the foot of the page is Klaviyo, and that integration is mine too — the DNS records that let it send as DFYNE, and the mailer itself.",
+    incidentsTitle: "What a drop needs from me now",
+    incidentsNote:
+      "The test these were built against: can a campaign go live without a developer in the room.",
+    incidents: [
+      {
+        what: "The artwork and the words",
+        why: "The hero image, the headline over it, both buttons and where each one points are content on the section. A new campaign is a new set of values rather than a new block of markup, and nobody waits on a deploy to fix a button that says the wrong thing.",
+      },
+      {
+        what: "Which products, and in which colourway",
+        why: "The rail is fed by a collection and the thumbnails above it filter by colour. Both are things the team changes anyway while setting a drop up, so the homepage updates as a side effect of work that was already happening.",
+      },
+      {
+        what: "Where it sits on the page",
+        why: "Sections can be reordered, duplicated and switched off. Which campaign leads the page on the morning of a launch is a decision made on the morning of the launch, by the people whose decision it is.",
+      },
+    ],
+    /* No results row: nothing here was measured. See the note above. */
+    slots: {
+      hero: "The homepage hero — one campaign leading the page",
+      shot1: "The product rail under it, filtered by colourway",
+      shot2: "The same hero section, a different drop",
+    },
+    shots: {
+      hero: heroImages["dfyne-homepage"],
+      shot1: {
+        src: "/images/work/dfyne-homepage/02-dynamic-next-chapter.png",
+        fit: "contain",
+        alt: "A product rail headed Dynamic's Next Chapter, six colourway thumbnails above it, and a row of products below carrying New badges, price and star ratings.",
+      },
+      shot2: {
+        src: "/images/work/dfyne-homepage/07-hero-5th-birthday.png",
+        fit: "contain",
+        alt: "The same hero section carrying a different campaign: four athletes in blue sitting in a stadium, a DFYNE 5th Birthday lockup, and a Shop Now button.",
+      },
+    },
+    gallery: [
+      {
+        src: "/images/work/dfyne-homepage/04-anisia-x-dfyne.png",
+        fit: "contain",
+        alt: "The product section again, headed Anisia X DFYNE, with four colourway thumbnails and a rail of Limited Edition products.",
+        caption:
+          "The same product section, a different collaboration. Four thumbnails instead of six, because that is how many colourways the drop has.",
+      },
+      {
+        src: "/images/work/dfyne-homepage/08-birthday-collection-womens.png",
+        fit: "contain",
+        alt: "And again for The Birthday Collection, with three colourway thumbnails and a rail that includes a product marked Sold Out.",
+        caption:
+          "And again, further down the same page. The Sold Out badge on the third card is the product saying so, not somebody remembering to.",
+      },
+      {
+        src: "/images/work/dfyne-homepage/22-mobile-sections.png",
+        alt: "Three phone screens side by side: a product rail with quick-add buttons, the athlete styles tiles, and the newsletter block above a footer whose columns collapse into accordions.",
+        caption:
+          "The same sections on a phone. The rails scroll sideways, each card gains a quick-add button, and the footer columns become accordions.",
+      },
+      {
+        src: "/images/work/dfyne-homepage/21-mobile-trio.png",
+        alt: "Three phone screens side by side: the homepage hero, the navigation drawer on womenswear, and the same drawer on menswear with different promo tiles.",
+        caption:
+          "The same sections on a phone, beside the drawer that replaces the navigation. Womens and Mens swap the whole tree, promo tiles included.",
+      },
+      {
+        src: "/images/work/dfyne-homepage/10-newsletter-klaviyo-footer.png",
+        fit: "contain",
+        alt: "The foot of the page: a Sign up and save block offering 10% off a first order, above the footer with account, about, contact and delivery columns.",
+        caption:
+          "The signup block is Klaviyo. I set up the DNS so it sends as DFYNE, and built the mailer behind it.",
+      },
+    ],
+  },
 
   "dfyne-cloudflare-migration": {
     tags: ["Infrastructure", "Cloudflare", "2026"],
