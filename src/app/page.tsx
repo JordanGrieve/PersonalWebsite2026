@@ -164,7 +164,11 @@ export default function HomePage() {
               style={{
                 margin: 0,
                 maxWidth: "44ch",
-                font: "500 clamp(0.8125rem,1.3cqw,0.9375rem)/1.45 var(--font-heading)",
+                /* Flat 0.9375rem rather than clamping down to 0.8125rem.
+                   The clamp only ever ranged 13px to 15px, and 13px is
+                   small for the line that says what I do — it was the
+                   measurement that started this. */
+                font: "500 0.9375rem/1.45 var(--font-heading)",
                 letterSpacing: ".05em",
                 textTransform: "uppercase",
                 color: "var(--color-neutral-200)",
