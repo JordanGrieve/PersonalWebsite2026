@@ -1,50 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
+import { sendMessage, type ContactState } from "@/app/contact/actions";
 import { site } from "@/data/site";
 
 /**
- * The brief form. Submitting hands the message to the visitor's own mail
- * client, pre-filled, rather than posting it anywhere — so a brief either
- * visibly reaches a compose window or visibly does not. The previous version
- * said "Message sent" and then dropped it.
- *
- * TODO: replace with a server action (Resend, Postmark, an inbox webhook) so
- * the form posts directly. That needs an API key in the environment; until
- * then this is the honest version.
+ * The contact form. Posts to a server action that sends the message on; it
+ * no longer hands the visitor a `mailto:` draft and hope they press send in
+ * a mail client that may not exist. The address stays visible underneath
+ * either way, so there is always a route that does not depend on this.
  */
+function SubmitButton() {
+  /* Reads the pending state of the form this button sits inside, which is
+     why it has to be its own component. */
+  const { pending } = useFormStatus();
+  return (
+    <button className="btn btn-primary btn-block" type="submit" disabled={pending}>
+      {pending ? "Sending…" : "Send message"}
+      {pending ? null : <i className="ph ph-arrow-up-right" />}
+    </button>
+  );
+}
+
 export default function ContactForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [msg, setMsg] = useState("");
-  const [err, setErr] = useState(false);
-  const [sent, setSent] = useState(false);
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email.includes("@") || msg.trim().length < 4) {
-      setErr(true);
-      return;
-    }
-    setErr(false);
-
-    const subject = "Hello from your portfolio";
-    const body = [name && `Name: ${name}`, `Email: ${email}`, "", msg]
-      .filter(Boolean)
-      .join("\n");
-
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
-  }
-
-  function reset() {
-    setSent(false);
-    setName("");
-    setEmail("");
-    setMsg("");
-  }
+  const [state, action] = useActionState<ContactState, FormData>(sendMessage, {});
 
   return (
     <div
@@ -55,7 +35,7 @@ export default function ContactForm() {
         padding: "clamp(20px,3cqw,30px)",
       }}
     >
-      {sent ? (
+      {state.ok ? (
         <div
           style={{
             display: "flex",
@@ -65,36 +45,21 @@ export default function ContactForm() {
             padding: "26px 0",
           }}
         >
-          <i className="ph ph-envelope-simple" style={{ fontSize: "2.125rem", color: "var(--color-accent)" }} />
-          <h3 style={{ margin: 0, fontSize: "1.375rem" }}>Check your email app</h3>
+          <i
+            className="ph ph-check-circle"
+            style={{ fontSize: "2.125rem", color: "var(--color-accent)" }}
+          />
+          <h3 style={{ margin: 0, fontSize: "1.375rem" }}>Message sent</h3>
           <p style={{ margin: 0, fontSize: "0.90625rem", color: "var(--color-neutral-400)" }}>
-            Thanks {name || "there"} — your message is written and waiting in a
-            draft. Press send there and it reaches me; I reply within a day.
+            It is in my inbox. I reply within a day — and replying to it reaches you, so there
+            is nothing else for you to do.
           </p>
-          <p style={{ margin: 0, fontSize: "0.84375rem", color: "var(--color-neutral-500)" }}>
-            Nothing opened?{" "}
-            <a href={`mailto:${site.email}`}>{site.email}</a>
-          </p>
-          <button className="btn btn-secondary" onClick={reset}>
-            Write another
-          </button>
         </div>
       ) : (
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: "flex", flexDirection: "column", gap: 14 }}
-          noValidate
-        >
+        <form action={action} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <div className="field">
             <label htmlFor="cf-name">Your name</label>
-            <input
-              className="input"
-              id="cf-name"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Ruth Kelso"
-            />
+            <input className="input" id="cf-name" name="name" placeholder="Ruth Kelso" />
           </div>
           <div className="field">
             <label htmlFor="cf-email">Email</label>
@@ -103,8 +68,7 @@ export default function ContactForm() {
               id="cf-email"
               name="email"
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              required
               placeholder="you@company.com"
             />
           </div>
@@ -114,20 +78,33 @@ export default function ContactForm() {
               className="input"
               id="cf-msg"
               name="message"
-              value={msg}
-              onChange={(e) => setMsg(e.target.value)}
+              required
               placeholder="Send a message saying hello :D"
             />
           </div>
-          {err ? (
+
+          {/* The honeypot. Off screen, hidden from the accessibility tree and
+              out of the tab order, so nothing but a bot ever fills it in. */}
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ position: "absolute", left: "-9999px", width: 1, height: 1 }}
+          />
+
+          {state.error ? (
             <div role="alert" style={{ fontSize: "0.78125rem", color: "var(--color-accent-300)" }}>
-              Add your email and a line or two.
+              {state.error}
             </div>
           ) : null}
-          <button className="btn btn-primary btn-block" type="submit">
-            Send message
-            <i className="ph ph-arrow-up-right" />
-          </button>
+
+          <SubmitButton />
+
+          <p style={{ margin: 0, fontSize: "0.78125rem", color: "var(--color-neutral-500)" }}>
+            Or email me directly at <a href={`mailto:${site.email}`}>{site.email}</a>.
+          </p>
         </form>
       )}
     </div>
