@@ -159,7 +159,7 @@ export default function Header() {
         >
           <span
             style={{
-              font: "500 10.5px/1 var(--font-heading)",
+              font: "500 0.65625rem/1 var(--font-heading)",
               letterSpacing: ".18em",
               textTransform: "uppercase",
               color: "var(--color-neutral-500)",
@@ -173,7 +173,7 @@ export default function Header() {
             aria-label="Close menu"
             style={{ width: 44, height: 44, padding: 0 }}
           >
-            <i className="ph ph-x" style={{ fontSize: 20 }} />
+            <i className="ph ph-x" style={{ fontSize: "1.25rem" }} />
           </button>
         </div>
         {navItems.map((item) => {
@@ -181,7 +181,7 @@ export default function Header() {
           const style = {
             textAlign: "left",
             fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
-            fontSize: 27,
+            fontSize: "1.6875rem",
             letterSpacing: ".01em",
             textTransform: "uppercase",
             padding: "8px 0",
@@ -223,7 +223,7 @@ export default function Header() {
           style={{
             marginTop: "auto",
             paddingTop: 20,
-            fontSize: 13,
+            fontSize: "0.8125rem",
             color: "var(--color-neutral-400)",
           }}
         >
@@ -261,7 +261,7 @@ export default function Header() {
               style={{
                 fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
                 fontWeight: 400,
-                fontSize: 24,
+                fontSize: "1.5rem",
                 letterSpacing: ".01em",
                 color: "var(--color-neutral-100)",
               }}
@@ -273,7 +273,7 @@ export default function Header() {
             {navItems.map((item) => {
               const wip = "wip" in item && item.wip;
               const style = {
-                font: "500 14px/1 var(--font-heading)",
+                font: "500 0.875rem/1 var(--font-heading)",
                 padding: "7px 10px",
                 borderRadius: "var(--radius-sm)",
                 color: isActive(pathname, item.href)
@@ -332,7 +332,7 @@ export default function Header() {
             aria-expanded={showingMenu}
             style={{ display: "none", width: 44, height: 44, padding: 0 }}
           >
-            <i className={showingMenu ? "ph ph-x" : "ph ph-list"} style={{ fontSize: 22 }} />
+            <i className={showingMenu ? "ph ph-x" : "ph ph-list"} style={{ fontSize: "1.375rem" }} />
           </button>
         </div>
       </header>

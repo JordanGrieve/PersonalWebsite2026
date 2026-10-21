@@ -16,7 +16,7 @@ const linkRow = {
   display: "flex",
   alignItems: "center",
   gap: 11,
-  fontSize: 15,
+  fontSize: "0.9375rem",
   minHeight: 24,
   padding: "4px 0",
 } as const;
@@ -37,7 +37,7 @@ export default function ContactPage() {
       <div>
         <h1
           style={{
-            fontSize: "clamp(38px,8cqw,96px)",
+            fontSize: "clamp(2.375rem,8cqw,6rem)",
             lineHeight: 0.9,
             letterSpacing: "-.04em",
             margin: 0,
@@ -48,7 +48,7 @@ export default function ContactPage() {
         <p
           style={{
             margin: "20px 0 0",
-            fontSize: 16,
+            fontSize: "1rem",
             lineHeight: 1.65,
             color: "var(--color-neutral-300)",
           }}
@@ -59,7 +59,7 @@ export default function ContactPage() {
         </p>
         <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14 }}>
           <a href={`mailto:${site.email}`} style={linkRow}>
-            <i className="ph ph-envelope-simple" style={{ fontSize: 19 }} />
+            <i className="ph ph-envelope-simple" style={{ fontSize: "1.1875rem" }} />
             {site.email}
           </a>
           {liveSocials.map((s) => (
@@ -70,12 +70,12 @@ export default function ContactPage() {
               rel="noreferrer"
               style={linkRow}
             >
-              <i className={s.icon} style={{ fontSize: 19 }} />
+              <i className={s.icon} style={{ fontSize: "1.1875rem" }} />
               {s.handle}
             </a>
           ))}
           <div style={{ ...linkRow, color: "var(--color-neutral-400)" }}>
-            <i className="ph ph-map-pin" style={{ fontSize: 19, color: "var(--color-accent)" }} />
+            <i className="ph ph-map-pin" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
             {site.location}
           </div>
         </div>

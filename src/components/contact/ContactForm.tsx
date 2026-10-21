@@ -65,13 +65,13 @@ export default function ContactForm() {
             padding: "26px 0",
           }}
         >
-          <i className="ph ph-envelope-simple" style={{ fontSize: 34, color: "var(--color-accent)" }} />
-          <h3 style={{ margin: 0, fontSize: 22 }}>Check your email app</h3>
-          <p style={{ margin: 0, fontSize: 14.5, color: "var(--color-neutral-400)" }}>
+          <i className="ph ph-envelope-simple" style={{ fontSize: "2.125rem", color: "var(--color-accent)" }} />
+          <h3 style={{ margin: 0, fontSize: "1.375rem" }}>Check your email app</h3>
+          <p style={{ margin: 0, fontSize: "0.90625rem", color: "var(--color-neutral-400)" }}>
             Thanks {name || "there"} — your message is written and waiting in a
             draft. Press send there and it reaches me; I reply within a day.
           </p>
-          <p style={{ margin: 0, fontSize: 13.5, color: "var(--color-neutral-500)" }}>
+          <p style={{ margin: 0, fontSize: "0.84375rem", color: "var(--color-neutral-500)" }}>
             Nothing opened?{" "}
             <a href={`mailto:${site.email}`}>{site.email}</a>
           </p>
@@ -120,7 +120,7 @@ export default function ContactForm() {
             />
           </div>
           {err ? (
-            <div role="alert" style={{ fontSize: 12.5, color: "var(--color-accent-300)" }}>
+            <div role="alert" style={{ fontSize: "0.78125rem", color: "var(--color-accent-300)" }}>
               Add your email and a line or two.
             </div>
           ) : null}

@@ -26,7 +26,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "land",
+    slug: "callback",
     name: "Callback",
     kind: "AI app",
     year: "2026",
@@ -97,7 +97,10 @@ export const projects: Project[] = [
     name: "DFYNE site performance",
     kind: "Performance",
     year: "2026",
-    result: "LCP for real visitors: 1.81s → 1.31s, and under a second on the US store",
+    /* The US pair, not the rest-of-world one. Both are measured and both
+       are on the case study; leading with this one means the card and the
+       CV open on the same figure. */
+    result: "US store LCP for real visitors: 1.61s → under a second",
     ph: "Main thread — before and after",
     tag: "Performance",
   },
@@ -138,12 +141,12 @@ export const projectFilters = [
  * own row. The fourth is hidden once the grid goes three-up (globals.css).
  */
 export const featuredSlugs = [
+  "postbox",
   "dfyne-cloudflare-migration",
-  "land",
-  "dfyne-mobile-performance",
+  "callback",
   /* Fourth card: hidden between 883 and 1119px, where the grid is three
      across and this one would start a second row on its own. */
-  "open-door-bakery",
+  "dfyne-mobile-performance",
 ];
 
 export const featuredBlurbs: Record<string, string> = {
@@ -152,19 +155,19 @@ export const featuredBlurbs: Record<string, string> = {
   "dfyne-homepage": "Shopify · Configurable sections, so marketing runs its own drops",
   // HIDDEN with Essential Upsell.
 //   "essential-upsell": "Shopify app · Vector search over sales and returns",
-  land: "AI app · Voice mock interviews scored against a real job advert",
+  callback: "AI app · Voice mock interviews scored against a real job advert",
   "dfyne-mobile-performance":
-    "Performance · LCP 1.81s → 1.31s for real visitors, and faster on desktop too",
+    "Performance · US store LCP 1.61s → under a second for real visitors",
   // HIDDEN with AMORIA.
 //   amoria: "Headless Shopify · Hydrogen on Oxygen, built end to end",
   "open-door-bakery": "Web build · Storefront, admin and API in one app",
-  postbox: "SaaS · Contact form and support email in one inbox",
+  postbox: "SaaS · Multi-tenant support and newsletters, held to WCAG 2.2 AAA",
 };
 
 export const featuredPlaceholders: Record<string, string> = {
   // HIDDEN with Essential Upsell.
 //   "essential-upsell": "Project shot — recommendations on the product page",
-  land: "Project shot — the voice interview in progress",
+  callback: "Project shot — the voice interview in progress",
   "dfyne-mobile-performance": "Project shot — main thread, before and after",
   // HIDDEN with AMORIA.
 //   amoria: "Project shot — headless storefront",
@@ -302,7 +305,7 @@ const caseStudies: Record<string, CaseStudy> = {
   },
 
 
-  land: {
+  callback: {
     tags: ["AI", "App", "2026"],
     heading: "CALLBACK",
     intro:
@@ -338,7 +341,7 @@ const caseStudies: Record<string, CaseStudy> = {
        page argues about scoring and structured output, and none of that
        is visible from outside the login. */
     shots: {
-      hero: heroImages["land"],
+      hero: heroImages["callback"],
       shot1: {
         src: "/images/work/ai-job-prep/how-it-works.png",
         fit: "contain",
@@ -352,16 +355,21 @@ const caseStudies: Record<string, CaseStudy> = {
     tags: ["App", "SaaS", "2026"],
     heading: "POSTBOX",
     intro:
-      "A multi-tenant support-ticket system that turns a small business's website contact form and support email into one threaded inbox. The alternative for a small shop is a shared Gmail account where enquiries get lost, and the commercial helpdesks are priced and shaped for far larger teams.",
+      "A multi-tenant support and newsletter platform, built and run on my own: shared inboxes, ticketing, campaigns and subscriber management for small businesses. The alternative for a small shop is a Gmail account three people share and nobody owns, and the commercial helpdesks are priced and shaped for far larger teams.\n\nThe part I would point at first is not a feature. It is held to WCAG 2.2 AAA, and the measurements behind that claim are written rather than bought.",
     meta: [
       { l: "Client", v: "Personal project — my own product" },
-      { l: "Scope", v: "Multi-tenant SaaS, email threading, admin" },
+      { l: "Scope", v: "Shared inboxes, ticketing, campaigns, subscribers, billing" },
       { l: "Timeline", v: "—" },
-      { l: "Stack", v: "Next.js 16, TypeScript, Neon Postgres, Drizzle, Clerk, Resend, Vercel" },
+      {
+        l: "Stack",
+        v: "Next.js 16, React 19, TypeScript, Postgres behind Drizzle, Clerk, Stripe, Resend, Vercel",
+      },
+      { l: "Tests", v: "1,696 across 115 files, gated in GitHub Actions" },
       { l: "Live", v: "postbox.help" },
     ],
+    problemTitle: "Measured, not claimed",
     problem:
-      "A small business takes enquiries through two unrelated channels — a website contact form and a support inbox — with no shared history and no record of what was answered. The obvious fix, replying from the business's own domain, was not available: you cannot verify a domain you do not control, so mail sent as the client would fail authentication and land in spam. Replies had to originate from a domain I could verify while still threading correctly in the customer's mail client.",
+      "Most accessibility statements are an assertion. An audit tool is run, it reports no violations, and the claim goes up — but the common tools cannot see the three things that actually fail: contrast where the text sits on something translucent, targets that are smaller than their bounding box suggests, and layouts that break when the window is narrow.\n\nSo I wrote the measurements instead of buying them. Contrast is composited through a canvas, so a translucent layer over a gradient resolves to the colour a person actually sees rather than the one in the stylesheet. Target size is hit tested with elementFromPoint at the corners, which catches a 44px button with 20px of it covered by something else. Reflow is checked at 320px, the narrowest width the guideline asks about. And the whole type scale is rem rather than px, so a reader who has set their browser to large text gets large text.\n\nThat last one is the test I would put first if I could only keep one. It is trivially easy to fail and almost nobody checks.\n\nThe other half of the build is email, and there the problem was different. A small business takes enquiries through two unrelated channels — a website contact form and a support inbox — with no shared history and no record of what was answered. The obvious fix, replying from the business's own domain, was not available: you cannot verify a domain you do not control, so mail sent as the client would fail authentication and land in spam. Replies had to originate from a domain I could verify while still threading correctly in the customer's mail client.",
     /* The reply-address token scheme and the tenancy boundary are deliberately
        not described here — the repo is public, and a portfolio page is not the
        place to hand someone a map of the security model. */
@@ -371,12 +379,12 @@ const caseStudies: Record<string, CaseStudy> = {
        absent: latency (the London region pinning "roughly halved" it, but no
        before/after was recorded), ticket volume, uptime, deliverability. */
     results: [
+      { n: "1,696", l: "Tests across 115 files, gated on every pull request" },
       {
         n: "33% → 59%",
         l: "Share of a phone screen given to the conversation, 277px up to 495px",
       },
-      { n: "260 → 180", l: "Pixels of interface above the first message on mobile" },
-      { n: "0 → 27", l: "Unit tests over reply-parsing and threading logic" },
+      { n: "320px", l: "Reflow checked at the narrowest width WCAG 2.2 asks about" },
     ],
     /* Every screenshot is of a seeded demo workspace, not a client's. A
        real one would carry customer names, addresses and the contents of

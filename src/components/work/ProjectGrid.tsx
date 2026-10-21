@@ -32,7 +32,7 @@ export default function ProjectGrid() {
             aria-pressed={filter === f}
             style={{
               cursor: "pointer",
-              font: "500 12px/1 var(--font-heading)",
+              font: "500 0.75rem/1 var(--font-heading)",
               letterSpacing: ".06em",
               padding: "8px 14px",
               borderRadius: 999,
@@ -85,21 +85,21 @@ export default function ProjectGrid() {
                   gap: 10,
                 }}
               >
-                <span className="tag tag-outline" style={{ fontSize: 10.5 }}>
+                <span className="tag tag-outline" style={{ fontSize: "0.65625rem" }}>
                   {p.kind}
                 </span>
-                <span style={{ fontSize: 11, color: "var(--color-neutral-500)" }}>{p.year}</span>
+                <span style={{ fontSize: "0.6875rem", color: "var(--color-neutral-500)" }}>{p.year}</span>
               </div>
               <div
                 style={{
                   marginTop: 12,
-                  font: "500 16px/1.25 var(--font-heading)",
+                  font: "500 1rem/1.25 var(--font-heading)",
                   color: "var(--color-text)",
                 }}
               >
                 {p.name}
               </div>
-              <div style={{ marginTop: 5, fontSize: 13, color: "var(--color-neutral-400)" }}>
+              <div style={{ marginTop: 5, fontSize: "0.8125rem", color: "var(--color-neutral-400)" }}>
                 {p.result}
               </div>
             </div>

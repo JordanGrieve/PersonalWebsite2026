@@ -97,7 +97,7 @@ h4 {
 }
 body {
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.55;
   font-weight: 400;
 }
@@ -114,22 +114,22 @@ h6 {
   margin: 0 0 var(--space-2);
 }
 h1 {
-  font-size: 42px;
+  font-size: 2.625rem;
 }
 h2 {
-  font-size: 32px;
+  font-size: 2rem;
 }
 h3 {
-  font-size: 25px;
+  font-size: 1.5625rem;
 }
 h4 {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 h5 {
-  font-size: 16px;
+  font-size: 1rem;
 }
 h6 {
-  font-size: 13px;
+  font-size: 0.8125rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -148,7 +148,7 @@ figure {
   margin: 0;
 }
 figcaption {
-  font-size: 11px;
+  font-size: 0.6875rem;
   margin-top: var(--space-1);
   color: color-mix(in srgb, var(--color-text) 55%, transparent);
 }
@@ -190,7 +190,7 @@ figcaption {
   text-decoration: none;
   font-family: var(--font-heading);
   font-weight: var(--font-heading-weight);
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.2;
   color: var(--color-text);
   background: transparent;
@@ -247,7 +247,7 @@ figcaption {
 /* — forms — */
 .field > label {
   display: block;
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-bottom: 5px;
   color: color-mix(in srgb, var(--color-text) 70%, transparent);
 }
@@ -256,7 +256,7 @@ figcaption {
   min-height: 36px;
   padding: 6px 10px;
   font: inherit;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--color-text);
   caret-color: var(--color-accent);
   background: var(--color-surface);
@@ -285,7 +285,7 @@ textarea.input {
   background: var(--color-surface);
 }
 .card-kicker {
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-accent);
@@ -293,12 +293,12 @@ textarea.input {
 .card-title {
   font-family: var(--font-heading);
   font-weight: var(--font-heading-weight);
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.2;
 }
 .card-body {
   margin: 0;
-  font-size: 13px;
+  font-size: 0.8125rem;
   opacity: 0.8;
   flex: 1;
 }
@@ -306,7 +306,7 @@ textarea.input {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: color-mix(in srgb, var(--color-text) 50%, transparent);
 }
 .elev-sm {
@@ -323,7 +323,7 @@ textarea.input {
 .tag {
   display: inline-flex;
   align-items: center;
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.02em;
   padding: 3px 10px;
   border-radius: calc(var(--radius-md) * 0.75);

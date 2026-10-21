@@ -63,12 +63,12 @@ export default function ServicesGrid() {
             minHeight: 196,
           }}
         >
-          <i className={sv.icon} style={{ fontSize: 26, color: "var(--color-accent)" }} />
-          <h4 style={{ margin: 0, fontSize: 15, letterSpacing: ".04em", textTransform: "uppercase" }}>
+          <i className={sv.icon} style={{ fontSize: "1.625rem", color: "var(--color-accent)" }} />
+          <h4 style={{ margin: 0, fontSize: "0.9375rem", letterSpacing: ".04em", textTransform: "uppercase" }}>
             {sv.title}
           </h4>
           <b style={{ display: "none", fontWeight: 400, color: "var(--color-neutral-500)" }}>
-            <i className={open === i ? "ph ph-minus" : "ph ph-plus"} style={{ fontSize: 16 }} />
+            <i className={open === i ? "ph ph-minus" : "ph ph-plus"} style={{ fontSize: "1rem" }} />
           </b>
           <div className="svc-body" id={`svc-body-${i}`} data-open={open === i}>
             {/* This div is what clips to the collapsing row, so it carries no
@@ -78,7 +78,7 @@ export default function ServicesGrid() {
               <p
                 style={{
                   margin: 0,
-                  fontSize: 13.5,
+                  fontSize: "0.84375rem",
                   lineHeight: 1.55,
                   color: "var(--color-neutral-400)",
                 }}
@@ -90,7 +90,7 @@ export default function ServicesGrid() {
           <span
             style={{
               marginTop: "auto",
-              font: "500 11px/1 var(--font-heading)",
+              font: "500 0.6875rem/1 var(--font-heading)",
               letterSpacing: ".1em",
               color: "var(--color-neutral-500)",
             }}

@@ -47,7 +47,7 @@ function Prose({ text }: { text: string }) {
           key={i}
           style={{
             margin: i === 0 ? 0 : "14px 0 0",
-            fontSize: 15,
+            fontSize: "0.9375rem",
             lineHeight: 1.65,
             color: "var(--color-neutral-400)",
           }}
@@ -121,11 +121,11 @@ function DetailList({
 
   return (
     <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)" }}>
-      <h3 style={{ margin: "0 0 6px", fontSize: 20, letterSpacing: "-.01em" }}>{title}</h3>
+      <h3 style={{ margin: "0 0 6px", fontSize: "1.25rem", letterSpacing: "-.01em" }}>{title}</h3>
       <p
         style={{
           margin: "0 0 18px",
-          fontSize: 14,
+          fontSize: "0.875rem",
           lineHeight: 1.6,
           color: "var(--color-neutral-500)",
         }}
@@ -144,10 +144,10 @@ function DetailList({
               borderTop: "1px solid var(--color-divider)",
             }}
           >
-            <div style={{ font: "500 15px/1.45 var(--font-heading)", color: "var(--color-text)" }}>
+            <div style={{ font: "500 0.9375rem/1.45 var(--font-heading)", color: "var(--color-text)" }}>
               {item.what}
             </div>
-            <div style={{ fontSize: 14, lineHeight: 1.6, color: "var(--color-neutral-400)" }}>
+            <div style={{ fontSize: "0.875rem", lineHeight: 1.6, color: "var(--color-neutral-400)" }}>
               {item.why}
             </div>
           </div>
@@ -197,7 +197,7 @@ function Gallery({ items }: { items?: Shot[] }) {
 
   return (
     <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)" }}>
-      <h3 style={{ margin: "0 0 18px", fontSize: 20, letterSpacing: "-.01em" }}>
+      <h3 style={{ margin: "0 0 18px", fontSize: "1.25rem", letterSpacing: "-.01em" }}>
         The evidence
       </h3>
       {/* Two across at most. At four these were 150px wide and the routes
@@ -247,7 +247,7 @@ export default async function CaseStudyPage({ params }: Params) {
         </div>
         <h1
           style={{
-            fontSize: "clamp(38px,8cqw,96px)",
+            fontSize: "clamp(2.375rem,8cqw,6rem)",
             lineHeight: 0.9,
             letterSpacing: "-.04em",
             margin: 0,
@@ -258,7 +258,7 @@ export default async function CaseStudyPage({ params }: Params) {
         <p
           style={{
             margin: "20px 0 0",
-            fontSize: 17,
+            fontSize: "1.0625rem",
             lineHeight: 1.6,
             color: "var(--color-neutral-300)",
           }}
@@ -299,7 +299,7 @@ export default async function CaseStudyPage({ params }: Params) {
             <div key={m.l}>
               <div
                 style={{
-                  font: "500 11px/1 var(--font-heading)",
+                  font: "500 0.6875rem/1 var(--font-heading)",
                   letterSpacing: ".13em",
                   textTransform: "uppercase",
                   color: "var(--color-neutral-500)",
@@ -307,7 +307,7 @@ export default async function CaseStudyPage({ params }: Params) {
               >
                 {m.l}
               </div>
-              <div style={{ marginTop: 8, fontSize: 14, color: "var(--color-neutral-200)" }}>
+              <div style={{ marginTop: 8, fontSize: "0.875rem", color: "var(--color-neutral-200)" }}>
                 {m.l === "Live" ? withLink(m.v) : m.v}
               </div>
             </div>
@@ -330,13 +330,13 @@ export default async function CaseStudyPage({ params }: Params) {
           {/* Not every study starts from a problem. One of these is a brand
               I started myself, where the first section is what I wanted to
               make rather than what was wrong. */}
-          <h3 style={{ margin: "0 0 12px", fontSize: 20, letterSpacing: "-.01em" }}>
+          <h3 style={{ margin: "0 0 12px", fontSize: "1.25rem", letterSpacing: "-.01em" }}>
             {study.problemTitle ?? "The problem"}
           </h3>
           <Prose text={study.problem} />
         </div>
         <div>
-          <h3 style={{ margin: "0 0 12px", fontSize: 20, letterSpacing: "-.01em" }}>What I did</h3>
+          <h3 style={{ margin: "0 0 12px", fontSize: "1.25rem", letterSpacing: "-.01em" }}>What I did</h3>
           <Prose text={study.approach} />
         </div>
       </section>
@@ -359,7 +359,7 @@ export default async function CaseStudyPage({ params }: Params) {
             >
               <div
                 style={{
-                  font: "500 clamp(26px,3.2cqw,38px)/1 var(--font-heading)",
+                  font: "500 clamp(1.625rem,3.2cqw,2.375rem)/1 var(--font-heading)",
                   letterSpacing: "-.03em",
                   color: "var(--color-accent)",
                 }}
@@ -369,7 +369,7 @@ export default async function CaseStudyPage({ params }: Params) {
               <div
                 style={{
                   marginTop: 9,
-                  fontSize: 13,
+                  fontSize: "0.8125rem",
                   lineHeight: 1.5,
                   color: "var(--color-neutral-400)",
                 }}
@@ -448,7 +448,7 @@ export default async function CaseStudyPage({ params }: Params) {
             <blockquote
               style={{
                 margin: 0,
-                fontSize: "clamp(18px,2.4cqw,26px)",
+                fontSize: "clamp(1.125rem,2.4cqw,1.625rem)",
                 lineHeight: 1.4,
                 letterSpacing: "-.02em",
                 color: "var(--color-neutral-200)",
@@ -456,7 +456,7 @@ export default async function CaseStudyPage({ params }: Params) {
             >
               &ldquo;{study.quote.text}&rdquo;
             </blockquote>
-            <figcaption style={{ marginTop: 14, fontSize: 13, color: "var(--color-neutral-500)" }}>
+            <figcaption style={{ marginTop: 14, fontSize: "0.8125rem", color: "var(--color-neutral-500)" }}>
               {study.quote.who}
             </figcaption>
           </figure>

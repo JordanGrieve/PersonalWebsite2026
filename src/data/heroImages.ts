@@ -43,10 +43,10 @@ export const heroImages: Record<string, Shot> = {
     src: "/images/work/open-door-bakery/03-home-desktop.png",
     alt: "The Open Door Bakery home page: a watercolour hero reading Welcome to Open Door Bakery, buttons to shop and to order something custom, and a row of category cards.",
   },
-  /* Folder named ai-job-prep, project slug "land", product called
-     Callback. Three names for one thing; the folder and the URL stay as
-     they are because both are already published. */
-  land: {
+  /* Folder is still named ai-job-prep — the images are published at
+     those paths and renaming them would break every one. The slug itself
+     used to be "land", which was a leftover; /work/land now redirects. */
+  callback: {
     src: "/images/work/ai-job-prep/hero.png",
     alt: "The Callback landing page: a headline reading Practise the interview before it counts, a line saying it runs a live voice mock interview against the exact job you are chasing, and a Start practising free button.",
   },

@@ -27,8 +27,8 @@ export default function ImageSlot({ placeholder }: { placeholder: string }) {
         color: "var(--color-neutral-500)",
       }}
     >
-      <i className="ph ph-image" style={{ fontSize: 26, color: "var(--color-neutral-700)" }} />
-      <span style={{ fontSize: 12, lineHeight: 1.4, maxWidth: "28ch" }}>{placeholder}</span>
+      <i className="ph ph-image" style={{ fontSize: "1.625rem", color: "var(--color-neutral-700)" }} />
+      <span style={{ fontSize: "0.75rem", lineHeight: 1.4, maxWidth: "28ch" }}>{placeholder}</span>
     </div>
   );
 }

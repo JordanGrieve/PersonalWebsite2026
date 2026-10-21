@@ -36,6 +36,14 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        /* "land" was the working name for Callback and the slug outlived
+           it. The old URL was published and indexed, so it moves rather
+           than 404s. */
+        source: "/work/land",
+        destination: "/work/callback",
+        permanent: true,
+      },
+      {
         /* The blog is gone — routes, content and data. Both it and its one
            post were in the sitemap, so they redirect rather than 404. */
         source: "/writing",

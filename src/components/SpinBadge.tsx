@@ -26,7 +26,7 @@ export default function SpinBadge({
             fill="none"
           />
         </defs>
-        <text style={{ fontSize: 8, letterSpacing: "2.4px", fill: textFill, fontFamily: "Inter, sans-serif" }}>
+        <text style={{ fontSize: "0.5rem", letterSpacing: "2.4px", fill: textFill, fontFamily: "Inter, sans-serif" }}>
           <textPath href={`#${arcId}`}>
             JORDAN · SOFTWARE DEVELOPER · SHOPIFY · SPEED ·{" "}
           </textPath>

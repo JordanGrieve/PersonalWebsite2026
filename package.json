@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:icons": "node scripts/build-icon-font.mjs"
+    "build:icons": "node scripts/build-icon-font.mjs",
+    "prebuild": "node scripts/check-font-units.mjs",
+    "check:fonts": "node scripts/check-font-units.mjs"
   },
   "dependencies": {
     "next": "^15.5.4",

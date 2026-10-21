@@ -56,7 +56,7 @@ export default function Figure({
         <figcaption
           style={{
             marginTop: 10,
-            fontSize: 13.5,
+            fontSize: "0.84375rem",
             lineHeight: 1.55,
             color: "var(--color-neutral-400)",
           }}

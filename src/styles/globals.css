@@ -123,7 +123,7 @@ a:hover {
 /* One size for every call to action. Ghost buttons (text links), icon
    buttons and the burger keep their own sizing. */
 .btn:not(.btn-ghost):not(.btn-icon):not(#burger) {
-  font-size: 16px !important;
+  font-size: 1rem !important;
   padding: 14px 24px !important;
 }
 
@@ -139,7 +139,7 @@ a:hover {
    are gone. They stay smaller than the 16px every other `.btn` gets — these
    are a way back, not a call to action. */
 .btn-ghost {
-  font-size: 14px;
+  font-size: 0.875rem;
   min-height: 44px;
   padding-inline: 12px;
 }
@@ -502,11 +502,11 @@ a:hover {
     display: none;
   }
   main h1 {
-    font-size: 46px !important;
+    font-size: 2.875rem !important;
     line-height: 0.92 !important;
   }
   main h2 {
-    font-size: 38px !important;
+    font-size: 2.375rem !important;
   }
   #heroWrap h1 {
     font-size: 15.2cqw !important;
@@ -553,7 +553,7 @@ a:hover {
     transform: none;
   }
   #svcGrid > button > i {
-    font-size: 20px !important;
+    font-size: 1.25rem !important;
   }
   #svcGrid > button > h4 {
     flex: 1 !important;
@@ -770,7 +770,7 @@ a:hover {
   background: color-mix(in srgb, var(--color-neutral-900) 78%, transparent);
   border: 1px solid var(--color-divider);
   color: var(--color-neutral-300);
-  font-size: 16px;
+  font-size: 1rem;
   opacity: 0;
   transition: opacity 0.2s, border-color 0.2s, color 0.2s;
 }

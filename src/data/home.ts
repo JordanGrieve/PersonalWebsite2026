@@ -1,7 +1,10 @@
+/* Strongest number first. The row used to open on "1+ year", which led
+   with the weakest thing on it — tenure is the one figure that only goes
+   up with time rather than with work. */
 export const stats = [
-  { n: "1+ year", l: "At DFYNE, Scotland" },
-  { n: "8+", l: "Sites shipped" },
   { n: "1bn+", l: "Requests a month on the platform I support" },
+  { n: "8+", l: "Sites shipped" },
+  { n: "1+ year", l: "At DFYNE, Scotland" },
   { n: "BSc", l: "Web design & development, 2:1" },
 ];
 

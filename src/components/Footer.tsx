@@ -2,7 +2,7 @@ import { liveSocials, site } from "@/data/site";
 
 /* padding gets these to the 24px target minimum; they were 19px tall. */
 const linkStyle = {
-  fontSize: 12.5,
+  fontSize: "0.78125rem",
   color: "var(--color-neutral-400)",
   display: "inline-flex",
   alignItems: "center",
@@ -24,7 +24,7 @@ export default function Footer() {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ fontSize: 12.5, color: "var(--color-neutral-500)" }}>
+        <div style={{ fontSize: "0.78125rem", color: "var(--color-neutral-500)" }}>
           © {new Date().getFullYear()} {site.fullName} · {site.role}, Scotland
         </div>
         <div style={{ display: "flex", gap: 14 }}>

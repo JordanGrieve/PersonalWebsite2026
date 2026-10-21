@@ -30,7 +30,7 @@ export default function AboutPage() {
         <div>
           <div
             style={{
-              font: "500 11px/1 var(--font-heading)",
+              font: "500 0.6875rem/1 var(--font-heading)",
               letterSpacing: ".18em",
               textTransform: "uppercase",
               color: "var(--color-accent)",
@@ -41,7 +41,7 @@ export default function AboutPage() {
           </div>
           <h1
             style={{
-              fontSize: "clamp(38px,8cqw,96px)",
+              fontSize: "clamp(2.375rem,8cqw,6rem)",
               lineHeight: 0.9,
               letterSpacing: "-.04em",
               margin: 0,
@@ -59,7 +59,7 @@ export default function AboutPage() {
           <p
             style={{
               margin: "22px 0 0",
-              fontSize: 16,
+              fontSize: "1rem",
               lineHeight: 1.65,
               color: "var(--color-neutral-300)",
             }}
@@ -71,7 +71,7 @@ export default function AboutPage() {
           <p
             style={{
               margin: "14px 0 0",
-              fontSize: 16,
+              fontSize: "1rem",
               lineHeight: 1.65,
               color: "var(--color-neutral-400)",
             }}
@@ -87,7 +87,7 @@ export default function AboutPage() {
           <p
             style={{
               margin: "14px 0 0",
-              fontSize: 16,
+              fontSize: "1rem",
               lineHeight: 1.65,
               color: "var(--color-neutral-400)",
             }}
@@ -139,7 +139,7 @@ export default function AboutPage() {
       </section>
 
       <section style={{ padding: "clamp(34px,5cqw,72px) clamp(18px,4cqw,48px)" }}>
-        <h2 style={{ fontSize: "clamp(24px,3.6cqw,40px)", letterSpacing: "-.03em", margin: "0 0 24px" }}>
+        <h2 style={{ fontSize: "clamp(1.5rem,3.6cqw,2.5rem)", letterSpacing: "-.03em", margin: "0 0 24px" }}>
           THE SHORT VERSION
         </h2>
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -156,7 +156,7 @@ export default function AboutPage() {
             >
               <div
                 style={{
-                  font: "500 13px/1 var(--font-heading)",
+                  font: "500 0.8125rem/1 var(--font-heading)",
                   letterSpacing: ".1em",
                   color: "var(--color-accent)",
                 }}
@@ -164,11 +164,11 @@ export default function AboutPage() {
                 {t.when}
               </div>
               <div style={{ gridColumn: "span 2" }}>
-                <div style={{ font: "500 16px/1.3 var(--font-heading)" }}>{t.what}</div>
+                <div style={{ font: "500 1rem/1.3 var(--font-heading)" }}>{t.what}</div>
                 <div
                   style={{
                     marginTop: 6,
-                    fontSize: 14,
+                    fontSize: "0.875rem",
                     lineHeight: 1.55,
                     color: "var(--color-neutral-400)",
                   }}

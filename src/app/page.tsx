@@ -109,7 +109,7 @@ export default function HomePage() {
             style={{
               fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
               fontWeight: 400,
-              fontSize: "clamp(50px,15.2cqw,164px)",
+              fontSize: "clamp(3.125rem,15.2cqw,10.25rem)",
               lineHeight: 0.84,
               letterSpacing: "-.005em",
               textTransform: "uppercase",
@@ -129,7 +129,7 @@ export default function HomePage() {
                  takes the glyphs' full 1.2em content area, grows from 62px to
                  74px at the top of the clamp, and pushes #heroMeta down. */
               display: "flow-root",
-              fontSize: "clamp(26px,5.4cqw,62px)",
+              fontSize: "clamp(1.625rem,5.4cqw,3.875rem)",
               lineHeight: 1,
               color: "var(--color-accent)",
               margin: "-0.30em 0 0 clamp(6px,38cqw,420px)",
@@ -164,7 +164,7 @@ export default function HomePage() {
               style={{
                 margin: 0,
                 maxWidth: "44ch",
-                font: "500 clamp(13px,1.3cqw,15px)/1.45 var(--font-heading)",
+                font: "500 clamp(0.8125rem,1.3cqw,0.9375rem)/1.45 var(--font-heading)",
                 letterSpacing: ".05em",
                 textTransform: "uppercase",
                 color: "var(--color-neutral-200)",
@@ -175,7 +175,7 @@ export default function HomePage() {
             <p
               style={{
                 margin: "14px 0 0",
-                font: "500 11.5px/1.6 var(--font-heading)",
+                font: "500 0.71875rem/1.6 var(--font-heading)",
                 letterSpacing: ".12em",
                 textTransform: "uppercase",
                 color: "var(--color-accent-300)",
@@ -186,7 +186,7 @@ export default function HomePage() {
             <div id="heroActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
               <Link className="btn btn-primary" href="/contact">
                 Hire me
-                <i className="ph ph-arrow-right" style={{ fontSize: 18 }} />
+                <i className="ph ph-arrow-right" style={{ fontSize: "1.125rem" }} />
               </Link>
               <Link className="btn btn-secondary" href="/work">
                 See the work
@@ -240,7 +240,7 @@ export default function HomePage() {
               style={{
                 fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
                 fontWeight: 400,
-                fontSize: "clamp(30px,3.6cqw,46px)",
+                fontSize: "clamp(1.875rem,3.6cqw,2.875rem)",
                 lineHeight: 1,
                 color: "var(--color-accent-300)",
               }}
@@ -250,7 +250,7 @@ export default function HomePage() {
             <div
               style={{
                 marginTop: 8,
-                font: "500 10.5px/1.4 var(--font-heading)",
+                font: "500 0.65625rem/1.4 var(--font-heading)",
                 letterSpacing: ".14em",
                 textTransform: "uppercase",
                 color: "var(--color-neutral-300)",
@@ -275,19 +275,23 @@ export default function HomePage() {
               id="whatIDo"
               style={{
                 ...sectionHeading,
-                fontSize: "clamp(30px,4.8cqw,56px)",
+                fontSize: "clamp(1.875rem,4.8cqw,3.5rem)",
                 lineHeight: 0.94,
               }}
             >
+              {/* The line break is visual only. Without a space either side
+                  of it the accessible name concatenates to "WHATI DO" — it
+                  looks right and reads wrong. The space is inside the span
+                  so the two lines still butt up against the break. */}
               WHAT
               <br />
-              <span>I DO</span>
+              <span> I DO</span>
             </h2>
             <p
               style={{
                 margin: "18px 0 0",
                 maxWidth: "42ch",
-                fontSize: 15,
+                fontSize: "0.9375rem",
                 lineHeight: 1.6,
                 color: "var(--color-neutral-400)",
               }}
@@ -311,7 +315,7 @@ export default function HomePage() {
             marginBottom: 22,
           }}
         >
-          <h2 style={{ ...sectionHeading, fontSize: "clamp(28px,4.4cqw,52px)" }}>
+          <h2 style={{ ...sectionHeading, fontSize: "clamp(1.75rem,4.4cqw,3.25rem)" }}>
             FEATURED PROJECTS
           </h2>
           <Link
@@ -356,7 +360,7 @@ export default function HomePage() {
                     left: 12,
                     pointerEvents: "none",
                     fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
-                    fontSize: 13,
+                    fontSize: "0.8125rem",
                     letterSpacing: ".06em",
                     color: "var(--color-accent-200)",
                     background: "rgba(15,17,28,.72)",
@@ -378,8 +382,8 @@ export default function HomePage() {
                 }}
               >
                 <div>
-                  <div style={{ font: "500 14px/1.3 var(--font-heading)" }}>{p.name}</div>
-                  <div style={{ fontSize: 12.5, color: "var(--color-neutral-500)" }}>
+                  <div style={{ font: "500 0.875rem/1.3 var(--font-heading)" }}>{p.name}</div>
+                  <div style={{ fontSize: "0.78125rem", color: "var(--color-neutral-500)" }}>
                     {featuredBlurbs[p.slug]}
                   </div>
                 </div>
@@ -422,7 +426,7 @@ export default function HomePage() {
               margin: 0,
               fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
               fontWeight: 400,
-              fontSize: "clamp(26px,3.2cqw,38px)",
+              fontSize: "clamp(1.625rem,3.2cqw,2.375rem)",
               lineHeight: 1.02,
               letterSpacing: 0,
               textTransform: "uppercase",
@@ -431,7 +435,7 @@ export default function HomePage() {
           >
             Looking for my next role.
           </h3>
-          <p style={{ margin: "14px 0 0", fontSize: 14, lineHeight: 1.55, color: "#14121f" }}>
+          <p style={{ margin: "14px 0 0", fontSize: "0.875rem", lineHeight: 1.55, color: "#14121f" }}>
             For my next role I want to be pushed — unfamiliar problems, a bigger codebase,
             and the kind of work that leaves me better than it found me.
           </p>
@@ -455,7 +459,7 @@ export default function HomePage() {
 
       {testimonials.length ? (
       <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(38px,6cqw,84px)" }}>
-        <h2 style={{ ...sectionHeading, fontSize: "clamp(28px,4.4cqw,52px)", margin: "0 0 22px" }}>
+        <h2 style={{ ...sectionHeading, fontSize: "clamp(1.75rem,4.4cqw,3.25rem)", margin: "0 0 22px" }}>
           WHAT PEOPLE SAY
         </h2>
         <div
@@ -476,18 +480,18 @@ export default function HomePage() {
                 padding: 22,
               }}
             >
-              <i className="ph ph-quotes" style={{ fontSize: 22, color: "var(--color-accent)" }} />
+              <i className="ph ph-quotes" style={{ fontSize: "1.375rem", color: "var(--color-accent)" }} />
               <blockquote
                 style={{
                   margin: "12px 0 0",
-                  fontSize: 14.5,
+                  fontSize: "0.90625rem",
                   lineHeight: 1.6,
                   color: "var(--color-neutral-200)",
                 }}
               >
                 {t.quote}
               </blockquote>
-              <figcaption style={{ marginTop: 16, fontSize: 12, color: "var(--color-neutral-500)" }}>
+              <figcaption style={{ marginTop: 16, fontSize: "0.75rem", color: "var(--color-neutral-500)" }}>
                 {t.who}
               </figcaption>
             </figure>
@@ -507,7 +511,7 @@ export default function HomePage() {
         }}
       >
         <div>
-          <h2 style={{ ...sectionHeading, fontSize: "clamp(26px,3.8cqw,44px)", margin: "0 0 18px" }}>
+          <h2 style={{ ...sectionHeading, fontSize: "clamp(1.625rem,3.8cqw,2.75rem)", margin: "0 0 18px" }}>
             CONTACT
           </h2>
           <div style={{ display: "flex", flexDirection: "column", gap: 13 }}>
@@ -517,12 +521,12 @@ export default function HomePage() {
                 display: "flex",
                 alignItems: "center",
                 gap: 11,
-                fontSize: 15,
+                fontSize: "0.9375rem",
                 minHeight: 24,
                 padding: "4px 0",
               }}
             >
-              <i className="ph ph-envelope-simple" style={{ fontSize: 19 }} />
+              <i className="ph ph-envelope-simple" style={{ fontSize: "1.1875rem" }} />
               {site.email}
             </a>
             <div
@@ -530,11 +534,11 @@ export default function HomePage() {
                 display: "flex",
                 alignItems: "center",
                 gap: 11,
-                fontSize: 15,
+                fontSize: "0.9375rem",
                 color: "var(--color-neutral-400)",
               }}
             >
-              <i className="ph ph-map-pin" style={{ fontSize: 19, color: "var(--color-accent)" }} />
+              <i className="ph ph-map-pin" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
               {site.location}
             </div>
             <div
@@ -542,11 +546,11 @@ export default function HomePage() {
                 display: "flex",
                 alignItems: "center",
                 gap: 11,
-                fontSize: 15,
+                fontSize: "0.9375rem",
                 color: "var(--color-neutral-400)",
               }}
             >
-              <i className="ph ph-clock" style={{ fontSize: 19, color: "var(--color-accent)" }} />
+              <i className="ph ph-clock" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
               Replies within a day
             </div>
           </div>
@@ -556,7 +560,7 @@ export default function HomePage() {
           </Link>
         </div>
         <div>
-          <h2 style={{ ...sectionHeading, fontSize: "clamp(26px,3.8cqw,44px)", margin: "0 0 18px" }}>
+          <h2 style={{ ...sectionHeading, fontSize: "clamp(1.625rem,3.8cqw,2.75rem)", margin: "0 0 18px" }}>
             LET&apos;S CONNECT
           </h2>
           <div
@@ -581,11 +585,11 @@ export default function HomePage() {
                   padding: "13px 15px",
                   border: "1px solid var(--color-divider)",
                   borderRadius: "var(--radius-md)",
-                  fontSize: 14,
+                  fontSize: "0.875rem",
                   color: "var(--color-neutral-300)",
                 }}
               >
-                <i className={s.icon} style={{ fontSize: 18, color: "var(--color-accent)" }} />
+                <i className={s.icon} style={{ fontSize: "1.125rem", color: "var(--color-accent)" }} />
                 {s.label}
               </a>
             ))}
@@ -600,11 +604,11 @@ export default function HomePage() {
                 padding: "13px 15px",
                 border: "1px solid var(--color-divider)",
                 borderRadius: "var(--radius-md)",
-                fontSize: 14,
+                fontSize: "0.875rem",
                 color: "var(--color-neutral-300)",
               }}
             >
-              <i className="ph ph-download-simple" style={{ fontSize: 18, color: "var(--color-accent)" }} />
+              <i className="ph ph-download-simple" style={{ fontSize: "1.125rem", color: "var(--color-accent)" }} />
               CV
             </a>
           </div>

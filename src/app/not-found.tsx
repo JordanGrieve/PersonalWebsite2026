@@ -14,7 +14,7 @@ export default function NotFound() {
     >
       <div
         style={{
-          font: "500 11px/1 var(--font-heading)",
+          font: "500 0.6875rem/1 var(--font-heading)",
           letterSpacing: ".18em",
           textTransform: "uppercase",
           color: "var(--color-accent)",
@@ -27,7 +27,7 @@ export default function NotFound() {
         style={{
           fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
           fontWeight: 400,
-          fontSize: "clamp(40px,9cqw,110px)",
+          fontSize: "clamp(2.5rem,9cqw,6.875rem)",
           lineHeight: 0.9,
           textTransform: "uppercase",
           margin: 0,
@@ -41,7 +41,7 @@ export default function NotFound() {
         style={{
           margin: "20px 0 0",
           maxWidth: "40ch",
-          fontSize: 16,
+          fontSize: "1rem",
           lineHeight: 1.65,
           color: "var(--color-neutral-400)",
         }}

@@ -21,7 +21,7 @@ export default function WorkPage() {
     >
       <div
         style={{
-          font: "500 11px/1 var(--font-heading)",
+          font: "500 0.6875rem/1 var(--font-heading)",
           letterSpacing: ".18em",
           textTransform: "uppercase",
           color: "var(--color-accent)",
@@ -32,7 +32,7 @@ export default function WorkPage() {
       </div>
       <h1
         style={{
-          fontSize: "clamp(38px,8cqw,96px)",
+          fontSize: "clamp(2.375rem,8cqw,6rem)",
           lineHeight: 0.9,
           letterSpacing: "-.04em",
           margin: 0,
@@ -43,7 +43,7 @@ export default function WorkPage() {
       <p
         style={{
           margin: "18px 0 0",
-          fontSize: 16,
+          fontSize: "1rem",
           lineHeight: 1.6,
           color: "var(--color-neutral-400)",
         }}

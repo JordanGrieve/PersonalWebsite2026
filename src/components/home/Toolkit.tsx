@@ -33,7 +33,7 @@ export default function Toolkit() {
           margin: "0 0 18px",
           fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
           fontWeight: 400,
-          fontSize: "clamp(24px,2.6cqw,32px)",
+          fontSize: "clamp(1.5rem,2.6cqw,2rem)",
           letterSpacing: 0,
           color: "var(--color-accent)",
         }}
@@ -93,9 +93,9 @@ export default function Toolkit() {
                 <path d={t.path} />
               </svg>
             ) : (
-              <i className={t.icon} style={{ fontSize: 20, color: "var(--color-accent)" }} />
+              <i className={t.icon} style={{ fontSize: "1.25rem", color: "var(--color-accent)" }} />
             )}
-            <div style={{ marginTop: 7, fontSize: 11, color: "var(--color-neutral-400)" }}>
+            <div style={{ marginTop: 7, fontSize: "0.6875rem", color: "var(--color-neutral-400)" }}>
               {t.name}
             </div>
             {shown ? (
@@ -115,7 +115,7 @@ export default function Toolkit() {
                   borderRadius: "var(--radius-md)",
                   boxShadow: "var(--shadow-md)",
                   padding: "9px 11px",
-                  font: "400 11.5px/1.45 var(--font-body)",
+                  font: "400 0.71875rem/1.45 var(--font-body)",
                   color: "var(--color-neutral-200)",
                   textAlign: "left",
                   animation: "riseIn .18s ease both",
