@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
+import { posts } from "@/data/posts";
 import { projects } from "@/data/projects";
 import { site } from "@/data/site";
 
-/* Every page is statically prerendered, so "last modified" can only mean
-   the build, which is honest for every page here. */
+/* Every page is statically prerendered, so "last modified" can only mean the
+   build. That is honest for the hand-written pages; posts carry a real
+   publication date and use it instead. */
 const built = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 1,
   };
 
-  const indexes = ["/work", "/about", "/contact"].map(
+  const indexes = ["/work", "/about", "/writing", "/contact"].map(
     (path) => ({
       url: `${site.url}${path}`,
       lastModified: built,
@@ -30,5 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [home, ...indexes, ...caseStudies];
+  const writing = posts.map((p) => ({
+    url: `${site.url}/writing/${p.slug}`,
+    lastModified: built,
+    changeFrequency: "yearly" as const,
+    priority: 0.6,
+  }));
+
+  return [home, ...indexes, ...caseStudies, ...writing];
 }
