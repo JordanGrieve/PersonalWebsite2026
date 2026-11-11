@@ -4,11 +4,28 @@ import { liveSocials, site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
 import { contactSchema } from "@/lib/schema";
 
+const title = "Contact";
+const description =
+  "Hire Jordan Grieve for Shopify, web or performance work. Tell me what you're building and roughly when you need it — I reply within a day.";
+
+/* openGraph and twitter are set in full: Next.js replaces a nested metadata
+   key rather than merging it with the layout's, so leaving either out means
+   a share of this page describes the home page. */
 export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
-  title: "Contact",
-  description:
-    "Hire Jordan Grieve for Shopify, web or performance work. Tell me what you're building and roughly when you need it — I reply within a day.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    url: `${site.url}/contact`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 /* minHeight clears the 24px target minimum — these rows were 23px. */

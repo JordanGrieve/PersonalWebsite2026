@@ -29,6 +29,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       type: "article",
       url: `${site.url}/work/${slug}`,
     },
+    /* Set alongside openGraph: the layout's twitter text is inherited whole
+       unless replaced, so without this a shared case study carries its own
+       image with the home page's title and description. */
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} — ${project.kind}`,
+      description: project.result,
+    },
   };
 }
 
