@@ -6,11 +6,28 @@ import { site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
 import { aboutSchema } from "@/lib/schema";
 
+const title = "About";
+const description =
+  "Software developer in Scotland, working on a storefront thousands of people shop through every week — and the applications around it.";
+
+/* openGraph and twitter are set in full: Next.js replaces a nested metadata
+   key rather than merging it with the layout's, so leaving either out means
+   a share of this page describes the home page. */
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
-  title: "About",
-  description:
-    "Software developer in Scotland, working on a storefront thousands of people shop through every week — and the applications around it.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    url: `${site.url}/about`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function AboutPage() {

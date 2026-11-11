@@ -1,13 +1,31 @@
 import type { Metadata } from "next";
 import ProjectGrid from "@/components/work/ProjectGrid";
+import { site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
 import { workSchema } from "@/lib/schema";
 
+const title = "Projects";
+const description =
+  "Shopify storefronts, custom apps and performance work by Jordan Grieve. Every project lists what changed, not just what it looks like.";
+
+/* openGraph and twitter are set in full: Next.js replaces a nested metadata
+   key rather than merging it with the layout's, so leaving either out means
+   a share of this page describes the home page. */
 export const metadata: Metadata = {
   alternates: { canonical: "/work" },
-  title: "Projects",
-  description:
-    "Shopify storefronts, custom apps and performance work by Jordan Grieve. Every project lists what changed, not just what it looks like.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    url: `${site.url}/work`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function WorkPage() {
