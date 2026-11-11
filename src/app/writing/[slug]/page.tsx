@@ -30,6 +30,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       authors: [site.fullName],
       publishedTime: post.published,
     },
+    /* Set alongside openGraph: the layout's twitter text is inherited whole
+       unless replaced, so without this a shared post carries the post's
+       image with the home page's title and description. */
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.dek,
+    },
   };
 }
 

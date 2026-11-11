@@ -2,12 +2,30 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { displayDate, posts } from "@/data/posts";
 import JsonLd from "@/components/JsonLd";
+import { site } from "@/data/site";
 import { writingSchema } from "@/lib/schema";
 
+const title = "Blog";
+const description = "Short posts on Shopify, caching and the boring parts of making sites fast.";
+
+/* openGraph and twitter are set here in full: Next.js replaces a nested
+   metadata key rather than merging it with the layout's, so leaving either
+   out means a share of /writing describes the home page. */
 export const metadata: Metadata = {
   alternates: { canonical: "/writing" },
-  title: "Blog",
-  description: "Short posts on Shopify, caching and the boring parts of making sites fast.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    url: `${site.url}/writing`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function WritingPage() {
