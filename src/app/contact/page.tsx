@@ -37,6 +37,9 @@ const linkRow = {
   fontSize: "0.9375rem",
   minHeight: 24,
   padding: "0.2667em 0",
+  /* An email address or a profile URL is one unbreakable word. With large
+     text in a narrow column it ran out of the column; this lets it break. */
+  overflowWrap: "anywhere",
 } as const;
 
 export default function ContactPage() {

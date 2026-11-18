@@ -550,6 +550,10 @@ export default function HomePage() {
                 fontSize: "0.9375rem",
                 minHeight: 24,
                 padding: "0.2667em 0",
+                /* The address is one unbreakable word. With large text in a
+                   narrow column it ran out of the column and over the one
+                   beside it; this lets it break instead. */
+                overflowWrap: "anywhere",
               }}
             >
               <i aria-hidden="true" className="ph ph-envelope-simple" style={{ fontSize: "1.1875rem" }} />
