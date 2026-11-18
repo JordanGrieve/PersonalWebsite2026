@@ -161,7 +161,7 @@ export default async function PostPage({ params }: Params) {
               className="plain-list"
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+                gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,240px),1fr))",
                 gap: "0.9333em",
               }}
             >

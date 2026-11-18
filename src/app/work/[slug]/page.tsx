@@ -150,7 +150,7 @@ function DetailList({
             key={item.what}
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+              gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,240px),1fr))",
               gap: "0.5333em clamp(1.0667em,3cqw,2.4em)",
               padding: "1.0667em 0",
               borderTop: "1px solid var(--color-divider)",
@@ -307,7 +307,7 @@ export default async function CaseStudyPage({ params }: Params) {
           style={{
             marginTop: "1.7333em",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))",
+            gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,150px),1fr))",
             gap: "1.2em",
             padding: "1.4667em 0",
             borderTop: "1px solid var(--color-divider)",
@@ -435,7 +435,7 @@ export default async function CaseStudyPage({ params }: Params) {
         style={{
           padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.1333em,5cqw,4.2667em)",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,240px),1fr))",
           gap: "1.0667em",
         }}
       >

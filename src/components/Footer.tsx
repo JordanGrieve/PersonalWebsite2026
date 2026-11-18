@@ -29,7 +29,9 @@ export default function Footer() {
           © {new Date().getFullYear()} {site.fullName} · {site.role}, Scotland
         </p>
         <nav aria-label="Elsewhere">
-          <ul className="plain-list" style={{ display: "flex", gap: "0.9333em" }}>
+          {/* Wraps: three links in a row is wider than a very narrow screen
+              with large text, and the last one ran off the edge. */}
+          <ul className="plain-list" style={{ display: "flex", flexWrap: "wrap", gap: "0.9333em" }}>
             {liveSocials.map((s) => (
               <li key={s.label}>
                 <a href={s.href} target="_blank" rel="noreferrer" style={linkStyle}>

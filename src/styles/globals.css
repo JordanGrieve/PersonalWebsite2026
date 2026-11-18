@@ -885,10 +885,10 @@ main li p a {
   #heroActions,
   #aboutActions {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 7.5rem), 1fr));
   }
   #aboutActions {
-    grid-template-columns: repeat(auto-fit, minmax(9.75rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.75rem), 1fr));
   }
   #heroActions > *,
   #aboutActions > * {
@@ -1050,5 +1050,101 @@ main li p a {
 @container (min-width: 960px) {
   .result-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+/* — very narrow screens, and ordinary ones at high zoom — */
+
+/* Every auto-fit grid on the site floors its tracks at a fixed width, and they
+   are now all written `minmax(min(100%, 260px), 1fr)` rather than
+   `minmax(260px, 1fr)`. A bare floor is a promise the track will be 260px
+   even when the screen is not: on anything narrower than the floor plus the
+   section padding — a 300px pane, or a phone at high zoom — the grid was wider
+   than the page and `.site` clipped the excess off the right. That is what
+   cut the project cards, the contact form and the accordion's plus signs off
+   at the edge. `min(100%, …)` lets the floor give way to the container.
+
+   The services list had a second cause. It is `grid-column: span 2` so that it
+   takes two of the three columns on desktop, but in a one-column grid a span
+   of two invents a second, implicit column — and the gap that goes with it.
+   `1 / -1` is the whole row and nothing more. Safe in this block: at these
+   widths the grid has at most two columns, where the two mean the same. */
+@container (max-width: 640px) {
+  #svcGrid {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* A lone call to action fills the row on a phone, the way the paired ones
+     and the form's Send button already do — a small pill adrift on the left
+     of a full-width column reads as unfinished, and a full-width target is
+     easier to hit. Text links (`.btn-ghost`) and icon buttons are not calls
+     to action and keep their own size. */
+  main .btn:not(.btn-ghost):not(.btn-icon) {
+    width: 100%;
+  }
+}
+
+/* Two tools across instead of three once three no longer fit their labels.
+   A tile needs about 5.25rem to hold "Observability" on one line; three of
+   those, two gaps, and the card's and the section's padding come to 22.5rem.
+   Below that the labels were breaking mid-word — "TypeScrip / t".
+
+   In rem, because what decides it is the size of the text: at the default
+   size this starts under 360px, and at 150% text it covers every phone. The
+   note above each tile is pinned to whichever edge its tile sits on, as the
+   three- and four-column rules above do for theirs. */
+@container (max-width: 22.5rem) {
+  #toolGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  #toolGrid > li:nth-child(odd) .tool-note {
+    left: 0 !important;
+    right: auto !important;
+    transform: none !important;
+  }
+  #toolGrid > li:nth-child(even) .tool-note {
+    left: auto !important;
+    right: 0 !important;
+    transform: none !important;
+  }
+}
+
+/* The last resort for a word that is wider than the screen. On a phone, text
+   wraps between words and that is always enough — until the screen is very
+   narrow or the text very large, when a single word ("INFRASTRUCTURE.",
+   uppercase and letterspaced) is wider than its column. It then pushes its
+   whole column out past the edge and takes everything in the column with it:
+   that is how one long word in the hero tagline put the two buttons under it
+   off screen. `anywhere` lets such a word break, and — unlike `break-word` —
+   lets the column shrink to fit as well. A word that fits is never touched,
+   so at ordinary phone sizes this changes nothing. */
+@container (max-width: 640px) {
+  main :is(h1, h2, h3, p, li, dt, dd) {
+    overflow-wrap: anywhere;
+  }
+  /* The accordion title gives way before the plus sign does. Without a
+     `min-width` of 0 a flex item will not go narrower than its longest word,
+     so with large text the title took the whole row and bumped the plus sign
+     onto a line of its own at the left. */
+  #svcGrid > li > h3 {
+    min-width: 0;
+  }
+}
+
+/* One tool per row when even two no longer fit their labels: two tiles, the
+   gap, and the padding round them need 16.5rem. */
+@container (max-width: 16.5rem) {
+  #toolGrid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* Below 15rem the two-across grids go to one. The stats band and the Connect
+   tiles are both pinned at two columns on a phone, which holds down to about
+   260px at the default text size and no further. */
+@container (max-width: 15rem) {
+  #heroStats,
+  #connectGrid {
+    grid-template-columns: minmax(0, 1fr) !important;
   }
 }

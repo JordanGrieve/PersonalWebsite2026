@@ -39,7 +39,7 @@ export default function AboutPage() {
         style={{
           padding: "clamp(2em,5cqw,4.5333em) clamp(1.2em,4cqw,3.2em) 0",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
+          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,280px),1fr))",
           gap: "clamp(1.4667em,4cqw,3.4667em)",
           alignItems: "start",
         }}
@@ -168,7 +168,7 @@ export default function AboutPage() {
               key={t.what}
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))",
+                gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,150px),1fr))",
                 gap: "0.8em",
                 padding: "1.2em 0",
                 borderTop: "1px solid var(--color-divider)",

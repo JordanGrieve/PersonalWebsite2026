@@ -56,7 +56,7 @@ export default function ServicesGrid() {
       style={{
         gridColumn: "span 2",
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))",
+        gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,230px),1fr))",
         gap: "0.9333em",
       }}
     >
