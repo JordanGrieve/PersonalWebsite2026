@@ -233,7 +233,7 @@ export default function HomePage() {
           borderTop: "1px solid var(--color-accent-800)",
           borderBottom: "1px solid var(--color-accent-800)",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))",
+          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,130px),1fr))",
           gap: "clamp(0.9333em,2cqw,1.6em)",
         }}
       >
@@ -275,7 +275,7 @@ export default function HomePage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
+            gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,260px),1fr))",
             gap: "clamp(1.3333em,3cqw,2.6667em)",
           }}
         >
@@ -342,7 +342,7 @@ export default function HomePage() {
           className="plain-list"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
+            gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,260px),1fr))",
             gap: "1.0667em",
           }}
         >
@@ -427,7 +427,7 @@ export default function HomePage() {
         style={{
           padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.5333em,6cqw,5.6em)",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
+          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,260px),1fr))",
           gap: "1.0667em",
         }}
       >
@@ -491,7 +491,7 @@ export default function HomePage() {
           id="testGrid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+            gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,240px),1fr))",
             gap: "1.0667em",
           }}
         >
@@ -531,7 +531,7 @@ export default function HomePage() {
             "clamp(2em,4cqw,3.7333em) clamp(1.2em,4cqw,3.2em) clamp(2.6667em,5cqw,4.6667em)",
           borderTop: "1px solid var(--color-divider)",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,240px),1fr))",
           gap: "clamp(1.6em,4cqw,3.7333em)",
         }}
       >
@@ -599,7 +599,7 @@ export default function HomePage() {
             className="plain-list"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))",
+              gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,130px),1fr))",
               gap: "0.6667em",
             }}
           >

@@ -80,7 +80,7 @@ export default function WritingPage() {
               textAlign: "left",
               borderTop: "1px solid var(--color-divider)",
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+              gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,180px),1fr))",
               gap: "0.9333em",
               padding: "1.4667em 0",
               color: "inherit",
