@@ -1139,11 +1139,31 @@ main li p a {
   }
 }
 
-/* Below 15rem the two-across grids go to one. The stats band and the Connect
-   tiles are both pinned at two columns on a phone, which holds down to about
-   260px at the default text size and no further. */
-@container (max-width: 15rem) {
-  #heroStats,
+/* Below 17rem the stats band goes from two across to one. It is pinned at two
+   columns on a phone, which holds down to about 275px at the default text
+   size and no further. */
+@container (max-width: 17rem) {
+  #heroStats {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+/* The stats opt out of the break-anywhere rule above. Their two columns are
+   `1fr 1fr`, which lets one column grow to hold a long word at the other's
+   expense — "DEVELOPMENT," fits that way at 300px. Told it may break, the
+   word no longer claims the room and the columns go back to equal halves,
+   which split it as "DEVELOP / MENT,". Whole words here; the one-column rule
+   just above catches the widths where even that does not fit. */
+#heroStats > li {
+  overflow-wrap: normal;
+}
+
+/* The Connect tiles go to one column sooner than that, at 19rem. A tile has
+   to hold its icon, the gap and the word "LinkedIn" on one line, which takes
+   about 7.4rem; two of those, the gap between them and the section's padding
+   come to 17.6rem. Just under that — a 300px pane — the tile was a few pixels
+   short and the label broke as "LinkedI / n". 19rem leaves a margin, and a
+   320px phone, at 20rem, keeps its two columns. */
+@container (max-width: 19rem) {
   #connectGrid {
     grid-template-columns: minmax(0, 1fr) !important;
   }
