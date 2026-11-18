@@ -33,19 +33,19 @@ export default function WritingPage() {
     <>
       <JsonLd data={writingSchema()} />
     <section
-      style={{ padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) clamp(40px,6cqw,84px)" }}
+      style={{ padding: "clamp(2em,5cqw,4.5333em) clamp(1.2em,4cqw,3.2em) clamp(2.6667em,6cqw,5.6em)" }}
     >
-      <div
+      <p
         style={{
           font: "500 0.6875rem/1 var(--font-heading)",
           letterSpacing: ".18em",
           textTransform: "uppercase",
           color: "var(--color-accent)",
-          marginBottom: 14,
+          margin: "0 0 1.2727em",
         }}
       >
         Blog
-      </div>
+      </p>
       <h1
         style={{
           fontSize: "clamp(2.375rem,8cqw,6rem)",
@@ -58,7 +58,7 @@ export default function WritingPage() {
       </h1>
       <p
         style={{
-          margin: "20px 0 0",
+          margin: "1.25em 0 0",
           fontSize: "1rem",
           lineHeight: 1.65,
           color: "var(--color-neutral-400)",
@@ -66,10 +66,10 @@ export default function WritingPage() {
       >
         Short posts on Shopify, caching and the boring parts of making sites fast.
       </p>
-      <div style={{ marginTop: 32 }}>
+      <ul className="plain-list" style={{ marginTop: "2.1333em" }}>
         {posts.map((p) => (
+          <li key={p.slug}>
           <Link
-            key={p.slug}
             href={`/writing/${p.slug}`}
             /* As with the project grid: one post gets read, not four.
                58.6kB of prefetch on this page down to 21.5kB. */
@@ -81,8 +81,8 @@ export default function WritingPage() {
               borderTop: "1px solid var(--color-divider)",
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
-              gap: 14,
-              padding: "22px 0",
+              gap: "0.9333em",
+              padding: "1.4667em 0",
               color: "inherit",
             }}
           >
@@ -90,18 +90,19 @@ export default function WritingPage() {
               <time dateTime={p.published}>{displayDate(p.published)}</time> · {p.read}
             </div>
             <div style={{ gridColumn: "span 2" }}>
-              <div
+              <h2
                 style={{
+                  margin: 0,
                   font: "500 clamp(1.125rem,2.2cqw,1.5rem)/1.25 var(--font-heading)",
                   letterSpacing: "-.02em",
                   color: "var(--color-text)",
                 }}
               >
                 {p.title}
-              </div>
+              </h2>
               <div
                 style={{
-                  marginTop: 8,
+                  marginTop: "0.5714em",
                   fontSize: "0.875rem",
                   lineHeight: 1.55,
                   color: "var(--color-neutral-400)",
@@ -111,8 +112,9 @@ export default function WritingPage() {
               </div>
             </div>
           </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
     </>
   );

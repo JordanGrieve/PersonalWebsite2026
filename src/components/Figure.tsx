@@ -55,7 +55,7 @@ export default function Figure({
       {shot?.caption ? (
         <figcaption
           style={{
-            marginTop: 10,
+            marginTop: "0.7407em",
             fontSize: "0.84375rem",
             lineHeight: 1.55,
             color: "var(--color-neutral-400)",

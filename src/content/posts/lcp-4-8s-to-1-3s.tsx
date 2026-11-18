@@ -15,24 +15,24 @@ export default function Post() {
         the browser had to finish first.
       </p>
 
-      <h3 style={sectionHeading}>What was in the way</h3>
+      <h2 style={sectionHeading}>What was in the way</h2>
       <ul style={listWrap}>
         <li style={li}>
-          <i className="ph ph-x-circle" style={{ color: "var(--color-accent)", fontSize: "1.125rem", flex: "none", marginTop: 3 }} />
+          <i aria-hidden="true" className="ph ph-x-circle" style={{ color: "var(--color-accent)", fontSize: "1.125rem", flex: "none", marginTop: "0.1667em" }} />
           <span>
             <b style={{ fontWeight: 500, color: "var(--color-text)" }}>Three apps loading jQuery.</b>{" "}
             Each one shipped its own copy, none of them checked whether it was already there.
           </span>
         </li>
         <li style={li}>
-          <i className="ph ph-x-circle" style={{ color: "var(--color-accent)", fontSize: "1.125rem", flex: "none", marginTop: 3 }} />
+          <i aria-hidden="true" className="ph ph-x-circle" style={{ color: "var(--color-accent)", fontSize: "1.125rem", flex: "none", marginTop: "0.1667em" }} />
           <span>
             <b style={{ fontWeight: 500, color: "var(--color-text)" }}>A 1.2MB hero image</b> served
             as a PNG at 2400px wide, then scaled down in CSS.
           </span>
         </li>
         <li style={li}>
-          <i className="ph ph-x-circle" style={{ color: "var(--color-accent)", fontSize: "1.125rem", flex: "none", marginTop: 3 }} />
+          <i aria-hidden="true" className="ph ph-x-circle" style={{ color: "var(--color-accent)", fontSize: "1.125rem", flex: "none", marginTop: "0.1667em" }} />
           <span>
             <b style={{ fontWeight: 500, color: "var(--color-text)" }}>
               Fonts loading from three origins,
@@ -41,7 +41,7 @@ export default function Post() {
           </span>
         </li>
         <li style={li}>
-          <i className="ph ph-x-circle" style={{ color: "var(--color-accent)", fontSize: "1.125rem", flex: "none", marginTop: 3 }} />
+          <i aria-hidden="true" className="ph ph-x-circle" style={{ color: "var(--color-accent)", fontSize: "1.125rem", flex: "none", marginTop: "0.1667em" }} />
           <span>
             <b style={{ fontWeight: 500, color: "var(--color-text)" }}>A review widget in the head,</b>{" "}
             synchronous, above everything the customer came to see.
@@ -49,7 +49,7 @@ export default function Post() {
         </li>
       </ul>
 
-      <h3 style={sectionHeading}>The fix, in order of payoff</h3>
+      <h2 style={sectionHeading}>The fix, in order of payoff</h2>
       <p style={para}>
         Image first. Shopify will serve WebP and the right size if you ask it to, and the hero is
         the one image worth preloading by hand:
@@ -61,8 +61,8 @@ export default function Post() {
         role="region"
         aria-label="Code example: preloading the hero image"
         style={{
-          margin: "0 0 22px",
-          padding: "16px 18px",
+          margin: "0 0 1.6923em",
+          padding: "1.2308em 1.3846em",
           background: "var(--color-neutral-900)",
           border: "1px solid var(--color-divider)",
           borderRadius: "var(--radius-md)",
@@ -86,8 +86,8 @@ export default function Post() {
 
       <figure
         style={{
-          margin: "30px 0",
-          padding: "22px 24px",
+          margin: "2em 0",
+          padding: "1.4667em 1.6em",
           borderLeft: "2px solid var(--color-accent)",
           background: "var(--color-surface)",
           borderRadius: "0 var(--radius-md) var(--radius-md) 0",
@@ -107,13 +107,13 @@ export default function Post() {
         </blockquote>
       </figure>
 
-      <h3 style={sectionHeading}>What it was worth</h3>
+      <h2 style={sectionHeading}>What it was worth</h2>
       <p style={para}>
         Mobile conversion rate over the following month was up 34%. I would not claim all of that is
         speed — the cart drawer changed in the same release — but the bounce rate on paid landings
         dropped from 61% to 44%, and that one is hard to explain any other way.
       </p>
-      <p style={{ ...para, margin: "0 0 8px" }}>
+      <p style={{ ...para, margin: "0 0 0.5em" }}>
         If your store feels slow, start with the waterfall on a real device. The fix is usually four
         things, and three of them are images.
       </p>

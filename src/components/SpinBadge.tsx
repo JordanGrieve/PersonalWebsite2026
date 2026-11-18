@@ -7,7 +7,8 @@ export default function SpinBadge({
   /** Must be unique per instance — it is an SVG path reference. */
   arcId: string;
   textFill: string;
-  initialsSize: number;
+  /** Any CSS font-size, in rem — a bare number here would be px. */
+  initialsSize: string;
 }) {
   return (
     <>
@@ -32,7 +33,10 @@ export default function SpinBadge({
           </textPath>
         </text>
       </svg>
+      {/* Hidden along with the seal: the initials are part of the same
+          ornament, and "JD" read out on its own means nothing. */}
       <div
+        aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,

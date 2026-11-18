@@ -10,6 +10,14 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
 }
 
+/** `page` on the link to the page you are on, `true` on the link to the
+    section you are inside (Work, while reading a case study). Either way a
+    screen reader announces it as current, and globals.css underlines it. */
+function current(pathname: string, href: string) {
+  if (pathname === href) return "page" as const;
+  return isActive(pathname, href) ? ("true" as const) : undefined;
+}
+
 /** Drawer slide duration. Shared by the CSS below and the unmount timer, so
     the two cannot drift apart. */
 const DRAWER_MS = 280;
@@ -143,7 +151,7 @@ export default function Header() {
           background: "var(--color-bg)",
           borderLeft: "1px solid var(--color-accent-800)",
           boxShadow: "-24px 0 48px rgba(0,0,0,.55)",
-          padding: 22,
+          padding: "1.4667em",
           display: "flex",
           flexDirection: "column",
           animation: `${closing ? "slideOut" : "slideIn"} ${DRAWER_MS}ms ${DRAWER_EASE} both`,
@@ -154,7 +162,7 @@ export default function Header() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: 18,
+            marginBottom: "1.2em",
           }}
         >
           <span
@@ -168,14 +176,16 @@ export default function Header() {
             Menu
           </span>
           <button
+            type="button"
             className="btn btn-secondary"
             onClick={closeMenu}
             aria-label="Close menu"
             style={{ width: 44, height: 44, padding: 0 }}
           >
-            <i className="ph ph-x" style={{ fontSize: "1.25rem" }} />
+            <i aria-hidden="true" className="ph ph-x" style={{ fontSize: "1.25rem" }} />
           </button>
         </div>
+        <nav id="drawerNav" aria-label="Primary" style={{ display: "flex", flexDirection: "column" }}>
         {navItems.map((item) => {
           const wip = "wip" in item && item.wip;
           const style = {
@@ -184,7 +194,7 @@ export default function Header() {
             fontSize: "1.6875rem",
             letterSpacing: ".01em",
             textTransform: "uppercase",
-            padding: "8px 0",
+            padding: "0.2963em 0",
             color: isActive(pathname, item.href)
               ? "var(--color-text)"
               : "var(--color-neutral-500)",
@@ -197,10 +207,9 @@ export default function Header() {
             <span
               key={item.href}
               style={{ ...style, textDecoration: "line-through", cursor: "default" }}
-              aria-disabled="true"
-              title={`${item.label} — still in progress`}
             >
               {item.label}
+              <span className="sr-only"> (still in progress)</span>
             </span>
           ) : (
             <Link
@@ -208,21 +217,23 @@ export default function Header() {
               href={item.href}
               /* Same seven links as the header nav — see the note there. */
               prefetch={false}
+              aria-current={current(pathname, item.href)}
               style={style}
             >
               {item.label}
             </Link>
           );
         })}
-        <Link className="btn btn-primary btn-block" href="/contact" style={{ marginTop: 22 }}>
+        </nav>
+        <Link className="btn btn-primary btn-block" href="/contact" style={{ marginTop: "1.375em" }}>
           Get in touch
-          <i className="ph ph-arrow-up-right" />
+          <i aria-hidden="true" className="ph ph-arrow-up-right" />
         </Link>
         <a
           href={`mailto:${site.email}`}
           style={{
             marginTop: "auto",
-            paddingTop: 20,
+            paddingTop: "1.5385em",
             fontSize: "0.8125rem",
             color: "var(--color-neutral-400)",
           }}
@@ -251,12 +262,19 @@ export default function Header() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: 14,
+            gap: "0.9333em",
             flexWrap: "wrap",
-            padding: "14px clamp(18px,4cqw,48px)",
+            padding: "0.9333em clamp(1.2em,4cqw,3.2em)",
           }}
         >
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9 }}>
+          {/* Named in full: "JORDAN." on its own does not say this is the
+              way home. The label still starts with the visible word, so
+              voice control ("click Jordan") keeps working. */}
+          <Link
+            href="/"
+            aria-label={`${site.fullName} — home`}
+            style={{ display: "flex", alignItems: "center", gap: "0.6em" }}
+          >
             <span
               style={{
                 fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
@@ -269,12 +287,12 @@ export default function Header() {
               JORDAN<span style={{ color: "var(--color-accent)" }}>.</span>
             </span>
           </Link>
-          <nav id="siteNav" style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+          <nav id="siteNav" aria-label="Primary" style={{ display: "flex", flexWrap: "wrap", gap: "0.1333em" }}>
             {navItems.map((item) => {
               const wip = "wip" in item && item.wip;
               const style = {
                 font: "500 0.875rem/1 var(--font-heading)",
-                padding: "7px 10px",
+                padding: "0.5em 0.7143em",
                 borderRadius: "var(--radius-sm)",
                 color: isActive(pathname, item.href)
                   ? "var(--color-text)"
@@ -289,10 +307,9 @@ export default function Header() {
                 <span
                   key={item.href}
                   style={{ ...style, textDecoration: "line-through", cursor: "default" }}
-                  aria-disabled="true"
-                  title={`${item.label} — still in progress`}
                 >
                   {item.label}
+                  <span className="sr-only"> (still in progress)</span>
                 </span>
               ) : (
                 <Link
@@ -312,6 +329,7 @@ export default function Header() {
                      Fast 3G. The load saving lands on every visitor; the nav
                      cost only lands on the ones who click. */
                   prefetch={false}
+                  aria-current={current(pathname, item.href)}
                   style={style}
                 >
                   {item.label}
@@ -321,18 +339,20 @@ export default function Header() {
           </nav>
           <Link id="headerCta" className="btn btn-primary" href="/contact">
             Get in touch
-            <i className="ph ph-arrow-up-right" />
+            <i aria-hidden="true" className="ph ph-arrow-up-right" />
           </Link>
           <button
             id="burger"
+            type="button"
             ref={burgerRef}
             className="btn btn-secondary"
             onClick={showingMenu ? closeMenu : openMenu}
             aria-label={showingMenu ? "Close menu" : "Open menu"}
             aria-expanded={showingMenu}
+            aria-haspopup="dialog"
             style={{ display: "none", width: 44, height: 44, padding: 0 }}
           >
-            <i className={showingMenu ? "ph ph-x" : "ph ph-list"} style={{ fontSize: "1.375rem" }} />
+            <i aria-hidden="true" className={showingMenu ? "ph ph-x" : "ph ph-list"} style={{ fontSize: "1.375rem" }} />
           </button>
         </div>
       </header>

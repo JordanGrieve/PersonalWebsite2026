@@ -175,7 +175,7 @@ export default function Zoomable({
           style={{ objectFit: fit, objectPosition: fit === "cover" ? "top" : "center" }}
         />
         <span className="zoom-hint" aria-hidden="true">
-          <i className="ph ph-arrows-out" />
+          <i aria-hidden="true" className="ph ph-arrows-out" />
         </span>
       </button>
 
@@ -212,7 +212,7 @@ export default function Zoomable({
             onClick={close}
             aria-label="Close image"
           >
-            <i className="ph ph-x" />
+            <i aria-hidden="true" className="ph ph-x" />
           </button>
         </dialog>
       ) : null}

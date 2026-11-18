@@ -10,19 +10,19 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <section
-      style={{ padding: "clamp(40px,8cqw,110px) clamp(18px,4cqw,48px) clamp(50px,8cqw,120px)" }}
+      style={{ padding: "clamp(2.6667em,8cqw,7.3333em) clamp(1.2em,4cqw,3.2em) clamp(3.3333em,8cqw,8em)" }}
     >
-      <div
+      <p
         style={{
           font: "500 0.6875rem/1 var(--font-heading)",
           letterSpacing: ".18em",
           textTransform: "uppercase",
           color: "var(--color-accent)",
-          marginBottom: 14,
+          margin: "0 0 1.2727em",
         }}
       >
         404
-      </div>
+      </p>
       <h1
         style={{
           fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
@@ -33,13 +33,15 @@ export default function NotFound() {
           margin: 0,
         }}
       >
-        NOTHING
+        {/* The space keeps the accessible name two words. A bare <br>
+            reads as "NOTHINGHERE". */}
+        NOTHING{" "}
         <br />
         HERE
       </h1>
       <p
         style={{
-          margin: "20px 0 0",
+          margin: "1.25em 0 0",
           maxWidth: "40ch",
           fontSize: "1rem",
           lineHeight: 1.65,
@@ -48,10 +50,10 @@ export default function NotFound() {
       >
         That page moved or never existed. The work is still where you left it.
       </p>
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 26 }}>
+      <div style={{ display: "flex", gap: "0.6667em", flexWrap: "wrap", marginTop: "1.7333em" }}>
         <Link className="btn btn-primary" href="/">
           Back home
-          <i className="ph ph-arrow-right" />
+          <i aria-hidden="true" className="ph ph-arrow-right" />
         </Link>
         <Link className="btn btn-secondary" href="/work">
           See the work

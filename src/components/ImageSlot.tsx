@@ -18,16 +18,19 @@ export default function ImageSlot({ placeholder }: { placeholder: string }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 8,
-        padding: 16,
+        gap: "0.5333em",
+        padding: "1.0667em",
         textAlign: "center",
         background:
           "linear-gradient(140deg, color-mix(in srgb, var(--color-accent) 7%, var(--color-neutral-900)), var(--color-neutral-900))",
         border: "1px dashed var(--color-neutral-800)",
-        color: "var(--color-neutral-500)",
+        /* neutral-400, not 500: against the lighter corner of the gradient
+           behind it, 500 measured 4.4:1 — just under the 4.5 body text
+           needs. */
+        color: "var(--color-neutral-400)",
       }}
     >
-      <i className="ph ph-image" style={{ fontSize: "1.625rem", color: "var(--color-neutral-700)" }} />
+      <i aria-hidden="true" className="ph ph-image" style={{ fontSize: "1.625rem", color: "var(--color-neutral-700)" }} />
       <span style={{ fontSize: "0.75rem", lineHeight: 1.4, maxWidth: "28ch" }}>{placeholder}</span>
     </div>
   );

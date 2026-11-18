@@ -53,22 +53,22 @@ export default async function PostPage({ params }: Params) {
     <>
       <JsonLd data={postSchema(post)} />
       <article>
-        <section style={{ padding: "clamp(26px,4cqw,56px) clamp(18px,4cqw,48px) 0" }}>
-          <Link className="btn btn-ghost" href="/writing" style={{ marginBottom: 20 }}>
-            <i className="ph ph-arrow-left" />
+        <section style={{ padding: "clamp(1.7333em,4cqw,3.7333em) clamp(1.2em,4cqw,3.2em) 0" }}>
+          <Link className="btn btn-ghost" href="/writing" style={{ marginBottom: "1.4286em" }}>
+            <i aria-hidden="true" className="ph ph-arrow-left" />
             &nbsp;All posts
           </Link>
           <div
             style={{
               display: "flex",
-              gap: 14,
+              gap: "1.2727em",
               flexWrap: "wrap",
               alignItems: "center",
               font: "500 0.6875rem/1 var(--font-heading)",
               letterSpacing: ".14em",
               textTransform: "uppercase",
               color: "var(--color-neutral-500)",
-              marginBottom: 16,
+              marginBottom: "1.4545em",
             }}
           >
             <span style={{ color: "var(--color-accent)" }}>{post.category}</span>
@@ -91,7 +91,7 @@ export default async function PostPage({ params }: Params) {
           </h1>
           <p
             style={{
-              margin: "20px 0 0",
+              margin: "1.25rem 0 0",
               maxWidth: "60ch",
               fontSize: "clamp(1rem,1.7cqw,1.1875rem)",
               lineHeight: 1.6,
@@ -100,7 +100,7 @@ export default async function PostPage({ params }: Params) {
           >
             {post.dek}
           </p>
-          <div style={{ marginTop: 28 }}>
+          <div style={{ marginTop: "1.8667em" }}>
             <Figure
               shot={post.hero}
               placeholder={post.ph}
@@ -113,7 +113,7 @@ export default async function PostPage({ params }: Params) {
 
         <section
           style={{
-            padding: "clamp(28px,4cqw,52px) clamp(18px,4cqw,48px) 0",
+            padding: "clamp(1.8667em,4cqw,3.4667em) clamp(1.2em,4cqw,3.2em) 0",
             maxWidth: "74ch",
           }}
         >
@@ -121,34 +121,34 @@ export default async function PostPage({ params }: Params) {
         </section>
       </article>
 
-      <section style={{ padding: "clamp(30px,4cqw,56px) clamp(18px,4cqw,48px)" }}>
+      <section style={{ padding: "clamp(2em,4cqw,3.7333em) clamp(1.2em,4cqw,3.2em)" }}>
         <div
           style={{
             display: "flex",
-            gap: 12,
+            gap: "0.8em",
             flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "22px 0",
+            padding: "1.4667em 0",
             borderTop: "1px solid var(--color-divider)",
             borderBottom: "1px solid var(--color-divider)",
           }}
         >
-          <span style={{ fontSize: "0.9375rem", color: "var(--color-neutral-300)" }}>
+          <p style={{ margin: 0, fontSize: "0.9375rem", color: "var(--color-neutral-300)" }}>
             Interested in this kind of work?
-          </span>
+          </p>
           <Link className="btn btn-primary" href="/contact">
             Get in touch
-            <i className="ph ph-arrow-up-right" />
+            <i aria-hidden="true" className="ph ph-arrow-up-right" />
           </Link>
         </div>
         {/* Only rendered when there is somewhere to go next. With one post on
             the site this was a heading above an empty grid. */}
         {related.length ? (
           <>
-            <h3
+            <h2
               style={{
-                margin: "30px 0 16px",
+                margin: "1.875rem 0 1rem",
                 fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
                 fontWeight: 400,
                 fontSize: "clamp(1.375rem,2.6cqw,1.875rem)",
@@ -156,44 +156,48 @@ export default async function PostPage({ params }: Params) {
               }}
             >
               READ NEXT
-            </h3>
-            <div
+            </h2>
+            <ul
+              className="plain-list"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
-                gap: 14,
+                gap: "0.9333em",
               }}
             >
           {related.map((r) => (
+            <li key={r.slug}>
             <Link
-              key={r.slug}
               href={`/writing/${r.slug}`}
               className="hov-border"
               style={{
                 display: "block",
+                height: "100%",
                 textAlign: "left",
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-divider)",
                 borderRadius: "var(--radius-lg)",
-                padding: 20,
+                padding: "1.3333em",
                 color: "inherit",
               }}
             >
               <div style={{ fontSize: "0.7188rem", color: "var(--color-neutral-500)" }}>
                 <time dateTime={r.published}>{displayDate(r.published)}</time> · {r.read}
               </div>
-              <div
+              <h3
                 style={{
-                  marginTop: 9,
+                  margin: "0.5625em 0 0",
                   font: "500 1rem/1.3 var(--font-heading)",
+                  letterSpacing: "normal",
                   color: "var(--color-text)",
                 }}
               >
                 {r.title}
-              </div>
+              </h3>
             </Link>
+            </li>
               ))}
-            </div>
+            </ul>
           </>
         ) : null}
       </section>
