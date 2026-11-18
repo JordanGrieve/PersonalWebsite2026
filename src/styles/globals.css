@@ -1168,3 +1168,38 @@ main li p a {
     grid-template-columns: minmax(0, 1fr) !important;
   }
 }
+
+/* The accordion gives its titles the whole row once they stop fitting beside
+   the icon. A row is the section's padding, the icon, the title and the plus
+   sign, with a gap either side of the title. The longest word in any title,
+   "OBSERVABILITY", is 7.78rem wide, which makes the row 13.96rem — so below
+   that the word has nowhere to go and was splitting as "OBSERVABILI / TY".
+
+   Nobody meets that at the default text size, where it is 223px. At 150%
+   text it is 335px, which is every small phone.
+
+   The icon is the part that can go: it is decoration, hidden from screen
+   readers already, and the title says the same thing in words. Dropping it
+   and its gap, closing the title's letterspacing, and tightening the gap to
+   the plus sign brings the row down to about 11.2rem — 269px at 150% text.
+   The description loses the indent that lined it up under the title, since
+   there is no longer an icon for it to clear.
+
+   Narrower than that, the word really is wider than the screen, and the
+   break-anywhere rule above is still there to catch it. */
+@container (max-width: 14.25rem) {
+  #svcGrid > li > i {
+    display: none;
+  }
+  /* `column-gap`, not `gap`: the rows keep the zero row-gap they are given
+     above, so a closed row does not reserve space for its hidden body. */
+  #svcGrid > li {
+    column-gap: 0.5em !important;
+  }
+  #svcGrid > li > h3 {
+    letter-spacing: 0 !important;
+  }
+  #svcGrid > li > .svc-body p {
+    padding-left: 0;
+  }
+}
