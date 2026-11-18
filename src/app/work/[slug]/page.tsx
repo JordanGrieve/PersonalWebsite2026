@@ -7,6 +7,7 @@ import Zoomable from "@/components/Zoomable";
 import { getCaseStudy, getProject, nextProject, projects, type Shot } from "@/data/projects";
 import { site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
+import NewTabHint from "@/components/NewTabHint";
 import { caseStudySchema } from "@/lib/schema";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -54,7 +55,7 @@ function Prose({ text }: { text: string }) {
         <p
           key={i}
           style={{
-            margin: i === 0 ? 0 : "14px 0 0",
+            margin: i === 0 ? 0 : "0.9333em 0 0",
             fontSize: "0.9375rem",
             lineHeight: 1.65,
             color: "var(--color-neutral-400)",
@@ -83,6 +84,7 @@ function linked(text: string) {
     return (
       <a key={i} href={m[2]} target="_blank" rel="noreferrer noopener">
         {m[1]}
+        <NewTabHint />
       </a>
     );
   });
@@ -103,6 +105,7 @@ function withLink(value: string) {
     /^[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i.test(part) ? (
       <a key={i} href={`https://${part}`} target="_blank" rel="noreferrer noopener">
         {part}
+        <NewTabHint />
       </a>
     ) : (
       part
@@ -128,11 +131,11 @@ function DetailList({
   if (!items?.length) return null;
 
   return (
-    <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)" }}>
-      <h3 style={{ margin: "0 0 6px", fontSize: "1.25rem", letterSpacing: "-.01em" }}>{title}</h3>
+    <section style={{ padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.1333em,5cqw,4.2667em)" }}>
+      <h2 style={{ margin: "0 0 0.3em", fontSize: "1.25rem", letterSpacing: "-.01em" }}>{title}</h2>
       <p
         style={{
-          margin: "0 0 18px",
+          margin: "0 0 1.2857em",
           fontSize: "0.875rem",
           lineHeight: 1.6,
           color: "var(--color-neutral-500)",
@@ -140,27 +143,28 @@ function DetailList({
       >
         {note}
       </p>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      {/* Term and description: what was tried, then why it went. */}
+      <dl style={{ display: "flex", flexDirection: "column" }}>
         {items.map((item) => (
           <div
             key={item.what}
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
-              gap: "8px clamp(16px,3cqw,36px)",
-              padding: "16px 0",
+              gap: "0.5333em clamp(1.0667em,3cqw,2.4em)",
+              padding: "1.0667em 0",
               borderTop: "1px solid var(--color-divider)",
             }}
           >
-            <div style={{ font: "500 0.9375rem/1.45 var(--font-heading)", color: "var(--color-text)" }}>
+            <dt style={{ font: "500 0.9375rem/1.45 var(--font-heading)", color: "var(--color-text)" }}>
               {item.what}
-            </div>
-            <div style={{ fontSize: "0.875rem", lineHeight: 1.6, color: "var(--color-neutral-400)" }}>
+            </dt>
+            <dd style={{ fontSize: "0.875rem", lineHeight: 1.6, color: "var(--color-neutral-400)" }}>
               {item.why}
-            </div>
+            </dd>
           </div>
         ))}
-      </div>
+      </dl>
     </section>
   );
 }
@@ -204,17 +208,17 @@ function Gallery({ items }: { items?: Shot[] }) {
   if (!items?.length) return null;
 
   return (
-    <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)" }}>
-      <h3 style={{ margin: "0 0 18px", fontSize: "1.25rem", letterSpacing: "-.01em" }}>
+    <section style={{ padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.1333em,5cqw,4.2667em)" }}>
+      <h2 style={{ margin: "0 0 0.9em", fontSize: "1.25rem", letterSpacing: "-.01em" }}>
         The evidence
-      </h3>
+      </h2>
       {/* Two across at most. At four these were 150px wide and the routes
           table was unreadable, which defeats the point of showing it. */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,560px),1fr))",
-          gap: "clamp(16px,3cqw,28px)",
+          gap: "clamp(1.0667em,3cqw,1.8667em)",
         }}
       >
         {items.map((item) => (
@@ -241,18 +245,22 @@ export default async function CaseStudyPage({ params }: Params) {
   return (
     <>
       <JsonLd data={caseStudySchema(project)} />
-      <section style={{ padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) 0" }}>
-        <Link className="btn btn-ghost" href="/work" style={{ marginBottom: 20 }}>
-          <i className="ph ph-arrow-left" />
+      <section style={{ padding: "clamp(2em,5cqw,4.5333em) clamp(1.2em,4cqw,3.2em) 0" }}>
+        <Link className="btn btn-ghost" href="/work" style={{ marginBottom: "1.4286em" }}>
+          <i aria-hidden="true" className="ph ph-arrow-left" />
           &nbsp;All projects
         </Link>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
+        <ul
+          className="plain-list"
+          aria-label="Tags"
+          style={{ display: "flex", gap: "0.5333em", flexWrap: "wrap", marginBottom: "1.2em" }}
+        >
           {study.tags.map((t, i) => (
-            <span key={t} className={i === 0 ? "tag tag-accent" : "tag tag-outline"}>
+            <li key={t} className={i === 0 ? "tag tag-accent" : "tag tag-outline"}>
               {t}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
         <h1
           style={{
             fontSize: "clamp(2.375rem,8cqw,6rem)",
@@ -265,7 +273,7 @@ export default async function CaseStudyPage({ params }: Params) {
         </h1>
         <p
           style={{
-            margin: "20px 0 0",
+            margin: "1.1765em 0 0",
             fontSize: "1.0625rem",
             lineHeight: 1.6,
             color: "var(--color-neutral-300)",
@@ -275,7 +283,7 @@ export default async function CaseStudyPage({ params }: Params) {
         </p>
         <div
           style={{
-            marginTop: 30,
+            marginTop: "2em",
             borderRadius: "var(--radius-lg)",
             overflow: "hidden",
             /* Taller than it was. A page screenshot is about 3:2, so at the
@@ -292,20 +300,23 @@ export default async function CaseStudyPage({ params }: Params) {
             sizes="(max-width: 700px) 100vw, 93vw"
           />
         </div>
-        <div
+        {/* Label and value pairs — Role, Stack, Live — which is exactly
+            what a description list is for. As divs, a screen reader heard
+            eight unrelated lines. */}
+        <dl
           style={{
-            marginTop: 26,
+            marginTop: "1.7333em",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))",
-            gap: 18,
-            padding: "22px 0",
+            gap: "1.2em",
+            padding: "1.4667em 0",
             borderTop: "1px solid var(--color-divider)",
             borderBottom: "1px solid var(--color-divider)",
           }}
         >
           {study.meta.map((m) => (
             <div key={m.l}>
-              <div
+              <dt
                 style={{
                   font: "500 0.6875rem/1 var(--font-heading)",
                   letterSpacing: ".13em",
@@ -314,13 +325,13 @@ export default async function CaseStudyPage({ params }: Params) {
                 }}
               >
                 {m.l}
-              </div>
-              <div style={{ marginTop: 8, fontSize: "0.875rem", color: "var(--color-neutral-200)" }}>
+              </dt>
+              <dd style={{ marginTop: "0.5714em", fontSize: "0.875rem", color: "var(--color-neutral-200)" }}>
                 {m.l === "Live" ? withLink(m.v) : m.v}
-              </div>
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
 
       {/* One column, not two: "The problem" and "What I did" each run the full
@@ -328,41 +339,42 @@ export default async function CaseStudyPage({ params }: Params) {
           is now the space between them rather than beside them. */}
       <section
         style={{
-          padding: "clamp(32px,5cqw,64px) clamp(18px,4cqw,48px)",
+          padding: "clamp(2.1333em,5cqw,4.2667em) clamp(1.2em,4cqw,3.2em)",
           display: "grid",
           gridTemplateColumns: "1fr",
-          gap: "clamp(22px,4cqw,48px)",
+          gap: "clamp(1.4667em,4cqw,3.2em)",
         }}
       >
         <div>
           {/* Not every study starts from a problem. One of these is a brand
               I started myself, where the first section is what I wanted to
               make rather than what was wrong. */}
-          <h3 style={{ margin: "0 0 12px", fontSize: "1.25rem", letterSpacing: "-.01em" }}>
+          <h2 style={{ margin: "0 0 0.6em", fontSize: "1.25rem", letterSpacing: "-.01em" }}>
             {study.problemTitle ?? "The problem"}
-          </h3>
+          </h2>
           <Prose text={study.problem} />
         </div>
         <div>
-          <h3 style={{ margin: "0 0 12px", fontSize: "1.25rem", letterSpacing: "-.01em" }}>What I did</h3>
+          <h2 style={{ margin: "0 0 0.6em", fontSize: "1.25rem", letterSpacing: "-.01em" }}>What I did</h2>
           <Prose text={study.approach} />
         </div>
       </section>
 
       {study.results?.length ? (
-      <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)" }}>
+      <section style={{ padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.1333em,5cqw,4.2667em)" }}>
         {/* Columns come from globals.css: four tiles were breaking three and
             one just below desktop, which reads as a mistake rather than a
             layout. Two by two instead, until there is room for the lot. */}
-        <div className="result-grid" style={{ display: "grid", gap: 16 }}>
+        <h2 className="sr-only">Results</h2>
+        <ul className="result-grid plain-list" style={{ display: "grid", gap: "1.0667em" }}>
           {study.results.map((r) => (
-            <div
+            <li
               key={r.l}
               style={{
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-divider)",
                 borderRadius: "var(--radius-lg)",
-                padding: 22,
+                padding: "1.4667em",
               }}
             >
               <div
@@ -376,7 +388,7 @@ export default async function CaseStudyPage({ params }: Params) {
               </div>
               <div
                 style={{
-                  marginTop: 9,
+                  marginTop: "0.6923em",
                   fontSize: "0.8125rem",
                   lineHeight: 1.5,
                   color: "var(--color-neutral-400)",
@@ -384,9 +396,9 @@ export default async function CaseStudyPage({ params }: Params) {
               >
                 {r.l}
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
       ) : null}
 
@@ -413,11 +425,18 @@ export default async function CaseStudyPage({ params }: Params) {
           `#studyShots` in globals.css. */}
       <section
         id="studyShots"
+        aria-label="Screenshots"
+        /* On a phone this row scrolls sideways. With real shots in it the
+           enlarge buttons make it reachable from a keyboard; with only
+           placeholders there is nothing inside to focus, so the row itself
+           has to take focus or the second slot cannot be scrolled to
+           without a pointer. */
+        tabIndex={study.shots?.shot1 || study.shots?.shot2 ? undefined : 0}
         style={{
-          padding: "0 clamp(18px,4cqw,48px) clamp(32px,5cqw,64px)",
+          padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.1333em,5cqw,4.2667em)",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
-          gap: 16,
+          gap: "1.0667em",
         }}
       >
         <div
@@ -450,7 +469,7 @@ export default async function CaseStudyPage({ params }: Params) {
         </div>
       </section>
 
-      <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(40px,6cqw,84px)" }}>
+      <section style={{ padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.6667em,6cqw,5.6em)" }}>
         {study.quote?.text ? (
           <figure>
             <blockquote
@@ -464,7 +483,7 @@ export default async function CaseStudyPage({ params }: Params) {
             >
               &ldquo;{study.quote.text}&rdquo;
             </blockquote>
-            <figcaption style={{ marginTop: 14, fontSize: "0.8125rem", color: "var(--color-neutral-500)" }}>
+            <figcaption style={{ marginTop: "1.0769em", fontSize: "0.8125rem", color: "var(--color-neutral-500)" }}>
               {study.quote.who}
             </figcaption>
           </figure>
@@ -475,18 +494,18 @@ export default async function CaseStudyPage({ params }: Params) {
             otherwise refuse to share the row evenly. */}
         <div
           id="caseStudyCtas"
-          style={{ marginTop: 34, display: "flex", gap: 10, flexWrap: "wrap" }}
+          style={{ marginTop: "2.2667em", display: "flex", gap: "0.6667em", flexWrap: "wrap" }}
         >
           <Link className="btn btn-primary" href="/contact">
             Talk to me about a role
-            <i className="ph ph-arrow-right" />
+            <i aria-hidden="true" className="ph ph-arrow-right" />
           </Link>
           {/* Named, because "Next project" tells you there is one and
               nothing about whether you want it. The name is the reason to
               click. */}
           <Link className="btn btn-secondary" href={`/work/${next.slug}`}>
             Another project — {next.name}
-            <i className="ph ph-arrow-right" />
+            <i aria-hidden="true" className="ph ph-arrow-right" />
           </Link>
         </div>
       </section>

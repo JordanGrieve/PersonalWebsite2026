@@ -52,12 +52,15 @@
   --font-heading-weight: 500;
   --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
 
-  --space-1: 2.8px;
-  --space-2: 5.6px;
-  --space-3: 8.4px;
-  --space-4: 11.2px;
-  --space-6: 16.8px;
-  --space-8: 22.4px;
+  /* In em, so each step is a multiple of the font-size of whatever uses it
+     and the spacing grows with the text. They were 2.8px to 22.4px, which is
+     these same multiples of the system's 14px (0.875rem) control size. */
+  --space-1: 0.2em;
+  --space-2: 0.4em;
+  --space-3: 0.6em;
+  --space-4: 0.8em;
+  --space-6: 1.2em;
+  --space-8: 1.6em;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -185,7 +188,7 @@ figcaption {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 0.4286em;
   cursor: pointer;
   text-decoration: none;
   font-family: var(--font-heading);
@@ -241,20 +244,20 @@ figcaption {
 }
 .btn-block {
   width: 100%;
-  margin-top: var(--space-2);
+  margin-top: 0.35em;
 }
 
 /* — forms — */
 .field > label {
   display: block;
   font-size: 0.75rem;
-  margin-bottom: 5px;
+  margin-bottom: 0.4167em;
   color: color-mix(in srgb, var(--color-text) 70%, transparent);
 }
 .input {
   width: 100%;
   min-height: 36px;
-  padding: 6px 10px;
+  padding: 0.4286em 0.7143em;
   font: inherit;
   font-size: 0.875rem;
   color: var(--color-text);
@@ -305,7 +308,7 @@ textarea.input {
 .card-meta {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.5455em;
   font-size: 0.6875rem;
   color: color-mix(in srgb, var(--color-text) 50%, transparent);
 }
@@ -325,7 +328,7 @@ textarea.input {
   align-items: center;
   font-size: 0.6875rem;
   letter-spacing: 0.02em;
-  padding: 3px 10px;
+  padding: 0.2727em 0.9091em;
   border-radius: calc(var(--radius-md) * 0.75);
 }
 .tag-accent {

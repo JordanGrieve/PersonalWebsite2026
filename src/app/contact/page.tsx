@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ContactForm from "@/components/contact/ContactForm";
 import { liveSocials, site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
+import NewTabHint from "@/components/NewTabHint";
 import { contactSchema } from "@/lib/schema";
 
 const title = "Contact";
@@ -32,10 +33,10 @@ export const metadata: Metadata = {
 const linkRow = {
   display: "flex",
   alignItems: "center",
-  gap: 11,
+  gap: "0.7333em",
   fontSize: "0.9375rem",
   minHeight: 24,
-  padding: "4px 0",
+  padding: "0.2667em 0",
 } as const;
 
 export default function ContactPage() {
@@ -44,10 +45,10 @@ export default function ContactPage() {
       <JsonLd data={contactSchema()} />
     <section
       style={{
-        padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) clamp(40px,6cqw,84px)",
+        padding: "clamp(2em,5cqw,4.5333em) clamp(1.2em,4cqw,3.2em) clamp(2.6667em,6cqw,5.6em)",
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-        gap: "clamp(24px,4cqw,52px)",
+        gap: "clamp(1.6em,4cqw,3.4667em)",
         alignItems: "start",
       }}
     >
@@ -64,7 +65,7 @@ export default function ContactPage() {
         </h1>
         <p
           style={{
-            margin: "20px 0 0",
+            margin: "1.25em 0 0",
             fontSize: "1rem",
             lineHeight: 1.65,
             color: "var(--color-neutral-300)",
@@ -74,28 +75,40 @@ export default function ContactPage() {
           solved before and people who will stretch me. If you are hiring, tell me about the
           role and I will reply within a day.
         </p>
-        <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14 }}>
+        <ul
+          className="plain-list"
+          style={{ marginTop: "1.8667em", display: "flex", flexDirection: "column", gap: "0.9333em" }}
+        >
+          <li>
           <a href={`mailto:${site.email}`} style={linkRow}>
-            <i className="ph ph-envelope-simple" style={{ fontSize: "1.1875rem" }} />
+            <i aria-hidden="true" className="ph ph-envelope-simple" style={{ fontSize: "1.1875rem" }} />
             {site.email}
           </a>
+          </li>
           {liveSocials.map((s) => (
+            <li key={s.label}>
             <a
-              key={s.label}
               href={s.href}
               target="_blank"
               rel="noreferrer"
               style={linkRow}
             >
-              <i className={s.icon} style={{ fontSize: "1.1875rem" }} />
+              <i aria-hidden="true" className={s.icon} style={{ fontSize: "1.1875rem" }} />
+              {/* The handle is a bare URL, which says where but not what:
+                  the icon that tells a sighted reader "GitHub" is hidden
+                  from a screen reader, so the name goes in for them. */}
+              <span className="sr-only">{s.label}: </span>
               {s.handle}
+              <NewTabHint />
             </a>
+            </li>
           ))}
-          <div style={{ ...linkRow, color: "var(--color-neutral-400)" }}>
-            <i className="ph ph-map-pin" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
+          <li style={{ ...linkRow, color: "var(--color-neutral-400)" }}>
+            <i aria-hidden="true" className="ph ph-map-pin" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
+            <span className="sr-only">Based in: </span>
             {site.location}
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
       <ContactForm />
     </section>

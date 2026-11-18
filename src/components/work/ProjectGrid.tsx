@@ -24,17 +24,24 @@ export default function ProjectGrid() {
 
   return (
     <>
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "26px 0 22px" }}>
+      {/* A named group, so the five buttons are announced as one control
+          for one job rather than five unrelated toggles. */}
+      <div
+        role="group"
+        aria-label="Filter projects by type"
+        style={{ display: "flex", gap: "0.5333em", flexWrap: "wrap", margin: "1.7333em 0 1.4667em" }}
+      >
         {projectFilters.map((f) => (
           <button
             key={f}
+            type="button"
             onClick={() => setFilter(f)}
             aria-pressed={filter === f}
             style={{
               cursor: "pointer",
               font: "500 0.75rem/1 var(--font-heading)",
               letterSpacing: ".06em",
-              padding: "8px 14px",
+              padding: "0.6667em 1.1667em",
               borderRadius: 999,
               borderStyle: "solid",
               borderWidth: 1,
@@ -45,16 +52,24 @@ export default function ProjectGrid() {
           </button>
         ))}
       </div>
-      <div
+      {/* Pressing a filter redraws the grid below, which a screen reader has
+          no way to notice. This says what happened (WCAG 4.1.3). */}
+      <p className="sr-only" role="status">
+        {filter === "All"
+          ? `Showing all ${shown.length} projects`
+          : `Showing ${shown.length} ${filter} ${shown.length === 1 ? "project" : "projects"}`}
+      </p>
+      <ul
+        className="plain-list"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-          gap: 16,
+          gap: "1.0667em",
         }}
       >
         {shown.map((p) => (
+          <li key={p.slug}>
           <Link
-            key={p.slug}
             href={`/work/${p.slug}`}
             /* Eight case studies prefetching on sight cost 86kB on /work,
                of which a reader uses at most one. Off entirely — Next 15 does
@@ -64,6 +79,7 @@ export default function ProjectGrid() {
             className="hov-lift"
             style={{
               display: "block",
+              height: "100%",
               textAlign: "left",
               padding: 0,
               background: "var(--color-surface)",
@@ -76,36 +92,38 @@ export default function ProjectGrid() {
             <div style={{ position: "relative", height: 184 }}>
               <CardThumb slug={p.slug} placeholder={p.ph} />
             </div>
-            <div style={{ padding: "16px 18px" }}>
+            <div style={{ padding: "1.0667em 1.2em" }}>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  gap: 10,
+                  gap: "0.6667em",
                 }}
               >
-                <span className="tag tag-outline" style={{ fontSize: "0.65625rem" }}>
+                <span className="tag tag-outline" style={{ fontSize: "0.65625rem", padding: "0.2857em 0.9524em" }}>
                   {p.kind}
                 </span>
                 <span style={{ fontSize: "0.6875rem", color: "var(--color-neutral-500)" }}>{p.year}</span>
               </div>
-              <div
+              <h2
                 style={{
-                  marginTop: 12,
+                  margin: "0.75em 0 0",
                   font: "500 1rem/1.25 var(--font-heading)",
+                  letterSpacing: "normal",
                   color: "var(--color-text)",
                 }}
               >
                 {p.name}
-              </div>
-              <div style={{ marginTop: 5, fontSize: "0.8125rem", color: "var(--color-neutral-400)" }}>
+              </h2>
+              <div style={{ marginTop: "0.3846em", fontSize: "0.8125rem", color: "var(--color-neutral-400)" }}>
                 {p.result}
               </div>
             </div>
           </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 }

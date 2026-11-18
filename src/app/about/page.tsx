@@ -37,25 +37,25 @@ export default function AboutPage() {
       <section
         id="aboutSec"
         style={{
-          padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) 0",
+          padding: "clamp(2em,5cqw,4.5333em) clamp(1.2em,4cqw,3.2em) 0",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-          gap: "clamp(22px,4cqw,52px)",
+          gap: "clamp(1.4667em,4cqw,3.4667em)",
           alignItems: "start",
         }}
       >
         <div>
-          <div
+          <p
             style={{
               font: "500 0.6875rem/1 var(--font-heading)",
               letterSpacing: ".18em",
               textTransform: "uppercase",
               color: "var(--color-accent)",
-              marginBottom: 14,
+              margin: "0 0 1.2727em",
             }}
           >
             About
-          </div>
+          </p>
           <h1
             style={{
               fontSize: "clamp(2.375rem,8cqw,6rem)",
@@ -75,7 +75,7 @@ export default function AboutPage() {
               beside a heading that used all of it. */}
           <p
             style={{
-              margin: "22px 0 0",
+              margin: "1.375em 0 0",
               fontSize: "1rem",
               lineHeight: 1.65,
               color: "var(--color-neutral-300)",
@@ -87,7 +87,7 @@ export default function AboutPage() {
           </p>
           <p
             style={{
-              margin: "14px 0 0",
+              margin: "0.875em 0 0",
               fontSize: "1rem",
               lineHeight: 1.65,
               color: "var(--color-neutral-400)",
@@ -103,7 +103,7 @@ export default function AboutPage() {
               example of this paragraph, so it belongs above them. */}
           <p
             style={{
-              margin: "14px 0 0",
+              margin: "0.875em 0 0",
               fontSize: "1rem",
               lineHeight: 1.65,
               color: "var(--color-neutral-400)",
@@ -113,9 +113,9 @@ export default function AboutPage() {
             monitoring, logs and the data until the real cause turns up, fixing it, and then
             checking it stayed fixed. Most of what is on this site started that way.
           </p>
-          <div id="aboutActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 26 }}>
+          <div id="aboutActions" style={{ display: "flex", gap: "0.6667em", flexWrap: "wrap", marginTop: "1.7333em" }}>
             <a className="btn btn-primary" href={site.cv} download={site.cvName}>
-              <i className="ph ph-download-simple" />
+              <i aria-hidden="true" className="ph ph-download-simple" />
               &nbsp;Download CV
             </a>
             <Link className="btn btn-secondary" href="/contact">
@@ -125,6 +125,7 @@ export default function AboutPage() {
         </div>
         <div id="aboutPhoto" style={{ position: "relative" }}>
           <div
+            aria-hidden="true"
             style={{
               position: "absolute",
               inset: "10% 8%",
@@ -135,7 +136,7 @@ export default function AboutPage() {
           />
           <Image
             src="/images/jordan-hero-image.png"
-            alt="Jordan"
+            alt="Jordan Grieve"
             width={1086}
             height={1448}
             /* Above 640px the portrait is a fixed 480x600 (see `#aboutPhoto`
@@ -155,19 +156,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section style={{ padding: "clamp(34px,5cqw,72px) clamp(18px,4cqw,48px)" }}>
-        <h2 style={{ fontSize: "clamp(1.5rem,3.6cqw,2.5rem)", letterSpacing: "-.03em", margin: "0 0 24px" }}>
+      <section style={{ padding: "clamp(2.2667em,5cqw,4.8em) clamp(1.2em,4cqw,3.2em)" }}>
+        <h2 className="section-title" style={{ fontSize: "clamp(1.5rem,3.6cqw,2.5rem)", letterSpacing: "-.03em", margin: "0 0 1.5rem" }}>
           THE SHORT VERSION
         </h2>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        {/* Ordered: it is a timeline, newest first, and the order is the
+            point of it. */}
+        <ol className="plain-list" style={{ display: "flex", flexDirection: "column" }}>
           {timeline.map((t) => (
-            <div
+            <li
               key={t.what}
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))",
-                gap: 12,
-                padding: "18px 0",
+                gap: "0.8em",
+                padding: "1.2em 0",
                 borderTop: "1px solid var(--color-divider)",
               }}
             >
@@ -181,10 +184,12 @@ export default function AboutPage() {
                 {t.when}
               </div>
               <div style={{ gridColumn: "span 2" }}>
-                <div style={{ font: "500 1rem/1.3 var(--font-heading)" }}>{t.what}</div>
+                <h3 style={{ margin: 0, font: "500 1rem/1.3 var(--font-heading)", letterSpacing: "normal" }}>
+                  {t.what}
+                </h3>
                 <div
                   style={{
-                    marginTop: 6,
+                    marginTop: "0.4286em",
                     fontSize: "0.875rem",
                     lineHeight: 1.55,
                     color: "var(--color-neutral-400)",
@@ -193,9 +198,9 @@ export default function AboutPage() {
                   {t.body}
                 </div>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
     </>
   );

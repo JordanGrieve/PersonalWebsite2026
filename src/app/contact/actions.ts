@@ -20,7 +20,17 @@ import { site } from "@/data/site";
  * which is where this is going anyway.
  */
 
-export type ContactState = { ok?: true; error?: string };
+export type ContactState = {
+  ok?: true;
+  error?: string;
+  /** The field the error is about, when it is about one. The form marks it
+      invalid, ties the message to it, and puts focus there. */
+  field?: "email" | "message";
+  /** What was typed, handed back on any failure. React resets a form once its
+      action returns, so without these a visitor whose send failed is shown an
+      error above three empty boxes and has to write the message again. */
+  values?: { name: string; email: string; message: string };
+};
 
 /** Caps, so the form cannot be used to push an arbitrary payload. */
 const LIMITS = { name: 100, email: 200, message: 5000 };
@@ -39,17 +49,23 @@ export async function sendMessage(
 
   /* Deliberately loose. The only test that means anything is whether a reply
      arrives, and an over-strict pattern rejects real addresses. */
+  const values = { name, email, message };
+
   if (!/^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(email)) {
-    return { error: "That email address does not look right — check it and try again." };
+    return {
+      error: "That email address does not look right — check it and try again.",
+      field: "email",
+      values,
+    };
   }
   if (message.length < 4) {
-    return { error: "Add a line or two so I know what you are after." };
+    return { error: "Add a line or two so I know what you are after.", field: "message", values };
   }
 
   const key = process.env.RESEND_API_KEY;
   if (!key) {
     console.error("Contact form: RESEND_API_KEY is not set.");
-    return { error: `Something broke at my end. Email me directly at ${site.email}.` };
+    return { error: `Something broke at my end. Email me directly at ${site.email}.`, values };
   }
 
   try {
@@ -74,11 +90,11 @@ export async function sendMessage(
     if (!response.ok) {
       /* Resend's body says why; the visitor does not need to know. */
       console.error("Contact form: Resend returned", response.status, await response.text());
-      return { error: `That did not send. Email me directly at ${site.email}.` };
+      return { error: `That did not send. Email me directly at ${site.email}.`, values };
     }
   } catch (cause) {
     console.error("Contact form: request failed", cause);
-    return { error: `That did not send. Email me directly at ${site.email}.` };
+    return { error: `That did not send. Email me directly at ${site.email}.`, values };
   }
 
   return { ok: true };

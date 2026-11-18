@@ -34,20 +34,20 @@ export default function WorkPage() {
       <JsonLd data={workSchema()} />
     <section
       style={{
-        padding: "clamp(30px,5cqw,68px) clamp(18px,4cqw,48px) clamp(38px,6cqw,84px)",
+        padding: "clamp(2em,5cqw,4.5333em) clamp(1.2em,4cqw,3.2em) clamp(2.5333em,6cqw,5.6em)",
       }}
     >
-      <div
+      <p
         style={{
           font: "500 0.6875rem/1 var(--font-heading)",
           letterSpacing: ".18em",
           textTransform: "uppercase",
           color: "var(--color-accent)",
-          marginBottom: 14,
+          margin: "0 0 1.2727em",
         }}
       >
         Selected work
-      </div>
+      </p>
       <h1
         style={{
           fontSize: "clamp(2.375rem,8cqw,6rem)",
@@ -60,7 +60,7 @@ export default function WorkPage() {
       </h1>
       <p
         style={{
-          margin: "18px 0 0",
+          margin: "1.125em 0 0",
           fontSize: "1rem",
           lineHeight: 1.6,
           color: "var(--color-neutral-400)",

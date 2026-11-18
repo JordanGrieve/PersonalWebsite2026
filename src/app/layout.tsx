@@ -68,11 +68,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        {/* First thing in the body, so it is the first Tab stop. */}
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
         <ScrollReveal />
         <DeferMotion />
         <div className="site">
           <Header />
-          <main className="wrap" style={{ animation: "riseIn .45s ease both" }}>
+          {/* tabIndex -1 so the skip link can move focus here, not just
+              scroll: without it the next Tab starts from the top again. */}
+          <main
+            id="main"
+            tabIndex={-1}
+            className="wrap"
+            style={{ animation: "riseIn .45s ease both" }}
+          >
             {children}
           </main>
           <Footer />

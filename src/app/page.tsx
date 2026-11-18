@@ -15,6 +15,7 @@ import {
 } from "@/data/projects";
 import { liveSocials, site } from "@/data/site";
 import JsonLd from "@/components/JsonLd";
+import NewTabHint from "@/components/NewTabHint";
 import { homeSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -39,7 +40,7 @@ export default function HomePage() {
         id="heroSection"
         style={{
           position: "relative",
-          padding: "clamp(16px,2.4cqw,30px) clamp(18px,4cqw,48px) 0",
+          padding: "clamp(1.0667em,2.4cqw,2em) clamp(1.2em,4cqw,3.2em) 0",
           overflow: "hidden",
         }}
       >
@@ -73,7 +74,7 @@ export default function HomePage() {
         >
           <Image
             src="/images/jordan-hero-image.png"
-            alt="Jordan"
+            alt="Jordan Grieve"
             fill
             priority
             sizes="(max-width: 640px) 100vw, 46vw"
@@ -100,7 +101,7 @@ export default function HomePage() {
               backdropFilter: "blur(3px)",
             }}
           >
-            <SpinBadge arcId="badgeArcM" textFill="#b2b6ca" initialsSize={26} />
+            <SpinBadge arcId="badgeArcM" textFill="#b2b6ca" initialsSize="1.625rem" />
           </div>
         </div>
 
@@ -116,7 +117,9 @@ export default function HomePage() {
               margin: 0,
             }}
           >
-            <span style={{ display: "block", color: "var(--color-accent)" }}>Software</span>
+            {/* The space is for the accessible name. Two block spans look
+                like two lines and read as "SoftwareDeveloper" without it. */}
+            <span style={{ display: "block", color: "var(--color-accent)" }}>Software </span>
             <span style={{ display: "block", color: "var(--color-neutral-200)" }}>Developer</span>
           </h1>
           {/* Outlines, not live text — see PortfolioWord. The font-size here
@@ -132,7 +135,7 @@ export default function HomePage() {
               fontSize: "clamp(1.625rem,5.4cqw,3.875rem)",
               lineHeight: 1,
               color: "var(--color-accent)",
-              margin: "-0.30em 0 0 clamp(6px,38cqw,420px)",
+              margin: "-0.30em 0 0 clamp(0.375rem,38cqw,26.25rem)",
             }}
           >
             <PortfolioWord />
@@ -144,10 +147,10 @@ export default function HomePage() {
           style={{
             position: "relative",
             zIndex: 2,
-            marginTop: "calc(-1 * clamp(4px,1.6cqw,20px))",
+            marginTop: "calc(-1 * clamp(0.2667em,1.6cqw,1.3333em))",
             display: "grid",
             gridTemplateColumns: "minmax(180px,1fr) auto",
-            gap: 24,
+            gap: "1.6em",
             alignItems: "end",
           }}
         >
@@ -178,7 +181,7 @@ export default function HomePage() {
             </p>
             <p
               style={{
-                margin: "14px 0 0",
+                margin: "1.2174em 0 0",
                 font: "500 0.71875rem/1.6 var(--font-heading)",
                 letterSpacing: ".12em",
                 textTransform: "uppercase",
@@ -187,10 +190,10 @@ export default function HomePage() {
             >
               &lt;/ Build. Ship. Speed up. /&gt;
             </p>
-            <div id="heroActions" style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
+            <div id="heroActions" style={{ display: "flex", gap: "0.6667em", flexWrap: "wrap", marginTop: "1.3333em" }}>
               <Link className="btn btn-primary" href="/contact">
                 Hire me
-                <i className="ph ph-arrow-right" style={{ fontSize: "1.125rem" }} />
+                <i aria-hidden="true" className="ph ph-arrow-right" style={{ fontSize: "1.125rem" }} />
               </Link>
               <Link className="btn btn-secondary" href="/work">
                 See the work
@@ -201,13 +204,13 @@ export default function HomePage() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 20,
+              gap: "1.3333em",
               justifyContent: "flex-end",
               flexWrap: "wrap",
             }}
           >
             <div id="heroBadge" style={{ position: "relative", width: 104, height: 104, flex: "none" }}>
-              <SpinBadge arcId="badgeArc" textFill="#9397ab" initialsSize={30} />
+              <SpinBadge arcId="badgeArc" textFill="#9397ab" initialsSize="1.875rem" />
             </div>
           </div>
         </div>
@@ -216,27 +219,29 @@ export default function HomePage() {
       {/* Sibling of the hero, not a child: `#heroSection` clips its overflow
           to contain the glow, which would also clip this band's full-bleed
           overhang. globals.css bleeds it out to both viewport edges. */}
-      <div
+      <ul
         id="heroStats"
+        className="plain-list"
+        aria-label="In numbers"
         style={{
           position: "relative",
           zIndex: 2,
-          marginTop: "clamp(24px,3.4cqw,44px)",
-          padding: "clamp(20px,2.6cqw,30px) clamp(18px,4cqw,48px)",
+          marginTop: "clamp(1.6em,3.4cqw,2.9333em)",
+          padding: "clamp(1.3333em,2.6cqw,2em) clamp(1.2em,4cqw,3.2em)",
           background:
             "linear-gradient(100deg,var(--color-section) 0%,#1d2149 55%,var(--color-section) 100%)",
           borderTop: "1px solid var(--color-accent-800)",
           borderBottom: "1px solid var(--color-accent-800)",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))",
-          gap: "clamp(14px,2cqw,24px)",
+          gap: "clamp(0.9333em,2cqw,1.6em)",
         }}
       >
         {stats.map((s) => (
-          <div
+          <li
             key={s.l}
             style={{
-              paddingLeft: "clamp(14px,2cqw,24px)",
+              paddingLeft: "clamp(0.9333em,2cqw,1.6em)",
               borderLeft: "1px solid rgba(233,233,237,.14)",
             }}
           >
@@ -253,7 +258,7 @@ export default function HomePage() {
             </div>
             <div
               style={{
-                marginTop: 8,
+                marginTop: "0.7619em",
                 font: "500 0.65625rem/1.4 var(--font-heading)",
                 letterSpacing: ".14em",
                 textTransform: "uppercase",
@@ -262,21 +267,22 @@ export default function HomePage() {
             >
               {s.l}
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
 
-      <section style={{ padding: "clamp(38px,6cqw,84px) clamp(18px,4cqw,48px)" }}>
+      <section style={{ padding: "clamp(2.5333em,6cqw,5.6em) clamp(1.2em,4cqw,3.2em)" }}>
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-            gap: "clamp(20px,3cqw,40px)",
+            gap: "clamp(1.3333em,3cqw,2.6667em)",
           }}
         >
           <div>
             <h2
               id="whatIDo"
+              className="section-title"
               style={{
                 ...sectionHeading,
                 fontSize: "clamp(1.875rem,4.8cqw,3.5rem)",
@@ -293,7 +299,7 @@ export default function HomePage() {
             </h2>
             <p
               style={{
-                margin: "18px 0 0",
+                margin: "1.2em 0 0",
                 maxWidth: "42ch",
                 fontSize: "0.9375rem",
                 lineHeight: 1.6,
@@ -308,18 +314,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(38px,6cqw,84px)" }}>
+      <section style={{ padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.5333em,6cqw,5.6em)" }}>
         <div
           style={{
             display: "flex",
             alignItems: "baseline",
             justifyContent: "space-between",
-            gap: 16,
+            gap: "1.0667em",
             flexWrap: "wrap",
-            marginBottom: 22,
+            marginBottom: "1.4667em",
           }}
         >
-          <h2 style={{ ...sectionHeading, fontSize: "clamp(1.75rem,4.4cqw,3.25rem)" }}>
+          <h2 className="section-title" style={{ ...sectionHeading, fontSize: "clamp(1.75rem,4.4cqw,3.25rem)" }}>
             FEATURED PROJECTS
           </h2>
           <Link
@@ -328,26 +334,28 @@ export default function HomePage() {
             style={{ letterSpacing: ".1em", textTransform: "uppercase" }}
           >
             All projects
-            <i className="ph ph-arrow-right" />
+            <i aria-hidden="true" className="ph ph-arrow-right" />
           </Link>
         </div>
-        <div
+        <ul
           id="featGrid"
+          className="plain-list"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-            gap: 16,
+            gap: "1.0667em",
           }}
         >
           {featured.map((p, i) => (
             /* The whole card is the link. The arrow used to be the only hit
                target — a 36px square in a 260px card. */
+            <li key={p.slug}>
             <Link
-              key={p.slug}
               href={`/work/${p.slug}`}
               className="hov-lift"
               style={{
                 display: "block",
+                height: "100%",
                 color: "inherit",
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-divider)",
@@ -357,7 +365,11 @@ export default function HomePage() {
             >
               <div style={{ position: "relative", height: 190 }}>
                 <CardThumb slug={p.slug} placeholder={featuredPlaceholders[p.slug]} />
+                {/* "01" to "04": ornament. The list says which card this
+                    is; read aloud, the number just gets in front of the
+                    project's name. */}
                 <span
+                  aria-hidden="true"
                   style={{
                     position: "absolute",
                     top: 12,
@@ -370,7 +382,7 @@ export default function HomePage() {
                     background: "rgba(15,17,28,.72)",
                     border: "1px solid var(--color-divider)",
                     borderRadius: "var(--radius-sm)",
-                    padding: "4px 8px",
+                    padding: "0.3077em 0.6154em",
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -378,15 +390,23 @@ export default function HomePage() {
               </div>
               <div
                 style={{
-                  padding: "16px 18px",
+                  padding: "1.0667em 1.2em",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  gap: 12,
+                  gap: "0.8em",
                 }}
               >
                 <div>
-                  <div style={{ font: "500 0.875rem/1.3 var(--font-heading)" }}>{p.name}</div>
+                  <h3
+                    style={{
+                      margin: 0,
+                      font: "500 0.875rem/1.3 var(--font-heading)",
+                      letterSpacing: "normal",
+                    }}
+                  >
+                    {p.name}
+                  </h3>
                   <div style={{ fontSize: "0.78125rem", color: "var(--color-neutral-500)" }}>
                     {featuredBlurbs[p.slug]}
                   </div>
@@ -394,20 +414,21 @@ export default function HomePage() {
                 {/* Decorative only — the card is the link, and a nested one
                     would be invalid. Hidden on mobile (globals.css). */}
                 <span className="btn btn-icon btn-secondary feat-arrow" aria-hidden="true">
-                  <i className="ph ph-arrow-up-right" />
+                  <i aria-hidden="true" className="ph ph-arrow-up-right" />
                 </span>
               </div>
             </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       <section
         style={{
-          padding: "0 clamp(18px,4cqw,48px) clamp(38px,6cqw,84px)",
+          padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.5333em,6cqw,5.6em)",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-          gap: 16,
+          gap: "1.0667em",
         }}
       >
         <Toolkit />
@@ -417,7 +438,7 @@ export default function HomePage() {
           id="ctaCard"
           style={{
             borderRadius: "var(--radius-lg)",
-            padding: 26,
+            padding: "1.7333em",
             // Lightened from accent-500/700: dark text on the old dark end measured
             // 2.2:1. accent-400/500 keeps the same look and clears AA.
             background: "linear-gradient(150deg,var(--color-accent-400),var(--color-accent-500) 70%)",
@@ -425,7 +446,7 @@ export default function HomePage() {
             flexDirection: "column",
           }}
         >
-          <h3
+          <h2
             style={{
               margin: 0,
               fontFamily: "var(--font-anton), 'Anton', var(--font-heading)",
@@ -438,8 +459,8 @@ export default function HomePage() {
             }}
           >
             Looking for my next role.
-          </h3>
-          <p style={{ margin: "14px 0 0", fontSize: "0.875rem", lineHeight: 1.55, color: "#14121f" }}>
+          </h2>
+          <p style={{ margin: "1em 0 0", fontSize: "0.875rem", lineHeight: 1.55, color: "#14121f" }}>
             For my next role I want to be pushed — unfamiliar problems, a bigger codebase,
             and the kind of work that leaves me better than it found me.
           </p>
@@ -456,14 +477,14 @@ export default function HomePage() {
             }}
           >
             Get in touch
-            <i className="ph ph-arrow-up-right" />
+            <i aria-hidden="true" className="ph ph-arrow-up-right" />
           </Link>
         </div>
       </section>
 
       {testimonials.length ? (
-      <section style={{ padding: "0 clamp(18px,4cqw,48px) clamp(38px,6cqw,84px)" }}>
-        <h2 style={{ ...sectionHeading, fontSize: "clamp(1.75rem,4.4cqw,3.25rem)", margin: "0 0 22px" }}>
+      <section style={{ padding: "0 clamp(1.2em,4cqw,3.2em) clamp(2.5333em,6cqw,5.6em)" }}>
+        <h2 className="section-title" style={{ ...sectionHeading, fontSize: "clamp(1.75rem,4.4cqw,3.25rem)", margin: "0 0 1.375rem" }}>
           WHAT PEOPLE SAY
         </h2>
         <div
@@ -471,7 +492,7 @@ export default function HomePage() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
-            gap: 16,
+            gap: "1.0667em",
           }}
         >
           {testimonials.map((t) => (
@@ -481,13 +502,13 @@ export default function HomePage() {
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-divider)",
                 borderRadius: "var(--radius-lg)",
-                padding: 22,
+                padding: "1.4667em",
               }}
             >
-              <i className="ph ph-quotes" style={{ fontSize: "1.375rem", color: "var(--color-accent)" }} />
+              <i aria-hidden="true" className="ph ph-quotes" style={{ fontSize: "1.375rem", color: "var(--color-accent)" }} />
               <blockquote
                 style={{
-                  margin: "12px 0 0",
+                  margin: "0.8276em 0 0",
                   fontSize: "0.90625rem",
                   lineHeight: 1.6,
                   color: "var(--color-neutral-200)",
@@ -495,7 +516,7 @@ export default function HomePage() {
               >
                 {t.quote}
               </blockquote>
-              <figcaption style={{ marginTop: 16, fontSize: "0.75rem", color: "var(--color-neutral-500)" }}>
+              <figcaption style={{ marginTop: "1.3333em", fontSize: "0.75rem", color: "var(--color-neutral-500)" }}>
                 {t.who}
               </figcaption>
             </figure>
@@ -507,77 +528,80 @@ export default function HomePage() {
       <section
         style={{
           padding:
-            "clamp(30px,4cqw,56px) clamp(18px,4cqw,48px) clamp(40px,5cqw,70px)",
+            "clamp(2em,4cqw,3.7333em) clamp(1.2em,4cqw,3.2em) clamp(2.6667em,5cqw,4.6667em)",
           borderTop: "1px solid var(--color-divider)",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
-          gap: "clamp(24px,4cqw,56px)",
+          gap: "clamp(1.6em,4cqw,3.7333em)",
         }}
       >
         <div>
-          <h2 style={{ ...sectionHeading, fontSize: "clamp(1.625rem,3.8cqw,2.75rem)", margin: "0 0 18px" }}>
+          <h2 className="section-title" style={{ ...sectionHeading, fontSize: "clamp(1.625rem,3.8cqw,2.75rem)", margin: "0 0 1.125rem" }}>
             CONTACT
           </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: 13 }}>
+          <ul className="plain-list" style={{ display: "flex", flexDirection: "column", gap: "0.8667em" }}>
+            <li>
             <a
               href={`mailto:${site.email}`}
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 11,
+                gap: "0.7333em",
                 fontSize: "0.9375rem",
                 minHeight: 24,
-                padding: "4px 0",
+                padding: "0.2667em 0",
               }}
             >
-              <i className="ph ph-envelope-simple" style={{ fontSize: "1.1875rem" }} />
+              <i aria-hidden="true" className="ph ph-envelope-simple" style={{ fontSize: "1.1875rem" }} />
               {site.email}
             </a>
-            <div
+            </li>
+            <li
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 11,
+                gap: "0.7333em",
                 fontSize: "0.9375rem",
                 color: "var(--color-neutral-400)",
               }}
             >
-              <i className="ph ph-map-pin" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
+              <i aria-hidden="true" className="ph ph-map-pin" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
               {site.location}
-            </div>
-            <div
+            </li>
+            <li
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 11,
+                gap: "0.7333em",
                 fontSize: "0.9375rem",
                 color: "var(--color-neutral-400)",
               }}
             >
-              <i className="ph ph-clock" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
+              <i aria-hidden="true" className="ph ph-clock" style={{ fontSize: "1.1875rem", color: "var(--color-accent)" }} />
               Replies within a day
-            </div>
-          </div>
-          <Link className="btn btn-primary" href="/contact" style={{ marginTop: 22 }}>
+            </li>
+          </ul>
+          <Link className="btn btn-primary" href="/contact" style={{ marginTop: "1.375em" }}>
             Get in touch
-            <i className="ph ph-arrow-up-right" />
+            <i aria-hidden="true" className="ph ph-arrow-up-right" />
           </Link>
         </div>
         <div>
-          <h2 style={{ ...sectionHeading, fontSize: "clamp(1.625rem,3.8cqw,2.75rem)", margin: "0 0 18px" }}>
+          <h2 className="section-title" style={{ ...sectionHeading, fontSize: "clamp(1.625rem,3.8cqw,2.75rem)", margin: "0 0 1.125rem" }}>
             LET&apos;S CONNECT
           </h2>
-          <div
+          <ul
             id="connectGrid"
+            className="plain-list"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))",
-              gap: 10,
+              gap: "0.6667em",
             }}
           >
             {liveSocials.map((s) => (
+              <li key={s.label}>
               <a
-                key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
@@ -585,37 +609,43 @@ export default function HomePage() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 10,
-                  padding: "13px 15px",
+                  gap: "0.7143em",
+                  padding: "0.9286em 1.0714em",
                   border: "1px solid var(--color-divider)",
                   borderRadius: "var(--radius-md)",
                   fontSize: "0.875rem",
                   color: "var(--color-neutral-300)",
                 }}
               >
-                <i className={s.icon} style={{ fontSize: "1.125rem", color: "var(--color-accent)" }} />
+                <i aria-hidden="true" className={s.icon} style={{ fontSize: "1.125rem", color: "var(--color-accent)" }} />
                 {s.label}
+                <NewTabHint />
               </a>
+              </li>
             ))}
+            <li>
             <a
               href={site.cv}
               download={site.cvName}
+              /* "CV" alone says neither what happens nor what arrives. */
+              aria-label="CV — download as a PDF"
               className="hov-border"
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 10,
-                padding: "13px 15px",
+                gap: "0.7143em",
+                padding: "0.9286em 1.0714em",
                 border: "1px solid var(--color-divider)",
                 borderRadius: "var(--radius-md)",
                 fontSize: "0.875rem",
                 color: "var(--color-neutral-300)",
               }}
             >
-              <i className="ph ph-download-simple" style={{ fontSize: "1.125rem", color: "var(--color-accent)" }} />
+              <i aria-hidden="true" className="ph ph-download-simple" style={{ fontSize: "1.125rem", color: "var(--color-accent)" }} />
               CV
             </a>
-          </div>
+            </li>
+          </ul>
         </div>
       </section>
     </>
