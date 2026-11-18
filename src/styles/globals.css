@@ -161,6 +161,13 @@ main li p a {
   /* Contains the full-bleed overshoot below. `clip` rather than `hidden`
      so it does not become a scroll container and break the sticky header. */
   overflow-x: clip;
+  /* So the clip above also applies to absolutely positioned descendants. An
+     `.sr-only` label is one, and with nothing positioned above it its
+     containing block was the viewport, which `overflow-x: clip` here does not
+     reach: one that landed just past the right edge — after a link that ends
+     a full line, at large text on a phone — gave the whole page a sideways
+     scroll for the sake of an invisible 1px box. */
+  position: relative;
 }
 
 /* Full-bleed band inside `main.wrap`: the background runs to both viewport
@@ -301,6 +308,14 @@ main li p a {
     width: 100%;
   }
 }
+/* A tool's label may break mid-word. This used to apply only below 1120px,
+   where the tiles are narrow — but a tile is also too narrow for its label
+   when the label is big: at 200% text "Observability" ran out of its tile and
+   over the next one, at widths this rule never reached. A word that fits is
+   not affected, so it costs nothing to leave on everywhere. */
+#toolGrid > li > button > span {
+  overflow-wrap: anywhere;
+}
 #toolGrid > li:nth-child(4n) .tool-note {
   left: auto !important;
   right: 0 !important;
@@ -385,9 +400,6 @@ main li p a {
   }
   #toolGrid > li > button {
     padding-inline: 0.1333em !important;
-  }
-  #toolGrid > li > button > span {
-    overflow-wrap: anywhere;
   }
   #toolGrid > li:nth-child(4n) .tool-note,
   #toolGrid > li:nth-child(4n + 1) .tool-note {
@@ -571,6 +583,36 @@ main li p a {
   }
   #burger {
     display: inline-flex !important;
+  }
+}
+
+/* The hero tucks the tagline up under the script "Portfolio": `#heroMeta`
+   carries a negative top margin, and the word's own box overhangs by a tenth
+   of its font-size. That only works while the tagline ends to the left of
+   the word, and the two are sized in different units — the tagline is 44ch
+   wide whatever the screen, and the word starts 38cqw in. Once 38cqw is less
+   than 44ch, the first line of the tagline runs underneath the lettering.
+
+   That is what a reader at 150% zoom got: a 1280px laptop becomes an 853px
+   viewport, the word slides left, and "SCALABLE SOFTWARE" sat under it. The
+   same at 150% text size, where the tagline grows instead.
+
+   Below the width where the two can meet, the tagline starts under the word
+   rather than beside its tail. 0.8em clears the overhang, which is at most
+   0.39rem here, and leaves a little air.
+
+   The limit is in rem on purpose, and it is the only breakpoint in this file
+   that is. The collision depends on how wide 44ch of text is, and that
+   follows the reader's font size; a px limit would hold at the default size
+   and miss exactly the large-text case. 72rem is where 38cqw first clears
+   44ch (about 25.6rem) with a rem to spare.
+
+   The lower bound keeps this off the phone layout, which stacks the hero and
+   sets its own margin in the block below. `!important` because the margin it
+   replaces is inline. */
+@container (min-width: 641px) and (max-width: 72rem) {
+  #heroMeta {
+    margin-top: 0.8em !important;
   }
 }
 
@@ -829,10 +871,24 @@ main li p a {
      The 24px side padding every `.btn` carries is too much inside a 172px
      track — "Download CV" and its icon do not fit — so it comes down here.
      The 14px vertical stays, which is what holds the 44px touch target. */
+  /* The tracks have a floor, in rem, and `auto-fit` drops to one column
+     when two of them no longer fit. They used to be a flat `1fr 1fr`, which
+     is half the row whatever is in it: the labels are `nowrap`, so on a phone
+     at 150% text "Download CV" ran out of its button and across "Say hello".
+     Now the pair stacks, full width, at the point the labels stop fitting.
+
+     In rem so the floor grows with the reader's text — the label does, and a
+     px floor would still call 160px enough. Each floor is the width its row's
+     longest label needs: 9.75rem for "Download CV" and its icon, 7.5rem for
+     "See the work". At the default size both rows are still two equal halves
+     on every phone from 360px up. */
   #heroActions,
   #aboutActions {
     display: grid !important;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  }
+  #aboutActions {
+    grid-template-columns: repeat(auto-fit, minmax(9.75rem, 1fr));
   }
   #heroActions > *,
   #aboutActions > * {
